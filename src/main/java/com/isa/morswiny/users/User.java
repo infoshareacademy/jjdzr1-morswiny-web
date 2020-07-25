@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public class User {
 
+    private Integer ID;
     private String name;
     private String surname;
     private String login;
@@ -23,19 +24,6 @@ public class User {
     private List<Event> favourites = new ArrayList<>();
     private List<Event> myEvents = new ArrayList<>();
     private BufferedImage myPicture;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getSurname(), user.getSurname()) &&
-                Objects.equals(getLogin(), user.getLogin()) &&
-                Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getPassword(), user.getPassword()) &&
-                Objects.equals(getBirthday(), user.getBirthday());
-    }
 
     @Override
     public String toString() {
@@ -49,8 +37,30 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getID(), user.getID()) &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getSurname(), user.getSurname()) &&
+                Objects.equals(getLogin(), user.getLogin()) &&
+                Objects.equals(getEmail(), user.getEmail()) &&
+                Objects.equals(getPassword(), user.getPassword()) &&
+                Objects.equals(getBirthday(), user.getBirthday());
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getLogin(), getEmail(), getPassword(), getBirthday());
+        return Objects.hash(getID(), getName(), getSurname(), getLogin(), getEmail(), getPassword(), getBirthday());
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public String getName() {
