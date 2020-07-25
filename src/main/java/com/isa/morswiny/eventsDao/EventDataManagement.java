@@ -1,18 +1,14 @@
 package com.isa.morswiny.eventsDao;
 
+import com.isa.morswiny.comparators.DateComparator;
 import com.isa.morswiny.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class EventDataManagement {
 
@@ -21,14 +17,15 @@ public class EventDataManagement {
     public List<Event> createListOfAllEvents(){
         Event[] gsonEvents = new EventDataLoad().getJsonEventData("src/main/resources/events.json");
         List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
-        trimDateStrings(eventsList);//list - trimdatetime
-        setLocalDateTimeInList(eventsList);//list - set local date
-        formatStartEndDate(eventsList);//list - set date
-        trimDescription(eventsList);//list - trimdescription
-
+        trimDateStrings(eventsList);
+        setLocalDateTimeInList(eventsList);
+        formatStartEndDate(eventsList);
+        trimDescription(eventsList);
+        eventsList.sort(new DateComparator());
         return eventsList;
     }
 
+    //method trims given StartDate and EndDate Strings form JSON file so they can be parsed to LocalDateTime
     private static void trimDateStrings(List<Event> list){
         for (Event event : list){
             if (event.getStartDate() != null){
@@ -40,6 +37,7 @@ public class EventDataManagement {
         }
     }
 
+    //method sets LocalDateTimes to events from JSON file
     private static void setLocalDateTimeInList (List<Event> list) {
         for (Event event : list) {
             if (event.getStartDate() != null) {
@@ -53,6 +51,7 @@ public class EventDataManagement {
         }
     }
 
+    //method formats StartDate and EndDate Strings to format form property file
     private static void formatStartEndDate(List<Event> list){
         Properties prop = readPropertiesFile();
         DateTimeFormatter dtf;
@@ -72,7 +71,7 @@ public class EventDataManagement {
         }
     }
 
-    public static Properties readPropertiesFile() {
+    private static Properties readPropertiesFile() {
         FileInputStream property = null;
         Properties prop = null;
         try {
@@ -92,9 +91,13 @@ public class EventDataManagement {
         return prop;
     }
 
+    //method trims descriptions from JSON file
     private static void trimDescription(List<Event> list){
         for (Event event : list){
-            event.setDescLong(event.getDescLong().replaceAll("\\<.*?>",""));
+            if (event.getDescLong() != null){
+                event.setDescLong(event.getDescLong().replaceAll("\\<.*?>",""));
+            }
         }
     }
+
 }
