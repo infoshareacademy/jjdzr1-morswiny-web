@@ -21,16 +21,15 @@ public class EventDataManagement {
     public List<Event> createListOfAllEvents(){
         Event[] gsonEvents = new EventDataLoad().getJsonEventData("src/main/resources/events.json");
         List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
-        //list - trimdatetime
-        //list - set local date
-        //list - set date
-        //list - trimdescription
-        //list - sort
-        // -
+        trimDateStrings(eventsList);//list - trimdatetime
+        setLocalDateTimeInList(eventsList);//list - set local date
+        formatStartEndDate(eventsList);//list - set date
+        trimDescription(eventsList);//list - trimdescription
+
         return eventsList;
     }
 
-    private void trimDateStrings(List<Event> list){
+    private static void trimDateStrings(List<Event> list){
         for (Event event : list){
             if (event.getStartDate() != null){
                 event.setStartDate(event.getStartDate().substring(0, 19));
@@ -41,7 +40,7 @@ public class EventDataManagement {
         }
     }
 
-    private void setLocalDateTimeInList (List<Event> list) {
+    private static void setLocalDateTimeInList (List<Event> list) {
         for (Event event : list) {
             if (event.getStartDate() != null) {
                 LocalDateTime localDateTime = LocalDateTime.parse(event.getStartDate());
@@ -54,8 +53,23 @@ public class EventDataManagement {
         }
     }
 
-    private void formatStartEndDate(List<Event> list){
-
+    private static void formatStartEndDate(List<Event> list){
+        Properties prop = readPropertiesFile();
+        DateTimeFormatter dtf;
+            try {
+                dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
+            } catch (NullPointerException e){
+                STDOUT.error("Property file not found!");
+                dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm");
+            }
+        for (Event event : list){
+            if (event.getStartDate() != null){
+                event.setStartDate(event.getStartDateLDT().format(dtf));
+            }
+            if (event.getEndDate() != null){
+                event.setEndDate(event.getEndDateLDT().format(dtf));
+            }
+        }
     }
 
     public static Properties readPropertiesFile() {
@@ -78,19 +92,9 @@ public class EventDataManagement {
         return prop;
     }
 
-    public String dateTimeFormatter(String date) {
-        Properties prop = readPropertiesFile();
-        String[] dateArray = date.split("T");
-        LocalDate eventDate = LocalDate.parse(dateArray[0]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
-        String eventDate1 = eventDate.format(dtf);
-        return eventDate1 + ", time: " + dateArray[1].substring(0,5);
-    }
-
-
-    public static String trimDescription(String description){
-        String noHTMLString = description.replaceAll("\\<.*?>","");
-        noHTMLString = noHTMLString.trim();
-        return noHTMLString;
+    private static void trimDescription(List<Event> list){
+        for (Event event : list){
+            event.setDescLong(event.getDescLong().replaceAll("\\<.*?>",""));
+        }
     }
 }
