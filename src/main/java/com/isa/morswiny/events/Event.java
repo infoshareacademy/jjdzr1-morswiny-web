@@ -2,7 +2,6 @@ package com.isa.morswiny.events;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -195,39 +194,5 @@ public class Event {
         this.tickets = tickets;
     }
 
-    public String dateTimeFormatter(String date) {
-        Properties prop = readPropertiesFile();
-        String[] dateArray = date.split("T");
-        LocalDate eventDate = LocalDate.parse(dateArray[0]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
-        String eventDate1 = eventDate.format(dtf);
-        return eventDate1 + ", time: " + dateArray[1].substring(0,5);
-    }
 
-    public static Properties readPropertiesFile() {
-        FileInputStream property = null;
-        Properties prop = null;
-        try {
-            property = new FileInputStream("src/main/resources/config.properties");
-            prop = new Properties();
-            prop.load(property);
-        } catch (IOException e) {
-            logger.info("Cannot find property file");
-        } finally {
-            assert property != null;
-            try {
-                property.close();
-            } catch (IOException e) {
-                logger.info("Cannot find property file");
-            }
-        }
-        return prop;
-    }
-    public String trimDescription(String description){
-
-        String htmlString = description;
-        String noHTMLString = htmlString.replaceAll("\\<.*?>","");
-        noHTMLString = noHTMLString.trim();
-        return noHTMLString;
-    }
 }
