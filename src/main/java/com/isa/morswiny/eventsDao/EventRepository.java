@@ -35,6 +35,6 @@ public class EventRepository implements EventCRUDRepositoryInterface , Serializa
                 return event;
             }
         }
-        return new Event();
+        return null;
     }
 }

@@ -22,6 +22,10 @@ public class EventServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         writer.println("Welcome to single event page");
         Integer id = Integer.parseInt(req.getParameter("id"));
-        writer.println(eventCRUDRepositoryInterface.getEventByID(id));
+        try {
+            writer.println(eventCRUDRepositoryInterface.getEventByID(id));
+        } catch (NullPointerException e){
+            writer.println("Event not found");
+        }
     }
 }
