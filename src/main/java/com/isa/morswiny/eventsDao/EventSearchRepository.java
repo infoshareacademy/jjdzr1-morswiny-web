@@ -1,6 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
-import com.infoshareacademy.events.Event;
+
+import com.isa.morswiny.events.Event;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -42,7 +43,9 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     public List<Event> searchByPlace(String place) {
         List<Event> list = new ArrayList<>();
         for (Event event : eventSet) {
-            String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
+
+//            String nameAndSubname = event.getPlace()    getName() + event.getPlace().getSubname();
+            String nameAndSubname = event.getName();
             if (nameAndSubname.toLowerCase()
                     .contains(
                             place.toLowerCase())) {

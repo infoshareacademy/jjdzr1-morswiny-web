@@ -1,13 +1,13 @@
-package com.infoshareacademy.events;
+package com.isa.morswiny.events;
 
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
 
         import java.io.FileInputStream;
         import java.io.IOException;
         import java.time.LocalDate;
         import java.time.format.DateTimeFormatter;
         import java.util.*;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
 
 public class Event {
     private Integer id;
@@ -32,7 +32,7 @@ public class Event {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        com.infoshareacademy.events.Event event = (com.infoshareacademy.events.Event) o;
+        Event event = (Event) o;
         return Objects.equals(id, event.id) &&
                 Objects.equals(place, event.place) &&
                 Objects.equals(endDate, event.endDate) &&
