@@ -2,7 +2,7 @@ package com.isa.morswiny.eventsDao;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.infoshareacademy.events.Event;
+import com.isa.morswiny.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

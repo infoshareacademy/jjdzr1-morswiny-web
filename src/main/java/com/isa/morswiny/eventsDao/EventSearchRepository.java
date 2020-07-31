@@ -1,8 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
-import com.infoshareacademy.events.Event;
+import com.isa.morswiny.events.Event;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
