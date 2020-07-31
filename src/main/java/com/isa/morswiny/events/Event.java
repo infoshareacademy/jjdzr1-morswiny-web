@@ -1,13 +1,13 @@
 package com.isa.morswiny.events;
 
-
-        import java.io.FileInputStream;
-        import java.io.IOException;
-        import java.time.LocalDate;
-        import java.time.format.DateTimeFormatter;
-        import java.util.*;
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Event {
     private Integer id;
@@ -22,6 +22,8 @@ public class Event {
     private Organizer organizer;
     private Integer  active;
     private Ticket tickets;
+    private LocalDateTime startDateLDT;
+    private LocalDateTime endDateLDT;
 
     public Event(){
     }
@@ -78,6 +80,22 @@ public class Event {
                         + startDate + '\n'
                         + descLong + '\n'
                         + organizer.getDesignation() + '\n';
+    }
+
+    public LocalDateTime getStartDateLDT() {
+        return startDateLDT;
+    }
+
+    public void setStartDateLDT(LocalDateTime startDateLDT) {
+        this.startDateLDT = startDateLDT;
+    }
+
+    public LocalDateTime getEndDateLDT() {
+        return endDateLDT;
+    }
+
+    public void setEndDateLDT(LocalDateTime endDateLDT) {
+        this.endDateLDT = endDateLDT;
     }
 
     public Integer getId() {
@@ -176,39 +194,5 @@ public class Event {
         this.tickets = tickets;
     }
 
-    public String dateTimeFormatter(String date) {
-        Properties prop = readPropertiesFile();
-        String[] dateArray = date.split("T");
-        LocalDate eventDate = LocalDate.parse(dateArray[0]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
-        String eventDate1 = eventDate.format(dtf);
-        return eventDate1 + ", time: " + dateArray[1].substring(0,5);
-    }
 
-    public static Properties readPropertiesFile() {
-        FileInputStream property = null;
-        Properties prop = null;
-        try {
-            property = new FileInputStream("src/main/resources/config.properties");
-            prop = new Properties();
-            prop.load(property);
-        } catch (IOException e) {
-            logger.info("Cannot find property file");
-        } finally {
-            assert property != null;
-            try {
-                property.close();
-            } catch (IOException e) {
-                logger.info("Cannot find property file");
-            }
-        }
-        return prop;
-    }
-    public String trimDescription(String description){
-
-        String htmlString = description;
-        String noHTMLString = htmlString.replaceAll("\\<.*?>","");
-        noHTMLString = noHTMLString.trim();
-        return noHTMLString;
-    }
 }
