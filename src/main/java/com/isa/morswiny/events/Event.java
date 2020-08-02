@@ -34,7 +34,7 @@ public class Event {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        com.isa.morswiny.events.Event event = (com.isa.morswiny.events.Event) o;
+        Event event = (Event) o;
         return Objects.equals(id, event.id) &&
                 Objects.equals(place, event.place) &&
                 Objects.equals(endDate, event.endDate) &&
