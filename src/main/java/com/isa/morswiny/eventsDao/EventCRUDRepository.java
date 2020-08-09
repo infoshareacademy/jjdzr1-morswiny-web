@@ -1,6 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
+import com.isa.morswiny.repository.JsonEventDataManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,13 +10,13 @@ import java.io.Serializable;
 import java.util.*;
 
 @SessionScoped
-public class EventRepository implements EventCRUDRepositoryInterface , Serializable {
+public class EventCRUDRepository implements EventCRUDRepositoryInterface , Serializable {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private List<Event> allEventsList = new ArrayList<>();
 
     public void fillRepositoryWithJSONEvents(){
-        setAllEventsList(new EventDataManagement().createListOfAllEvents());
+        setAllEventsList(new JsonEventDataManagement().createListOfAllEvents());
     }
 
     public List<Event> getAllEventsList() {
@@ -42,7 +43,10 @@ public class EventRepository implements EventCRUDRepositoryInterface , Serializa
 
     @Override
     public boolean isEventExisting(Event event) {
-        return Objects.nonNull(event) && allEventsList.contains(event);
+        if (Objects.nonNull(event)){
+        return allEventsList.contains(event);
+        }
+        return true;
     }
 
     @Override
@@ -55,10 +59,10 @@ public class EventRepository implements EventCRUDRepositoryInterface , Serializa
     public boolean createEvent(Event event) {
         if (!isEventExisting(event)) {
             allEventsList.add(event);
-            STDOUT.info("New event has been created successfully! \n");
+            STDOUT.info("New event has been created\n");
             return true;
         } else {
-            STDOUT.info("Event already existing or not defined!");
+            STDOUT.info("Event already existing or not defined");
         }
         return false;
     }
@@ -67,11 +71,11 @@ public class EventRepository implements EventCRUDRepositoryInterface , Serializa
         for (Event event : allEventsList) {
             if (eventId.equals(event.getId())) {
                 allEventsList.remove(event);
-                STDOUT.info("Event has been deleted");
+                STDOUT.info("Event " + eventId + " has been deleted");
                 return true;
             }
         }
-        STDOUT.info("\nFailed! Please try again");
+        STDOUT.info("\nDeletion failed for " + eventId);
         return false;
     }
     @Override
@@ -85,7 +89,7 @@ public class EventRepository implements EventCRUDRepositoryInterface , Serializa
 
     @Override
     public boolean saveEvent(Event event){
-        if (event != null) {
+        if (Objects.nonNull(event)) {
             allEventsList.add(event);
         }
         return false;
