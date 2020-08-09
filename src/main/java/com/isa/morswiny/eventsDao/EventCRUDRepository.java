@@ -57,14 +57,14 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
     @Override
     public boolean deleteEvent(Integer eventId) {
-        for (Event event : getAllEventsList()) {
-            if (eventId.equals(event.getId())) {
-                getAllEventsList().remove(event);
-                STDOUT.info("Event " + eventId + " has been deleted");
-                return true;
-            }
+        Iterator i = getAllEventsList().iterator();
+        while(i.hasNext()){
+            Event event = (Event) i.next();
+            if (eventId.equals(event.getId()))
+                i.remove();
+            return true;
         }
-        STDOUT.info("\nDeletion failed for " + eventId);
+
         return false;
     }
     @Override
