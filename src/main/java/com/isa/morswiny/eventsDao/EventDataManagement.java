@@ -4,42 +4,68 @@ import com.isa.morswiny.comparators.DateComparator;
 import com.isa.morswiny.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+//odpowiedzialnosc klasy - zwroc przeformatowana liste eventow do dalszego procesowania przez logike biznesowa aplikacji
+
+
 public class EventDataManagement {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public List<Event> createListOfAllEvents(){
-        Event[] gsonEvents = new EventDataLoad().getJsonEventData("src/main/resources/events.json");
-        List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
-        trimDateStrings(eventsList);
-        setLocalDateTimeInList(eventsList);
-        formatStartEndDate(eventsList);
-        trimDescription(eventsList);
-        eventsList.sort(new DateComparator());
-        return eventsList;
+    private List<Event> listOfEvents;
+
+    public EventDataManagement() {
+        setListOfAllEvents();
+    }
+
+    public List<Event> returnListOfAllEvents() {
+        return listOfEvents;
+    }
+
+    public  List<Event> getListOfEvents() {
+        return listOfEvents;
+    }
+
+    private void setListOfAllEvents() {
+        listOfEvents = initializeListOfEvents();
+        formatEvents();
+    }
+
+    public List<Event> initializeListOfEvents() {
+        Event[] gsonEvents = new EventDataLoad().getJsonEventData();
+        return new ArrayList<>(Arrays.asList(gsonEvents));
+    }
+
+    // TODO change name of method
+    private void formatEvents() {
+        trimDateStrings();
+        setLocalDateTimeInList();
+        formatStartEndDate();
+        trimDescription();
+        listOfEvents.sort(new DateComparator());
     }
 
     //method trims given StartDate and EndDate Strings form JSON file so they can be parsed to LocalDateTime
-    private static void trimDateStrings(List<Event> list){
-        for (Event event : list){
-            if (event.getStartDate() != null){
+    private void trimDateStrings() {
+        for (Event event : listOfEvents) {
+            if (event.getStartDate() != null) {
                 event.setStartDate(event.getStartDate().substring(0, 19));
             }
-            if (event.getEndDate() != null){
+            if (event.getEndDate() != null) {
                 event.setEndDate(event.getEndDate().substring(0, 19));
             }
         }
     }
 
     //method sets LocalDateTimes to events from JSON file
-    private static void setLocalDateTimeInList (List<Event> list) {
-        for (Event event : list) {
+    private void setLocalDateTimeInList() {
+        for (Event event : listOfEvents) {
             if (event.getStartDate() != null) {
                 LocalDateTime localDateTime = LocalDateTime.parse(event.getStartDate());
                 event.setStartDateLDT(localDateTime);
@@ -52,20 +78,20 @@ public class EventDataManagement {
     }
 
     //method formats StartDate and EndDate Strings to format form property file
-    private static void formatStartEndDate(List<Event> list){
+    private void formatStartEndDate() {
         Properties prop = readPropertiesFile();
         DateTimeFormatter dtf;
-            try {
-                dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
-            } catch (NullPointerException e){
-                STDOUT.error("Property file not found!");
-                dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm");
-            }
-        for (Event event : list){
-            if (event.getStartDate() != null){
+        try {
+            dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
+        } catch (NullPointerException e) {
+            STDOUT.error("Property file not found!");
+            dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm");
+        }
+        for (Event event : listOfEvents) {
+            if (event.getStartDate() != null) {
                 event.setStartDate(event.getStartDateLDT().format(dtf));
             }
-            if (event.getEndDate() != null){
+            if (event.getEndDate() != null) {
                 event.setEndDate(event.getEndDateLDT().format(dtf));
             }
         }
@@ -92,10 +118,10 @@ public class EventDataManagement {
     }
 
     //method trims descriptions from JSON file
-    private static void trimDescription(List<Event> list){
-        for (Event event : list){
-            if (event.getDescLong() != null){
-                event.setDescLong(event.getDescLong().replaceAll("\\<.*?>",""));
+    private void trimDescription() {
+        for (Event event : listOfEvents) {
+            if (event.getDescLong() != null) {
+                event.setDescLong(event.getDescLong().replaceAll("\\<.*?>", ""));
             }
         }
     }

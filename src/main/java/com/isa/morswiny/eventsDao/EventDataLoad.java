@@ -15,8 +15,7 @@ public class EventDataLoad {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
 
-    public Event[] getJsonEventData(String filePath) {
-
+    public Event[] getJsonEventData() {
         Gson gson = new Gson();
         JsonReader jsonReader = null;
         try {
@@ -24,9 +23,8 @@ public class EventDataLoad {
             jsonReader = new JsonReader(new FileReader(file));
         } catch (Exception e) {
             STDOUT.error("Plik nie moze byc znaleziony lub nie jest w formacie JSON. Upewnij sie, ze podales wlasciwe dane.");
+            return new Event[0];
         }
-
         return gson.fromJson(jsonReader, Event[].class);
     }
-
 }

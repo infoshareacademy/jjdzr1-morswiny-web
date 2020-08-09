@@ -2,18 +2,28 @@ package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
 
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class EventSearchRepository implements EventSearchRepositoryInterface {
-    private Set<Event> eventSet;
+@SessionScoped
+
+public class EventSearchRepository implements EventSearchRepositoryInterface, EventCRUDRepositoryInterface, Serializable {
+    private List<Event> eventList;
+
+
+
+    public void setEventList() {
+        EventDataManagement eventDataManagement = new EventDataManagement();
+        this.eventList = eventDataManagement.getListOfEvents();
+    }
 
     @Override
     public List<Event> searchByString(String userInput) {
         List<Event> list = new ArrayList<>();
         String eventSpecification;
-        for (Event event : eventSet) {
+        for (Event event : eventList) {
             eventSpecification = event.returnEventParams();
             if (eventSpecification.toLowerCase()
                     .contains
@@ -27,7 +37,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     @Override
     public List<Event> searchByOrganizer(String organizer) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : eventList) {
             if (event.getOrganizer().getDesignation().toLowerCase()
                     .contains
                             (organizer.toLowerCase())) {
@@ -40,7 +50,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     @Override
     public List<Event> searchByPlace(String place) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : eventList) {
             String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
             if (nameAndSubname.toLowerCase()
                     .contains(
@@ -55,7 +65,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     // 1 if active, 0 if inactive
     public List<Event> searchActive(Integer active) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : eventList) {
             if (event.getActive().equals(active)) {
                 list.add(event);
             }
@@ -66,7 +76,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     @Override
     public List<Event> searchByName(String name) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : eventList) {
             if (event.getName().toLowerCase()
                     .contains(
                             name.toLowerCase())) {
@@ -76,12 +86,22 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
         return list;
     }
 
-    // method to search for event dates
+    public Event getEventByID(Integer id) {
+        for (Event event : eventList) {
+            if (id.equals(event.getId())) {
+                return event;
+            }
+        }
+        return new Event();
+    }
+}
+
+// method to search for event dates
 //    public List<Event> searchByExactDate(String date) {
 //        LocalDate queryDate = stringToLocalDate(date);
 //
 //        List<Event> list = new ArrayList<>();
-//        for (Event event : eventSet) {
+//        for (Event event : eventList) {
 //            LocalDate eventStart = stringToLocalDate(event.getStartDate());
 //            LocalDate eventEnd = stringToLocalDate(event.getEndDate());
 //            if (eventStart.isBefore(queryDate) && eventEnd.isAfter(queryDate)) {
@@ -96,7 +116,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
 //        LocalDate queryDate = stringToLocalDate(date);
 //        int queryMonth = queryDate.getMonth().getValue();
 //        List<Event> list = new ArrayList<>();
-//        for (Event event : eventSet) {
+//        for (Event event : eventList) {
 //            LocalDate eventStart = stringToLocalDate(event.getStartDate());
 //            LocalDate eventEnd = stringToLocalDate(event.getEndDate());
 //            int startMonth = eventStart.getMonth().getValue();
@@ -110,4 +130,4 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
 //        return list;
 //    }
 
-}
+

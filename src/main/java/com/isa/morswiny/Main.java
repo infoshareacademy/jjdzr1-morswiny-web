@@ -1,12 +1,12 @@
 package com.isa.morswiny;
 
-import com.isa.morswiny.eventsDao.EventRepository;
+import com.isa.morswiny.eventsDao.EventDataLoad;
 
 public class Main {
     public static void main(String[] args) {
+//        EventDataLoad ed = new EventDataLoad();
+//        System.out.println(ed.getEventByID(71944));
 
-        EventRepository er = new EventRepository();
-        System.out.println(er.getEventByID(71944));
 
     }
 }
