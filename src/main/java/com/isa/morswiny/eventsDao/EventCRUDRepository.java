@@ -1,6 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
+import com.isa.morswiny.repository.EventRepository;
 import com.isa.morswiny.repository.JsonEventDataManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,21 +14,9 @@ import java.util.*;
 public class EventCRUDRepository implements EventCRUDRepositoryInterface , Serializable {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private List<Event> allEventsList = new ArrayList<>();
-
-    public void fillRepositoryWithJSONEvents(){
-        setAllEventsList(new JsonEventDataManagement().createListOfAllEvents());
-    }
 
     public List<Event> getAllEventsList() {
-        if (allEventsList.isEmpty()) {
-            fillRepositoryWithJSONEvents();
-        }
-        return allEventsList;
-    }
-
-    public void setAllEventsList(List<Event> allEventsList) {
-        this.allEventsList = allEventsList;
+        return EventRepository.getEventRepository();
     }
 
     @Override
@@ -44,21 +33,21 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     @Override
     public boolean isEventExisting(Event event) {
         if (Objects.nonNull(event)){
-        return allEventsList.contains(event);
+        return getAllEventsList().contains(event);
         }
-        return true;
+        return false;
     }
 
     @Override
     public Integer getNextID(){
-        Event event = Collections.max(allEventsList, Comparator.comparing(Event::getId));
+        Event event = Collections.max(getAllEventsList(), Comparator.comparing(Event::getId));
         return event.getId() + 1;
     }
 
     @Override
     public boolean createEvent(Event event) {
         if (!isEventExisting(event)) {
-            allEventsList.add(event);
+            getAllEventsList().add(event);
             STDOUT.info("New event has been created\n");
             return true;
         } else {
@@ -68,9 +57,9 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
     @Override
     public boolean deleteEvent(Integer eventId) {
-        for (Event event : allEventsList) {
+        for (Event event : getAllEventsList()) {
             if (eventId.equals(event.getId())) {
-                allEventsList.remove(event);
+                getAllEventsList().remove(event);
                 STDOUT.info("Event " + eventId + " has been deleted");
                 return true;
             }
@@ -80,7 +69,7 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
     @Override
     public boolean updateEvent(Event event){
-        if (allEventsList.contains(event)){
+        if (getAllEventsList().contains(event)){
             deleteEvent(event.getId());
             createEvent(event);
         }
@@ -90,7 +79,7 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     @Override
     public boolean saveEvent(Event event){
         if (Objects.nonNull(event)) {
-            allEventsList.add(event);
+            getAllEventsList().add(event);
         }
         return false;
     }
