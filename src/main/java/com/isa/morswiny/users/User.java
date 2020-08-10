@@ -21,7 +21,7 @@ public class User {
     private String email;
     private String password;
     private UserTypes userTypes;
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private List<Event> favourites = new ArrayList<>();
     private List<Event> myEvents = new ArrayList<>();
     private BufferedImage myPicture;
@@ -115,11 +115,11 @@ public class User {
         this.userTypes = userTypes;
     }
 
-    public LocalDateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
