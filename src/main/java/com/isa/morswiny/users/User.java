@@ -20,6 +20,7 @@ public class User {
     private String login;
     private String email;
     private String password;
+    private UserTypes userTypes;
     private LocalDateTime birthday;
     private List<Event> favourites = new ArrayList<>();
     private List<Event> myEvents = new ArrayList<>();
@@ -28,10 +29,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
+                ", userTypes=" + userTypes +
                 ", birthday=" + birthday +
                 '}';
     }
@@ -41,18 +44,19 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getID(), user.getID()) &&
-                Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getSurname(), user.getSurname()) &&
-                Objects.equals(getLogin(), user.getLogin()) &&
-                Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getPassword(), user.getPassword()) &&
-                Objects.equals(getBirthday(), user.getBirthday());
+        return ID.equals(user.ID) &&
+                name.equals(user.name) &&
+                surname.equals(user.surname) &&
+                login.equals(user.login) &&
+                email.equals(user.email) &&
+                password.equals(user.password) &&
+                userTypes == user.userTypes &&
+                birthday.equals(user.birthday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getID(), getName(), getSurname(), getLogin(), getEmail(), getPassword(), getBirthday());
+        return Objects.hash(ID, name, surname, login, email, password, userTypes, birthday);
     }
 
     public Integer getID() {
@@ -101,6 +105,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserTypes getUserTypes() {
+        return userTypes;
+    }
+
+    public void setUserTypes(UserTypes userTypes) {
+        this.userTypes = userTypes;
     }
 
     public LocalDateTime getBirthday() {
