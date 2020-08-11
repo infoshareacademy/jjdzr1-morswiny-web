@@ -1,7 +1,10 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.events.Event;
+import com.isa.morswiny.eventsDao.EventCRUDRepository;
 import com.isa.morswiny.repository.JsonEventDataLoad;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,12 +15,17 @@ import java.io.PrintWriter;
 
 @WebServlet("/event-list")
 public class AllEventsListServlet extends HttpServlet {
+
+    @EJB
+    EventCRUDRepository eventCRUDRepository;
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-            JsonEventDataLoad eventDataLoad = new JsonEventDataLoad();
-            Event[] list = eventDataLoad.getJsonEventData("/home/tom/Desktop/Morswiny-Web/jjdzr1-morswiny-web/src/main/resources/events.json");
-            writer.println(list[0]);
+        JsonEventDataLoad eventDataLoad = new JsonEventDataLoad();
+        Event[] list = eventDataLoad.getJsonEventData("/home/tom/Desktop/Morswiny-Web/jjdzr1-morswiny-web/src/main/resources/events.json");
+        writer.println(list[0]);
 
     }
     //robi Mateo & Tomek

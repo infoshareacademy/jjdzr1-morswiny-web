@@ -2,9 +2,10 @@ package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
 
+import javax.ejb.Local;
 
 
-
+@Local
 public interface EventCRUDRepositoryInterface {
 
     Event getEventByID(Integer id);
