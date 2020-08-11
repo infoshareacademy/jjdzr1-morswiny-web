@@ -25,25 +25,25 @@ public class AllEventsListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         PrintWriter writer = resp.getWriter();
-        JsonEventDataLoad eventDataLoad = new JsonEventDataLoad();
-        Event[] list = eventDataLoad.getJsonEventData("/home/tom/Desktop/Morswiny-Web/jjdzr1-morswiny-web/src/main/resources/events.json");
 
+        for (Event event : eventCRUDRepositoryInterface.getAllEventsList()) {
+            if (event != null) {
+                try {
+                    writer.write("<!DOCTYPE html><html><body>" + event + "</body></html>");
+                } catch (NullPointerException e) {
+                    writer.write("<!DOCTYPE html><html><body>" + "Event not found" + "</body></html>");
 
-        //test
-        String id = req.getParameter("id");
-        Integer integerId = Integer.parseInt(id);
+                }
+            } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                writer.write("<!DOCTYPE html><html><body>" + "Nie ma takiego eventu." + "</body></html>");
 
-
-        if(id==null || id.isEmpty() ){
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            writer.write("<!DOCTYPE html><html><body>" + "nie ma takiego eventu lub nie podales id"+"</body></html>");
-        }else{
-            Event event = eventCRUDRepositoryInterface.getEventByID(integerId);
-            writer.write("<!DOCTYPE html><html><body>" + event +"</body></html>");
-
+            }
         }
 
     }
-
 }
+
+
