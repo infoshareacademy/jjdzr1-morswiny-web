@@ -11,7 +11,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.*;
 
-@SessionScoped
 @Stateless
 public class EventCRUDRepository implements EventCRUDRepositoryInterface , Serializable {
 
