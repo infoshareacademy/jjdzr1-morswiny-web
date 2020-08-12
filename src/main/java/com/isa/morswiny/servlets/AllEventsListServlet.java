@@ -16,7 +16,7 @@ public class AllEventsListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
             JsonEventDataLoad eventDataLoad = new JsonEventDataLoad();
-            Event[] list = eventDataLoad.getJsonEventData("/home/tom/Desktop/Morswiny-Web/jjdzr1-morswiny-web/src/main/resources/events.json");
+            Event[] list = eventDataLoad.getJsonEventData();
             writer.println(list[0]);
 
     }
