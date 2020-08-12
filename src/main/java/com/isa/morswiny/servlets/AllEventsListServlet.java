@@ -1,8 +1,7 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.events.Event;
-import com.isa.morswiny.eventsDao.EventDataLoad;
-
+import com.isa.morswiny.repository.JsonEventDataLoad;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +15,9 @@ public class AllEventsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        EventDataLoad eventDataLoad = new EventDataLoad();
-        Event[] list = eventDataLoad.getJsonEventData();
-        writer.println(list[0]);
+            JsonEventDataLoad eventDataLoad = new JsonEventDataLoad();
+            Event[] list = eventDataLoad.getJsonEventData();
+            writer.println(list[0]);
 
     }
     //robi Mateo & Tomek

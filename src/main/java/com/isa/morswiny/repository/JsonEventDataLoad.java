@@ -1,4 +1,4 @@
-package com.isa.morswiny.eventsDao;
+package com.isa.morswiny.repository;
 
 
 import com.google.gson.Gson;
@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import com.google.gson.stream.JsonReader;
 
-public class EventDataLoad {
+public class JsonEventDataLoad {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
 

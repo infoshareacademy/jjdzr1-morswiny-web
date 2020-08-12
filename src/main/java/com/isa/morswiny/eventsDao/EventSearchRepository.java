@@ -1,6 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
+import com.isa.morswiny.repository.JsonEventDataManagement;
 
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -15,8 +16,8 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Ev
 
 
     public void setEventList() {
-        EventDataManagement eventDataManagement = new EventDataManagement();
-        this.eventList = eventDataManagement.getListOfEvents();
+        JsonEventDataManagement jsonEventDataManagement = new JsonEventDataManagement();
+        this.eventList = jsonEventDataManagement.createListOfAllEvents();
     }
 
     @Override
@@ -93,6 +94,12 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Ev
             }
         }
         return new Event();
+    }
+
+
+    @Override
+    public boolean isEventExisting(Event event) {
+        return false;
     }
 }
 
