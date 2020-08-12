@@ -2,11 +2,14 @@ package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
 
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class EventSearchRepository implements EventSearchRepositoryInterface {
+@SessionScoped
+public class EventSearchRepository implements EventSearchRepositoryInterface, Serializable {
     private Set<Event> eventSet;
 
     @Override
