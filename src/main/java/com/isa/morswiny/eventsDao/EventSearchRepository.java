@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public class EventSearchRepository implements EventSearchRepositoryInterface {
-    private Set<Event> eventSet;
 
     @Override
     public List<Event> searchByString(String userInput) {
