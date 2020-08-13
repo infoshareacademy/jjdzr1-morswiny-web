@@ -1,5 +1,6 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.events.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -44,7 +45,14 @@ public class EventServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         Integer id = Integer.parseInt(req.getParameter("id"));
         try {
-            map.put("event", eventCRUDRepositoryInterface.getEventByID(id));
+            Event event = eventCRUDRepositoryInterface.getEventByID(id);
+            map.put("event", event);
+            if (event.getAttachments().length > 0){
+                map.put("picture", event.getAttachments()[0].getFileName());
+            }
+            if (event.getUrls().getWww() != null){
+                map.put("tickets", event.getUrls().getWww());
+            }
         } catch (NullPointerException e) {
             writer.println("Event not found");
         }
