@@ -32,8 +32,9 @@ public class EventServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
-        resp.setContentType("text/html;charset=UTF-8");
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
