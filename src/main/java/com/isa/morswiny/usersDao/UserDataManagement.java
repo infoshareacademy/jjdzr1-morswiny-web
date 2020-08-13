@@ -8,8 +8,7 @@ import javax.ejb.Stateless;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.time.*;
+import java.util.Set;
 
 @Stateless
 public class UserDataManagement implements UserCRUDRepositoryInterface {
@@ -26,12 +25,12 @@ public class UserDataManagement implements UserCRUDRepositoryInterface {
 
     @Override
     public void addUser(User user) {
-        List<User> userList = UserRepository.getRepository();
+        Set<User> userList = UserRepository.getRepository();
         userList.add(user);
     }
 
     @Override
-    public List<User> getUsersList () {
+    public Set<User> getUsersList () {
         return UserRepository.getRepository();
     }
 

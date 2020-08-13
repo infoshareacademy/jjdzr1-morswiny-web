@@ -2,11 +2,11 @@ package com.isa.morswiny.usersDao;
 
 import com.isa.morswiny.users.User;
 import javax.ejb.Local;
-import java.util.List;
+import java.util.Set;
 
 @Local
 public interface UserCRUDRepositoryInterface {
-    List<User> getUsersList();
+    Set<User> getUsersList();
 
     void addUser(User user);
 }
