@@ -6,11 +6,12 @@ import com.isa.morswiny.repository.JsonEventDataManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.*;
 
-@SessionScoped
+@Stateless
 public class EventCRUDRepository implements EventCRUDRepositoryInterface , Serializable {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
