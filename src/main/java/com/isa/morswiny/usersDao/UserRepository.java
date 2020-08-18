@@ -78,8 +78,8 @@ public class UserRepository {
 
     public static boolean contains(User user) {
         Set<User> repository = getRepository();
-        for (User userFromList : repository) {
-            if (userFromList.getId().equals(user.getId())) {
+        for (User userFromSet : repository) {
+            if (userFromSet.getId().equals(user.getId())) {
                 return true;
             }
         }

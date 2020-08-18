@@ -12,7 +12,7 @@ public class Main {
         //System.out.println(er.getEventByID(71944));
 
         UserDataManagement udm = new UserDataManagement();
-        for (User user : udm.getUsersList()) {
+        for (User user : udm.getUsersSet()) {
             System.out.println(user.toString());
 
         }

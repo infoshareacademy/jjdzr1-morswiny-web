@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Local
 public interface UserCRUDRepositoryInterface {
-    Set<User> getUsersList();
+    Set<User> getUsersSet();
 
     void addUser(User user);
 }

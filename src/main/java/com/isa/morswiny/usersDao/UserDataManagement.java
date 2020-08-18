@@ -25,12 +25,12 @@ public class UserDataManagement implements UserCRUDRepositoryInterface {
 
     @Override
     public void addUser(User user) {
-        Set<User> userList = UserRepository.getRepository();
-        userList.add(user);
+        Set<User> userSet = UserRepository.getRepository();
+        userSet.add(user);
     }
 
     @Override
-    public Set<User> getUsersList () {
+    public Set<User> getUsersSet () {
         return UserRepository.getRepository();
     }
 
