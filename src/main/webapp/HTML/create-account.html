@@ -22,17 +22,18 @@
                         <center><h2>Create an account</h2></center>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="signupName">Your name</label>
+                        <label class="control-label" for="signupName">First Name</label>
                         <input id="signupName" type="text" maxlength="50" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="signupEmail">Email</label>
-                        <input id="signupEmail" type="email" maxlength="50" class="form-control">
+                        <label class="control-label" for="signupName">Last Name</label>
+                        <input id="signupSurname" type="text" maxlength="50" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="signupEmailagain">Email again</label>
-                        <input id="signupEmailagain" type="email" maxlength="50" class="form-control">
+                        <label class="control-label" for="signupEmail">Address E-mail</label>
+                        <input id="signupEmail" type="email" maxlength="50" class="form-control">
                     </div>
+                    <div></div>
                     <div class="form-group">
                         <label class="control-label" for="signupPassword">Password</label>
                         <input id="signupPassword" type="password" maxlength="25" class="form-control"
@@ -40,14 +41,23 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupPasswordagain">Password again</label>
-                        <input id="signupPasswordagain" type="password" maxlength="25" class="form-control">
+                        <input id="signupPasswordagain" type="password" maxlength="25" class="form-control"
+                               placeholder="at least 6 characters" length="40">
                     </div>
+                    <div class="form-group">
+                        <label class="control-label" for="signupPasswordagain">Accept</label>
+                        <div class="input-group"><span class="input-group-addon"><input type="checkbox">
+                        </span><input id="check_critiria" name="check_critiria" class="form-control" type="text"
+                                      placeholder="I accept the criteria" required=""></div>
+                    </div>
+
+
                     <div>
                         <a href="thank-you.html">
-                        <button class="btn btn-lg btn-primary btn-block" type="button">
-                            Register
-                        </button>
-                    </a></div>
+                            <button class="btn btn-lg btn-primary btn-block" type="button">
+                                Register
+                            </button>
+                        </a></div>
                     <br>
                     <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our
                         <a href="#">Privacy Policy</a>.</p>
