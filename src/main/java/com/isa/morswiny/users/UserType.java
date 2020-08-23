@@ -1,6 +1,6 @@
 package com.isa.morswiny.users;
 
-public enum UserTypes {
+public enum UserType {
     ADMIN,
     STANDARD_USER
 }

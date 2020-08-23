@@ -14,13 +14,13 @@ import java.util.Objects;
 
 public class User {
 
-    private Integer ID;
+    private Integer id;
     private String name;
     private String surname;
     private String login;
     private String email;
     private String password;
-    private UserTypes userTypes;
+    private UserType userType;
     private LocalDate birthday;
     private List<Event> favourites = new ArrayList<>();
     private List<Event> myEvents = new ArrayList<>();
@@ -29,12 +29,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
-                ", userTypes=" + userTypes +
+                ", userType=" + userType +
                 ", birthday=" + birthday +
                 '}';
     }
@@ -44,27 +44,27 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return ID.equals(user.ID) &&
+        return id.equals(user.id) &&
                 name.equals(user.name) &&
                 surname.equals(user.surname) &&
                 login.equals(user.login) &&
                 email.equals(user.email) &&
                 password.equals(user.password) &&
-                userTypes == user.userTypes &&
+                userType == user.userType &&
                 birthday.equals(user.birthday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, name, surname, login, email, password, userTypes, birthday);
+        return Objects.hash(id, name, surname, login, email, password, userType, birthday);
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -107,12 +107,12 @@ public class User {
         this.password = password;
     }
 
-    public UserTypes getUserTypes() {
-        return userTypes;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setUserTypes(UserTypes userTypes) {
-        this.userTypes = userTypes;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public LocalDate getBirthday() {
