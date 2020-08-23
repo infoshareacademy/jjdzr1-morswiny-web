@@ -6,11 +6,12 @@ import com.isa.morswiny.repository.JsonEventDataManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.*;
 
-@SessionScoped
+@Stateless
 public class EventCRUDRepository implements EventCRUDRepositoryInterface , Serializable {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -64,9 +65,9 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
                 i.remove();
             return true;
         }
-
         return false;
     }
+
     @Override
     public boolean updateEvent(Event event){
         if (getAllEventsList().contains(event)){
@@ -76,11 +77,4 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
         return false;
     }
 
-    @Override
-    public boolean saveEvent(Event event){
-        if (Objects.nonNull(event)) {
-            getAllEventsList().add(event);
-        }
-        return false;
-    }
 }
