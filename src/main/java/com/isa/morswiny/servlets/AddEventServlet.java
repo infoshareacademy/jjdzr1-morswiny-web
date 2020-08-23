@@ -38,7 +38,6 @@ public class AddEventServlet extends HttpServlet {
 
         EventCRUDRepository eventRepository = new EventCRUDRepository();
         eventRepository.createEvent(event);
-        eventRepository.saveEvent(event);
 
         event = eventRepository.getEventByID(event.getId());
 
