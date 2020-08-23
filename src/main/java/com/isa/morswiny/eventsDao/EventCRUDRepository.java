@@ -65,9 +65,9 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
                 i.remove();
             return true;
         }
-
         return false;
     }
+
     @Override
     public boolean updateEvent(Event event){
         if (getAllEventsList().contains(event)){
@@ -77,11 +77,4 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
         return false;
     }
 
-    @Override
-    public boolean saveEvent(Event event){
-        if (Objects.nonNull(event)) {
-            getAllEventsList().add(event);
-        }
-        return false;
-    }
 }
