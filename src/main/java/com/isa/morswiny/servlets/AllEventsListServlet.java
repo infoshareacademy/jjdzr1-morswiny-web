@@ -15,11 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -60,15 +56,18 @@ public class AllEventsListServlet extends HttpServlet {
 
     private List<Event> setListOfMainEvents() {
         List<Event> listOfAllEvents = eventCRUDRepositoryInterface.getAllEventsList();
-        int sizeOfList = listOfAllEvents.size();
-        List numOfEvents = listOfAllEvents.stream()
-                .sorted((event1, event2) -> event1.getStartDateLDT().compareTo(event2.getStartDateLDT()))
+        int numOfAllEvents = listOfAllEvents.size();
+        int numOfMainEvents = returnNumberOfMainEvents(listOfAllEvents);
+
+        listOfMainEvents = listOfAllEvents.stream()
+                .sorted(Comparator.comparing(Event::getStartDateLDT))
+                .skip(numOfAllEvents - numOfMainEvents)
                 .collect(toList());
 
-        for (int i = 0; i < 3; i++) {
-            listOfMainEvents.add(listOfAllEvents.get(i));
-        }
         return listOfMainEvents;
+    }
+    private int returnNumberOfMainEvents(List list){
+        return Math.min(list.size(), 3);
     }
 
 
