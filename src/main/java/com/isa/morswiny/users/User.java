@@ -14,13 +14,14 @@ import java.util.Objects;
 
 public class User {
 
-    private Integer ID;
+    private Integer id;
     private String name;
     private String surname;
     private String login;
     private String email;
     private String password;
-    private LocalDateTime birthday;
+    private UserType userType;
+    private LocalDate birthday;
     private List<Event> favourites = new ArrayList<>();
     private List<Event> myEvents = new ArrayList<>();
     private BufferedImage myPicture;
@@ -28,10 +29,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "ID=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
+                ", userType=" + userType +
                 ", birthday=" + birthday +
                 '}';
     }
@@ -41,26 +44,27 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getID(), user.getID()) &&
-                Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getSurname(), user.getSurname()) &&
-                Objects.equals(getLogin(), user.getLogin()) &&
-                Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getPassword(), user.getPassword()) &&
-                Objects.equals(getBirthday(), user.getBirthday());
+        return id.equals(user.id) &&
+                name.equals(user.name) &&
+                surname.equals(user.surname) &&
+                login.equals(user.login) &&
+                email.equals(user.email) &&
+                password.equals(user.password) &&
+                userType == user.userType &&
+                birthday.equals(user.birthday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getID(), getName(), getSurname(), getLogin(), getEmail(), getPassword(), getBirthday());
+        return Objects.hash(id, name, surname, login, email, password, userType, birthday);
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -103,11 +107,19 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getBirthday() {
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
