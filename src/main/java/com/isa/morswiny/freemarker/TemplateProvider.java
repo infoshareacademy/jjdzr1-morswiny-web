@@ -4,12 +4,16 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.servlet.ServletContext;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class TemplateProvider {
+@ApplicationScoped
+public class TemplateProvider implements Serializable {
 
-    public static final String TEMPLATES_DIRECTORY_PATH = "/fm-templates";
+    public static final String TEMPLATES_DIRECTORY_PATH = "WEB-INF/fm-templates";
 
     public static Template createTemplate(ServletContext servletContext, String templateName) throws IOException {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_27);
