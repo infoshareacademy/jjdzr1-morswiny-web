@@ -18,7 +18,7 @@ public class JsonEventDataManagement {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public List<Event> createListOfAllEvents(){
-        Event[] gsonEvents = new JsonEventDataLoad().getJsonEventData("src/main/resources/events.json");
+        Event[] gsonEvents = new JsonEventDataLoad().getJsonEventData();
         List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
         trimDateStrings(eventsList);
         setLocalDateTimeInList(eventsList);
@@ -104,4 +104,5 @@ public class JsonEventDataManagement {
             }
         }
     }
+
 }

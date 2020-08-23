@@ -1,19 +1,23 @@
 package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.events.Event;
+import com.isa.morswiny.repository.EventRepository;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class EventSearchRepository implements EventSearchRepositoryInterface {
-    private Set<Event> eventSet;
+@SessionScoped
+public class EventSearchRepository implements EventSearchRepositoryInterface, Serializable {
 
     @Override
     public List<Event> searchByString(String userInput) {
         List<Event> list = new ArrayList<>();
         String eventSpecification;
-        for (Event event : eventSet) {
+        for (Event event : EventRepository.getEventRepository()) {
             eventSpecification = event.returnEventParams();
             if (eventSpecification.toLowerCase()
                     .contains
@@ -27,7 +31,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     @Override
     public List<Event> searchByOrganizer(String organizer) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : EventRepository.getEventRepository()) {
             if (event.getOrganizer().getDesignation().toLowerCase()
                     .contains
                             (organizer.toLowerCase())) {
@@ -40,7 +44,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     @Override
     public List<Event> searchByPlace(String place) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : EventRepository.getEventRepository()) {
             String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
             if (nameAndSubname.toLowerCase()
                     .contains(
@@ -55,7 +59,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     // 1 if active, 0 if inactive
     public List<Event> searchActive(Integer active) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : EventRepository.getEventRepository()) {
             if (event.getActive().equals(active)) {
                 list.add(event);
             }
@@ -66,7 +70,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface {
     @Override
     public List<Event> searchByName(String name) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet) {
+        for (Event event : EventRepository.getEventRepository()) {
             if (event.getName().toLowerCase()
                     .contains(
                             name.toLowerCase())) {
