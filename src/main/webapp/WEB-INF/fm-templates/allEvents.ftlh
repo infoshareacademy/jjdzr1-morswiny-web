@@ -79,7 +79,12 @@
     <#list listOfMainEvents as events>
 
         <div class="card">
-            <img src="../../Images/morswin.png" class="card-img-top" alt="...">
+
+            <#if events.getAttachments()?size = 0>
+                <img src="../../Images/morswin.png" class="card-img-top" alt="...">
+                <#else>
+                <img src="${events.attachments[0].getFileName()}">
+            </#if>
             <div class="card-body">
                 <h5 class="card-title">${events.name}</h5>
                 </div>
