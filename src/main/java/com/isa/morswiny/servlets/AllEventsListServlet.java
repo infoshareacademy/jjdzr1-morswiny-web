@@ -69,8 +69,6 @@ public class AllEventsListServlet extends HttpServlet {
     private int returnNumberOfMainEvents(List list){
         return Math.min(list.size(), 3);
     }
-
-
 }
 
 

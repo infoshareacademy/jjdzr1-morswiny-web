@@ -82,12 +82,12 @@
 
             <#if events.getAttachments()?size = 0>
                 <img src="../../Images/morswin.png" class="card-img-top" alt="...">
-                <#else>
+            <#else>
                 <img src="${events.attachments[0].getFileName()}">
             </#if>
             <div class="card-body">
                 <h5 class="card-title">${events.name}</h5>
-                </div>
+            </div>
             <div>
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
@@ -107,13 +107,15 @@
                     </svg>
                     ${events.getPlace().getName()}
                     <#if events.getPlace().getSubname()??>
-                       - ${events.getPlace().getSubname()}
+                        - ${events.getPlace().getSubname()}
                     </#if>
 
                 </div>
                 <br>
                 <div>
-                    <button type="button" class="btn btn-primary">Kup bilet</button>
+                    <#if events.getUrls().www ?has_content>
+                    <button type="submit" class="btn btn-primary" formaction="${events.getUrls().www}">Kup bilet</button>
+                    </#if>
                     <button type="button" class="btn btn-secondary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
