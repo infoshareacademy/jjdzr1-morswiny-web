@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Morswiny</title>
+    <title>Morswiny - Welcome Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
 
+    </style>
 </head>
 <body>
 
@@ -58,7 +65,7 @@
 
 <div>
 
-    <p> <br> Welcome! <br>
+    <p><br> Welcome! <br>
         Culture is vital for every nation and person. <br>
         You can find here many pieces of information concerning latest cultural events in Gdansk. <br>
         Search for, add to favourites, register your own events! <br>
@@ -72,21 +79,12 @@
     <#list listOfMainEvents as events>
 
         <div class="card">
+
             <img src="../../Images/morswin.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${events.name}</h5>
-                <div>
-                    <p class="card-text">Siema zapraszam wszystkich na mega fajny event bla blabla </p>
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                        <path fill-rule="evenodd"
-                              d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                        <path fill-rule="evenodd"
-                              d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                    18.06
                 </div>
+            <div>
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +93,7 @@
                         <path fill-rule="evenodd"
                               d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
                     </svg>
-                    ${events.startDate}
+                    ${events.startDate} - ${events.endDate}
                 </div>
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor"
@@ -103,7 +101,11 @@
                         <path fill-rule="evenodd"
                               d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg>
-                    ${events.place}
+                    ${events.getPlace().getName()}
+                    <#if events.getPlace().getSubname()??>
+                       - ${events.getPlace().getSubname()}
+                    </#if>
+
                 </div>
                 <br>
                 <div>
