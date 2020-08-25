@@ -64,7 +64,7 @@
                 <#if picture??>
                     <source srcset="${picture}">
                 </#if>
-                <img src="Images/singleEventPhoto.jpg" alt="Gdansk" class="rounded picture" />
+                <img src="Images/morswin.png" alt="Morświn events" class="rounded picture" />
             </picture>
         </div>
             <div class="col-6">
