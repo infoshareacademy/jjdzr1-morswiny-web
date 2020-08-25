@@ -12,6 +12,51 @@
             font-family: 'Lato', sans-serif;
         }
 
+        {
+            box-sizing: border-box;
+        }
+
+        /* Style the search field */
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 40%;
+            margin-left: 25%;
+            background: #f1f1f1;
+            text-align: center;
+        }
+
+        /* Style the submit button */
+        form.example button {
+            float: left;
+            width: 10%;
+            margin-right: 25%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none; /* Prevent double borders */
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+        /* Clear floats */
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        div.text {
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -63,16 +108,28 @@
     </div>
 </nav>
 
-<div>
+<div class = "text">
 
     <p><br> Welcome! <br>
-        Culture is vital for every nation and person. <br>
+        We believe that culture is vital for every nation and person. <br>
         You can find here many pieces of information concerning latest cultural events in Gdansk. <br>
         Search for, add to favourites, register your own events! <br>
-        Have fun! <br>
+        Have fun! :-) <br>
     </p>
 
 </div>
+<br><br>
+
+<!-- Load icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The form -->
+<form class="example" action="action_page.php">
+    <input type="text" placeholder="Search events..." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+
+<br><br>
 
 
 <div class="card-deck">
@@ -112,9 +169,16 @@
 
                 </div>
                 <br>
+
+
                 <div>
                     <#if events.getUrls().www ?has_content>
-                    <button type="submit" class="btn btn-primary" formaction="${events.getUrls().www}">Kup bilet</button>
+                    <button type="submit" class="btn btn-primary" onclick="redirect()">Buy ticket</button>
+                        <script>
+                            function redirect() {
+                                location.replace("http://www.wp.pl")
+                            }
+                        </script>
                     </#if>
                     <button type="button" class="btn btn-secondary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
