@@ -173,12 +173,8 @@
 
                 <div>
                     <#if events.getUrls().www ?has_content>
-                    <button type="submit" class="btn btn-primary" onclick="redirect()">Buy ticket</button>
-                        <script>
-                            function redirect() {
-                                location.replace("http://www.wp.pl")
-                            }
-                        </script>
+                    <a href= ${events.getUrls().www}>
+                    <button type="submit" class="btn btn-primary">Buy ticket</button> </a>
                     </#if>
                     <button type="button" class="btn btn-secondary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
@@ -187,7 +183,9 @@
                                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
                     </button>
+                    <a href = "/single-event?id=${events.getStringId()}">
                     <button type="button" class="btn btn-info">Info</button>
+                    </a>
                 </div>
             </div>
         </div>

@@ -102,6 +102,9 @@ public class Event {
         return id;
     }
 
+    public String getStringId() {
+        return String.valueOf(id);
+    }
     public void setId(Integer id) {
         this.id = id;
     }
