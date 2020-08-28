@@ -20,4 +20,12 @@
     height: 700px;
 }
 
+.carouselstyle{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    width: 1200px;
+}
+
 
