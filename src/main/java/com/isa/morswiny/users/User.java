@@ -20,6 +20,8 @@ public class User {
     private String login;
     private String email;
     private String password;
+    private UserGender userGender;
+    private UserNationality userNationality;
     private UserType userType;
     private LocalDate birthday;
     private List<Event> favourites = new ArrayList<>();
@@ -29,11 +31,14 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userGender=" + userGender +
+                ", userNationality=" + userNationality +
                 ", userType=" + userType +
                 ", birthday=" + birthday +
                 '}';
@@ -44,19 +49,24 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return id.equals(user.id) &&
-                name.equals(user.name) &&
-                surname.equals(user.surname) &&
-                login.equals(user.login) &&
-                email.equals(user.email) &&
-                password.equals(user.password) &&
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(surname, user.surname) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                userGender == user.userGender &&
+                userNationality == user.userNationality &&
                 userType == user.userType &&
-                birthday.equals(user.birthday);
+                Objects.equals(birthday, user.birthday) &&
+                Objects.equals(favourites, user.favourites) &&
+                Objects.equals(myEvents, user.myEvents) &&
+                Objects.equals(myPicture, user.myPicture);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, login, email, password, userType, birthday);
+        return Objects.hash(id, name, surname, login, email, password, userGender, userNationality, userType, birthday, favourites, myEvents, myPicture);
     }
 
     public Integer getId() {
@@ -146,4 +156,21 @@ public class User {
     public void setMyPicture(BufferedImage myPicture) {
         this.myPicture = myPicture;
     }
+
+    public UserGender getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(UserGender userGender) {
+        this.userGender = userGender;
+    }
+
+    public UserNationality getUserNationality() {
+        return userNationality;
+    }
+
+    public void setUserNationality(UserNationality userNationality) {
+        this.userNationality = userNationality;
+    }
+
 }

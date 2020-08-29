@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mariadb:
+    image: mariadb:10.2.19
+    container_name: "morswinyweb_mariadb"
+    restart: always
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: morswinyweb
+      MYSQL_USER: morswinyweb
+      MYSQL_PASSWORD: morswinyweb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/mysql:/var/lib/mysql
