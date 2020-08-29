@@ -1,20 +1,15 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.cdi.EventDao;
 import com.isa.morswiny.events.Event;
-import com.isa.morswiny.events.EventURL;
-import com.isa.morswiny.events.Organizer;
-import com.isa.morswiny.events.Place;
 import com.isa.morswiny.eventsDao.EventCRUDRepository;
-import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,14 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ApplicationScoped
-@WebServlet("/add-event")
-public class AddEventServlet extends HttpServlet {
+@WebServlet("/edit-event")
+public class EditEventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String TEMPLATE_NAME = "addEvent.ftlh";
+    private static final String TEMPLATE_NAME = "editEvent.ftlh";
 
-    @Inject
-    private EventDao eventDao;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -70,26 +63,16 @@ public class AddEventServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Map<String, String[]> eventsMap = req.getParameterMap();
-        eventDao.createEvent(eventsMap);
-
-        Place place = new Place();
-        place.setName(req.getParameter("eventPlace"));
-        Organizer organizer = new Organizer();
-        organizer.setDesignation(req.getParameter("organizer"));
-        EventURL url = new EventURL();
-        url.setWww(req.getParameter("eventURL"));
-
         event.setName(req.getParameter("eventName"));
-        event.setPlace(place);
-        event.setOrganizer(organizer);
-        event.setUrls(url);
-        event.setStartDateLDT(eventDao.setDateFormat(req.getParameter("startDate")));
-        event.setEndDateLDT(eventDao.setDateFormat(req.getParameter("endDate")));
+        event.getPlace().setName(req.getParameter("eventPlace"));
+        event.getOrganizer().setDesignation(req.getParameter("organizer"));
+        event.getUrls().setWww(req.getParameter("url"));
+        event.setStartDateLDT(LocalDateTime.parse(req.getParameter("start date")));
+        event.setEndDateLDT(LocalDateTime.parse(req.getParameter("end date")));
         event.setDescLong(req.getParameter("description"));
-//        event.getAttachments()[0].setFileName(req.getParameter("attachment"));
+        event.getAttachments()[0].setFileName(req.getParameter("attachment"));
 
-        if (event.getId().equals(null)) {
+        if (event.getId() == null) {
             //TODO to be deleted
             event.setId(new EventCRUDRepository().getNextID());
             eventRepository.createEvent(event);
