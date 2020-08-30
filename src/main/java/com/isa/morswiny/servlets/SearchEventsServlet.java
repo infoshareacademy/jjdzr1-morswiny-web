@@ -69,9 +69,7 @@ public class SearchEventsServlet extends HttpServlet {
     }
 
     private void setModel() {
-        if (model == null || model.isEmpty()) {
             model.put("listOfQueriedEvents", setListOfQueriedEvents());
-        }
     }
 
 
