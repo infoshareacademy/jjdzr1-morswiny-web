@@ -102,3 +102,13 @@ input:checked + .slider:before {
     width:100%;
     position:absolute;
 }
+
+.circular--square {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
