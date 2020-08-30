@@ -126,10 +126,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- The form -->
-<form class="example" action="action_page.php">
+<form class="example" action="/search-events">
     <input type="text" placeholder="Search events..." name="search">
     <button type="submit"><i class="fa fa-search"></i></button>
 </form>
+
 
 <br><br>
 <div class="text">
