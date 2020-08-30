@@ -107,7 +107,6 @@ input:checked + .slider:before {
     border-radius: 50%;
     height: 100px;
     width: 100px;
-    display: block;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -116,6 +115,11 @@ input:checked + .slider:before {
 }
 
 .content {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin-left: 800px;
+    margin-right: auto;
     display: flex;
 }
 
@@ -127,10 +131,7 @@ input:checked + .slider:before {
     width: 100px;
 
 
-
-
-
 }
 
 .content h3,
-.content p {margin: 0;}
+.content p {margin: 0px;}
