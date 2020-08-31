@@ -26,31 +26,31 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label requiredField" for="eventName">Name</label>
-                        <input id="eventName" type="text" maxlength="100" class="form-control" value="<#if event.getName()?has_content>${event.getName()}</#if>">
+                        <input id="eventName" type="text" maxlength="100" class="form-control" value="<#if event.getName()?has_content>${event.getName()}</#if>" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label requiredField" for="eventPlace">Place</label>
-                        <input id="eventPlace" type="text" maxlength="100" class="form-control" value="<#if event.getPlace().getName?has_content>${event.getPlace().getName()}</#if>">
+                        <input id="eventPlace" type="text" maxlength="100" class="form-control" value="<#if event.getPlace().getName?has_content>${event.getPlace().getName()}</#if>" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="organizer">Organizer</label>
-                        <input id="organizer" type="text" maxlength="50" class="form-control" value="<#if event.getOrganizer().getDesignation?has_content>${event.getOrganizer().getDesignation()}</#if>">
+                        <input id="organizer" type="text" maxlength="50" class="form-control" value="<#if event.getOrganizer().getDesignation?has_content>${event.getOrganizer().getDesignation()}</#if>" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventURL">URL</label>
-                        <input id="eventURL" type="text" maxlength="50" class="form-control" value="<#if event.getEventURL().getWww()?has_content>${event.getEventURL().getWww()}</#if>">
+                        <input id="eventURL" type="text" maxlength="50" class="form-control" value="<#if event.getEventURL().getWww()?has_content>${event.getEventURL().getWww()}</#if>" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label requiredField" for="startDate">Start Date</label>
                         <div class='input-group date' id='startDate'>
-                            <input type='text' class="form-control" value="<#if event.getStartDateLDT?has_content>${event.getStartDateLDT()}</#if>">
+                            <input type='text' class="form-control" value="<#if event.getStartDateLDT?has_content>${event.getStartDateLDT()}</#if>" required>
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             <script type="text/javascript">
                                 $(function () {
                                     $('#startDate').datetimepicker({
-                                        format: 'DD MMMM YYYY hh:mm'
+                                        format: 'DD MMMM YYYY H:mm'
                                     })
                                 });
                             </script>
@@ -58,15 +58,15 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label requiredField" for="endDate">End Date</label>
-                        <div class='input-group date' id='endDate' value="<#if event.getEndDateLDT?has_content>${event.getEndDateLDT()}</#if>">
-                            <input type='text' class="form-control" />
+                        <div class='input-group date' id='endDate'>
+                            <input type='text' class="form-control" value="<#if event.getEndDateLDT?has_content>${event.getEndDateLDT()}</#if>" required>
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             <script type="text/javascript">
                                 $(function () {
                                     $('#endDate').datetimepicker({
-                                        format: 'DD MMMM YYYY hh:mm'
+                                        format: 'DD MMMM YYYY H:mm'
                                     })
                                 });
                             </script>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="description">Description</label>
-                        <textarea id="description" cols="20" rows="10" class="form-control" value="<#if event.getDescLong()?has_content>${event.getDescLong()}</#if>">></textarea>
+                        <textarea id="description" cols="20" rows="10" class="form-control" value="<#if event.getDescLong()?has_content>${event.getDescLong()}</#if>" required></textarea>
                     </div>
 <#--                    <div class="form-group">-->
 <#--                        <label class="form-group" for="attachment">Attach event image</label>-->

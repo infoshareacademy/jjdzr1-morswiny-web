@@ -2,6 +2,7 @@ package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.events.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepository;
+import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -28,12 +29,14 @@ public class EditEventServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "editEvent.ftlh";
 
+    @Inject
+    private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
     @Inject
     private TemplateProvider templateProvider;
 
-    Event event = new Event();
-    EventCRUDRepository eventRepository = new EventCRUDRepository();
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,6 +66,9 @@ public class EditEventServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
+        Integer id = Integer.parseInt(req.getParameter("id"));
+        Event event = eventCRUDRepositoryInterface.getEventByID(id);
+
         event.setName(req.getParameter("eventName"));
         event.getPlace().setName(req.getParameter("eventPlace"));
         event.getOrganizer().setDesignation(req.getParameter("organizer"));
@@ -75,10 +81,10 @@ public class EditEventServlet extends HttpServlet {
         if (event.getId() == null) {
             //TODO to be deleted
             event.setId(new EventCRUDRepository().getNextID());
-            eventRepository.createEvent(event);
+            eventCRUDRepositoryInterface.createEvent(event);
         } else {
-            event = eventRepository.getEventByID(event.getId());
-            eventRepository.updateEvent(event);
+            event = eventCRUDRepositoryInterface.getEventByID(event.getId());
+            eventCRUDRepositoryInterface.updateEvent(event);
         }
 
         Map<String, Object> map = new HashMap<>();

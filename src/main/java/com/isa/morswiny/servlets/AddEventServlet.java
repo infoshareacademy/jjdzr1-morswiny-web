@@ -33,14 +33,14 @@ public class AddEventServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "addEvent.ftlh";
 
+
     @Inject
-    private EventDao eventDao;
+    private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
     @Inject
     private TemplateProvider templateProvider;
 
     Event event = new Event();
-    EventCRUDRepository eventRepository = new EventCRUDRepository();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,36 +70,39 @@ public class AddEventServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Map<String, String[]> eventsMap = req.getParameterMap();
-        eventDao.createEvent(eventsMap);
+        event.setName(req.getParameter("eventName"));
 
         Place place = new Place();
         place.setName(req.getParameter("eventPlace"));
+        event.setPlace(place);
+
         Organizer organizer = new Organizer();
         organizer.setDesignation(req.getParameter("organizer"));
+        event.setOrganizer(organizer);
+
         EventURL url = new EventURL();
         url.setWww(req.getParameter("eventURL"));
-
-        event.setName(req.getParameter("eventName"));
-        event.setPlace(place);
-        event.setOrganizer(organizer);
         event.setUrls(url);
-        event.setStartDateLDT(eventDao.setDateFormat(req.getParameter("startDate")));
-        event.setEndDateLDT(eventDao.setDateFormat(req.getParameter("endDate")));
+
+        event.setStartDate(req.getParameter("startDate"));
+        event.setEndDate(req.getParameter("endDate"));
         event.setDescLong(req.getParameter("description"));
+
 //        event.getAttachments()[0].setFileName(req.getParameter("attachment"));
 
-        if (event.getId().equals(null)) {
+        if (null == event.getId()) {
             //TODO to be deleted
-            event.setId(new EventCRUDRepository().getNextID());
-            eventRepository.createEvent(event);
+            event.setId(eventCRUDRepositoryInterface.getNextID());
+            eventCRUDRepositoryInterface.createEvent(event);
         } else {
-            event = eventRepository.getEventByID(event.getId());
-            eventRepository.updateEvent(event);
+            event = eventCRUDRepositoryInterface.getEventByID(event.getId());
+            eventCRUDRepositoryInterface.updateEvent(event);
         }
 
         Map<String, Object> map = new HashMap<>();
         map.put("event", event);
+
+        System.out.println(map);
 
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
