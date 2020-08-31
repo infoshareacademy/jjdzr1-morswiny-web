@@ -39,10 +39,7 @@ public class SearchEventsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setCharacterEncoding("UTF-8");
-//        PrintWriter writer = resp.getWriter();
-//        resp.setContentType("text/html;charset=UTF-8");
-//        writer.println("Welcome to single event page");
+
         userQuery = req.getParameter("search");
 
 
@@ -57,11 +54,7 @@ public class SearchEventsServlet extends HttpServlet {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
 
-//        try {
-//            writer.println(eventSearchRepositoryInterface.searchByString(userQuery));
-//        } catch (NullPointerException e) {
-//            writer.println("Event not found");
-//        }
+
     }
 
     private List<Event> setListOfQueriedEvents() {
@@ -70,6 +63,7 @@ public class SearchEventsServlet extends HttpServlet {
 
     private void setModel() {
             model.put("listOfQueriedEvents", setListOfQueriedEvents());
+
     }
 
 
