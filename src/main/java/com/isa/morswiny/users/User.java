@@ -20,8 +20,8 @@ public class User {
     private String login;
     private String email;
     private String password;
-    private UserGender userGender;
-    private UserNationality userNationality;
+    private String userGender;
+    private String userNationality;
     private UserType userType;
     private LocalDate birthday;
     private List<Event> favourites = new ArrayList<>();
@@ -55,8 +55,8 @@ public class User {
                 Objects.equals(login, user.login) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
-                userGender == user.userGender &&
-                userNationality == user.userNationality &&
+                Objects.equals(userGender, user.userGender) &&
+                Objects.equals(userNationality, user.userNationality) &&
                 userType == user.userType &&
                 Objects.equals(birthday, user.birthday) &&
                 Objects.equals(favourites, user.favourites) &&
@@ -157,20 +157,19 @@ public class User {
         this.myPicture = myPicture;
     }
 
-    public UserGender getUserGender() {
+    public String getUserGender() {
         return userGender;
     }
 
-    public void setUserGender(UserGender userGender) {
+    public void setUserGender(String userGender) {
         this.userGender = userGender;
     }
 
-    public UserNationality getUserNationality() {
+    public String getUserNationality() {
         return userNationality;
     }
 
-    public void setUserNationality(UserNationality userNationality) {
+    public void setUserNationality(String userNationality) {
         this.userNationality = userNationality;
     }
-
 }

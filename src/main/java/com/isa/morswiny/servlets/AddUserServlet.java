@@ -27,22 +27,22 @@ public class AddUserServlet extends HttpServlet {
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("user", new User());
-        RequestDispatcher rd = req.getRequestDispatcher("add-user.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("create-account.jsp");
         rd.forward(req,resp);
     }
 
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String userGender = req.getParameter("userGender");
-        String userNationality = req.getParameter("userNationality");
+        String name = req.getParameter("signupName");
+        String surname = req.getParameter("signupSurname");
+        String login = req.getParameter("signupLogin");
+        String email = req.getParameter("signupEmail");
+        String password = req.getParameter("signupPassword");
+        String userGender = req.getParameter("signupGender");
+        String userNationality = req.getParameter("country");
         String userType = req.getParameter("userType");
-        String birthday = req.getParameter("birthday");
+        String birthday = req.getParameter("signupBirthday");
 
         User user = new User();
         user.setName(name);
@@ -50,9 +50,9 @@ public class AddUserServlet extends HttpServlet {
         user.setLogin(login);
         user.setEmail(email);
         user.setPassword(password);
-        user.setUserGender(UserGender.valueOf(userGender));
-        user.setUserNationality(UserNationality.valueOf(userNationality));
-        user.setUserType(UserType.valueOf(userType));
+        user.setUserGender(userGender);
+        user.setUserNationality(userNationality);
+        user.setUserType(UserType.STANDARD_USER);
         user.setBirthday(LocalDate.parse(birthday));
 
         try {

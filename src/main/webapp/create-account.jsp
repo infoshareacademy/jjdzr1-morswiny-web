@@ -16,13 +16,14 @@
     <link rel="stylesheet" type="text/css" href="./log-in.css">
 </head>
 <body>
+<form method="post" action="<%=request.getContextPath()%>/add-user">
 
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <div class="account-wall">
                 <img class="profile-img"
-                     src="morswin.png" height="130" width="130"
+                     src="HTML/morswin.png" height="130" width="130"
                      alt="">
                 <form class="form-signin">
                     <div class="form-group">
@@ -30,20 +31,24 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupName">First Name</label>
-                        <input id="signupName" type="text" maxlength="50" class="form-control">
+                        <input id="signupName" type="text" name="signupName" maxlength="50" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="signupName">Last Name</label>
-                        <input id="signupSurname" type="text" maxlength="50" class="form-control">
+                        <label class="control-label" for="signupSurname">Last Name</label>
+                        <input id="signupSurname" type="text" name="signupSurname" maxlength="50" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="signupLogin">Login</label>
+                        <input id="signupLogin" type="text" name="signupLogin" maxlength="50" class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupEmail">Address E-mail</label>
-                        <input id="signupEmail" type="email" maxlength="50" class="form-control">
+                        <input id="signupEmail" type="text" name="signupEmail" maxlength="50" class="form-control">
                     </div>
                     <div></div>
                     <div class="form-group">
                         <label class="control-label" for="signupPassword">Password</label>
-                        <input id="signupPassword" type="password" maxlength="25" class="form-control"
+                        <input id="signupPassword" type="password" name="signupPassword" maxlength="25" class="form-control"
                                placeholder="at least 6 characters" length="40">
                     </div>
                     <div class="form-group">
@@ -51,29 +56,42 @@
                         <input id="signupPasswordagain" type="password" maxlength="25" class="form-control"
                                placeholder="at least 6 characters" length="40">
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="signupPasswordagain">Gender</label><br>
-                            <input type="radio" name="gender" id="gender-0" value="Male" checked="checked">
-                            Male
-                            <input type="radio" name="gender" id="gender-1" value="Female">
-                            Female
 
-                    </div>
+
+                    <!div class="form-group">
+                    <!    <label class="control-label" for="signupGender">Gender</label><br>
+                        <select id="signupGender" name="signupGender" class="form-control">
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        </select>
+                    <!/div>
+
                     <div class="form-group">
-                        <label class="control-label" for="signupPasswordagain">Select your Country</label>
+                        <label class="control-label" for="signupGender">Gender</label><br>
+                        <input type="radio" name="signupGender" id="gender-0" value="Male" checked="checked">
+                        Male
+                        <input type="radio" name="signupGender" id="gender-1" value="Female">
+                        Female
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label" for="country">Select your Country</label>
                         <select id="country" name="country" class="form-control">
                             <option value="Poland">Poland</option>
                             <option value="USA">USA</option>
                             <option value="UK">UK</option>
                             <option value="Germany">Germany</option>
                             <option value="France">France</option>
-                            <option value="Other">Other</option>
-
                         </select>                    </div>
                     <div class="form-group">
                         <label class="form-group" for="signupPasswordagain">Upload your profile picture</label>
                             <label for="exampleFormControlFile1"></label>
                             <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="signupBirthday">Birthday</label>
+                        <input id="signupBirthday" type="text" name="signupBirthday" maxlength="10" class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupPasswordagain">Accept</label>
@@ -83,7 +101,7 @@
                     </div>
                     <div>
                         <a href="thank-you.html">
-                            <button class="btn btn-lg btn-primary btn-block" type="button">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Register
                             </button>
                         </a></div>
@@ -97,5 +115,6 @@
         </div>
     </div>
 </div>
+</form>
 </body>
 </html>
