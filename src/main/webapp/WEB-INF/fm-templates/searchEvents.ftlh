@@ -10,17 +10,25 @@
     <style>
         body {
             font-family: 'Lato', sans-serif;
+
         }
 
         p {
             font-size: 1.5em;
         }
 
-        .picture {
-            width: 100%;
-            height: 100%;
-            max-width: 400px;
-            max-height: 400px;
+        .card-img-top {
+            width: 250px;
+            height: 200px;
+            display: block;
+            margin: 0 auto;
+
+        }
+
+        .bi bi-clock {
+            display: block;
+            margin: 0 auto;
+
         }
 
         a:link {
@@ -71,6 +79,21 @@
             clear: both;
             display: table;
         }
+
+        .card-body {
+            width: 100%;
+            text-align: center;
+
+
+        }
+
+        .card {
+            margin-left: 30%;
+            margin-right: 30%;
+            width: 250px;
+            height: 420px;
+        }
+
 
     </style>
 </head>
@@ -135,23 +158,24 @@
     <input type="text" placeholder="Search events..." name="search">
     <button type="submit"><i class="fa fa-search"></i></button>
 </form>
-
+<br> <br>
 
 <ul class="list-group">
     <#list listOfQueriedEvents as event>
 
 
 
-        <div class="col-6 thumbnail picture">
+
+        <div class="card" style="width: 45rem;">
+
             <picture>
                 <#if event.getAttachments()?size = 0>
                     <img src="../../Images/morswin.png" class="card-img-top" alt="...">
                 <#else>
-                    <img src="${event.attachments[0].getFileName()}">
+                    <img src="${event.attachments[0].getFileName()}" class="card-img-top">
                 </#if>
             </picture>
-        </div>
-        <div class="card" style="width: 18rem;">
+
             <div class="card-body">
                 <h5 class="card-title">${event.getName()}</h5>
                 <br>
@@ -176,7 +200,7 @@
                     </#if>
 
                 </div>
-
+                <br>
                 <div>
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
@@ -197,6 +221,7 @@
 
             </div>
         </div>
+        <br> <br>
     </#list>
 </ul>
 </body>
