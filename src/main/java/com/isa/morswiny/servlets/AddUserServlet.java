@@ -60,7 +60,7 @@ public class AddUserServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-resp.sendRedirect("");
+resp.sendRedirect("thank-you");
     }
 
 }

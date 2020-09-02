@@ -58,21 +58,21 @@
                     </div>
 
 
-                    <!div class="form-group">
-                    <!    <label class="control-label" for="signupGender">Gender</label><br>
+                    <div class="form-group">
+                    <    <label class="control-label" for="signupGender">Gender</label><br>
                         <select id="signupGender" name="signupGender" class="form-control">
                         <option value="MALE">Male</option>
                         <option value="FEMALE">Female</option>
                         </select>
-                    <!/div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="signupGender">Gender</label><br>
-                        <input type="radio" name="signupGender" id="gender-0" value="Male" checked="checked">
-                        Male
-                        <input type="radio" name="signupGender" id="gender-1" value="Female">
-                        Female
                     </div>
+
+                    <!div class="form-group">
+                        <!label class="control-label" for="signupGender">Gender</label><br>
+                        <!input type="radio" name="signupGender" id="gender-0" value="MALE" checked="checked">
+                        !Male
+                        <!input type="radio" name="signupGender" id="gender-1" value="FEMALE">
+                        !Female
+                    <!/div>
 
 
                     <div class="form-group">
