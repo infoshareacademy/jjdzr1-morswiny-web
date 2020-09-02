@@ -146,6 +146,8 @@
             </#if>
             <div class="card-body">
                 <h5 class="card-title">${events.name}</h5>
+            </div>
+            <div>
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +173,7 @@
                 <br>
                 <div>
                     <#if events.getUrls().www ?has_content>
-                        <a href="${events.getUrls.www}">
+                        <a href= ${events.getUrls().www}>
                             <button type="button" class="btn btn-primary">Buy tickets</button>
                         </a>
                     </#if>
