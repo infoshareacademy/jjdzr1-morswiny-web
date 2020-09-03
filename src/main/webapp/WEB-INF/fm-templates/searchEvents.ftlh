@@ -126,7 +126,7 @@
                 </div>
                 <br>
 
-                <div style="text-align: end; margin-right: 20px">
+                <div style="text-align: end; margin-right: 20px; margin-bottom: 5px">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
                             <button type="submit" class="btn btn-primary">Buy ticket</button>
