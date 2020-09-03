@@ -83,7 +83,7 @@
 
 <div>
     <ol class="breadcrumb primary-color">
-        <li class="breadcrumb-item"><a class="white-text" href="main.html">Home</a></li>
+        <li class="breadcrumb-item"><a class="white-text" href="main-page">Home</a></li>
         <li class="breadcrumb-item breadcrumb-active">Search Events</li>
     </ol>
 </div>
@@ -126,7 +126,7 @@
                 </div>
                 <br>
 
-                <div style="text-align: end; margin-right: 20px">
+                <div style="text-align: end; margin-right: 20px; margin-bottom: 5px">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
                             <button type="submit" class="btn btn-primary">Buy ticket</button>
