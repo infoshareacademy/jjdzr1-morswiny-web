@@ -1,21 +1,24 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.events.Event;
-import com.isa.morswiny.eventsDao.EventCRUDRepository;
+import com.isa.morswiny.events.EventURL;
+import com.isa.morswiny.events.Organizer;
+import com.isa.morswiny.events.Place;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -36,8 +39,6 @@ public class EditEventServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
 
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -45,59 +46,78 @@ public class EditEventServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Map<String, Object> map = new HashMap<>();
+        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
-        Template template = templateProvider.createTemplate(
-                getServletContext(), TEMPLATE_NAME);
+        Map<String, Object> map = new HashMap<>();
+        Integer id = Integer.parseInt(req.getParameter("id"));
+        try {
+            Event event = eventCRUDRepositoryInterface.getEventByID(id);
+            map.put("event", event);
+        } catch (NullPointerException e) {
+            writer.println("Event not found");
+        }
+
+        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         try {
             template.process(map, writer);
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
-
     }
 
-
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+//
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
+
+        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
         Integer id = Integer.parseInt(req.getParameter("id"));
         Event event = eventCRUDRepositoryInterface.getEventByID(id);
 
         event.setName(req.getParameter("eventName"));
-        event.getPlace().setName(req.getParameter("eventPlace"));
-        event.getOrganizer().setDesignation(req.getParameter("organizer"));
-        event.getUrls().setWww(req.getParameter("url"));
-        event.setStartDateLDT(LocalDateTime.parse(req.getParameter("start date")));
-        event.setEndDateLDT(LocalDateTime.parse(req.getParameter("end date")));
-        event.setDescLong(req.getParameter("description"));
-        event.getAttachments()[0].setFileName(req.getParameter("attachment"));
 
-        if (event.getId() == null) {
-            //TODO to be deleted
-            event.setId(new EventCRUDRepository().getNextID());
-            eventCRUDRepositoryInterface.createEvent(event);
-        } else {
-            event = eventCRUDRepositoryInterface.getEventByID(event.getId());
-            eventCRUDRepositoryInterface.updateEvent(event);
-        }
+        Place place = new Place();
+        place.setName(req.getParameter("eventPlace"));
+        event.setPlace(place);
+
+        Organizer organizer = new Organizer();
+        organizer.setDesignation(req.getParameter("organizer"));
+        event.setOrganizer(organizer);
+
+        EventURL url = new EventURL();
+        url.setWww(req.getParameter("eventURL"));
+        event.setUrls(url);
+
+        event.setStartDate(req.getParameter("startDate"));
+        event.setEndDate(req.getParameter("endDate"));
+        event.setDescLong(req.getParameter("description"));
+
+        eventCRUDRepositoryInterface.updateEvent(event);
 
         Map<String, Object> map = new HashMap<>();
         map.put("event", event);
 
-        Template template = templateProvider.createTemplate(
-                getServletContext(), TEMPLATE_NAME);
-        try {
-            template.process(map, writer);
-        } catch (TemplateException e) {
-            STDOUT.error("Error while processing template: ", e);
-        }
+        resp.sendRedirect("/single-event");
 
+//        Template template = templateProvider.createTemplate(
+//                getServletContext(), TEMPLATE_NAME);
+//        try {
+//            template.process(map, writer);
+//        } catch (TemplateException e) {
+//            STDOUT.error("Error while processing template: ", e);
+//        }
     }
 }
+
 

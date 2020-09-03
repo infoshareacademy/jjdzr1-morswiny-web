@@ -111,7 +111,6 @@ input:checked + .slider:before {
     margin-right: auto;
     display: flex;
 
-
 }
 
 .content {

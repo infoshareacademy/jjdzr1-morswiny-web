@@ -62,7 +62,7 @@ public class JsonEventDataManagement {
                 dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
             } catch (NullPointerException e){
                 STDOUT.error("Property file not found!");
-                dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm");
+                dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy H:mm");
             }
         for (Event event : list){
             if (event.getStartDate() != null){

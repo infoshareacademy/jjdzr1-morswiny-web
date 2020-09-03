@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,18 +29,17 @@ public class NewEventCreatedServlet extends HttpServlet {
     private static final String TEMPLATE_NAME = "newEventCreated.ftlh";
 
     @Inject
-    private TemplateProvider templateProvider;
+    TemplateProvider templateProvider;
 
     @Inject
-    private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
-
 
         Map<String, Object> map = new HashMap<>();
 
@@ -50,24 +51,6 @@ public class NewEventCreatedServlet extends HttpServlet {
 //            writer.println("Event not found");
 //        }
 
-        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        try {
-            template.process(map, resp.getWriter());
-        } catch (
-                TemplateException e) {
-            STDOUT.error("Error while processing template: ", e);
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter writer = resp.getWriter();
-        resp.addHeader("Content-Type", "text/html; charset=utf-8");
-
-        Map<String, Object> map = new HashMap<>();
-
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
         try {
@@ -75,7 +58,8 @@ public class NewEventCreatedServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
-
     }
 
 }
+
+

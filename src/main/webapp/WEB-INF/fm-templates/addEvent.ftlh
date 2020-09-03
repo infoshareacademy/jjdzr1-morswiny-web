@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
-    <link rel="stylesheet" type="text/css" href="../css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
@@ -19,30 +19,30 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <div class="account-wall">
                 <img class="profile-img"
-                     src="morswin.png" height="130" width="130"
+                     src="/Images/morswin.png" height="130" width="130"
                      alt="">
-                <form class="form-create" action="/add-event" method="POST">
+                <form class="form-signin" action="/add-event" method="POST">
                     <div class="form-group">
-                        <center><h2>Create new Event</h2></center>
+                        <center><h2>Create Event</h2></center>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventName">Name</label>
-                        <input name="eventName" type="text" maxlength="100" class="form-control" value="" required>
+                        <input name="eventName" type="text" maxlength="100" class="form-control" value="" placeholder="" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventPlace">Place</label>
-                        <input name="eventPlace" type="text" maxlength="100" class="form-control" value="" required>
+                        <input name="eventPlace" type="text" maxlength="100" class="form-control" value="" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="organizer">Organizer</label>
-                        <input name="organizer" type="text" maxlength="50" class="form-control" value="" required>
+                        <input name="organizer" type="text" maxlength="100" class="form-control" value="" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventURL">URL</label>
-                        <input name="eventURL" type="text" maxlength="50" class="form-control" value="" required>
+                        <input name="eventURL" type="text" maxlength="100" class="form-control" value="" required/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label requiredField" for="startDate">Start Date</label>
+                        <label class="control-label" for="startDate">Start Date</label>
                         <div class='input-group date' id='startDate'>
                             <input type='text' class="form-control" name="startDate" required/>
                             <span class="input-group-addon">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label requiredField" for="endDate" >End Date</label>
+                        <label class="control-label" for="endDate" >End Date</label>
                         <div class='input-group date' id='endDate'>
                             <input type='text' class="form-control" name="endDate" required/>
                             <span class="input-group-addon">
@@ -83,7 +83,8 @@
 <#--                        <input type="file" class="form-control-file" name="attachment">-->
 <#--                    </div>-->
                     <div>
-                        <input class="btn btn-lg btn-primary btn-block" onclick="location.href='/new-event-created';" type="submit" value="Create"/>
+                        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Create" />
+                        <input class="btn btn-sm btn-secondary btn-block" type="reset" value="Reset"/>
                     </div>
                     <br>
                     <div>

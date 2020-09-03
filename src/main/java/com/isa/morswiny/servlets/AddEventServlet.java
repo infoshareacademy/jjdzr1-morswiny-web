@@ -1,15 +1,9 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.cdi.EventDao;
-import com.isa.morswiny.events.Event;
-import com.isa.morswiny.events.EventURL;
-import com.isa.morswiny.events.Organizer;
-import com.isa.morswiny.events.Place;
-import com.isa.morswiny.eventsDao.EventCRUDRepository;
+import com.isa.morswiny.events.*;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
@@ -20,9 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +34,6 @@ public class AddEventServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    Event event = new Event();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,7 +51,6 @@ public class AddEventServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
-
     }
 
 
@@ -70,6 +62,7 @@ public class AddEventServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
+        Event event = new Event();
         event.setName(req.getParameter("eventName"));
 
         Place place = new Place();
@@ -94,9 +87,6 @@ public class AddEventServlet extends HttpServlet {
             //TODO to be deleted
             event.setId(eventCRUDRepositoryInterface.getNextID());
             eventCRUDRepositoryInterface.createEvent(event);
-        } else {
-            event = eventCRUDRepositoryInterface.getEventByID(event.getId());
-            eventCRUDRepositoryInterface.updateEvent(event);
         }
 
         Map<String, Object> map = new HashMap<>();
@@ -104,14 +94,7 @@ public class AddEventServlet extends HttpServlet {
 
         System.out.println(map);
 
-        Template template = templateProvider.createTemplate(
-                getServletContext(), TEMPLATE_NAME);
-        try {
-            template.process(map, writer);
-        } catch (TemplateException e) {
-            STDOUT.error("Error while processing template: ", e);
-        }
-
+        resp.sendRedirect("/new-event-created");
     }
 }
 

@@ -69,12 +69,11 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
 
     @Override
-    public boolean updateEvent(Event event){
-        if (getAllEventsList().contains(event)){
+    public boolean updateEvent(Event event) {
+        if (getAllEventsList().contains(event)) {
             deleteEvent(event.getId());
             createEvent(event);
         }
         return false;
     }
-
 }
