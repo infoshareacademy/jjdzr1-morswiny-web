@@ -20,7 +20,7 @@ import java.util.*;
 import static java.util.stream.Collectors.toList;
 
 
-@WebServlet("/event-list")
+@WebServlet("/main-page")
 public class AllEventsListServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);

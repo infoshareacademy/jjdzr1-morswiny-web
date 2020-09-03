@@ -29,7 +29,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
-        <a href="main.html"><img src="/HTML/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
+        <a href="main-page"><img src="/HTML/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
     </div>
     <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -67,8 +67,8 @@
                 <a class="nav-link" href="abous-us.html">About Us</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" action="/search-events?">
+            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name = "search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <div>
