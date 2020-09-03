@@ -3,6 +3,8 @@ package com.isa.morswiny.users;
 import com.isa.morswiny.events.Event;
 
 import javax.imageio.ImageIO;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+
 public class User {
+
 
     private Integer id;
     private String name;
