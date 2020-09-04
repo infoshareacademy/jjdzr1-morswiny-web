@@ -58,12 +58,13 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
     @Override
     public boolean deleteEvent(Integer eventId) {
-        Iterator i = getAllEventsList().iterator();
+        ListIterator<Event> i = getAllEventsList().listIterator();
         while(i.hasNext()){
-            Event event = (Event) i.next();
-            if (eventId.equals(event.getId()))
+            Event event = i.next();
+            if (event.getId().equals(eventId)){
                 i.remove();
-            return true;
+                return true;
+            }
         }
         return false;
     }

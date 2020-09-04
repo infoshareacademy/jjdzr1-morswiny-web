@@ -77,11 +77,11 @@
                         <label class="control-label" for="description">Description</label>
                         <textarea id="description" cols="20" rows="10" class="form-control" required>${event.getDescLong()}</textarea>
                     </div>
-<#--                    <div class="form-group">-->
-<#--                        <label class="form-group" for="attachment">Attach event image</label>-->
-<#--                        <label for="attachment"></label>-->
-<#--                        <input type="file" class="form-control-file" id="attachment">-->
-<#--                    </div>-->
+                    <div class="form-group">
+                        <label class="form-group" for="attachment">Attach event image</label>
+                        <label for="attachment"></label>
+                        <input type="file" class="form-control-file" id="attachment">
+                    </div>
                     <div>
                         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Apply"/>
                         <input class="btn btn-sm btn-secondary btn-block" type="reset" value="Reset"/>

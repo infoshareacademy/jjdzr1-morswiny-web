@@ -17,9 +17,7 @@
                 <img class="profile-img"
                      src="/Images/morswin.png"  height="130" width="130"
                      alt="">
-                        <h2> Thank you </h2>
-                        <p> New event has been created successfully.</p>
-<#--                    <a href="/edit-event?id=${event.getId()}">Edit new event</a>-->
+                        <h3> Event has been deleted </h3>
                     <br>
                     <div>
                         <p>Go back to the <a href="/event-list"> all events.</a></p>

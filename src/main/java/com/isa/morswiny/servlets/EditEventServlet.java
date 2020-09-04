@@ -108,6 +108,8 @@ public class EditEventServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("event", event);
 
+        System.out.println(map);
+
         resp.sendRedirect("/single-event");
 
 //        Template template = templateProvider.createTemplate(
