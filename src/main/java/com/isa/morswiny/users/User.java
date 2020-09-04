@@ -3,8 +3,7 @@ package com.isa.morswiny.users;
 import com.isa.morswiny.events.Event;
 
 import javax.imageio.ImageIO;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,23 +14,67 @@ import java.util.List;
 import java.util.Objects;
 
 
+@Entity
+@Table(name = "EventsUsers")
 
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", unique = true, nullable = false)
+    private int id;
 
-    private Integer id;
+    @Column(name = "Name", unique = false, nullable = true)
     private String name;
+
+    @Column(name = "Surname", unique = false, nullable = true)
     private String surname;
+
+    @Column(name = "Login", unique = false, nullable = true)
     private String login;
+
+    @Column(name = "Email", unique = false, nullable = true)
     private String email;
+
+    @Column(name = "Password", unique = false, nullable = true)
     private String password;
+
+    @Column(name = "Gender", unique = false, nullable = true)
     private String userGender;
+
+    @Column(name = "Nationality", unique = false, nullable = true)
     private String userNationality;
-    private UserType userType;
+
+    @Column(name = "UserType", unique = false, nullable = true)
+    private String userType;
+
+    @Column(name = "Birthday", unique = false, nullable = true)
     private LocalDate birthday;
-    private List<Event> favourites = new ArrayList<>();
-    private List<Event> myEvents = new ArrayList<>();
-    private BufferedImage myPicture;
+
+    @Column(name = "RegistrationTime", unique = false, nullable = true)
+    private LocalDateTime registrationTime;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) &&
+                Objects.equals(surname, user.surname) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(userGender, user.userGender) &&
+                Objects.equals(userNationality, user.userNationality) &&
+                Objects.equals(userType, user.userType) &&
+                Objects.equals(birthday, user.birthday) &&
+                Objects.equals(registrationTime, user.registrationTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, login, email, password, userGender, userNationality, userType, birthday, registrationTime);
+    }
 
     @Override
     public String toString() {
@@ -47,31 +90,6 @@ public class User {
                 ", userType=" + userType +
                 ", birthday=" + birthday +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(surname, user.surname) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(userGender, user.userGender) &&
-                Objects.equals(userNationality, user.userNationality) &&
-                userType == user.userType &&
-                Objects.equals(birthday, user.birthday) &&
-                Objects.equals(favourites, user.favourites) &&
-                Objects.equals(myEvents, user.myEvents) &&
-                Objects.equals(myPicture, user.myPicture);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, login, email, password, userGender, userNationality, userType, birthday, favourites, myEvents, myPicture);
     }
 
     public Integer getId() {
@@ -122,11 +140,11 @@ public class User {
         this.password = password;
     }
 
-    public UserType getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
@@ -138,7 +156,8 @@ public class User {
         this.birthday = birthday;
     }
 
-    public List<Event> getFavourites() {
+    /*public List<Event> getFavourites() {
+
         return favourites;
     }
 
@@ -154,13 +173,9 @@ public class User {
         this.myEvents = myEvents;
     }
 
-    public BufferedImage getMyPicture() {
-        return myPicture;
-    }
 
-    public void setMyPicture(BufferedImage myPicture) {
-        this.myPicture = myPicture;
-    }
+     */
+
 
     public String getUserGender() {
         return userGender;
@@ -176,5 +191,13 @@ public class User {
 
     public void setUserNationality(String userNationality) {
         this.userNationality = userNationality;
+    }
+
+    public LocalDateTime getRegistrationTime() {
+        return registrationTime;
+    }
+
+    public void setRegistrationTime(LocalDateTime registrationTime) {
+        this.registrationTime = registrationTime;
     }
 }

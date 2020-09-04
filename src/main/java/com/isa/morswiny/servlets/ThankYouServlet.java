@@ -21,8 +21,6 @@ public class ThankYouServlet extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("thank-you.jsp");
         rd.forward(req,resp);
 
-        //PrintWriter pw = resp.getWriter();
-        //pw.write("Thank you for registering!");
 
         }
 

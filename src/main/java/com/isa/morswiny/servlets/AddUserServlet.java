@@ -52,7 +52,7 @@ public class AddUserServlet extends HttpServlet {
         user.setPassword(password);
         user.setUserGender(userGender);
         user.setUserNationality(userNationality);
-        user.setUserType(UserType.STANDARD_USER);
+        user.setUserType(userType);
         user.setBirthday(LocalDate.parse(birthday));
 
         try {

@@ -15,13 +15,16 @@ public class UserDataManagement implements UserCRUDRepositoryInterface {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
+    /*
     public static void setDefaultImage(User user){
+
         try {
             user.setMyPicture(ImageIO.read(new File("src/main/webapp/Images/default-user-icon-4.jpg")));
         } catch (IOException e){
             STDOUT.error("Default image not found!");
         }
     }
+     */
 
     @Override
     public void addUser(User user) {

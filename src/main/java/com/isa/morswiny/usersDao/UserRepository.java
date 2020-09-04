@@ -27,7 +27,7 @@ public class UserRepository {
         user1.setEmail("kuba@com.pl");
         user1.setPassword("kuba1234");
         user1.setBirthday(LocalDate.parse("2020-01-01",DateTimeFormatter.ISO_LOCAL_DATE));
-        user1.setUserType(UserType.ADMIN);
+        user1.setUserType("ADMIN");
         usersRepository.add(user1);
 
         User user2 = new User();
@@ -38,7 +38,7 @@ public class UserRepository {
         user2.setEmail("tomek@com.pl");
         user2.setPassword("tomek1234");
         user2.setBirthday(LocalDate.parse("2020-01-02",DateTimeFormatter.ISO_LOCAL_DATE));
-        user2.setUserType(UserType.ADMIN);
+        user2.setUserType("ADMIN");
         usersRepository.add(user2);
 
         User user3 = new User();
@@ -49,7 +49,7 @@ public class UserRepository {
         user3.setEmail("mateusz@com.pl");
         user3.setPassword("mateusz1234");
         user3.setBirthday(LocalDate.parse("2020-01-03",DateTimeFormatter.ISO_LOCAL_DATE));
-        user3.setUserType(UserType.ADMIN);
+        user3.setUserType("ADMIN");
         usersRepository.add(user3);
 
         User user4 = new User();
@@ -60,7 +60,7 @@ public class UserRepository {
         user4.setEmail("agata@com.pl");
         user4.setPassword("agata1234");
         user4.setBirthday(LocalDate.parse("2020-01-04",DateTimeFormatter.ISO_LOCAL_DATE));
-        user4.setUserType(UserType.ADMIN);
+        user4.setUserType("ADMIN");
         usersRepository.add(user4);
 
         User user5 = new User();
@@ -71,7 +71,7 @@ public class UserRepository {
         user5.setEmail("przemek@com.pl");
         user5.setPassword("przemek1234");
         user5.setBirthday(LocalDate.parse("2020-01-05",DateTimeFormatter.ISO_LOCAL_DATE));
-        user5.setUserType(UserType.ADMIN);
+        user5.setUserType("ADMIN");
         usersRepository.add(user5);
 
     }

@@ -1,7 +1,7 @@
 package com.isa.morswiny.servlets;
 
 
-import com.isa.morswiny.users.UserHiber;
+import com.isa.morswiny.users.User;
 import com.isa.morswiny.users.UserType;
 import com.isa.morswiny.usersDao.UserConnectionHiber;
 import org.hibernate.Session;
@@ -19,25 +19,25 @@ import java.time.LocalDateTime;
 
 public class AddUserServletHiber extends HttpServlet {
 
-/*    public AddUserServletHiber() {
+    public AddUserServletHiber() {
         super();
     }
 
+    public static final long serialVersionUID = 1L;
 
- */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        UserHiber userHiber1 = new UserHiber();
-        userHiber1.setName("Przem");
+        User userHiber1 = new User();
+        userHiber1.setName("Przem2");
         userHiber1.setSurname("Ziel");
         userHiber1.setLogin("pzx");
-        userHiber1.setEmail("pzx@com.pl");
+        userHiber1.setEmail("pzx1@com.pl");
         userHiber1.setPassword("przemek");
         userHiber1.setUserGender("MALE");
         userHiber1.setUserNationality("Poland");
-        userHiber1.setUserType(UserType.valueOf("ADMIN"));
+        userHiber1.setUserType("ADMIN");
         userHiber1.setBirthday(LocalDate.parse("1999-01-01"));
         userHiber1.setRegistrationTime(LocalDateTime.now());
 
