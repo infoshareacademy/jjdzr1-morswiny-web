@@ -181,8 +181,8 @@ body {
 }
 
 .content h3,
-.content p {margin: 10px;}
-<<<<<<<< HEAD:src/main/webapp/css/style.css
+.content p {margin: 10px;
+}
 
 .card{
     margin-left: auto;
@@ -199,11 +199,6 @@ body {
     border: none;
     outline: none;
     box-shadow: none;
-}
-========
->>>>>>>> develop:src/main/webapp/HTML/style.css
-
-
 }
 
 .content h3,
