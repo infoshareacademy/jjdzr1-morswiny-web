@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,7 +33,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="log-in.html">My Account</a>
             </li>
-            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Filter
@@ -106,6 +106,9 @@
                 <button class="button-singleevent" type="button" disabled>Tickets and more information</button>
             </#if>
             <a href="/single-event?id=#{event.getId()}&addEvent=#{event.getId()}" class="button-singleevent" role="button">Add event to favourites</a>
+
+            <a href="/edit-event?id=${event.getId()}" class="button-singleevent" role="button"> Edit event </a>
+            <a href="/delete-event?id=${event.getId()}" class="button-singleevent" role="button"> Delete event </a>
         </div>
     </div>
 </div>
