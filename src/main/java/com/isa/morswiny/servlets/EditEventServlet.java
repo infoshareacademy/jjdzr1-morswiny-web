@@ -1,11 +1,9 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.Event;
-import com.isa.morswiny.events.EventURL;
-import com.isa.morswiny.events.Organizer;
-import com.isa.morswiny.events.Place;
+import com.isa.morswiny.events.*;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.parsers.DateTimeParser;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -35,6 +33,8 @@ public class EditEventServlet extends HttpServlet {
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
+    @Inject
+    private DateTimeParser dateTimeParser;
     @Inject
     private TemplateProvider templateProvider;
 
@@ -101,7 +101,22 @@ public class EditEventServlet extends HttpServlet {
 
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
+
+        event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
+        event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
+
         event.setDescLong(req.getParameter("description"));
+
+        event.setAttachments(new Attachment[0]);
+        //event.getAttachments()[0].setFileName(req.getParameter("attachment"));
+
+        Ticket ticket = new Ticket();
+        ticket.setType(req.getParameter("ticket"));
+        event.setTickets(ticket);
+
+        event.setCategoryId(req.getParameter("categoryId"));
+        event.setActive(Integer.valueOf(req.getParameter("active")));
+
 
         eventCRUDRepositoryInterface.updateEvent(event);
 

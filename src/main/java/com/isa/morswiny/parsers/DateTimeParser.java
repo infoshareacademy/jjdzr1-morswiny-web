@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @ApplicationScoped
-public class DataParser {
+public class DateTimeParser {
 
         public LocalDateTime setDateFormat(String date) {
 
-            String format = "DD MMMM YYYY H:mm";
+            String format = "dd MMMM yyyy H:mm";
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
             LocalDateTime dateTime = LocalDateTime.parse(date, dtf);
 

@@ -32,7 +32,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <div class="account-wall" style="text-align:center">
+            <div class="account-wall" >
                 <img class="profile-img"
                      src="/Images/morswin.png" height="130" width="130"
                      alt="">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventURL">URL</label>
-                        <input id="eventURL" type="text" maxlength="100" class="form-control" contenteditable="true" value="${event.getUrls().getWww()}" required/>
+                        <input id="eventURL" type="text" maxlength="100" class="form-control" contenteditable="true" value="${event.getUrls().getWww()}"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="startDate">Start Date</label>
@@ -90,7 +90,22 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="description">Description</label>
-                        <textarea id="description" cols="20" rows="10" class="form-control" required>${event.getDescLong()}</textarea>
+                        <textarea id="description" cols="20" rows="10" class="form-control">${event.getDescLong()}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="ticket">Ticket</label>
+                        <input name="ticket" type="text" maxlength="100" class="form-control" contenteditable="true" value=" " />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="categoryId">Category Id</label>
+                        <input name="categoryId" type="text" maxlength="100" class="form-control" contenteditable="true" value="${event.getCategoryId()}" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="active">Active</label><br>
+                        <input type="radio" name="active" id="active" value="1" checked="checked">
+                        Yes
+                        <input type="radio" name="active" id="active" value="0">
+                        No
                     </div>
                     <div class="form-group">
                         <label class="form-group" for="attachment">Attach event image</label>

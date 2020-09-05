@@ -3,20 +3,20 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.events.*;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.parsers.DateTimeParser;
 import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +31,8 @@ public class AddEventServlet extends HttpServlet {
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
-//    @Inject
-//    private DataParser dataParser;
+    @Inject
+    private DateTimeParser dateTimeParser;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -82,13 +82,23 @@ public class AddEventServlet extends HttpServlet {
 
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
-//        event.setStartDateLDT(dataParser.setDateFormat(req.getParameter("startDateLDT")));
-//        event.setEndDateLDT(dataParser.setDateFormat(req.getParameter("endDateLDT")));
+
+        event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
+        event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
 
         event.setDescLong(req.getParameter("description"));
 
-       event.setAttachments(new Attachment[0]);
+
+        event.setAttachments(new Attachment[0]);
        //event.getAttachments()[0].setFileName(req.getParameter("attachment"));
+
+        Ticket ticket = new Ticket();
+        ticket.setType(req.getParameter("ticket"));
+        event.setTickets(ticket);
+
+        event.setCategoryId(req.getParameter("categoryId"));
+        event.setActive(Integer.valueOf(req.getParameter("active")));
+
 
         if (null == event.getId()) {
             //TODO to be deleted
