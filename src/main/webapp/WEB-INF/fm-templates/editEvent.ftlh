@@ -11,13 +11,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/HTML/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/HTML/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/HTML/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/HTML/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/HTML/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 <#setting number_format="00000">
 <#--<#include "header.ftlh">-->
 <div>
     <ol class="breadcrumb primary-color">
-        <li class="breadcrumb-item"><a class="white-text" href="/HTML/main.html">Home</a></li>
+        <li class="breadcrumb-item"><a class="white-text" href="/main-page">Home</a></li>
         <li class="breadcrumb-item white-text"><a class="white-text" href="/single-event?id=${event.getId()}">Single Event</a></li>
         <li class="breadcrumb-item breadcrumb-active">Edit Event</li>
     </ol>

@@ -24,7 +24,7 @@
 <#--<#include "header.ftlh">-->
 <div>
     <ol class="breadcrumb primary-color">
-        <li class="breadcrumb-item"><a class="white-text" href="/HTML/main.html">Home</a></li>
+        <li class="breadcrumb-item"><a class="white-text" href="/main-page">Home</a></li>
         <li class="breadcrumb-item breadcrumb-active">Add Event</li>
     </ol>
 </div>
