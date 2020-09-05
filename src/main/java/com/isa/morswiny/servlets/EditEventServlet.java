@@ -30,6 +30,7 @@ public class EditEventServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "editEvent.ftlh";
     private String idString = new String();
+    private Organizer organizer = new Organizer();
 
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
@@ -123,13 +124,13 @@ public class EditEventServlet extends HttpServlet {
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
 
-        event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
-        event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
+        //event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
+        String check = new String ("check");
+        //event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
 
         event.setDescLong(req.getParameter("description"));
 
         event.setAttachments(new Attachment[0]);
-        //event.getAttachments()[0].setFileName(req.getParameter("attachment"));
 
         Ticket ticket = new Ticket();
         ticket.setType(req.getParameter("ticket"));
@@ -138,15 +139,13 @@ public class EditEventServlet extends HttpServlet {
         event.setCategoryId(req.getParameter("categoryId"));
         event.setActive(Integer.valueOf(req.getParameter("active")));
 
-
         eventCRUDRepositoryInterface.updateEvent(event);
-
         Map<String, Object> map = new HashMap<>();
         map.put("event", event);
 
         System.out.println(map);
 
-        //resp.sendRedirect("/main-page");
+        resp.sendRedirect("/single-event?id=" +  event.getId());
 
 //        Template template = templateProvider.createTemplate(
 //                getServletContext(), TEMPLATE_NAME);

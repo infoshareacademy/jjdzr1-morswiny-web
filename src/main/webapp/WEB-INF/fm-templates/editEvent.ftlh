@@ -46,28 +46,28 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label requiredField" for="eventName">Name</label>
-                        <input id="eventName" type="text" maxlength="100" class="form-control" contenteditable="true"
+                        <input id="eventName" name = "eventName" type="text" maxlength="100" class="form-control" contenteditable="true"
                                value="${event.getName()}" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label requiredField" for="eventPlace">Place</label>
-                        <input id="eventPlace" type="text" maxlength="100" class="form-control" contenteditable="true"
+                        <input id="eventPlace" name ="eventPlace" type="text" maxlength="100" class="form-control" contenteditable="true"
                                value="${event.getPlace().getName()}" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="organizer">Organizer</label>
-                        <input id="organizer" type="text" maxlength="100" class="form-control" contenteditable="true"
+                        <input id="organizer" name = "organizer" type="text" maxlength="100" class="form-control" contenteditable="true"
                                value="${event.getOrganizer().getDesignation()}" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventURL">URL</label>
-                        <input id="eventURL" type="text" maxlength="100" class="form-control" contenteditable="true"
+                        <input id="eventURL" name="eventURL" type="text" maxlength="100" class="form-control" contenteditable="true"
                                value="${event.getUrls().getWww()}"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="startDate">Start Date</label>
                         <div class='input-group date' id='startDate'>
-                            <input type='text' class="form-control" contenteditable="true"
+                            <input type='text' name= "startDate" class="form-control" contenteditable="true"
                                    value=${event.getStartDate()} required/>
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <label class="control-label" for="endDate">End Date</label>
                         <div class='input-group date' id='endDate'>
-                            <input type='text' class="form-control" contenteditable="true"
+                            <input type='text' name= "endDate" class="form-control" contenteditable="true"
                                    value=${event.getEndDate()} required/>
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -100,13 +100,13 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="description">Description</label>
-                        <textarea id="description" cols="20" rows="10"
+                        <textarea id="description" name="description" cols="20" rows="10"
                                   class="form-control">${event.getDescLong()}</textarea>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="ticket">Ticket</label>
                         <input name="ticket" type="text" maxlength="100" class="form-control" contenteditable="true"
-                               value=" "/>
+                               value="${event.getTickets().getType()}"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="categoryId">Category Id</label>
@@ -123,7 +123,7 @@
                     <div class="form-group">
                         <label class="form-group" for="attachment">Attach event image</label>
                         <label for="attachment"></label>
-                        <input type="file" class="form-control-file" id="attachment">
+                        <input type="file" name = "attachment" class="form-control-file" id="attachment">
                     </div>
                     <form action="/search-events?search=">
                         <div>

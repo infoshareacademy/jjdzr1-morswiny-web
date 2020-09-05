@@ -54,12 +54,12 @@
                 <a class="nav-link" href="abous-us.html">About Us</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" action ="/search-event?search=">
             <input class="form-control mr-sm-2" type="search" placeholder="Type here..." aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <div>
-            <a href="log-in.html"><button type="button" style = "position:relative; right:-5px;" class="btn btn-outline-primary">Log in</button>
+            <a href="/HTML/log-in.html"><button type="button" style = "position:relative; right:-5px;" class="btn btn-outline-primary">Log in</button>
             </a>
         </div>
 
