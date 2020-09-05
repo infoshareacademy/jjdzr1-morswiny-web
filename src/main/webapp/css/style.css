@@ -110,6 +110,8 @@ input:checked + .slider:before {
     margin-left: auto;
     margin-right: auto;
     display: flex;
+
+
 }
 
 .content {
@@ -128,6 +130,55 @@ input:checked + .slider:before {
     border-radius: 50%;
     height: 100px;
     width: 100px;
+}
+body {
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 50px;
+}
+
+.p-singleevent {
+    font-size: 1.5em;
+}
+
+.picture-singleevent {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    margin-right: 20px;
+}
+
+.button-singleevent {
+    background-color: white;
+    color: black!important;
+    padding: 25px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 20px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 300px;
+    border: 2px solid #008CBA;
+
+}
+
+.button-singleevent:hover {
+    background-color: #008CBA;
+    color: white!important;
+}
+
+.event-info {
+    padding: 40px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.buttons-for-event {
+    margin-top: 30px;
 }
 
 .content h3,
