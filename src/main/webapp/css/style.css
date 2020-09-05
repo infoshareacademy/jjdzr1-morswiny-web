@@ -136,7 +136,7 @@ body {
     margin-bottom: 50px;
 }
 
-p {
+.p-singleevent {
     font-size: 1.5em;
 }
 
@@ -183,3 +183,20 @@ p {
 
 .content h3,
 .content p {margin: 10px;}
+
+.card{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+}
+
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
