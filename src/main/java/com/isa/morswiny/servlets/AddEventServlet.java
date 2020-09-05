@@ -81,7 +81,8 @@ public class AddEventServlet extends HttpServlet {
         event.setEndDate(req.getParameter("endDate"));
         event.setDescLong(req.getParameter("description"));
 
-//        event.getAttachments()[0].setFileName(req.getParameter("attachment"));
+       event.setAttachments(new Attachment[0]);
+       //event.getAttachments()[0].setFileName(req.getParameter("attachment"));
 
         if (null == event.getId()) {
             //TODO to be deleted

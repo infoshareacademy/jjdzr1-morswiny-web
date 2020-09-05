@@ -45,6 +45,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="/HTML/log-in.html">My Account</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add-event">Add Event</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
