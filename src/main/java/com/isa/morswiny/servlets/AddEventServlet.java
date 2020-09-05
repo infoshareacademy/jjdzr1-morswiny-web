@@ -33,8 +33,8 @@ public class AddEventServlet extends HttpServlet {
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
-    @Inject
-    private DataParser dataParser;
+//    @Inject
+//    private DataParser dataParser;
 
     @Inject
     private TemplateProvider templateProvider;
