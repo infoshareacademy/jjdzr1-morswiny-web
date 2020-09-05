@@ -75,12 +75,12 @@
 </div>
 <div class="container">
     <div class="row event-info">
-        <div class="col-4 thumbnail picture">
+        <div class="col-4 thumbnail picture-singleevent">
             <picture>
                 <#if picture??>
                     <source srcset="${picture}">
                 </#if>
-                <img src="Images/morswin.png" alt="Morświn events" class="rounded picture" />
+                <img src="Images/morswin.png" alt="Morświn events" class="rounded picture-singleevent" />
             </picture>
         </div>
             <div class="col-8">
@@ -101,9 +101,9 @@
     </div>
         <div class="row d-flex justify-content-center buttons-for-event">
             <#if tickets??>
-                <a href="${tickets}" class="button" role="button">Tickets and more information</a>
+                <a href="${tickets}" class="button-singleevent" role="button">Tickets and more information</a>
             <#else>
-                <button class="button" type="button" disabled>Tickets and more information</button>
+                <button class="button-singleevent" type="button" disabled>Tickets and more information</button>
             </#if>
             <a href="/single-event?id=#{event.getId()}&addEvent=#{event.getId()}" class="button" role="button">Add event to favourites</a>
         </div>

@@ -5,13 +5,6 @@
 .white-text{
     color: #e3eeff;
 }
-a {
-    color: #e3eeff;
-}
-
-a:visited {
-    color: #e3eeff;
-}
 
 .primary-color{
     background-color: #44d3ff;
@@ -147,7 +140,7 @@ p {
     font-size: 1.5em;
 }
 
-.picture {
+.picture-singleevent {
     width: 100%;
     height: 100%;
     max-width: 300px;
@@ -155,7 +148,7 @@ p {
     margin-right: 20px;
 }
 
-.button {
+.button-singleevent {
     background-color: white;
     color: black!important;
     padding: 25px 32px;
@@ -171,7 +164,7 @@ p {
 
 }
 
-.button:hover {
+.button-singleevent:hover {
     background-color: #008CBA;
     color: white!important;
 }
