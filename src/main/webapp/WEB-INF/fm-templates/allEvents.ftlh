@@ -137,15 +137,15 @@
 
 
 <div class="card-deck">
-    <#list listOfMainEvents as events>
+    <#list listOfMainEvents as event>
         <div class="card">
-            <#if events.getAttachments()?size = 0>
+            <#if event.getAttachments()?size = 0>
                 <img src="/HTML/morswin.png" class="card-img-top" alt="...">
             <#else>
-                <img src="${events.attachments[0].getFileName()}">
+                <img src="${event.attachments[0].getFileName()}">
             </#if>
             <div class="card-body">
-                <h5 class="card-title">${events.name}</h5>
+                <h5 class="card-title">${event.name}</h5>
             </div>
             <div>
                 <div>
@@ -157,7 +157,7 @@
                         <path fill-rule="evenodd"
                               d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
                     </svg>
-                    ${events.startDate} - ${events.endDate}
+                    ${event.startDate} - ${event.endDate}
                 </div>
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor"
@@ -165,15 +165,15 @@
                         <path fill-rule="evenodd"
                               d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg>
-                    ${events.getPlace().getName()}
-                    <#if events.getPlace().getSubname()??>
-                        - ${events.getPlace().getSubname()}
+                    ${event.getPlace().getName()}
+                    <#if event.getPlace().getSubname()??>
+                        - ${event.getPlace().getSubname()}
                     </#if>
                 </div>
                 <br>
                 <div>
-                    <#if events.getUrls().www ?has_content>
-                        <a href= ${events.getUrls().www}>
+                    <#if event.getUrls().www ?has_content>
+                        <a href= ${event.getUrls().www}>
                             <button type="button" class="btn btn-primary">Buy tickets</button>
                         </a>
                     </#if>
@@ -184,7 +184,7 @@
                                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
                     </button>
-                    <a href="/single-event?id=#{events.getId()}">
+                    <a href="/single-event?id=#{event.getId()}">
                         <button type="button" class="btn btn-info">Info</button>
                     </a>
                 </div>
