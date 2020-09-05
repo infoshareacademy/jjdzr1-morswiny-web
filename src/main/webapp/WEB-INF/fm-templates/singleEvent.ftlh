@@ -75,7 +75,7 @@
 </div>
 <div class="container">
     <div class="row event-info">
-        <div class="col-4 thumbnail picture-singleevent">
+        <div class="col-3 thumbnail picture-singleevent">
             <picture>
                 <#if picture??>
                     <source srcset="${picture}">
@@ -106,9 +106,8 @@
                 <button class="button-singleevent" type="button" disabled>Tickets and more information</button>
             </#if>
             <a href="/single-event?id=#{event.getId()}&addEvent=#{event.getId()}" class="button-singleevent" role="button">Add event to favourites</a>
-
-            <a href="/edit-event?id=${event.getId()}" class="button" role="button-singleevent"> Edit event </a>
-            <a href="/delete-event?id=${event.getId()}" class="button" role="button-singleevent"> Delete event </a>
+            <a href="/edit-event?id=${event.getId()}" class="button-singleevent" role="button"> Edit event </a>
+            <a href="/delete-event?id=${event.getId()}" class="button-singleevent" role="button"> Delete event </a>
         </div>
     </div>
 </div>

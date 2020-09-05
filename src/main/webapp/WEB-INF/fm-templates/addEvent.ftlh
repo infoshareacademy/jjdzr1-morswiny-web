@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <label class="control-label" for="startDate">Start Date</label>
                         <div class='input-group date' id='startDate'>
-                            <input type='text' class="form-control" value="" required/>
+                            <input type='text' class="form-control" name="startDate" required/>
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label class="control-label" for="endDate">End Date</label>
                         <div class='input-group date' id='endDate'>
-                            <input type='text' class="form-control" value="" required/>
+                            <input type='text' class="form-control" name="endDate" required/>
                             <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>

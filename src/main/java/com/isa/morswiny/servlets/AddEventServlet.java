@@ -3,6 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.events.*;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.parsers.DataParser;
 import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +32,9 @@ public class AddEventServlet extends HttpServlet {
 
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+
+    @Inject
+    private DataParser dataParser;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -79,9 +84,12 @@ public class AddEventServlet extends HttpServlet {
 
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
+//        event.setStartDateLDT(dataParser.setDateFormat(req.getParameter("startDateLDT")));
+//        event.setEndDateLDT(dataParser.setDateFormat(req.getParameter("endDateLDT")));
+
         event.setDescLong(req.getParameter("description"));
 
-//        event.getAttachments()[0].setFileName(req.getParameter("attachment"));
+        event.setAttachments(new Attachment[0]);
 
         if (null == event.getId()) {
             //TODO to be deleted
