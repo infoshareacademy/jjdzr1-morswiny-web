@@ -31,6 +31,9 @@ public class AddEventServlet extends HttpServlet {
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
+//    @Inject
+//    private DataParser dataParser;
+
     @Inject
     private TemplateProvider templateProvider;
 
@@ -79,6 +82,9 @@ public class AddEventServlet extends HttpServlet {
 
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
+//        event.setStartDateLDT(dataParser.setDateFormat(req.getParameter("startDateLDT")));
+//        event.setEndDateLDT(dataParser.setDateFormat(req.getParameter("endDateLDT")));
+
         event.setDescLong(req.getParameter("description"));
 
        event.setAttachments(new Attachment[0]);
