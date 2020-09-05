@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Create an account</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="./HTML/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./HTML/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./HTML/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./HTML/favicon/site.webmanifest">
+    <link rel="mask-icon" href="./HTML/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./log-in.css">
+    <link rel="stylesheet" type="text/css" href="./HTML/log-in.css">
 </head>
 <body>
 <form method="post" action="<%=request.getContextPath()%>/add-user">
@@ -59,20 +59,12 @@
 
 
                     <div class="form-group">
-                    <    <label class="control-label" for="signupGender">Gender</label><br>
+                    <label class="control-label" for="signupGender">Gender</label><br>
                         <select id="signupGender" name="signupGender" class="form-control">
                         <option value="MALE">Male</option>
                         <option value="FEMALE">Female</option>
                         </select>
                     </div>
-
-                    <!div class="form-group">
-                        <!label class="control-label" for="signupGender">Gender</label><br>
-                        <!input type="radio" name="signupGender" id="gender-0" value="MALE" checked="checked">
-                        !Male
-                        <!input type="radio" name="signupGender" id="gender-1" value="FEMALE">
-                        !Female
-                    <!/div>
 
 
                     <div class="form-group">
@@ -84,6 +76,15 @@
                             <option value="Germany">Germany</option>
                             <option value="France">France</option>
                         </select>                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="signUserType">USER TYPE</label><br>
+                        <select id="signUserType" name="signUserType" class="form-control">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="STANDARD_USER">STANDARD_USER</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label class="form-group" for="signupPasswordagain">Upload your profile picture</label>
                             <label for="exampleFormControlFile1"></label>
