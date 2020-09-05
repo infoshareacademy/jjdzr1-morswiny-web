@@ -23,7 +23,7 @@ import java.util.Map;
 public class EventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String TEMPLATE_NAME = "singleEvent.ftml";
+    private static final String TEMPLATE_NAME = "singleEvent.ftlh";
 
     @Inject
     EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
