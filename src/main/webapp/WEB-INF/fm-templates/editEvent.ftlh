@@ -14,10 +14,18 @@
 </head>
 <body>
 <#setting number_format="00000">
+<#--<#include "header.ftlh">-->
+<div>
+    <ol class="breadcrumb primary-color">
+        <li class="breadcrumb-item"><a class="white-text" href="/HTML/main.html">Home</a></li>
+        <li class="breadcrumb-item white-text"><a class="white-text" href="/single-event?id=${event.getId()}">Single Event</a></li>
+        <li class="breadcrumb-item breadcrumb-active">Edit Event</li>
+    </ol>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <div class="account-wall">
+            <div class="account-wall" style="text-align:center">
                 <img class="profile-img"
                      src="/Images/morswin.png" height="130" width="130"
                      alt="">
@@ -95,5 +103,6 @@
         </div>
     </div>
 </div>
+<#--<#include "footer.ftlh">-->
 </body>
 </html>

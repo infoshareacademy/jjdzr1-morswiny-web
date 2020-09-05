@@ -10,6 +10,13 @@
 </head>
 <body>
 <#setting number_format="00000">
+<#--<#include "header.ftlh">-->
+<div>
+    <ol class="breadcrumb primary-color">
+        <li class="breadcrumb-item"><a class="white-text" href="/HTML/main.html">Home</a></li>
+        <li class="breadcrumb-item breadcrumb-active">Delete Event</li>
+    </ol>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -20,12 +27,12 @@
                         <h3> Event has been deleted </h3>
                     <br>
                     <div>
-                        <p>Go back to the <a href="/event-list"> all events.</a></p>
-                        <p>Go back to the <a href="/HTML/main.html">main page</a>.</p>
+                        <p>Go back to <a href="/event-list"> all events.</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<#--<#include "footer.ftlh">-->
 </body>
 </html>
