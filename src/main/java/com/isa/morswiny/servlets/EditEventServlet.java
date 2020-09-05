@@ -29,6 +29,7 @@ public class EditEventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "editEvent.ftlh";
+    private String idString = new String();
 
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
@@ -50,9 +51,10 @@ public class EditEventServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
+        idString = req.getParameter("id");
 
         Map<String, Object> map = new HashMap<>();
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        Integer id = Integer.parseInt(idString);
         try {
             Event event = eventCRUDRepositoryInterface.getEventByID(id);
             map.put("event", event);
@@ -66,6 +68,23 @@ public class EditEventServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
+
+    }
+
+
+
+    protected void doGet2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter writer = resp.getWriter();
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
+
+        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        idString = req.getParameter("id");
+
     }
 
     @Override
@@ -76,13 +95,15 @@ public class EditEventServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
+        String requested = req.getParameter("id");
 
-        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+
+        if (idString == null || idString.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        Integer id = Integer.parseInt(idString);
         Event event = eventCRUDRepositoryInterface.getEventByID(id);
 
         event.setName(req.getParameter("eventName"));
@@ -125,7 +146,7 @@ public class EditEventServlet extends HttpServlet {
 
         System.out.println(map);
 
-        resp.sendRedirect("/single-event");
+        //resp.sendRedirect("/main-page");
 
 //        Template template = templateProvider.createTemplate(
 //                getServletContext(), TEMPLATE_NAME);
