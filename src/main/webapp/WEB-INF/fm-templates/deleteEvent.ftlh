@@ -34,7 +34,7 @@
                         <h3> Event has been deleted </h3>
                     <br>
                     <div>
-                        <p>Go back to <a href="/event-list"> all events.</a></p>
+                        <p>Go back to <a href="/search-events?=search="> all events.</a></p>
                     </div>
                 </div>
             </div>
