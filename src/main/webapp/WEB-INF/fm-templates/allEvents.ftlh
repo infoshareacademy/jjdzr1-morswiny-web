@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Morświny Events Home Page</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/HTML/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/HTML/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/HTML/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/HTML/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/HTML/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="/./Images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/./Images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/./Images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/./Images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/./Images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -40,12 +40,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="search-events?search=">Events <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="search-events?search=">Events</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/HTML/log-in.html">My Account</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/add-event">Add Event</a>
             </li>
             <li class="nav-item dropdown">
@@ -59,13 +59,13 @@
                     <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="#">Contact</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
             </li>
         </ul>
@@ -140,14 +140,14 @@
     <#list listOfMainEvents as event>
         <div class="card">
             <#if event.getAttachments()?size = 0>
-                <img src="/HTML/morswin.png" class="card-img-top" alt="...">
+                <img src="/HTML/morswin.png" class="card-img-top" style="height: 590px; width: 620px;" alt="...">
             <#else>
-                <img src="${event.attachments[0].getFileName()}">
+                <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>
             <div class="card-body">
-                <h5 class="card-title">${event.name}</h5>
+                <h5>${event.name}</h5>
             </div>
-            <div>
+            <div style="margin-left: 20px">
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +171,7 @@
                     </#if>
                 </div>
                 <br>
-                <div>
+                <div style="text-align: end; margin-right: 20px; margin-bottom: 20px">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
                             <button type="button" class="btn btn-primary">Buy tickets</button>

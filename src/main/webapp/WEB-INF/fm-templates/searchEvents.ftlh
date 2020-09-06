@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Morświny Events Home Page</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <title>Search Page</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/./Images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/./Images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/./Images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/./Images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/./Images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -31,7 +31,7 @@
     <div class="media">
         <a href="main-page"><img src="/HTML/morswin.png" style="width: 80px; height: 80px" class="mr-3" alt="..."></a>
     </div>
-    <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
+    <a class="navbar-brand" href="/main-page"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,8 +43,10 @@
                 <a class="nav-link" href="#">Events <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="log-in.html">My Account</a>
+                <a class="nav-link" href="/HTML/log-in.html">My Account</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add-event">Add Event</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -64,7 +66,7 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="abous-us.html">About Us</a>
+                <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search-events?">
@@ -126,10 +128,10 @@
                 </div>
                 <br>
 
-                <div style="text-align: end; margin-right: 20px; margin-bottom: 5px">
+                <div style="text-align: end; margin-right: 20px; margin-bottom: 20px">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
-                            <button type="submit" class="btn btn-primary">Buy ticket</button>
+                            <button type="button" class="btn btn-primary">Buy ticket</button>
                         </a>
                     </#if>
                     <button type="button" class="btn btn-secondary">
