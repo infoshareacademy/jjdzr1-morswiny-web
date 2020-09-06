@@ -126,10 +126,10 @@
                 </div>
                 <br>
 
-                <div style="text-align: end; margin-right: 20px; margin-bottom: 5px">
+                <div style="text-align: end; margin-right: 20px; margin-bottom: 20px">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
-                            <button type="submit" class="btn btn-primary">Buy ticket</button>
+                            <button type="button" class="btn btn-primary">Buy ticket</button>
                         </a>
                     </#if>
                     <button type="button" class="btn btn-secondary">

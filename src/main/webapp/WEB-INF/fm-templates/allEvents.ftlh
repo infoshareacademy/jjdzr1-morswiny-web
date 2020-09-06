@@ -140,7 +140,7 @@
     <#list listOfMainEvents as event>
         <div class="card">
             <#if event.getAttachments()?size = 0>
-                <img src="/HTML/morswin.png" class="card-img-top" alt="...">
+                <img src="/HTML/morswin.png" class="card-img-top" style="height: 590px; width: 620px;" alt="...">
             <#else>
                 <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>
