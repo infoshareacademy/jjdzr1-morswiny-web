@@ -130,10 +130,6 @@
                             <input class="btn btn-lg btn-primary btn-block" type="submit"
                                     value="Apply"/>
                         </div>
-                        <form class="form-inline my-2 my-lg-0" action="/search-events?search=">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name = "search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
                     </form>
                     <br>
                     <p class="form-group">By creating an event, you agree to our <a href="#">Terms of Use</a> and our
