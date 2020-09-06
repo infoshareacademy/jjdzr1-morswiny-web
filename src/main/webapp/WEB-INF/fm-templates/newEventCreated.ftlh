@@ -39,7 +39,7 @@
 <#--                    <a href="/edit-event?id=${event.getId()}">Edit new event</a>-->
                     <br>
                     <div>
-                        <p>Go back to <a href="/event-list"> all events.</a></p>
+                        <p>Go back to <a href="/search-events?search="> all events.</a></p>
                     </div>
                 </div>
             </div>
