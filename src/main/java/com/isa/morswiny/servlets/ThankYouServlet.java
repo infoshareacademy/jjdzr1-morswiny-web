@@ -38,6 +38,8 @@ public class ThankYouServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setCharacterEncoding("UTF-8");
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
+
         Map<String,Object> model = new HashMap<>();
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);

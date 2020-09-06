@@ -44,6 +44,7 @@ public class AddUserServletHiber extends HttpServlet {
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setCharacterEncoding("UTF-8");
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         req.setAttribute("user", new User());
         RequestDispatcher rd = req.getRequestDispatcher("create-account.jsp");

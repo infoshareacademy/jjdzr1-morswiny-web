@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 public class UserConnectionHiber {
 
-    private static SessionFactory sessionFactory;
+    private static final SessionFactory sessionFactory;
 
     static {
         Configuration configurationHiber = new Configuration();

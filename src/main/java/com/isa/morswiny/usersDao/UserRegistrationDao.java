@@ -20,7 +20,7 @@ public class UserRegistrationDao {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         try (Connection connection = DriverManager.getConnection
-                ("jdbc:mysql://localhost:3306/morswinyweb?useSSL=false", "root", "");
+                ("jdbc:mysql://localhost:3306/morswinyweb?serverTimezone=UTC", "root", "");
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
