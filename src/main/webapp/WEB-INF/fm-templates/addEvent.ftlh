@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="eventURL">URL</label>
-                        <input name="eventURL" type="text" maxlength="100" class="form-control" value="" required/>
+                        <input name="eventURL" type="text" maxlength="100" class="form-control" value="" />
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="startDate">Start Date</label>
@@ -91,7 +91,22 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="description">Description</label>
-                        <textarea name="description" cols="20" rows="10" class="form-control" value="" required></textarea>
+                        <textarea name="description" cols="20" rows="10" class="form-control" value=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="ticket">Ticket</label>
+                        <input name="ticket" type="text" maxlength="100" class="form-control" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="categoryId">Category Id</label>
+                        <input name="categoryId" type="text" maxlength="100" class="form-control" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="active">Active</label><br>
+                        <input type="radio" name="active" id="active" value="1" checked="checked">
+                        Yes
+                        <input type="radio" name="active" id="active" value="0">
+                        No
                     </div>
                     <div class="form-group">
                         <label class="form-group" for="attachment">Attach event image</label>

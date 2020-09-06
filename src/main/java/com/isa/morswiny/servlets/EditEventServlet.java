@@ -1,11 +1,9 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.Event;
-import com.isa.morswiny.events.EventURL;
-import com.isa.morswiny.events.Organizer;
-import com.isa.morswiny.events.Place;
+import com.isa.morswiny.events.*;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.parsers.DateTimeParser;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -31,10 +29,14 @@ public class EditEventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "editEvent.ftlh";
+    private String idString = new String();
+    private Organizer organizer = new Organizer();
 
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
+    @Inject
+    private DateTimeParser dateTimeParser;
     @Inject
     private TemplateProvider templateProvider;
 
@@ -50,9 +52,10 @@ public class EditEventServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
+        idString = req.getParameter("id");
 
         Map<String, Object> map = new HashMap<>();
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        Integer id = Integer.parseInt(idString);
         try {
             Event event = eventCRUDRepositoryInterface.getEventByID(id);
             map.put("event", event);
@@ -66,6 +69,23 @@ public class EditEventServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
+
+    }
+
+
+
+    protected void doGet2(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter writer = resp.getWriter();
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
+
+        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        idString = req.getParameter("id");
+
     }
 
     @Override
@@ -76,13 +96,15 @@ public class EditEventServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
+        String requested = req.getParameter("id");
 
-        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+
+        if (idString == null || idString.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        Integer id = Integer.parseInt(idString);
         Event event = eventCRUDRepositoryInterface.getEventByID(id);
 
         event.setName(req.getParameter("eventName"));
@@ -101,16 +123,29 @@ public class EditEventServlet extends HttpServlet {
 
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
+
+        //event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
+        String check = new String ("check");
+        //event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
+
         event.setDescLong(req.getParameter("description"));
 
-        eventCRUDRepositoryInterface.updateEvent(event);
+        event.setAttachments(new Attachment[0]);
 
+        Ticket ticket = new Ticket();
+        ticket.setType(req.getParameter("ticket"));
+        event.setTickets(ticket);
+
+        event.setCategoryId(req.getParameter("categoryId"));
+        event.setActive(Integer.valueOf(req.getParameter("active")));
+
+        eventCRUDRepositoryInterface.updateEvent(event);
         Map<String, Object> map = new HashMap<>();
         map.put("event", event);
 
         System.out.println(map);
 
-        resp.sendRedirect("/single-event");
+        resp.sendRedirect("/single-event?id=" +  event.getId());
 
 //        Template template = templateProvider.createTemplate(
 //                getServletContext(), TEMPLATE_NAME);
