@@ -145,7 +145,7 @@
                 <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>
             <div class="card-body">
-                <h5 class="card-title">${event.name}</h5>
+                <h5>${event.name}</h5>
             </div>
             <div style="margin-left: 20px">
                 <div>
