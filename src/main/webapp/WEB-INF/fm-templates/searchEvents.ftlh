@@ -31,7 +31,7 @@
     <div class="media">
         <a href="main-page"><img src="/HTML/morswin.png" style="width: 80px; height: 80px" class="mr-3" alt="..."></a>
     </div>
-    <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
+    <a class="navbar-brand" href="/main-page"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,8 +43,10 @@
                 <a class="nav-link" href="#">Events <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="log-in.html">My Account</a>
+                <a class="nav-link" href="/HTML/log-in.html">My Account</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add-event">Add Event</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -64,7 +66,7 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="abous-us.html">About Us</a>
+                <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search-events?">
