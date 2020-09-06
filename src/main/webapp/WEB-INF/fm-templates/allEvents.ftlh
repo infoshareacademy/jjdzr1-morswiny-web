@@ -40,15 +40,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="search-events?search=">Events <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="search-events?search=">Events</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/HTML/log-in.html">My Account</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/add-event">Add Event</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item active">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Filter
@@ -59,13 +59,13 @@
                     <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="#">Contact</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
             </li>
         </ul>
