@@ -142,12 +142,12 @@
             <#if event.getAttachments()?size = 0>
                 <img src="/HTML/morswin.png" class="card-img-top" alt="...">
             <#else>
-                <img src="${event.attachments[0].getFileName()}">
+                <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>
             <div class="card-body">
                 <h5 class="card-title">${event.name}</h5>
             </div>
-            <div>
+            <div style="margin-left: 20px">
                 <div>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +171,7 @@
                     </#if>
                 </div>
                 <br>
-                <div>
+                <div style="text-align: end; margin-right: 20px; margin-bottom: 20px">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>
                             <button type="button" class="btn btn-primary">Buy tickets</button>
