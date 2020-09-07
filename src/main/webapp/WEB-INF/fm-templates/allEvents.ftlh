@@ -29,7 +29,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
-        <a href="main-page"><img src="/HTML/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
+        <a href="main-page"><img src="/Images/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
     </div>
     <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -140,7 +140,7 @@
     <#list listOfMainEvents as event>
         <div class="card">
             <#if event.getAttachments()?size = 0>
-                <img src="/HTML/morswin.png" class="card-img-top" style="height: 590px; width: 620px;" alt="...">
+                <img src="/Images/morswin.png" class="card-img-top" style="height: 590px; width: 620px;" alt="...">
             <#else>
                 <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>
