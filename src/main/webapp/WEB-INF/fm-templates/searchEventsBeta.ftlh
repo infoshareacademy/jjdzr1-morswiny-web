@@ -70,7 +70,8 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search-events?">
-            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name = "search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name="search"
+                   aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <div>
@@ -91,43 +92,43 @@
 </div>
 
 <div class="row row-cols-1 row-cols-md-4">
-<#list listOfQueriedEvents as event>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <#if event.getAttachments()?size = 0>
-                <img src="../../Images/morswin.png" class="card-img-top" alt="..." style="height: 200px; width: 200px">
-            <#else>
-                <img src="${event.attachments[0].getFileName()}" class="card-img-top"
-                     style="height: 200px; width: 200px">
-            </#if>
-            <div class="card-body">
-                <h3 class="card-title">${event.getName()}</h3>
-                <div class="card-text">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                        <path fill-rule="evenodd"
-                              d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                        <path fill-rule="evenodd"
-                              d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                    ${event.startDate} - ${event.endDate}
-                </div>
-                <div>
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
-                    ${event.getPlace().getName()}
-                    <#if event.getPlace().getSubname()??>
-                        - ${event.getPlace().getSubname()}
-                    </#if>
+    <#list listOfQueriedEvents as event>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <#if event.getAttachments()?size = 0>
+                    <img src="../../Images/morswin.png" class="card-img-top" style="height: 400px; width: 400px;    display: block; margin-left: auto;margin-right: auto;">
+                <#else>
+                    <img src="${event.attachments[0].getFileName()}" class="card-img-top"  style="height: 400px; width: 400px; display: block; margin-left: auto;margin-right: auto;">
+                </#if>
+                <div class="card-body">
+                    <h3 class="card-title">${event.getName()}</h3>
+                    <div class="card-text">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                            <path fill-rule="evenodd"
+                                  d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+                            <path fill-rule="evenodd"
+                                  d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        ${event.startDate} - ${event.endDate}
+                    </div>
+                    <div>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        ${event.getPlace().getName()}
+                        <#if event.getPlace().getSubname()??>
+                            - ${event.getPlace().getSubname()}
+                        </#if>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-</#list>
+    </#list>
 </div>
 
 </body>
