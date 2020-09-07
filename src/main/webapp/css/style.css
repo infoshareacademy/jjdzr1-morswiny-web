@@ -184,7 +184,7 @@ body {
 .content p {margin: 10px;
 }
 
-.card{
+.card   {
     margin-left: auto;
     margin-right: auto;
     display: flex;
