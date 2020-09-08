@@ -102,7 +102,9 @@
                 </#if>
                 <div class="card-body">
                     <h3 class="card-title">${event.getName()}</h3>
-                    <div class="card-text">
+                </div>
+                <div style="margin-bottom: 40px; margin-left: 20px">
+                <div class="card-text">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -125,6 +127,23 @@
                             - ${event.getPlace().getSubname()}
                         </#if>
                     </div>
+            </div>
+                <div style="margin-bottom: 20px; margin-right: 20px; text-align: end ">
+                    <#if event.getUrls().www ?has_content>
+                        <a href= ${event.getUrls().www}>
+                            <button type="button" class="btn btn-primary">Buy ticket</button>
+                        </a>
+                    </#if>
+                    <button type="button" class="btn btn-secondary">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+                    </button>
+                    <a href="/single-event?id=#{event.getId()}">
+                        <button type="button" class="btn btn-info">Info</button>
+                    </a>
                 </div>
             </div>
         </div>
