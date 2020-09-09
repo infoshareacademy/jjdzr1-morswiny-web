@@ -70,7 +70,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search-events?">
-            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name="search"
+            <input class="form-control mr-sm-2" id="search" type="search" placeholder="Type here..." name="search"
                    aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
@@ -91,20 +91,32 @@
     </ol>
 </div>
 
+
+<p>Count:
+    ${listOfQueriedEvents?size}
+</p>
+
+<p>
+    The search term: ${userQuery}
+</p>
+
+
 <div class="row row-cols-1 row-cols-md-4">
     <#list listOfQueriedEvents as event>
         <div class="col mb-4">
             <div class="card h-100">
                 <#if event.getAttachments()?size = 0>
-                    <img src="../../Images/morswin.png" class="card-img-top" style="height: 400px; width: 400px;    display: block; margin-left: auto;margin-right: auto;">
+                    <img src="../../Images/morswin.png" class="card-img-top"
+                         style="height: 400px; width: 400px; margin-top: 20px;   display: block; margin-left: auto;margin-right: auto;">
                 <#else>
-                    <img src="${event.attachments[0].getFileName()}" class="card-img-top"  style="height: 400px; width: 400px; display: block; margin-left: auto;margin-right: auto;">
+                    <img src="${event.attachments[0].getFileName()}" class="card-img-top"
+                         style="height: 400px; width: 400px;margin-top: 20px; display: block; margin-left: auto;margin-right: auto;">
                 </#if>
                 <div class="card-body">
                     <h3 class="card-title">${event.getName()}</h3>
                 </div>
                 <div style="margin-bottom: 40px; margin-left: 20px">
-                <div class="card-text">
+                    <div class="card-text">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +139,7 @@
                             - ${event.getPlace().getSubname()}
                         </#if>
                     </div>
-            </div>
+                </div>
                 <div style="margin-bottom: 20px; margin-right: 20px; text-align: end ">
                     <#if event.getUrls().www ?has_content>
                         <a href= ${event.getUrls().www}>

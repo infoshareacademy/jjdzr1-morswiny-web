@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +26,6 @@ public class SearchEventsServletBeta extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);
     private static final String TEMPLATE_NAME = "searchEventsBeta";
-    private String userQuery;
-    private Map<String, Object> model = new HashMap<>();
 
     @Inject
     EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
@@ -36,15 +35,15 @@ public class SearchEventsServletBeta extends HttpServlet {
     @Inject
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        userQuery = req.getParameter("search");
-
-
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        setModel();
+        final Map model = new HashMap();
+        final String userQuery = req.getParameter("search");
+
+        initModel(model, userQuery);
         Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
@@ -52,17 +51,15 @@ public class SearchEventsServletBeta extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
-
-
     }
 
-    private List<Event> setListOfQueriedEvents() {
+    private void initModel(Map model, String query) {
+        model.put("userQuery", query);
+        model.put("listOfQueriedEvents", setListOfQueriedEvents(query));
+    }
+
+    private List<Event> setListOfQueriedEvents(String userQuery) {
         return eventSearchRepositoryInterface.searchByString(userQuery);
-    }
-
-    private void setModel() {
-            model.put("listOfQueriedEvents", setListOfQueriedEvents());
-
     }
 
 
