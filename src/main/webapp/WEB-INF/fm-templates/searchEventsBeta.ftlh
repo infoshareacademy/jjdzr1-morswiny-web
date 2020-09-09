@@ -91,14 +91,22 @@
     </ol>
 </div>
 
-
-<p>Count:
-    ${listOfQueriedEvents?size}
-</p>
-
-<p>
-    The search term: ${userQuery}
-</p>
+<div style="margin-left: 15px">
+    <p>
+        Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:
+    </p>
+</div>
+<div>
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            View
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="/search-events-beta">Card View</a>
+            <a class="dropdown-item" href="/search-events">List View</a>
+        </div>
+    </div>
+</div>
 
 
 <div class="row row-cols-1 row-cols-md-4">
