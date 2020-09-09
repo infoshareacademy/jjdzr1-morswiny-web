@@ -102,8 +102,8 @@
             View
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/search-events-beta">Card View</a>
-            <a class="dropdown-item" href="/search-events">List View</a>
+            <a class="dropdown-item" href="search-events-beta?search=${userQuery}">Card View</a>
+            <a class="dropdown-item" href="search-events?search=${userQuery}">List View</a>
         </div>
     </div>
 </div>
