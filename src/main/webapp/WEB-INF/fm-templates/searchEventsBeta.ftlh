@@ -113,7 +113,7 @@
     <br>
 
 
-    <div class="row row-cols-1 row-cols-md-4">
+    <div class="row row-cols-1 row-cols-md-4" style="margin-left: 5px; margin-right: 5px">
         <#list listOfQueriedEvents as event>
             <div class="col mb-4">
                 <div class="card h-100">
