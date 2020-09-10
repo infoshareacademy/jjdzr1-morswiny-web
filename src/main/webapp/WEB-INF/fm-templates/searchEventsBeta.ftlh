@@ -91,98 +91,103 @@
     </ol>
 </div>
 
-<div style="margin-left: 15px">
-    <p>
-        Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:
-    </p>
-</div>
-<div>
-    <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            View
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="search-events-beta?search=${userQuery}">Card View</a>
-            <a class="dropdown-item" href="search-events?search=${userQuery}">List View</a>
+<div style="display: flex; justify-content: space-between;  ">
+    <div style="margin-left: 15px">
+        <p>
+            Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:
+        </p>
+    </div>
+    <div style="text-align: end; margin-right: 50px">
+        <div class="btn-group btn-group-sm" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                View
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="search-events-beta?search=${userQuery}">Card View</a>
+                <a class="dropdown-item" href="search-events?search=${userQuery}">List View</a>
+            </div>
         </div>
     </div>
 </div>
+    <br>
 
 
-<div class="row row-cols-1 row-cols-md-4">
-    <#list listOfQueriedEvents as event>
-        <div class="col mb-4">
-            <div class="card h-100">
-                <#if event.getAttachments()?size = 0>
-                    <img src="../../Images/morswin.png" class="card-img-top"
-                         style="height: 400px; width: 400px; margin-top: 20px;   display: block; margin-left: auto;margin-right: auto;">
-                <#else>
-                    <img src="${event.attachments[0].getFileName()}" class="card-img-top"
-                         style="height: 400px; width: 400px;margin-top: 20px; display: block; margin-left: auto;margin-right: auto;">
-                </#if>
-                <div class="card-body">
-                    <h3 class="card-title">${event.getName()}</h3>
-                </div>
-                <div style="margin-bottom: 40px; margin-left: 20px">
-                    <div class="card-text">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date"
-                             fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                            <path fill-rule="evenodd"
-                                  d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                            <path fill-rule="evenodd"
-                                  d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
-                        </svg>
-                        ${event.startDate} - ${event.endDate}
-                    </div>
-                    <div>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg>
-                        ${event.getPlace().getName()}
-                        <#if event.getPlace().getSubname()??>
-                            - ${event.getPlace().getSubname()}
-                        </#if>
-                    </div>
-                </div>
-                <div style="margin-bottom: 20px; margin-right: 20px; text-align: end ">
-                    <#if event.getUrls().www ?has_content>
-                        <a href= ${event.getUrls().www}>
-                            <button type="button" class="btn btn-primary">Buy ticket</button>
-                        </a>
+    <div class="row row-cols-1 row-cols-md-4">
+        <#list listOfQueriedEvents as event>
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <#if event.getAttachments()?size = 0>
+                        <img src="../../Images/morswin.png" class="card-img-top"
+                             style="height: 400px; width: 400px; margin-top: 20px;   display: block; margin-left: auto;margin-right: auto;">
+                    <#else>
+                        <img src="${event.attachments[0].getFileName()}" class="card-img-top"
+                             style="height: 400px; width: 400px;margin-top: 20px; display: block; margin-left: auto;margin-right: auto;">
                     </#if>
-                    <button type="button" class="btn btn-secondary">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-                    </button>
-                    <a href="/single-event?id=#{event.getId()}">
-                        <button type="button" class="btn btn-info">Info</button>
-                    </a>
+                    <div class="card-body">
+                        <h3 class="card-title">${event.getName()}</h3>
+                    </div>
+                    <div style="margin-bottom: 40px; margin-left: 20px">
+                        <div class="card-text">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-date"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                <path fill-rule="evenodd"
+                                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            ${event.startDate} - ${event.endDate}
+                        </div>
+                        <div>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                            ${event.getPlace().getName()}
+                            <#if event.getPlace().getSubname()??>
+                                - ${event.getPlace().getSubname()}
+                            </#if>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px; margin-right: 20px; text-align: end ">
+                        <#if event.getUrls().www ?has_content>
+                            <a href= ${event.getUrls().www}>
+                                <button type="button" class="btn btn-primary">Buy ticket</button>
+                            </a>
+                        </#if>
+                        <button type="button" class="btn btn-secondary">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </button>
+                        <a href="/single-event?id=#{event.getId()}">
+                            <button type="button" class="btn btn-info">Info</button>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </#list>
-</div>
+        </#list>
+    </div>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-</nav>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 </body>
 </html>

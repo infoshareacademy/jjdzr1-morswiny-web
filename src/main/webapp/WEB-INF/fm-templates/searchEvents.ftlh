@@ -90,6 +90,27 @@
     </ol>
 </div>
 
+
+<div style="display: flex; justify-content: space-between;  ">
+    <div style="margin-left: 15px">
+        <p>
+            Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:
+        </p>
+    </div>
+    <div style="text-align: end; margin-right: 50px">
+        <div class="btn-group btn-group-sm" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                View
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="search-events-beta?search=${userQuery}">Card View</a>
+                <a class="dropdown-item" href="search-events?search=${userQuery}">List View</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <#list listOfQueriedEvents as event>
 <div class="card mb-3" style="max-width: 800px;">
     <div class="row no-gutters">

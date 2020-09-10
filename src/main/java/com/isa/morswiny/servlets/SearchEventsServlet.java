@@ -39,13 +39,12 @@ public class SearchEventsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        userQuery = req.getParameter("search");
-
-
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        setModel();
+        final Map model = new HashMap();
+        final String userQuery = req.getParameter("search");
+
+        initModel(model, userQuery);
         Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
@@ -53,17 +52,15 @@ public class SearchEventsServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
-
-
     }
 
-    private List<Event> setListOfQueriedEvents() {
+    private void initModel(Map model, String query) {
+        model.put("userQuery", query);
+        model.put("listOfQueriedEvents", setListOfQueriedEvents(query));
+    }
+
+    private List<Event> setListOfQueriedEvents(String userQuery) {
         return eventSearchRepositoryInterface.searchByString(userQuery);
-    }
-
-    private void setModel() {
-            model.put("listOfQueriedEvents", setListOfQueriedEvents());
-
     }
 
 
