@@ -93,9 +93,18 @@
 
 <div style="display: flex; justify-content: space-between;  ">
     <div style="margin-left: 15px">
-        <p>
-            Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:
-        </p>
+        <#if listOfQueriedEvents?size = 0>
+            <p>Sorry, we didn't find any results for <b>"${userQuery}"</b></p>
+            <ul>
+                <li>Check that all words are spelled correctly.</li>
+                <li>Try to use different or more general words.</li>
+                <li>Try to use fewer words.</li>
+            </ul>
+        <#elseif userQuery="">
+            <p>Found <b>${listOfQueriedEvents?size}</b> results:</p>
+        <#else>
+            <p>Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:</p>
+        </#if>
     </div>
     <div style="text-align: end; margin-right: 50px">
         <div class="btn-group btn-group-sm" role="group">
