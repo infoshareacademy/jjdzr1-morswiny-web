@@ -14,6 +14,7 @@ import java.util.Properties;
 public class Service {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final String MORSWIN_MAIL = "morswiny.events@onet.pl";
 
     Properties prop = new Properties();
 
@@ -31,7 +32,7 @@ public class Service {
 
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication("morswiny.events@onet.pl", "infoShare1");
+            return new PasswordAuthentication(MORSWIN_MAIL, "infoShare1");
         }
     });
 
@@ -40,9 +41,9 @@ public class Service {
         try {
             session.setDebug(true);
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("morswiny.events@onet.pl"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("morswiny.events@onet.pl"));
-            message.setSubject("Subject: + " + data.get("subject") + " | From: " + data.get("email"));
+            message.setFrom(new InternetAddress(MORSWIN_MAIL));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(MORSWIN_MAIL));
+            message.setSubject("Subject: " + data.get("subject") + " | From: " + data.get("email"));
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
             mimeBodyPart.setContent(data.get("message"), "text/html; charset=UTF-8");
