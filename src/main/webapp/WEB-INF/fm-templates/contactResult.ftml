@@ -31,6 +31,7 @@
         <li class="breadcrumb-item breadcrumb-active white-text">Contact</li>
     </ol>
 </div>
+
 <div class="d-flex p-2 justify-content-center">
     <#if Success??>
         <h4>Your e-mail was sent successfully!</h4>
@@ -41,5 +42,7 @@
 <div class="d-flex p-2 justify-content-center">
     <a href="/main-page">Go back to main page</a>
 </div>
+<img src="../Images/morswinOFF2.gif" class="contact-center">
+<br>
 </body>
 </html>

@@ -42,7 +42,7 @@ public class Service {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("morswiny.events@onet.pl"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("morswiny.events@onet.pl"));
-            message.setSubject("From: " + data.get("email") + " Subject: " + data.get("subject"));
+            message.setSubject("Subject: + " + data.get("subject") + " | From: " + data.get("email"));
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
             mimeBodyPart.setContent(data.get("message"), "text/html; charset=UTF-8");
