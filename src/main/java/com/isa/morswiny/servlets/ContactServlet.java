@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
-@WebServlet(name = "ContactServlet")
+@WebServlet("/contact")
 public class ContactServlet extends HttpServlet {
 
     private static final String TEMPLATE_NAME = "contact.ftml";

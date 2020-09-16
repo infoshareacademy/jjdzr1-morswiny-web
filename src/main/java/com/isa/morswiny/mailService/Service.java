@@ -37,16 +37,12 @@ public class Service {
 
     public boolean send(Map<String, String> data){
 
-        if (!DataCheck.isEmailCorrect(data.get("email"))) {
-            return false;
-        }
-
         try {
             session.setDebug(true);
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("jakub.bienkowski94@onet.pl"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(data.get("email")));
-            message.setSubject(data.get("subject"));
+            message.setFrom(new InternetAddress("morswiny.events@onet.pl"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("morswiny.events@onet.pl"));
+            message.setSubject("From: " + data.get("email") + " Subject: " + data.get("subject"));
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
             mimeBodyPart.setContent(data.get("message"), "text/html; charset=UTF-8");
