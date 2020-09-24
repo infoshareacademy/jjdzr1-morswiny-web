@@ -40,10 +40,17 @@ public class SearchEventsServletBeta extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
+        Integer limit = 20;
+        String page = req.getParameter("page");
+
+        if(page!=null){
+            page = "2"; //rzutowanie
+        }
+
         final Map model = new HashMap();
         final String userQuery = req.getParameter("search");
 
-        initModel(model, userQuery);
+        initModel(model, userQuery,limit);
         Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
@@ -53,9 +60,10 @@ public class SearchEventsServletBeta extends HttpServlet {
         }
     }
 
-    private void initModel(Map model, String query) {
+    private void initModel(Map model, String query,Integer limit) {
         model.put("userQuery", query);
         model.put("listOfQueriedEvents", setListOfQueriedEvents(query));
+        model.put("limit",limit);
     }
 
     private List<Event> setListOfQueriedEvents(String userQuery) {
