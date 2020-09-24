@@ -41,11 +41,12 @@ public class SearchEventsServletBeta extends HttpServlet {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Integer limit = 20;
-        String page = req.getParameter("page");
+        Integer pageId = Integer.parseInt(req.getParameter("page"));
 
-        if(page!=null){
-            page = "2"; //rzutowanie
+        if(pageId==null){
+            pageId=0;
         }
+
 
         final Map model = new HashMap();
         final String userQuery = req.getParameter("search");
@@ -67,6 +68,8 @@ public class SearchEventsServletBeta extends HttpServlet {
     }
 
     private List<Event> setListOfQueriedEvents(String userQuery) {
+        List<Event> events = new ArrayList<>();
+        events.get(0);
         return eventSearchRepositoryInterface.searchByString(userQuery);
     }
 
