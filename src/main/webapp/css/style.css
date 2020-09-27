@@ -319,6 +319,13 @@ body {
     position: center;
 }
 
+.fav-heart-unactive {
+    fill: currentColor;
+}
+
+.fav-heart-active {
+    fill: red;
+}
 .contact-center {
     width: 300px;
     display: block;
