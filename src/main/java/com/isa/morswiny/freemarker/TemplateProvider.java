@@ -14,8 +14,10 @@ import java.io.Serializable;
 public class TemplateProvider implements Serializable {
 
     public static final String TEMPLATES_DIRECTORY_PATH = "WEB-INF/fm-templates";
+    private static final String TEMPLATE_EXT = ".ftlh";
 
-    public static Template createTemplate(ServletContext servletContext, String templateName) throws IOException {
+
+    public Template createTemplate(ServletContext servletContext, String templateName) throws IOException {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_27);
 
         configuration.setServletContextForTemplateLoading(servletContext, TEMPLATES_DIRECTORY_PATH);
@@ -26,8 +28,7 @@ public class TemplateProvider implements Serializable {
         configuration.setNumberFormat("0.######");
 
 
-        Template template = configuration.getTemplate(templateName);
+        return configuration.getTemplate(templateName + TEMPLATE_EXT);
 
-        return template;
     }
 }

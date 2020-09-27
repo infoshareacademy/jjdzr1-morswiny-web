@@ -19,8 +19,8 @@ import java.util.HashMap;
 @WebServlet("/contact")
 public class ContactServlet extends HttpServlet {
 
-    private static final String TEMPLATE_NAME = "contact.ftml";
-    private static final String TEMPLATE_RESULT_NAME = "contactResult.ftml";
+    private static final String TEMPLATE_NAME = "contact";
+    private static final String TEMPLATE_RESULT_NAME = "contactResult";
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String ENCODING = "UTF-8";
 
@@ -50,6 +50,7 @@ public class ContactServlet extends HttpServlet {
         }
 
         getTemplate(resp, map, TEMPLATE_RESULT_NAME);
+
     }
 
     protected void getTemplate(HttpServletResponse resp, HashMap map, String templateName) throws IOException {

@@ -28,7 +28,7 @@ import java.util.Map;
 public class EditEventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String TEMPLATE_NAME = "editEvent.ftlh";
+    private static final String TEMPLATE_NAME = "editEvent";
     private String idString = new String();
     private Organizer organizer = new Organizer();
 
@@ -37,6 +37,7 @@ public class EditEventServlet extends HttpServlet {
 
     @Inject
     private DateTimeParser dateTimeParser;
+
     @Inject
     private TemplateProvider templateProvider;
 
@@ -64,6 +65,7 @@ public class EditEventServlet extends HttpServlet {
         }
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
+
         try {
             template.process(map, writer);
         } catch (TemplateException e) {
