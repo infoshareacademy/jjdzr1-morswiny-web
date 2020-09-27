@@ -115,12 +115,12 @@ public class EventCRUDRepositoryTest {
     @Test
     public void testCreateENonExistingEvent(){
         //given
-        Event event = new Event();
+        Event newEvent = new Event();
 
         //when
 
         //then
-        assertTrue(eventCRUDRepository.createEvent(event));
+        assertTrue(eventCRUDRepository.createEvent(newEvent));
 
     }
 
