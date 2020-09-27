@@ -41,17 +41,21 @@ public class SearchEventsServletBeta extends HttpServlet {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Integer limit = 20;
-        Integer pageId = Integer.parseInt(req.getParameter("page"));
+        String page = req.getParameter("page");
+        Integer count = 5; //ilosc wszystkich eventow w bazie podxzielonych przez limit
 
-        if(pageId==null){
-            pageId=0;
+        if(page==null){
+            page = "0";
         }
+
+        Integer pageInt = Integer.parseInt(page);
+
 
 
         final Map model = new HashMap();
         final String userQuery = req.getParameter("search");
 
-        initModel(model, userQuery,limit);
+        initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
@@ -61,16 +65,16 @@ public class SearchEventsServletBeta extends HttpServlet {
         }
     }
 
-    private void initModel(Map model, String query,Integer limit) {
+    private void initModel(Map model, String query,Integer limit, Integer page, Integer count) {
         model.put("userQuery", query);
         model.put("listOfQueriedEvents", setListOfQueriedEvents(query));
         model.put("limit",limit);
+        model.put("page",page);
+        model.put("count",count);
     }
 
     private List<Event> setListOfQueriedEvents(String userQuery) {
-        List<Event> events = new ArrayList<>();
-        events.get(0);
-        return eventSearchRepositoryInterface.searchByString(userQuery);
+        return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
     }
 
 
