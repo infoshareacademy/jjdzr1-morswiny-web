@@ -29,7 +29,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
-        <a href="main-page"><img src="/HTML/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
+        <a href="main-page"><img src="/Images/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
     </div>
     <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -70,7 +70,8 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search-events?">
-            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name = "search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name="search"
+                   aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <div>
@@ -105,32 +106,32 @@
     </div>
 </div>
 
-    <div class="container">
-        <br/>
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
-                <form class="card card-sm" action="/search-events">
-                    <div class="card-body row no-gutters align-items-center">
-                        <div class="col-auto">
-                            <i class="fas fa-search h4 text-body"></i>
-                        </div>
-                        <!--end of col-->
-                        <div class="col">
-                            <input class="form-control form-control-lg form-control-borderless" type="search"
-                                   placeholder="Search events by topics or keywords" name="search">
-                        </div>
-                        <!--end of col-->
-                        <div class="col-auto">
-                            <button class="btn btn-lg btn-success fa fa-search" type="submit">Search</button>
-                        </div>
-
-                        <!--end of col-->
+<div class="container">
+    <br/>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm" action="/search-events">
+                <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-search h4 text-body"></i>
                     </div>
-                </form>
-            </div>
-            <!--end of col-->
+                    <!--end of col-->
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                               placeholder="Search events by topics or keywords" name="search">
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-success fa fa-search" type="submit">Search</button>
+                    </div>
+
+                    <!--end of col-->
+                </div>
+            </form>
         </div>
+        <!--end of col-->
     </div>
+</div>
 <br/>
 
 <h5><p style="margin-left: 15px">Latest events coming: </p></h5>
@@ -140,7 +141,7 @@
     <#list listOfMainEvents as event>
         <div class="card">
             <#if event.getAttachments()?size = 0>
-                <img src="/HTML/morswin.png" class="card-img-top" style="height: 590px; width: 620px;" alt="...">
+                <img src="/Images/morswin.png" class="card-img-top" style="height: 590px; width: 620px;" alt="...">
             <#else>
                 <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>

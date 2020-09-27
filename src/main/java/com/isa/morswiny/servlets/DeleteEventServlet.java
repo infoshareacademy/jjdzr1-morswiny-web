@@ -28,7 +28,7 @@ import java.util.Map;
 public class DeleteEventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String TEMPLATE_NAME = "deleteEvent.ftlh";
+    private static final String TEMPLATE_NAME = "deleteEvent";
 
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
