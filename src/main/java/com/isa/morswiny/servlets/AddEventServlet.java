@@ -25,7 +25,7 @@ import java.util.Map;
 public class AddEventServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String TEMPLATE_NAME = "addEvent.ftlh";
+    private static final String TEMPLATE_NAME = "addEvent";
 
 
     @Inject

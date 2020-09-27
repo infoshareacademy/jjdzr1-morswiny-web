@@ -3,7 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.events.Event;
 
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
-import com.isa.morswiny.web.TemplateProvider;
+import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class AllEventsListServlet extends HttpServlet {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         setModel();
-        Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
+        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
             template.process(model, resp.getWriter());

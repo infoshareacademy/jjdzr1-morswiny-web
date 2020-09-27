@@ -186,8 +186,8 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="/search-events-beta?search=${userQuery}&page=${page-1}" tabindex="-1" aria-disabled="true">Previous</a>
+        <li class="page-item">
+            <a class="page-link" href="/search-events-beta?search=${userQuery}&page=${page-1}" tabindex="-1" >Previous</a>
         </li>
         <#list 1..count as page>
         <li class="page-item"><a class="page-link" href="/search-events-beta?search=${userQuery}&page=${page}">${page}</a></li>

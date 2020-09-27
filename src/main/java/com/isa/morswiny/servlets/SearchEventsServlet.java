@@ -3,12 +3,11 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.events.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
-import com.isa.morswiny.web.TemplateProvider;
+import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
-
-import static java.util.stream.Collectors.toList;
 
 @WebServlet("/search-events")
 public class SearchEventsServlet extends HttpServlet {
@@ -31,6 +27,7 @@ public class SearchEventsServlet extends HttpServlet {
 
     @Inject
     EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+
     @Inject
     TemplateProvider templateProvider;
 
@@ -53,11 +50,12 @@ public class SearchEventsServlet extends HttpServlet {
 
 
 
+
         final Map model = new HashMap();
         final String userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);
-        Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
+        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
             template.process(model, resp.getWriter());
