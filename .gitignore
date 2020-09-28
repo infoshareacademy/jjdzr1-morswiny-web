@@ -10,8 +10,8 @@
 out/
 target/
 !.mvn/wrapper/maven-wrapper.jar
-
-
+src/main/resources/META-INF/persistence.xml
+src/main/webapp/WEB-INF/web.xml
 
 ### STS ###
 .apt_generated
