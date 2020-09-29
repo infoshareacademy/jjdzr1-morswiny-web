@@ -28,6 +28,23 @@ public class Event {
     public Event(){
     }
 
+    public Event(Integer id, Place place, String endDate, String name, EventURL urls, Attachment[] attachments, String descLong, String categoryId, String startDate, Organizer organizer, Integer active, Ticket tickets, LocalDateTime startDateLDT, LocalDateTime endDateLDT) {
+        this.id = id;
+        this.place = place;
+        this.endDate = endDate;
+        this.name = name;
+        this.urls = urls;
+        this.attachments = attachments;
+        this.descLong = descLong;
+        this.categoryId = categoryId;
+        this.startDate = startDate;
+        this.organizer = organizer;
+        this.active = active;
+        this.tickets = tickets;
+        this.startDateLDT = startDateLDT;
+        this.endDateLDT = endDateLDT;
+    }
+
     private static final Logger logger = LoggerFactory.getLogger("CONSOLE_OUT");
 
     @Override
