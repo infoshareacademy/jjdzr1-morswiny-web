@@ -23,13 +23,16 @@
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
 
+    <!--        <link rel="stylesheet"-->
+    <!--              href="https://mdbootstrap.com/api/snippets/static/download/MDB-Pro_4.19.1/css/mdb.min.css">-->
+
 
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="media">
-        <a href="main-page"><img src="/Images/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
+    <div class="img-hover-zoom media">
+        <a href="main.html"><img src="../Images/morswin.png" style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80" class="mr-3" alt="..."></a>
     </div>
     <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
