@@ -2,6 +2,8 @@ package com.isa.morswiny.events;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.persistence.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -9,19 +11,41 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+//@Entity
+@Table (name = "event")
+
 public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id_db;
     private Integer id;
+
+    @ManyToMany
+
     private Place place;
     private String endDate;
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "url_id", referencedColumnName = "eventUrlId")
     private EventURL urls;
+
+    @OneToMany
+    @JoinColumn(name = "attachment_id", referencedColumnName = "attachmentId")
     private Attachment[] attachments;
     private String descLong;
     private String categoryId;
     private String startDate;
+
+    @ManyToMany
+
     private Organizer organizer;
     private Integer  active;
+
+    @OneToOne
+    @JoinColumn(name="ticket_id", referencedColumnName = "ticketID")
     private Ticket tickets;
+
     private LocalDateTime startDateLDT;
     private LocalDateTime endDateLDT;
 

@@ -1,6 +1,17 @@
 package com.isa.morswiny.events;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="attachment")
 public class Attachment {
+    public Integer getAttachmentId() {
+        return attachmentId;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer attachmentId;
     private String fileName;
 
     public Attachment(String fileName) {

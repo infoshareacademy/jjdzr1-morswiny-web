@@ -1,8 +1,21 @@
 package com.isa.morswiny.events;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "place")
+
 public class Place {
+    public Integer getPlaceId() {
+        return placeId;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer placeId;
     private String id;
     private String subname;
+    @Column (nullable = false)
     private String name;
 
 
