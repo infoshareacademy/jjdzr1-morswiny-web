@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Entity
-//@Table(name = "place")
+@Entity
+@Table(name = "place")
 
-public class Place {
+public class PlaceEntity {
     public Integer getPlaceId() {
         return placeId;
     }
@@ -20,17 +20,17 @@ public class Place {
     @Column (nullable = false)
     private String name;
 
-//    @ManyToMany (mappedBy = "place")
-//    private Set<Event> events = new HashSet<>();
+    @ManyToMany (mappedBy = "places")
+    private Set<EventEntity> events = new HashSet<>();
 
 
-    public Place(String id, String subname, String name) {
+    public PlaceEntity(String id, String subname, String name) {
         this.id = id;
         this.subname = subname;
         this.name = name;
     }
 
-    public Place() {
+    public PlaceEntity() {
 
     }
 

@@ -12,16 +12,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 //@Entity
-@Table (name = "event")
+//@Table (name = "event")
 
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_db;
+    private Integer eventId;
     private Integer id;
-
-    @ManyToMany
-
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "event_and_place_join_table",
+            joinColumns = @JoinColumn(name = "eventID"),
+            inverseJoinColumns = @JoinColumn(name = "placeId"))
     private Place place;
     private String endDate;
     private String name;
@@ -31,19 +33,19 @@ public class Event {
     private EventURL urls;
 
     @OneToMany
-    @JoinColumn(name = "attachment_id", referencedColumnName = "attachmentId")
+    @JoinColumn(name = "attachment")
     private Attachment[] attachments;
     private String descLong;
     private String categoryId;
     private String startDate;
 
-    @ManyToMany
-
+    @OneToOne
+    @JoinColumn(name = "organizer_id", referencedColumnName = "organizerId")
     private Organizer organizer;
     private Integer  active;
 
     @OneToOne
-    @JoinColumn(name="ticket_id", referencedColumnName = "ticketID")
+    @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
 
     private LocalDateTime startDateLDT;
@@ -114,7 +116,7 @@ public class Event {
 
     public String returnEventParams() {
         return
-                ""  + '\n' + place.getName() + place.getSubname() + '\n'
+                ""  + '\n' //+place.getName() + place.getSubname() + '\n'
                         + endDate + '\n'
                         + name + '\n'
                         + urls.getWww() + urls.getTickets() + '\n'
@@ -147,12 +149,12 @@ public class Event {
         this.id = id;
     }
 
-    public Place getPlace() {
-        return place;
-    }
+//    public Place getPlace() {
+//        return place;
+//    }
 
     public void setPlace(Place place) {
-        this.place = place;
+        //this.place = place;
     }
 
     public String getEndDate() {

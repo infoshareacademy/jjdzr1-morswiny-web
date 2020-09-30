@@ -47,12 +47,12 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
     public List<Event> searchByPlace(String place) {
         List<Event> list = new ArrayList<>();
         for (Event event : eventCRUDRepositoryInterface.getAllEventsList()) {
-            String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
+           /* String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
             if (nameAndSubname.toLowerCase()
                     .contains(
                             place.toLowerCase())) {
                 list.add(event);
-            }
+            }*/
         }
         return list;
     }
