@@ -18,34 +18,152 @@ public class EventEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventId;
     private Integer id;
+    private String endDate;
+    private String name;
+    private String descLong;
+    private String categoryId;
+    private String startDate;
+    private Integer  active;
+    private LocalDateTime startDateLDT;
+    private LocalDateTime endDateLDT;
+
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(
             name = "event_and_place_join_table",
             joinColumns = @JoinColumn(name = "eventID"),
             inverseJoinColumns = @JoinColumn(name = "placeId"))
     private Set<PlaceEntity> places = new HashSet<>();
-
-    private String endDate;
-    private String name;
-
-    @OneToOne
-    @JoinColumn(name = "url_id", referencedColumnName = "eventUrlId")
+    @OneToOne (mappedBy = "event")
     private EventURLEntity urls;
 
+    @OneToMany(mappedBy = "event")
+    @OrderColumn
+    private AttachmentEntity[] attachments;
 
-    private String descLong;
-    private String categoryId;
-    private String startDate;
+    @ManyToOne
+    @JoinColumn(name="organizer_Id", referencedColumnName = "organizerId")
+    private OrganizerEntity organizer;
 
+    @OneToOne (mappedBy = "event")
+    private TicketEntity tickets;
 
-    private Integer  active;
+    public Integer getEventId() {
+        return eventId;
+    }
 
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    private LocalDateTime startDateLDT;
-    private LocalDateTime endDateLDT;
+    public String getEndDate() {
+        return endDate;
+    }
 
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescLong() {
+        return descLong;
+    }
+
+    public void setDescLong(String descLong) {
+        this.descLong = descLong;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getStartDateLDT() {
+        return startDateLDT;
+    }
+
+    public void setStartDateLDT(LocalDateTime startDateLDT) {
+        this.startDateLDT = startDateLDT;
+    }
+
+    public LocalDateTime getEndDateLDT() {
+        return endDateLDT;
+    }
+
+    public void setEndDateLDT(LocalDateTime endDateLDT) {
+        this.endDateLDT = endDateLDT;
+    }
+
+    public Set<PlaceEntity> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(Set<PlaceEntity> places) {
+        this.places = places;
+    }
+
+    public EventURLEntity getUrls() {
+        return urls;
+    }
+
+    public void setUrls(EventURLEntity urls) {
+        this.urls = urls;
+    }
+
+    public AttachmentEntity[] getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(AttachmentEntity[] attachments) {
+        this.attachments = attachments;
+    }
+
+    public OrganizerEntity getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(OrganizerEntity organizer) {
+        this.organizer = organizer;
+    }
+
+    public TicketEntity getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(TicketEntity tickets) {
+        this.tickets = tickets;
+    }
 }

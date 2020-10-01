@@ -11,6 +11,10 @@ public class EventURLEntity {
     private String www;
     private String tickets;
 
+    @OneToOne
+    @JoinColumn(name="event_id", referencedColumnName = "eventId")
+    private EventEntity event;
+
     public EventURLEntity(String www, String tickets) {
         this.www = www;
         this.tickets = tickets;

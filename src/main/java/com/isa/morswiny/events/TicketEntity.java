@@ -2,10 +2,10 @@ package com.isa.morswiny.events;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name = "ticket")
+@Entity
+@Table(name = "ticket")
 
-public class Ticket {
+public class TicketEntity {
     public Integer getTicketId() {
         return ticketId;
     }
@@ -16,14 +16,17 @@ public class Ticket {
     private String type;
     private String startTicket;
     private String endTicket;
+    @OneToOne
+    @JoinColumn(name="event_Id", referencedColumnName = "eventId")
+    private EventEntity event;
 
-    public Ticket(String type, String startTicket, String endTicket) {
+    public TicketEntity(String type, String startTicket, String endTicket) {
         this.type = type;
         this.startTicket = startTicket;
         this.endTicket = endTicket;
     }
 
-    public Ticket() {
+    public TicketEntity() {
 
     }
 

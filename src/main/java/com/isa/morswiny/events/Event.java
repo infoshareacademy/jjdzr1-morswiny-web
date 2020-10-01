@@ -40,7 +40,7 @@ public class Event {
     private String startDate;
 
     @OneToOne
-    @JoinColumn(name = "organizer_id", referencedColumnName = "organizerId")
+    @JoinColumn(name = "organizerId")
     private Organizer organizer;
     private Integer  active;
 

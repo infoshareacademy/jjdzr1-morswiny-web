@@ -3,9 +3,9 @@ package com.isa.morswiny.events;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
-//@Table (name ="organizer")
-public class Organizer {
+@Entity
+@Table (name ="organizer")
+public class OrganizerEntity {
     public Integer getOrganizerID() {
         return organizerID;
     }
@@ -15,16 +15,15 @@ public class Organizer {
     private Integer organizerID;
     private String id;
     private String designation;
-    @OneToMany
-    @JoinColumn(name="")
+    @OneToMany (mappedBy = "organizer")
     private Set<EventEntity> events;
 
-    public Organizer(String id, String designation) {
+    public OrganizerEntity(String id, String designation) {
         this.id = id;
         this.designation = designation;
     }
 
-    public Organizer() {
+    public OrganizerEntity() {
 
     }
 

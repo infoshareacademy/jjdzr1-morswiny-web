@@ -2,8 +2,8 @@ package com.isa.morswiny.events;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="url")
+//@Entity
+//@Table(name="url")
 public class EventURL {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
