@@ -39,15 +39,15 @@
     <form name="emailForm" method="post" action="contact" accept-charset="UTF-8">
         <div class="form-group">
             <label for="mailAddress">E-mail address:</label><br>
-            <input type="email" id="mailAddress" name ="mailAddress" placeholder="Enter email" required>
+            <input type="email" class="form-control" name ="mailAddress" placeholder="Enter email" required>
         </div>
         <div class="form-group">
             <label for="subject">Subject:</label><br>
-            <input type="text" id="subject" name="subject" placeholder="Enter subject">
+            <input type="text" class="form-control" name="subject" placeholder="Enter subject">
         </div>
         <div class="form-group">
             <label for="message">Message:</label><br>
-            <textarea id="message" name="message" placeholder="Enter message here" rows="6" cols="50"></textarea>
+            <textarea class="form-control" name="message" placeholder="Enter message here" rows="6" cols="50"></textarea>
         </div>
         <div class="d-flex p-2 justify-content-center">
             <input type="submit" value="Submit" class="btn btn-primary">
