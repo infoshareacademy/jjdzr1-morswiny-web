@@ -16,9 +16,6 @@
     <link rel="stylesheet" type="text/css" href="../css/log-in.css">
 </head>
 <body>
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -27,15 +24,12 @@
                 <img class="profile-img"
                      src="../Images/morswin.png" height="130" width="130"
                      alt="">
-                <form class="form-signin">
+                <form class="form-signin" name="loginForm" method="post" action="login" accept-charset="UTF-8">
                     <input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                     <div>
-                        <a href="success-login.html">
-                            <button class="btn btn-lg btn-primary btn-block" type="button">
-                                Login
-                            </button>
-                        </a></div>
+                        <input type="submit" value="Submit" class="btn btn-lg btn-primary btn-block">
+                    </div>
                     <label class="checkbox pull-left">
                         <input type="checkbox" value="remember-me">
                         Remember me
