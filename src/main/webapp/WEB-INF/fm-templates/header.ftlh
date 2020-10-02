@@ -20,12 +20,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="search-events?search=">Events</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/HTML/log-in.html">My Account</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/add-event">Add Event</a>
-            </li>
+            <#if logged??>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/add-event">Add Event</a>
+                </li>
+            <#else>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Add Event</a>
+                </li>
+            </#if>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,12 +54,25 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name = "search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <div>
-            <a href="/HTML/log-in.html">
-                <button type="button" style="position:relative; right:-5px;" class="btn btn-outline-primary">Log in
-                </button>
-            </a>
-        </div>
-
+        <#if logged??>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${user.getLogin()}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="my-profile.html">My Profile</a>
+                    <a class="dropdown-item" href="/favourite">My favourites</a>
+                    <a class="dropdown-item" href="/logout">Log out</a>
+                </div>
+            </li>
+        <#else>
+            <div>
+                <a href="/login">
+                    <button type="button" style="position:relative; right:-5px;" class="btn btn-outline-primary">Log in
+                    </button>
+                </a>
+            </div>
+        </#if>
     </div>
 </nav>
