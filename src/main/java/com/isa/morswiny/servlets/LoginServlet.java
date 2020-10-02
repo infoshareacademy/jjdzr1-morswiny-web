@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/single-event")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -51,5 +51,19 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        String login = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        if (login.equals("kuba") && password.equals("kuba")){
+            req.getSession().setAttribute("logged", "userLogin");
+            resp.sendRedirect("/main-page");
+        } else {
+            resp.sendRedirect("HTML/login-failed.html");
+        }
     }
+
+//    private Boolean findUser(String login, String passsword){
+//        userCRUDRepositoryInterface.getUser()
+//
+//    }
 }
