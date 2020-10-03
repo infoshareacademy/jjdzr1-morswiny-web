@@ -1,8 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.events.*;
+import com.isa.morswiny.toBeDeleted.*;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

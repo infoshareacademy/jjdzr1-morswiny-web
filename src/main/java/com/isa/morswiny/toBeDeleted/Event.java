@@ -1,53 +1,30 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-//@Entity
-//@Table (name = "event")
+
 
 public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Integer eventId;
     private Integer id;
-    @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "event_and_place_join_table",
-            joinColumns = @JoinColumn(name = "eventID"),
-            inverseJoinColumns = @JoinColumn(name = "placeId"))
+
     private Place place;
     private String endDate;
     private String name;
-
-    @OneToOne
-    @JoinColumn(name = "url_id", referencedColumnName = "eventUrlId")
     private EventURL urls;
-
-    @OneToMany
-    @JoinColumn(name = "attachment")
     private Attachment[] attachments;
     private String descLong;
     private String categoryId;
     private String startDate;
-
-    @OneToOne
-    @JoinColumn(name = "organizerId")
     private Organizer organizer;
     private Integer  active;
-
-    @OneToOne
-    @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
-
     private LocalDateTime startDateLDT;
     private LocalDateTime endDateLDT;
 
@@ -149,12 +126,12 @@ public class Event {
         this.id = id;
     }
 
-//    public Place getPlace() {
-//        return place;
-//    }
+    public Place getPlace() {
+        return place;
+    }
 
     public void setPlace(Place place) {
-        //this.place = place;
+        this.place = place;
     }
 
     public String getEndDate() {

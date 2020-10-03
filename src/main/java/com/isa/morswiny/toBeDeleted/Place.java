@@ -1,4 +1,4 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,17 +11,10 @@ public class Place {
     public Integer getPlaceId() {
         return placeId;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer placeId;
     private String id;
     private String subname;
-    @Column (nullable = false)
     private String name;
-
-//    @ManyToMany (mappedBy = "place")
-//    private Set<Event> events = new HashSet<>();
 
 
     public Place(String id, String subname, String name) {

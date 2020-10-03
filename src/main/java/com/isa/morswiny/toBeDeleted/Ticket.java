@@ -1,32 +1,26 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "ticket")
+//@Entity
+//@Table(name = "ticket")
 
-public class TicketEntity {
+public class Ticket {
     public Integer getTicketId() {
         return ticketId;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ticketId;
     private String type;
     private String startTicket;
     private String endTicket;
-    @OneToOne
-    @JoinColumn(name="event_Id", referencedColumnName = "eventId")
-    private EventEntity event;
 
-    public TicketEntity(String type, String startTicket, String endTicket) {
+    public Ticket(String type, String startTicket, String endTicket) {
         this.type = type;
         this.startTicket = startTicket;
         this.endTicket = endTicket;
     }
 
-    public TicketEntity() {
+    public Ticket() {
 
     }
 

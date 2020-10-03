@@ -1,4 +1,4 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.model;
 
 import javax.persistence.*;
 import java.util.Set;

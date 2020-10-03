@@ -1,10 +1,10 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.model;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="attachment")
-public class Attachment {
+@Entity
+@Table(name="attachment")
+public class AttachmentEntity {
     public Integer getAttachmentId() {
         return attachmentId;
     }
@@ -13,12 +13,15 @@ public class Attachment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer attachmentId;
     private String fileName;
+    @ManyToOne
+    @JoinColumn(name = "event_Id", referencedColumnName = "eventId")
+    private EventEntity event;
 
-    public Attachment(String fileName) {
+    public AttachmentEntity(String fileName) {
         this.fileName = fileName;
     }
 
-    public Attachment() {
+    public AttachmentEntity() {
     }
 
     @Override

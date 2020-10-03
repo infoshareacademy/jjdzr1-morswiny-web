@@ -1,13 +1,8 @@
-package com.isa.morswiny.events;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.isa.morswiny.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity

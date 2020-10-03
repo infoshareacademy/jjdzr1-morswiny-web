@@ -1,4 +1,6 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
+
+import com.isa.morswiny.model.EventEntity;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,14 +11,9 @@ public class Organizer {
     public Integer getOrganizerID() {
         return organizerID;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer organizerID;
     private String id;
     private String designation;
-    @OneToMany
-    @JoinColumn(name="")
     private Set<EventEntity> events;
 
     public Organizer(String id, String designation) {

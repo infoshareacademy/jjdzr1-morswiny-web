@@ -1,22 +1,26 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.model;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="url")
-public class EventURL {
+@Entity
+@Table(name="url")
+public class EventURLEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventUrlId;
     private String www;
     private String tickets;
 
-    public EventURL(String www, String tickets) {
+    @OneToOne
+    @JoinColumn(name="event_id", referencedColumnName = "eventId")
+    private EventEntity event;
+
+    public EventURLEntity(String www, String tickets) {
         this.www = www;
         this.tickets = tickets;
     }
 
-    public EventURL() {
+    public EventURLEntity() {
 
     }
 
