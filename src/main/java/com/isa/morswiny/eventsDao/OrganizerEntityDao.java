@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ApplicationScoped
 public class OrganizerEntityDao implements Dao<OrganizerEntity>, Serializable {
@@ -13,28 +14,23 @@ public class OrganizerEntityDao implements Dao<OrganizerEntity>, Serializable {
     private EntityManager entityManager;
 
     @Override
-    public boolean save(OrganizerEntity organizerEntity) {
-        try{
-            entityManager.persist(organizerEntity);
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-
+    public void save(OrganizerEntity organizerEntity) {
+        entityManager.persist(organizerEntity);
     }
 
     @Override
-    public boolean update(OrganizerEntity organizerEntity) {
-        return false;
+    public OrganizerEntity update(OrganizerEntity organizerEntity) {
+       return entityManager.merge(organizerEntity);
     }
 
     @Override
-    public boolean delete(OrganizerEntity organizerEntity) {
-        return false;
+    public void delete(OrganizerEntity organizerEntity) {
+        entityManager.remove(organizerEntity);
     }
 
     @Override
-    public OrganizerEntity find(Integer id) {
-        return null;
+    public Optional<OrganizerEntity> find(Integer id) {
+        return Optional.ofNullable(entityManager.find(OrganizerEntity.class, id));
+
     }
 }

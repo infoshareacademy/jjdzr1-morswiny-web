@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ApplicationScoped
 public class EventEntityDao implements Dao<EventEntity>, Serializable {
@@ -13,26 +14,23 @@ public class EventEntityDao implements Dao<EventEntity>, Serializable {
     @PersistenceContext()
     private EntityManager entityManager;
 
-    public boolean save (EventEntity eventEntity){
-        try {entityManager.persist(eventEntity);
-        return true;
-        } catch (Exception e){
-            return false;
-        }
+    public void save(EventEntity eventEntity) {
+        entityManager.persist(eventEntity);
     }
 
     @Override
-    public boolean update(EventEntity eventEntity) {
-        return false;
+    public EventEntity update(EventEntity eventEntity) {
+        return entityManager.merge(eventEntity);
+
     }
 
     @Override
-    public boolean delete(EventEntity eventEntity) {
-        return false;
+    public void delete(EventEntity eventEntity) {
+        entityManager.remove(eventEntity);
     }
 
     @Override
-    public EventEntity find(Integer id) {
-        return null;
+    public Optional<EventEntity> find(Integer id) {
+        return Optional.ofNullable(entityManager.find(EventEntity.class, id));
     }
 }

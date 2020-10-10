@@ -6,35 +6,33 @@ import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Optional;
 
 @SessionScoped
 public class EventURLEntityDao implements Dao<EventURLEntity>, Serializable {
 
     @PersistenceContext
     private EntityManager entityManager;
-    @Override
-    public boolean save(EventURLEntity eventURLEntity) {
-        try {
-            entityManager.persist(eventURLEntity);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
 
+    @Override
+    public void save(EventURLEntity eventURLEntity) {
+
+        entityManager.persist(eventURLEntity);
     }
 
     @Override
-    public boolean update(EventURLEntity eventURLEntity) {
-        return false;
+    public EventURLEntity update(EventURLEntity eventURLEntity) {
+
+        return entityManager.merge(eventURLEntity);
     }
 
     @Override
-    public boolean delete(EventURLEntity eventURLEntity) {
-        return false;
+    public void delete(EventURLEntity eventURLEntity) {
+        entityManager.remove(eventURLEntity);
     }
 
     @Override
-    public EventURLEntity find(Integer id) {
-        return null;
+    public Optional<EventURLEntity> find(Integer id) {
+        return Optional.ofNullable(entityManager.find(EventURLEntity.class, id));
     }
 }

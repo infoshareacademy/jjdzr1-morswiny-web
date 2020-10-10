@@ -6,34 +6,33 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ApplicationScoped
-public class PlaceEntityDao implements Dao <PlaceEntity>, Serializable {
+public class PlaceEntityDao implements Dao<PlaceEntity>, Serializable {
 
     @PersistenceContext()
     private EntityManager entityManager;
 
     @Override
-    public boolean save(PlaceEntity placeEntity) {
-        try {entityManager.persist(placeEntity);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public void save(PlaceEntity placeEntity) {
+        entityManager.persist(placeEntity);
     }
 
     @Override
-    public boolean update(PlaceEntity placeEntity) {
-        return false;
+    public PlaceEntity update(PlaceEntity placeEntity) {
+
+        return entityManager.merge(placeEntity);
     }
 
     @Override
-    public boolean delete(PlaceEntity placeEntity) {
-        return false;
+    public void delete(PlaceEntity placeEntity) {
+        entityManager.remove(placeEntity);
     }
 
     @Override
-    public PlaceEntity find(Integer id) {
-        return null;
+    public Optional<PlaceEntity> find(Integer id) {
+
+        return Optional.ofNullable(entityManager.find(PlaceEntity.class, id));
     }
 }

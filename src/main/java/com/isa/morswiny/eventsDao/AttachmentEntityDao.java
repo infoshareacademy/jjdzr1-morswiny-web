@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Optional;
 
 
 @ApplicationScoped
@@ -15,29 +16,25 @@ public class AttachmentEntityDao implements Dao<AttachmentEntity>, Serializable 
     private EntityManager entityManager;
 
     @Override
-    public boolean save(AttachmentEntity attachmentEntity) {
-        try {
-            entityManager.persist(attachmentEntity);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public void save(AttachmentEntity attachmentEntity) {
+        entityManager.persist(attachmentEntity);
+    }
 
+
+    @Override
+    public AttachmentEntity update(AttachmentEntity attachmentEntity) {
+        return entityManager.merge(attachmentEntity);
 
     }
 
     @Override
-    public boolean update(AttachmentEntity attachmentEntity) {
-        return false;
+    public void delete(AttachmentEntity attachmentEntity) {
+        entityManager.remove(attachmentEntity);
+
     }
 
     @Override
-    public boolean delete(AttachmentEntity attachmentEntity) {
-        return false;
-    }
-
-    @Override
-    public AttachmentEntity find(Integer id) {
-        return null;
+    public Optional<AttachmentEntity> find(Integer id) {
+        return Optional.ofNullable(entityManager.find(AttachmentEntity.class, id));
     }
 }

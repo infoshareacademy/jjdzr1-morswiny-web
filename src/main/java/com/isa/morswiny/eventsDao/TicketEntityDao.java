@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ApplicationScoped
 public class TicketEntityDao implements Dao<TicketEntity>, Serializable {
@@ -14,28 +15,23 @@ public class TicketEntityDao implements Dao<TicketEntity>, Serializable {
     private EntityManager entityManager;
 
     @Override
-    public boolean save(TicketEntity ticketEntity) {
-        try{
-            entityManager.persist(ticketEntity);
-            return true;
-        } catch (Exception e)
-        {
-            return false;
-        }
+    public void save(TicketEntity ticketEntity) {
+        entityManager.persist(ticketEntity);
     }
 
     @Override
-    public boolean update(TicketEntity ticketEntity) {
-        return false;
+    public TicketEntity update(TicketEntity ticketEntity) {
+
+        return entityManager.merge(ticketEntity);
     }
 
     @Override
-    public boolean delete(TicketEntity ticketEntity) {
-        return false;
+    public void delete(TicketEntity ticketEntity) {
+        entityManager.remove(ticketEntity);
     }
 
     @Override
-    public TicketEntity find(Integer id) {
-        return null;
+    public Optional<TicketEntity> find(Integer id) {
+        return Optional.ofNullable(entityManager.find(TicketEntity.class, id));
     }
 }

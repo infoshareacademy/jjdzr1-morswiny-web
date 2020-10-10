@@ -1,11 +1,16 @@
 package com.isa.morswiny.eventsDao;
 
-public interface Dao <T>{
+import java.util.Optional;
 
-    public boolean save(T t);
-    public boolean update(T t);
-    public boolean delete(T t);
-    public T find (Integer id);
+public interface Dao<T> {
+
+    public void save(T t);
+
+    public T update(T t);
+
+    public void delete(T t);
+
+    public Optional<T> find(Integer id);
 
 
 }
