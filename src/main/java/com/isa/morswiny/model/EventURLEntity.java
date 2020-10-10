@@ -11,8 +11,7 @@ public class EventURLEntity {
     private String www;
     private String tickets;
 
-    @OneToOne
-    @JoinColumn(name="event_id", referencedColumnName = "eventId")
+    @OneToOne (mappedBy = "urls")
     private EventEntity event;
 
     public EventURLEntity(String www, String tickets) {
@@ -45,5 +44,9 @@ public class EventURLEntity {
 
     public void setTickets(String tickets) {
         this.tickets = tickets;
+    }
+
+    public void setEvent (EventEntity event) {
+        this.event = event;
     }
 }

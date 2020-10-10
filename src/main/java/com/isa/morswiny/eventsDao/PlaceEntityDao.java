@@ -1,6 +1,6 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.model.EventEntity;
+import com.isa.morswiny.model.PlaceEntity;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -8,31 +8,32 @@ import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 
 @ApplicationScoped
-public class EventEntityDao implements Dao<EventEntity>, Serializable {
+public class PlaceEntityDao implements Dao <PlaceEntity>, Serializable {
 
     @PersistenceContext()
     private EntityManager entityManager;
 
-    public boolean save (EventEntity eventEntity){
-        try {entityManager.persist(eventEntity);
-        return true;
+    @Override
+    public boolean save(PlaceEntity placeEntity) {
+        try {entityManager.persist(placeEntity);
+            return true;
         } catch (Exception e){
             return false;
         }
     }
 
     @Override
-    public boolean update(EventEntity eventEntity) {
+    public boolean update(PlaceEntity placeEntity) {
         return false;
     }
 
     @Override
-    public boolean delete(EventEntity eventEntity) {
+    public boolean delete(PlaceEntity placeEntity) {
         return false;
     }
 
     @Override
-    public EventEntity find(Integer id) {
+    public PlaceEntity find(Integer id) {
         return null;
     }
 }

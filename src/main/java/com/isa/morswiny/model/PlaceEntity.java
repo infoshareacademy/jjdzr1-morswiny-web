@@ -1,8 +1,10 @@
 package com.isa.morswiny.model;
 
+import javax.ejb.Stateless;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @Table(name = "place")

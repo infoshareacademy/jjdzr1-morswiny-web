@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ticket")
-
 public class TicketEntity {
     public Integer getTicketId() {
         return ticketId;
@@ -16,8 +15,7 @@ public class TicketEntity {
     private String type;
     private String startTicket;
     private String endTicket;
-    @OneToOne
-    @JoinColumn(name="event_Id", referencedColumnName = "eventId")
+    @OneToOne (mappedBy = "tickets")
     private EventEntity event;
 
     public TicketEntity(String type, String startTicket, String endTicket) {

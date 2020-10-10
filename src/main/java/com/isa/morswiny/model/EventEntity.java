@@ -28,7 +28,8 @@ public class EventEntity {
             joinColumns = @JoinColumn(name = "eventID"),
             inverseJoinColumns = @JoinColumn(name = "placeId"))
     private Set<PlaceEntity> places = new HashSet<>();
-    @OneToOne (mappedBy = "event")
+    @OneToOne
+    @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
     private EventURLEntity urls;
 
     @OneToMany(mappedBy = "event")
@@ -39,7 +40,8 @@ public class EventEntity {
     @JoinColumn(name="organizer_Id", referencedColumnName = "organizerId")
     private OrganizerEntity organizer;
 
-    @OneToOne (mappedBy = "event")
+    @OneToOne 
+    @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private TicketEntity tickets;
 
     public Integer getEventId() {

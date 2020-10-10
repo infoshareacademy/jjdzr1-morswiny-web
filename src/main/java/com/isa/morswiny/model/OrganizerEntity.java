@@ -15,7 +15,7 @@ public class OrganizerEntity {
     private Integer organizerID;
     private String id;
     private String designation;
-    @OneToMany (mappedBy = "organizer")
+    @OneToMany (mappedBy = "organizer", cascade = CascadeType.ALL)
     private Set<EventEntity> events;
 
     public OrganizerEntity(String id, String designation) {
