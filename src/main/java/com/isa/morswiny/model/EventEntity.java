@@ -32,7 +32,8 @@ public class EventEntity {
     @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
     private EventURLEntity urls;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="event_Id")
     @OrderColumn
     private AttachmentEntity[] attachments;
 
