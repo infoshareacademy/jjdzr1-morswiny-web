@@ -11,7 +11,7 @@ import java.util.Optional;
 @ApplicationScoped
 public class PlaceEntityDao implements Dao<PlaceEntity>, Serializable {
 
-    @PersistenceContext()
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override

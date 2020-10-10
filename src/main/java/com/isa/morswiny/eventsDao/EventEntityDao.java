@@ -11,7 +11,7 @@ import java.util.Optional;
 @ApplicationScoped
 public class EventEntityDao implements Dao<EventEntity>, Serializable {
 
-    @PersistenceContext()
+    @PersistenceContext
     private EntityManager entityManager;
 
     public void save(EventEntity eventEntity) {
