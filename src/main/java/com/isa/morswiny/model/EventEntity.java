@@ -22,12 +22,10 @@ public class EventEntity {
     private LocalDateTime startDateLDT;
     private LocalDateTime endDateLDT;
 
-    @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "event_and_place_join_table",
-            joinColumns = @JoinColumn(name = "eventID"),
-            inverseJoinColumns = @JoinColumn(name = "placeId"))
-    private Set<PlaceEntity> places = new HashSet<>();
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="place_id", referencedColumnName = "placeId")
+    private PlaceEntity place;
+
     @OneToOne
     @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
     private EventURLEntity urls;
@@ -125,12 +123,12 @@ public class EventEntity {
         this.endDateLDT = endDateLDT;
     }
 
-    public Set<PlaceEntity> getPlaces() {
-        return places;
+    public PlaceEntity getPlace() {
+        return place;
     }
 
-    public void setPlaces(Set<PlaceEntity> places) {
-        this.places = places;
+    public void setPlace(PlaceEntity place) {
+        this.place = place;
     }
 
     public EventURLEntity getUrls() {

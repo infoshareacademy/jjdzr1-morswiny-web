@@ -22,7 +22,7 @@ public class PlaceEntity {
     @Column (nullable = false)
     private String name;
 
-    @ManyToMany (mappedBy = "places")
+    @OneToMany (mappedBy = "place")
     private Set<EventEntity> events = new HashSet<>();
 
 
