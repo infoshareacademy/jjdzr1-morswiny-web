@@ -23,16 +23,21 @@
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
 
-    <!--        <link rel="stylesheet"-->
-    <!--              href="https://mdbootstrap.com/api/snippets/static/download/MDB-Pro_4.19.1/css/mdb.min.css">-->
-
+    <style>
+        .dark-mode {
+            background-color: #222831;
+            color: black;
+        }
+    </style>
 
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="img-hover-zoom media">
-        <a href="main.html"><img src="../Images/morswin.png" style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80" class="mr-3" alt="..."></a>
+        <a href="main.html"><img src="../Images/morswin.png"
+                                 style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80"
+                                 class="mr-3" alt="..."></a>
     </div>
     <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,6 +65,12 @@
                     <a class="dropdown-item" href="my-profile.html">Filter by Date</a>
                     <a class="dropdown-item" href="my-profile.html">Filter by Place</a>
                     <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
+                    <div class="col-xs-6">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                 </div>
             </li>
             <li class="nav-item active">
@@ -78,6 +89,10 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <div>
+            <button type="button" style="position:relative" class="btn btn-outline-primary" onclick="myFunction()">
+                Toggle dark mode
+            </button>
+
             <a href="/HTML/log-in.html">
                 <button type="button" style="position:relative; right:-5px;" class="btn btn-outline-primary">Log in
                 </button>
@@ -109,6 +124,101 @@
     </div>
 </div>
 
+<div>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            height: 34px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #222831;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(55px);
+            -ms-transform: translateX(55px);
+            transform: translateX(55px);
+        }
+
+        /*------ ADDED CSS ---------*/
+        .on {
+            display: none;
+        }
+
+        .on, .off {
+            color: white;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            font-size: 10px;
+            font-family: Verdana, sans-serif;
+        }
+
+        input:checked + .slider .on {
+            display: block;
+        }
+
+        input:checked + .slider .off {
+            display: none;
+        }
+
+        /*--------- END --------*/
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+    <label class="switch"><input type="checkbox" id="togBtn">
+        <div  onclick="myFunction()" class="slider round"><!--ADDED HTML --><span class="on"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-moon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"/>
+</svg></span><span class="off"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-sun" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3.5 8a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/>
+  <path fill-rule="evenodd" d="M8.202.28a.25.25 0 0 0-.404 0l-.91 1.255a.25.25 0 0 1-.334.067L5.232.79a.25.25 0 0 0-.374.155l-.36 1.508a.25.25 0 0 1-.282.19l-1.532-.245a.25.25 0 0 0-.286.286l.244 1.532a.25.25 0 0 1-.189.282l-1.509.36a.25.25 0 0 0-.154.374l.812 1.322a.25.25 0 0 1-.067.333l-1.256.91a.25.25 0 0 0 0 .405l1.256.91a.25.25 0 0 1 .067.334L.79 10.768a.25.25 0 0 0 .154.374l1.51.36a.25.25 0 0 1 .188.282l-.244 1.532a.25.25 0 0 0 .286.286l1.532-.244a.25.25 0 0 1 .282.189l.36 1.508a.25.25 0 0 0 .374.155l1.322-.812a.25.25 0 0 1 .333.067l.91 1.256a.25.25 0 0 0 .405 0l.91-1.256a.25.25 0 0 1 .334-.067l1.322.812a.25.25 0 0 0 .374-.155l.36-1.508a.25.25 0 0 1 .282-.19l1.532.245a.25.25 0 0 0 .286-.286l-.244-1.532a.25.25 0 0 1 .189-.282l1.508-.36a.25.25 0 0 0 .155-.374l-.812-1.322a.25.25 0 0 1 .067-.333l1.256-.91a.25.25 0 0 0 0-.405l-1.256-.91a.25.25 0 0 1-.067-.334l.812-1.322a.25.25 0 0 0-.155-.374l-1.508-.36a.25.25 0 0 1-.19-.282l.245-1.532a.25.25 0 0 0-.286-.286l-1.532.244a.25.25 0 0 1-.282-.189l-.36-1.508a.25.25 0 0 0-.374-.155l-1.322.812a.25.25 0 0 1-.333-.067L8.203.28zM8 2.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z"/>
+</svg></span>
+            <!--END--></div>
+    </label>
+</div>
 <div class="container">
     <br/>
     <div class="row justify-content-center">
@@ -196,5 +306,14 @@
         </div>
     </#list>
 </div>
+
+
+<script>
+    function myFunction() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+    }
+</script>
+
 </body>
 </html>
