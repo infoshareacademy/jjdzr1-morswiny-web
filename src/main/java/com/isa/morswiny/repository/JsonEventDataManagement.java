@@ -1,8 +1,7 @@
 package com.isa.morswiny.repository;
 
 import com.isa.morswiny.comparators.DateComparator;
-import com.isa.morswiny.events.Event;
-import com.isa.morswiny.repository.JsonEventDataLoad;
+import com.isa.morswiny.toBeDeleted.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

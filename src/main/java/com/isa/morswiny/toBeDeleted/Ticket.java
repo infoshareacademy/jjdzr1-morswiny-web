@@ -1,6 +1,15 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
+
+import javax.persistence.*;
+
+//@Entity
+//@Table(name = "ticket")
 
 public class Ticket {
+    public Integer getTicketId() {
+        return ticketId;
+    }
+    private Integer ticketId;
     private String type;
     private String startTicket;
     private String endTicket;

@@ -1,13 +1,11 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.events.Event;
+import com.isa.morswiny.toBeDeleted.Event;
 import com.isa.morswiny.repository.EventRepository;
-import com.isa.morswiny.repository.JsonEventDataManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.*;
 

@@ -1,6 +1,17 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+//@Entity
+//@Table(name = "place")
 
 public class Place {
+    public Integer getPlaceId() {
+        return placeId;
+    }
+    private Integer placeId;
     private String id;
     private String subname;
     private String name;

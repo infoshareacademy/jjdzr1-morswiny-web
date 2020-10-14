@@ -1,13 +1,9 @@
 package com.isa.morswiny.users;
 
-import com.isa.morswiny.events.Event;
+import com.isa.morswiny.toBeDeleted.Event;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

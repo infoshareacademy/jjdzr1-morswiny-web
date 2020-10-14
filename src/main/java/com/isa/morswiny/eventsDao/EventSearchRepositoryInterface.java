@@ -1,6 +1,6 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.events.Event;
+import com.isa.morswiny.toBeDeleted.Event;
 
 import java.util.List;
 

@@ -1,15 +1,29 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.model;
 
-public class Organizer {
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table (name ="organizer")
+public class OrganizerEntity {
+    public Integer getOrganizerID() {
+        return organizerID;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer organizerID;
     private String id;
     private String designation;
+    @OneToMany (mappedBy = "organizer", cascade = CascadeType.ALL)
+    private Set<EventEntity> events;
 
-    public Organizer(String id, String designation) {
+    public OrganizerEntity(String id, String designation) {
         this.id = id;
         this.designation = designation;
     }
 
-    public Organizer() {
+    public OrganizerEntity() {
 
     }
 

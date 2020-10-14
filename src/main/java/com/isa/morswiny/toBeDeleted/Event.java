@@ -1,16 +1,19 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.toBeDeleted;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.time.LocalDate;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+
+
 public class Event {
+
+    private Integer eventId;
     private Integer id;
+
     private Place place;
     private String endDate;
     private String name;
@@ -90,7 +93,7 @@ public class Event {
 
     public String returnEventParams() {
         return
-                ""  + '\n' + place.getName() + place.getSubname() + '\n'
+                ""  + '\n' //+place.getName() + place.getSubname() + '\n'
                         + endDate + '\n'
                         + name + '\n'
                         + urls.getWww() + urls.getTickets() + '\n'

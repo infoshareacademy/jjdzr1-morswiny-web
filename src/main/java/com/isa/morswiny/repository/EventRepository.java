@@ -1,6 +1,6 @@
 package com.isa.morswiny.repository;
 
-import com.isa.morswiny.events.Event;
+import com.isa.morswiny.toBeDeleted.Event;
 
 import java.util.ArrayList;
 import java.util.List;
