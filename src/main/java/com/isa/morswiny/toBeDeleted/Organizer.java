@@ -1,20 +1,24 @@
 package com.isa.morswiny.toBeDeleted;
 
-import com.isa.morswiny.model.EventEntity;
+
 
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
-//@Table (name ="organizer")
+@Entity
+@Table (name ="organizer")
 public class Organizer {
     public Integer getOrganizerID() {
         return organizerID;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer organizerID;
     private String id;
     private String designation;
-    private Set<EventEntity> events;
+    @OneToMany (mappedBy = "organizer", cascade = CascadeType.ALL)
+    private Set<Event> events;
 
     public Organizer(String id, String designation) {
         this.id = id;

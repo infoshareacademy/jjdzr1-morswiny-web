@@ -1,95 +1,48 @@
 package com.isa.morswiny.toBeDeleted;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-
+@Entity
+@Table (name = "event")
 
 public class Event {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventId;
     private Integer id;
-
-    private Place place;
     private String endDate;
     private String name;
-    private EventURL urls;
-    private Attachment[] attachments;
     private String descLong;
     private String categoryId;
     private String startDate;
-    private Organizer organizer;
     private Integer  active;
-    private Ticket tickets;
     private LocalDateTime startDateLDT;
     private LocalDateTime endDateLDT;
 
-    public Event(){
-    }
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="place_id", referencedColumnName = "placeId")
+    private Place place;
 
-    public Event(Integer id, Place place, String endDate, String name, EventURL urls, Attachment[] attachments, String descLong, String categoryId, String startDate, Organizer organizer, Integer active, Ticket tickets, LocalDateTime startDateLDT, LocalDateTime endDateLDT) {
-        this.id = id;
-        this.place = place;
-        this.endDate = endDate;
-        this.name = name;
-        this.urls = urls;
-        this.attachments = attachments;
-        this.descLong = descLong;
-        this.categoryId = categoryId;
-        this.startDate = startDate;
-        this.organizer = organizer;
-        this.active = active;
-        this.tickets = tickets;
-        this.startDateLDT = startDateLDT;
-        this.endDateLDT = endDateLDT;
-    }
+    @OneToOne
+    @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
+    private EventURL urls;
 
-    private static final Logger logger = LoggerFactory.getLogger("CONSOLE_OUT");
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="event_Id")
+    @OrderColumn
+    private Attachment[] attachments;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return Objects.equals(id, event.id) &&
-                Objects.equals(place, event.place) &&
-                Objects.equals(endDate, event.endDate) &&
-                Objects.equals(name, event.name) &&
-                Objects.equals(urls, event.urls) &&
-                Arrays.equals(attachments, event.attachments) &&
-                Objects.equals(descLong, event.descLong) &&
-                Objects.equals(categoryId, event.categoryId) &&
-                Objects.equals(startDate, event.startDate) &&
-                Objects.equals(organizer, event.organizer) &&
-                Objects.equals(active, event.active) &&
-                Objects.equals(tickets, event.tickets);
-    }
+    @ManyToOne
+    @JoinColumn(name="organizer_Id", referencedColumnName = "organizerId")
+    private Organizer organizer;
 
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(id, place, endDate, name, urls, descLong, categoryId, startDate, organizer, active, tickets);
-        result = 31 * result + Arrays.hashCode(attachments);
-        return result;
-    }
+    @OneToOne
+    @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
+    private Ticket tickets;
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", place=" + place +
-                ", endDate=" + endDate  +
-                ", name=" + name  +
-                ", urls=" + urls +
-                ", categoryId=" + categoryId  +
-                ", startDate=" + startDate  +
-                ", organizer=" + organizer +
-                ", active=" + active +
-                '}';
-    }
 
     public String returnEventParams() {
         return
@@ -102,20 +55,13 @@ public class Event {
                         + organizer.getDesignation() + '\n';
     }
 
-    public LocalDateTime getStartDateLDT() {
-        return startDateLDT;
+
+    public Integer getEventId() {
+        return eventId;
     }
 
-    public void setStartDateLDT(LocalDateTime startDateLDT) {
-        this.startDateLDT = startDateLDT;
-    }
-
-    public LocalDateTime getEndDateLDT() {
-        return endDateLDT;
-    }
-
-    public void setEndDateLDT(LocalDateTime endDateLDT) {
-        this.endDateLDT = endDateLDT;
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
     }
 
     public Integer getId() {
@@ -124,14 +70,6 @@ public class Event {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
     }
 
     public String getEndDate() {
@@ -143,27 +81,11 @@ public class Event {
     }
 
     public String getName() {
-        return name.toUpperCase();
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public EventURL getUrls() {
-        return urls;
-    }
-
-    public void setUrls(EventURL urls) {
-        this.urls = urls;
-    }
-
-    public Attachment[] getAttachments() {
-        return attachments;
-    }
-
-    public void setAttachments(Attachment[] attachments) {
-        this.attachments = attachments;
     }
 
     public String getDescLong() {
@@ -190,20 +112,60 @@ public class Event {
         this.startDate = startDate;
     }
 
-    public Organizer getOrganizer() {
-        return organizer;
-    }
-
-    public void setOrganizer(Organizer organizer) {
-        this.organizer = organizer;
-    }
-
     public Integer getActive() {
         return active;
     }
 
     public void setActive(Integer active) {
         this.active = active;
+    }
+
+    public LocalDateTime getStartDateLDT() {
+        return startDateLDT;
+    }
+
+    public void setStartDateLDT(LocalDateTime startDateLDT) {
+        this.startDateLDT = startDateLDT;
+    }
+
+    public LocalDateTime getEndDateLDT() {
+        return endDateLDT;
+    }
+
+    public void setEndDateLDT(LocalDateTime endDateLDT) {
+        this.endDateLDT = endDateLDT;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    public EventURL getUrls() {
+        return urls;
+    }
+
+    public void setUrls(EventURL urls) {
+        this.urls = urls;
+    }
+
+    public Attachment[] getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Attachment[] attachments) {
+        this.attachments = attachments;
+    }
+
+    public Organizer getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = organizer;
     }
 
     public Ticket getTickets() {
@@ -213,6 +175,4 @@ public class Event {
     public void setTickets(Ticket tickets) {
         this.tickets = tickets;
     }
-
-
 }

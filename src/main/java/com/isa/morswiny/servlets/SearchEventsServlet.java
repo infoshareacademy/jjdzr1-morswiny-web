@@ -1,5 +1,6 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.toBeDeleted.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
@@ -34,6 +35,9 @@ public class SearchEventsServlet extends HttpServlet {
     @Inject
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
+    @Inject
+    EventDao eventDao;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
@@ -48,7 +52,7 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
-
+        eventDao.loadDataToDB();
 
 
         final Map model = new HashMap();

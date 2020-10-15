@@ -1,13 +1,21 @@
 package com.isa.morswiny.toBeDeleted;
 
+
+
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="url")
+@Entity
+@Table(name="url")
 public class EventURL {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventUrlId;
     private String www;
     private String tickets;
+
+    @OneToOne (mappedBy = "urls")
+    private Event event;
+
     public EventURL(String www, String tickets) {
         this.www = www;
         this.tickets = tickets;
@@ -38,5 +46,9 @@ public class EventURL {
 
     public void setTickets(String tickets) {
         this.tickets = tickets;
+    }
+
+    public void setEvent (Event event) {
+        this.event = event;
     }
 }

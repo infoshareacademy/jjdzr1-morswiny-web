@@ -82,6 +82,8 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
         return list;
     }
 
+
+
     // method to search for event dates
 //    public List<Event> searchByExactDate(String date) {
 //        LocalDate queryDate = stringToLocalDate(date);

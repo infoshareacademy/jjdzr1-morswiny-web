@@ -1,18 +1,26 @@
 package com.isa.morswiny.toBeDeleted;
 
+
+
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="attachment")
-public class Attachment {
-    public Integer getAttachmentId() {
-        return attachmentId;
-    }
+@Entity
+@Table(name="attachment")
+public class Attachment{
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer attachmentId;
     private String fileName;
-    public Attachment(String fileName) {
+    @ManyToOne
+    @JoinColumn(name = "event_Id", referencedColumnName = "eventId")
+    private Event event;
+
+    public Attachment (String fileName) {
         this.fileName = fileName;
     }
+
     public Attachment() {
     }
 
@@ -21,7 +29,9 @@ public class Attachment {
         return "Attachment " +
                 "file Name = " + fileName;
     }
-
+    public Integer getAttachmentId() {
+        return attachmentId;
+    }
     public String getFileName() {
         return fileName;
     }
@@ -31,3 +41,4 @@ public class Attachment {
     }
 
 }
+
