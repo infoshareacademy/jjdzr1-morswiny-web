@@ -11,9 +11,9 @@ import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.Optional;
 
-@RequestScoped
+
 public class OrganizerEntityDao implements Dao<OrganizerEntity>, Serializable {
-    @PersistenceContext(unitName = "hibernate_database")
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override

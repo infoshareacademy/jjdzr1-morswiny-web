@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @Table (name = "event")
 
+
 public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

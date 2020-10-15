@@ -1,11 +1,8 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.eventsDao.EventEntityDao;
-import com.isa.morswiny.eventsDao.OrganizerEntityDao;
+import com.isa.morswiny.eventsDao.*;
 import com.isa.morswiny.model.OrganizerEntity;
 import com.isa.morswiny.toBeDeleted.Event;
-import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
-import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -39,8 +36,8 @@ public class SearchEventsServlet extends HttpServlet {
     @Inject
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
-    @EJB
-    EventEntityDao eventEntityDao;
+    @Inject
+    dupa eventEntityDao;
 
 
 

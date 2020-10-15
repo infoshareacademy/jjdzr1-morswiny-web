@@ -17,6 +17,8 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
 
 
 
+
+
     @Override
     public List<Event> searchByString(String userInput) {
         List<Event> list = new ArrayList<>();
@@ -31,7 +33,8 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
         }
 
        EventEntityDao eventEntityDao = new EventEntityDao();
-        eventEntityDao.loadEventsToDB();
+       dupa dupa = new dupa ();
+       dupa.loadEventsToDB();
 
         return list;
     }
