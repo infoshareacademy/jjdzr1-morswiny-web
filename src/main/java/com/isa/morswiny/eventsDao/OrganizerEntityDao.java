@@ -2,15 +2,18 @@ package com.isa.morswiny.eventsDao;
 
 import com.isa.morswiny.model.OrganizerEntity;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.Optional;
 
-@ApplicationScoped
+@RequestScoped
 public class OrganizerEntityDao implements Dao<OrganizerEntity>, Serializable {
-    @PersistenceContext
+    @PersistenceContext(unitName = "hibernate_database")
     private EntityManager entityManager;
 
     @Override
@@ -33,4 +36,5 @@ public class OrganizerEntityDao implements Dao<OrganizerEntity>, Serializable {
         return Optional.ofNullable(entityManager.find(OrganizerEntity.class, id));
 
     }
+
 }

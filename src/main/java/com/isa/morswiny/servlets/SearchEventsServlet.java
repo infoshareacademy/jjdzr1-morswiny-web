@@ -1,5 +1,8 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.eventsDao.EventEntityDao;
+import com.isa.morswiny.eventsDao.OrganizerEntityDao;
+import com.isa.morswiny.model.OrganizerEntity;
 import com.isa.morswiny.toBeDeleted.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
@@ -8,6 +11,8 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +39,11 @@ public class SearchEventsServlet extends HttpServlet {
     @Inject
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
+    @EJB
+    EventEntityDao eventEntityDao;
+
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
@@ -56,6 +66,8 @@ public class SearchEventsServlet extends HttpServlet {
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
+
+        eventEntityDao.loadEventsToDB();
 
         try {
             template.process(model, resp.getWriter());

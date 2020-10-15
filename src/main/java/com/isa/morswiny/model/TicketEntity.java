@@ -5,9 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ticket")
 public class TicketEntity {
-    public Integer getTicketId() {
-        return ticketId;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,5 +56,9 @@ public class TicketEntity {
 
     public void setEndTicket(String endTicket) {
         this.endTicket = endTicket;
+    }
+
+    public Integer getTicketId() {
+        return ticketId;
     }
 }

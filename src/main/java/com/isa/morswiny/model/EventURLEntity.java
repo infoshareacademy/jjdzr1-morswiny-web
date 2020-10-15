@@ -49,4 +49,8 @@ public class EventURLEntity {
     public void setEvent (EventEntity event) {
         this.event = event;
     }
+
+    public Integer getEventUrlId() {
+        return eventUrlId;
+    }
 }

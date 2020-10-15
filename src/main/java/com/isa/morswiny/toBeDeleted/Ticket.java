@@ -1,9 +1,5 @@
 package com.isa.morswiny.toBeDeleted;
 
-import javax.persistence.*;
-
-//@Entity
-//@Table(name = "ticket")
 
 public class Ticket {
     public Integer getTicketId() {

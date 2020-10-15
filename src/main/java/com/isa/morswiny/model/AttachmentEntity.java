@@ -5,9 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="attachment")
 public class AttachmentEntity {
-    public Integer getAttachmentId() {
-        return attachmentId;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,4 +36,7 @@ public class AttachmentEntity {
         this.fileName = fileName;
     }
 
+    public Integer getAttachmentId() {
+        return attachmentId;
+    }
 }

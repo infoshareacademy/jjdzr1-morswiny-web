@@ -10,9 +10,7 @@ import java.util.Set;
 @Table(name = "place")
 
 public class PlaceEntity {
-    public Integer getPlaceId() {
-        return placeId;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,6 +56,10 @@ public class PlaceEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getPlaceId() {
+        return placeId;
     }
 
     @Override

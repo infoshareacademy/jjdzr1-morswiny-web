@@ -1,5 +1,6 @@
 package com.isa.morswiny.eventsDao;
 
+import com.isa.morswiny.repository.JsonEventDataManagement;
 import com.isa.morswiny.toBeDeleted.Event;
 
 import javax.enterprise.context.SessionScoped;
@@ -15,6 +16,7 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 
 
+
     @Override
     public List<Event> searchByString(String userInput) {
         List<Event> list = new ArrayList<>();
@@ -27,6 +29,10 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
                 list.add(event);
             }
         }
+
+       EventEntityDao eventEntityDao = new EventEntityDao();
+        eventEntityDao.loadEventsToDB();
+
         return list;
     }
 

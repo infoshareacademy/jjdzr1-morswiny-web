@@ -162,4 +162,6 @@ public class EventEntity {
     public void setTickets(TicketEntity tickets) {
         this.tickets = tickets;
     }
+
+
 }

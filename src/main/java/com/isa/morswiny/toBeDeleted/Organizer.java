@@ -5,8 +5,6 @@ import com.isa.morswiny.model.EventEntity;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
-//@Table (name ="organizer")
 public class Organizer {
     public Integer getOrganizerID() {
         return organizerID;

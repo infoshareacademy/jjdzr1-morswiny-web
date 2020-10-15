@@ -1,11 +1,5 @@
 package com.isa.morswiny.toBeDeleted;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
-//@Entity
-//@Table(name = "place")
 
 public class Place {
     public Integer getPlaceId() {

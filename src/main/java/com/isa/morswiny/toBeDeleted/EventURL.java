@@ -1,9 +1,6 @@
 package com.isa.morswiny.toBeDeleted;
 
-import javax.persistence.*;
 
-//@Entity
-//@Table(name="url")
 public class EventURL {
     private Integer eventUrlId;
     private String www;

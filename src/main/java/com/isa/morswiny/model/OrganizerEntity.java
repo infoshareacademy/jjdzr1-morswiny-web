@@ -6,13 +6,11 @@ import java.util.Set;
 @Entity
 @Table (name ="organizer")
 public class OrganizerEntity {
-    public Integer getOrganizerID() {
-        return organizerID;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer organizerID;
+    private Integer organizerId;
     private String id;
     private String designation;
     @OneToMany (mappedBy = "organizer", cascade = CascadeType.ALL)
@@ -46,5 +44,13 @@ public class OrganizerEntity {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public Integer getOrganizerId() {
+        return organizerId;
+    }
+
+    public Set<EventEntity> getEvents() {
+        return events;
     }
 }

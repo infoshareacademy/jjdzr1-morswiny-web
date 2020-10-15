@@ -1,9 +1,6 @@
 package com.isa.morswiny.toBeDeleted;
 
-import javax.persistence.*;
 
-//@Entity
-//@Table(name="attachment")
 public class Attachment {
     public Integer getAttachmentId() {
         return attachmentId;
