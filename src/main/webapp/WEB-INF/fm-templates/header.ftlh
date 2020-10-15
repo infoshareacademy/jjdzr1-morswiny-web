@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
         <a href="main-page"><img src="/Images/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
