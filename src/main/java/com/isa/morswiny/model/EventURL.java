@@ -1,4 +1,4 @@
-package com.isa.morswiny.toBeDeleted;
+package com.isa.morswiny.model;
 
 
 

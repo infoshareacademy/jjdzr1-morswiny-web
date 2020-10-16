@@ -1,7 +1,7 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.eventsDao.EventDao;
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.services.EventService;
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
@@ -9,6 +9,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +37,7 @@ public class SearchEventsServlet extends HttpServlet {
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
     @Inject
-    EventDao eventDao;
+    EventService eventService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +53,7 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
-        eventDao.loadDataToDB();
+       eventService.load();
 
 
         final Map model = new HashMap();

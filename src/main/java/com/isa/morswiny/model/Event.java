@@ -1,9 +1,9 @@
-package com.isa.morswiny.toBeDeleted;
+package com.isa.morswiny.model;
+
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table (name = "event")
@@ -15,6 +15,8 @@ public class Event {
     private Integer id;
     private String endDate;
     private String name;
+
+    @Column(length = 16777215)
     private String descLong;
     private String categoryId;
     private String startDate;
@@ -26,7 +28,7 @@ public class Event {
     @JoinColumn(name="place_id", referencedColumnName = "placeId")
     private Place place;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
     private EventURL urls;
 
@@ -35,11 +37,11 @@ public class Event {
     @OrderColumn
     private Attachment[] attachments;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="organizer_Id", referencedColumnName = "organizerId")
     private Organizer organizer;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
 

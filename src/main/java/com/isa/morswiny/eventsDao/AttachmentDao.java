@@ -1,7 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
 
-import com.isa.morswiny.toBeDeleted.Attachment;
+import com.isa.morswiny.model.Attachment;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;

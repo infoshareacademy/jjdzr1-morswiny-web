@@ -2,16 +2,15 @@ package com.isa.morswiny.eventsDao;
 
 
 
-import com.isa.morswiny.toBeDeleted.Ticket;
+import com.isa.morswiny.model.Ticket;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 import java.util.Optional;
 
 @ApplicationScoped
-public class TicketDao implements Dao<Ticket>, Serializable {
+public class TicketDao implements Dao<Ticket> {
 
     @PersistenceContext
     private EntityManager entityManager;

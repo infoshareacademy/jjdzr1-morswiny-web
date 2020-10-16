@@ -1,6 +1,6 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.model.Event;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;

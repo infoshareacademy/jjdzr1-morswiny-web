@@ -1,15 +1,14 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.toBeDeleted.Place;
+import com.isa.morswiny.model.Place;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 import java.util.Optional;
 
 @ApplicationScoped
-public class PlaceDao implements Dao<Place>, Serializable {
+public class PlaceDao implements Dao<Place>{
 
     @PersistenceContext
     private EntityManager entityManager;

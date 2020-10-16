@@ -1,6 +1,6 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

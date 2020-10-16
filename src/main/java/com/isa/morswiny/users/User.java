@@ -1,6 +1,6 @@
 package com.isa.morswiny.users;
 
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.model.Event;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;

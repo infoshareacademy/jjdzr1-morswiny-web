@@ -1,16 +1,15 @@
 package com.isa.morswiny.eventsDao;
 
 
-import com.isa.morswiny.toBeDeleted.Organizer;
+import com.isa.morswiny.model.Organizer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 import java.util.Optional;
 
 @ApplicationScoped
-public class OrganizerDao implements Dao<Organizer>, Serializable {
+public class OrganizerDao implements Dao<Organizer> {
     @PersistenceContext
     private EntityManager entityManager;
 

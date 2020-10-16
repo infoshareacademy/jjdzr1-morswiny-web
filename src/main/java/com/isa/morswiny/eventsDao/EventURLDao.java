@@ -1,7 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
 
-import com.isa.morswiny.toBeDeleted.EventURL;
+import com.isa.morswiny.model.EventURL;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
