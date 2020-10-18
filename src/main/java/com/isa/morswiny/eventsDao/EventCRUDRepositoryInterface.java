@@ -3,6 +3,7 @@ package com.isa.morswiny.eventsDao;
 import com.isa.morswiny.model.Event;
 
 import javax.ejb.Local;
+import java.io.IOException;
 import java.util.List;
 
 @Local

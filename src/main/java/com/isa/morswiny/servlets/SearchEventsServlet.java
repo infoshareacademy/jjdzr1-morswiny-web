@@ -1,10 +1,11 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.services.EventService;
+import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.repository.EventRepository;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -37,7 +38,11 @@ public class SearchEventsServlet extends HttpServlet {
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
     @Inject
-    EventService eventService;
+    EventRepository eventRepository;
+
+    @Inject
+    EventDao eventDao;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -53,11 +58,8 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
-       eventService.load();
-
-
         final Map model = new HashMap();
-        final String userQuery = req.getParameter("search");
+        String userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -78,7 +80,9 @@ public class SearchEventsServlet extends HttpServlet {
     }
 
     private List<Event> setListOfQueriedEvents(String userQuery) {
-        return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
+        //return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
+        return  eventDao.findEventsByString(userQuery);
+
     }
 
 

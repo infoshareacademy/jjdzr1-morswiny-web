@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -14,12 +15,17 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public List<Event> getAllEventsList() {
-        return EventRepository.getEventRepository();
+    public List<Event> getAllEventsList()  {
+
+        try{
+        return EventRepository.getEventRepository();}
+        catch (Exception e){
+            return new ArrayList<>();
+        }
     }
 
     @Override
-    public Event getEventByID(Integer id) {
+    public Event getEventByID(Integer id)  {
         List<Event> list = getAllEventsList();
         for (Event event : list){
             if (id.equals(event.getId())){
@@ -30,7 +36,7 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
 
     @Override
-    public boolean isEventExisting(Event event) {
+    public boolean isEventExisting(Event event)  {
         if (Objects.nonNull(event)){
         return getAllEventsList().contains(event);
         }
@@ -38,13 +44,13 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
     }
 
     @Override
-    public Integer getNextID(){
+    public Integer getNextID()  {
         Event event = Collections.max(getAllEventsList(), Comparator.comparing(Event::getId));
         return event.getId() + 1;
     }
 
     @Override
-    public boolean createEvent(Event event) {
+    public boolean createEvent(Event event)  {
         if (!isEventExisting(event)) {
             getAllEventsList().add(event);
             STDOUT.info("New event has been created\n");
@@ -55,7 +61,7 @@ public class EventCRUDRepository implements EventCRUDRepositoryInterface , Seria
         return false;
     }
     @Override
-    public boolean deleteEvent(Integer eventId) {
+    public boolean deleteEvent(Integer eventId)  {
         ListIterator<Event> i = getAllEventsList().listIterator();
         while(i.hasNext()){
             Event event = i.next();

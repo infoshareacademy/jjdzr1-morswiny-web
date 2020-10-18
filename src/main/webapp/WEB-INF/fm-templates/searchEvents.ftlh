@@ -100,7 +100,7 @@
                 <li>Try to use different or more general words.</li>
                 <li>Try to use fewer words.</li>
             </ul>
-        <#elseif userQuery="">
+        <#elseif userQuery??>
             <p>Found <b>${listOfQueriedEvents?size}</b> results:</p>
         <#else>
             <p>Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:</p>

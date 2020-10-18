@@ -1,5 +1,6 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @ApplicationScoped
 @WebServlet("/single-event")
@@ -26,7 +28,7 @@ public class EventServlet extends HttpServlet {
     private static final String TEMPLATE_NAME = "singleEvent";
 
     @Inject
-    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+    private EventDao eventDao;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -46,13 +48,13 @@ public class EventServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         Integer id = Integer.parseInt(req.getParameter("id"));
         try {
-            Event event = eventCRUDRepositoryInterface.getEventByID(id);
-            map.put("event", event);
-            if (event.getAttachments().length > 0){
-                map.put("picture", event.getAttachments()[0].getFileName());
+            Optional<Event> event = eventDao.find(id);
+            map.put("event", event.get());
+            if (event.get().getAttachments().length > 0){
+                map.put("picture", event.get().getAttachments()[0].getFileName());
             }
-            if (event.getUrls().getWww() != null){
-                map.put("tickets", event.getUrls().getWww());
+            if (event.get().getUrls().getWww() != null){
+                map.put("tickets", event.get().getUrls().getWww());
             }
         } catch (NullPointerException e) {
             writer.println("Event not found");

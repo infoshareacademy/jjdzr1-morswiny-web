@@ -1,9 +1,11 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
 
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.repository.EventRepository;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -32,6 +34,10 @@ public class AllEventsListServlet extends HttpServlet {
     EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
     @Inject
     TemplateProvider templateProvider;
+    @Inject
+    EventDao eventDao;
+    @Inject
+    EventRepository eventRepository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,14 +54,20 @@ public class AllEventsListServlet extends HttpServlet {
 
     }
 
-    private void setModel() {
+    private void setModel() throws IOException {
         if (model == null || model.isEmpty()) {
             model.put("listOfMainEvents", setListOfMainEvents());
         }
     }
 
-    private List<Event> setListOfMainEvents() {
-        List<Event> listOfAllEvents = eventCRUDRepositoryInterface.getAllEventsList();
+    private List<Event> setListOfMainEvents() throws IOException {
+        //List<Event> listOfAllEvents = eventCRUDRepositoryInterface.getAllEventsList();
+        //@TODO 1 raz ladujmy wszystkie dane, a tutaj wyszukujmy 3 eventy po prostu
+        eventRepository.loadDataToDB();
+
+
+        List<Event> listOfAllEvents = eventDao.findAllEvents();
+
         int numOfAllEvents = listOfAllEvents.size();
         int numOfMainEvents = returnNumberOfMainEvents(listOfAllEvents);
 
