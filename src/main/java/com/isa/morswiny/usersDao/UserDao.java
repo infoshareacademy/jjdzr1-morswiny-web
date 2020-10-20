@@ -44,9 +44,17 @@ public class UserDao {
         User userFound = entityManager.find(User.class, id);
         userFound.setEmail(user.getEmail());
         userFound.setLogin(user.getLogin());
-        userFound.setName(user.getName());
+        if (user.getName() != null) {
+            userFound.setName(user.getName());
+        }
+        if (user.getSurname() != null) {
+            user.setUserType(user.getUserType());
+        }
+        if (user.getFavourites() != null) {
+            userFound.setFavourites(user.getFavourites());
+        }
         userFound.setSurname(user.getSurname());
-        user.setUserType(user.getUserType());
+
         return userFound;
     }
 }
