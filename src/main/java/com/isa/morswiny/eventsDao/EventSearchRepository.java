@@ -1,7 +1,7 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.events.Event;
-import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.model.Event;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -47,12 +47,12 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
     public List<Event> searchByPlace(String place) {
         List<Event> list = new ArrayList<>();
         for (Event event : eventCRUDRepositoryInterface.getAllEventsList()) {
-            String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
+           /* String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
             if (nameAndSubname.toLowerCase()
                     .contains(
                             place.toLowerCase())) {
                 list.add(event);
-            }
+            }*/
         }
         return list;
     }
@@ -81,6 +81,8 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
         }
         return list;
     }
+
+
 
     // method to search for event dates
 //    public List<Event> searchByExactDate(String date) {

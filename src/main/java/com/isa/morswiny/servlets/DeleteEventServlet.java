@@ -1,9 +1,5 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.Event;
-import com.isa.morswiny.events.EventURL;
-import com.isa.morswiny.events.Organizer;
-import com.isa.morswiny.events.Place;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;

@@ -1,9 +1,23 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ticket")
 public class Ticket {
+    public Integer getTicketId() {
+        return ticketId;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer ticketId;
     private String type;
     private String startTicket;
     private String endTicket;
+    @OneToOne (mappedBy = "tickets")
+    private Event event;
 
     public Ticket(String type, String startTicket, String endTicket) {
         this.type = type;
