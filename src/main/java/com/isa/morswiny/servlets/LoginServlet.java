@@ -1,8 +1,10 @@
 package com.isa.morswiny.servlets;
 
 
+import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.usersDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -26,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     private static final String TEMPLATE_NAME = "login";
 
     @Inject
-    EventCRUDRepositoryInterface userCRUDRepositoryInterface;
+    UserService userService;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -35,11 +37,9 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setCharacterEncoding("UTF-8");
-        PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Map<String, Object> map = new HashMap<>();
-
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         try {
@@ -54,14 +54,19 @@ public class LoginServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
-        String login = req.getParameter("email");
+        String email = req.getParameter("email");
         int password = req.getParameter("password").hashCode();
+        String passwordHashed = Integer.toString(password);
 
-        if (login.equals("kuba")) {
-            req.getSession().setAttribute("logged", "userLogin");
-            resp.sendRedirect("/main-page");
+        if (!ifUserExists(email)){
+            map.put("NoUser", "NoUser");
+        } else if (!verifyUser(email, passwordHashed)){
+            map.put("wrongPassword", "WrongPassword");
         } else {
-            resp.sendRedirect("HTML/login-failed.html");
+            UserDto user = logIn(email, passwordHashed);
+            map.put("success", "success");
+            req.getSession().setAttribute("logged", user);
+            resp.sendRedirect("/main-page");
         }
 
         try {
@@ -73,16 +78,16 @@ public class LoginServlet extends HttpServlet {
     }
 
     private boolean ifUserExists(String email){
-        return false;
+        return userService.getByEmail(email) != null;
     }
 
-    private void logIn(String email, int Password){
-
+    private UserDto logIn(String email, String password){
+        return userService.getByEmail(email);
     }
 
+    private boolean verifyUser(String email, String password){
+        UserDto user = userService.getByEmail(email);
+        return user.getPassword().equals(password);
+    }
 
-//    private Boolean findUser(String login, String passsword){
-//        userCRUDRepositoryInterface.getUser()
-//
-//    }
 }

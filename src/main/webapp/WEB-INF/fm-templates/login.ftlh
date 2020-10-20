@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../css/log-in.css">
 </head>
 <body>
+<#include "header.ftlh">
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
