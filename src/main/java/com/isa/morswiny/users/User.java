@@ -18,7 +18,6 @@ public class User {
     private Integer id;
     private String name;
     private String surname;
-    private String login;
     private String email;
     private String password;
     private UserType userType;
@@ -52,14 +51,6 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getEmail() {
@@ -102,7 +93,6 @@ public class User {
         return Objects.equals(getId(), user.getId()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
-                Objects.equals(getLogin(), user.getLogin()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
                 Objects.equals(getPassword(), user.getPassword()) &&
                 getUserType() == user.getUserType() &&
@@ -111,6 +101,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getSurname(), getLogin(), getEmail(), getPassword(), getUserType(), getFavourites());
+        return Objects.hash(getId(), getName(), getSurname(), getEmail(), getPassword(), getUserType(), getFavourites());
     }
 }

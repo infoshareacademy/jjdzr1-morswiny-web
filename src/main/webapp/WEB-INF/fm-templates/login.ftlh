@@ -25,6 +25,11 @@
                 <img class="profile-img"
                      src="../Images/morswin.png" height="130" width="130"
                      alt="">
+                <#if NoUser??>
+                    <p class="p-log">User not found!</p>
+                <#elseif wrongPassword??>
+                    <p class="p-log">Wrong password! Try again!</p>
+                </#if>
                 <form class="form-signin" name="loginForm" method="post" action="login" accept-charset="UTF-8">
                     <input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -38,7 +43,7 @@
                     <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                 </form>
             </div>
-            <div><a href="create-account.html" class="text-center new-account">Create an account </a>
+            <div><a href="/createAccount" class="text-center new-account">Create an account </a>
             </div>
         </div>
     </div>

@@ -37,26 +37,26 @@
                     </#if>
                     <div class="form-group">
                         <label class="control-label" for="signupName">First Name</label>
-                        <input id="signupName" name="name" type="text" maxlength="50" class="form-control">
+                        <input id="signupName" name="name" type="text" maxlength="50" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupName">Last Name</label>
-                        <input id="signupSurname" name="surname" type="text" maxlength="50" class="form-control">
+                        <input id="signupSurname" name="surname" type="text" maxlength="50" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupEmail">Address E-mail</label>
-                        <input id="signupEmail" name="email" type="email" maxlength="50" class="form-control">
+                        <input id="signupEmail" name="email" type="email" maxlength="50" class="form-control" required>
                     </div>
                     <div></div>
                     <div class="form-group">
                         <label class="control-label" for="signupPassword">Password</label>
                         <input id="signupPassword" name="password" type="password" maxlength="25" class="form-control"
-                               placeholder="at least 6 characters" length="40">
+                               placeholder="at least 6 characters" length="40" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupPasswordagain">Password verify</label>
                         <input id="signupPasswordagain" type="password" maxlength="25" class="form-control"
-                               placeholder="at least 6 characters" length="40">
+                               placeholder="at least 6 characters" length="40" required>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="signupPasswordagain">Accept</label>

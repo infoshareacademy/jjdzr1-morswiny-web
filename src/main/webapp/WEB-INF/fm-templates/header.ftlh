@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
         <a href="main-page"><img src="/Images/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
     </div>
@@ -56,15 +56,7 @@
 
     </div>
 </nav>
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-
+/-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
         <a href="main-page"><img src="/Images/morswin.png" height="80" width="80" class="mr-3" alt="..."></a>
@@ -118,7 +110,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    yourloginhere
+                    ${user.getEmail()}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="my-profile.html">My Profile</a>
@@ -136,4 +128,3 @@
         </#if>
     </div>
 </nav>
-</-->
