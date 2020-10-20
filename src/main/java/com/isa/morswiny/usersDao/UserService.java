@@ -52,10 +52,6 @@ public class UserService {
         return user;
     }
 
-    public boolean isEligibleForAdminRole(String email) {
-        return email.contains("morswin");
-    }
-
     public UserDto getUserDto(Integer id) {
         return userToDto(userDao.getUser(id));
     }
