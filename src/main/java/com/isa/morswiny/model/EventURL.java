@@ -1,10 +1,12 @@
 package com.isa.morswiny.model;
 
+
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="url")
-public class EventURLEntity {
+public class EventURL {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventUrlId;
@@ -12,14 +14,14 @@ public class EventURLEntity {
     private String tickets;
 
     @OneToOne (mappedBy = "urls")
-    private EventEntity event;
+    private Event event;
 
-    public EventURLEntity(String www, String tickets) {
+    public EventURL(String www, String tickets) {
         this.www = www;
         this.tickets = tickets;
     }
 
-    public EventURLEntity() {
+    public EventURL() {
 
     }
 
@@ -46,7 +48,7 @@ public class EventURLEntity {
         this.tickets = tickets;
     }
 
-    public void setEvent (EventEntity event) {
+    public void setEvent (Event event) {
         this.event = event;
     }
 }

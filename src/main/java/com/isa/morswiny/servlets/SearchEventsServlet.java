@@ -1,13 +1,16 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.eventsDao.EventDao;
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.repository.EventRepository;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +37,13 @@ public class SearchEventsServlet extends HttpServlet {
     @Inject
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
+    @Inject
+    EventRepository eventRepository;
+
+    @Inject
+    EventDao eventDao;
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
@@ -48,11 +58,8 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
-
-
-
         final Map model = new HashMap();
-        final String userQuery = req.getParameter("search");
+        String userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -73,7 +80,9 @@ public class SearchEventsServlet extends HttpServlet {
     }
 
     private List<Event> setListOfQueriedEvents(String userQuery) {
-        return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
+        //return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
+        return  eventDao.findEventsByString(userQuery);
+
     }
 
 

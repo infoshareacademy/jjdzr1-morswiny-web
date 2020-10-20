@@ -1,7 +1,7 @@
 package com.isa.morswiny.repository;
 
 import com.isa.morswiny.comparators.DateComparator;
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.model.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,15 +16,21 @@ public class JsonEventDataManagement {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public List<Event> createListOfAllEvents(){
-        Event[] gsonEvents = new JsonEventDataLoad().getJsonEventData();
-        List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
-        trimDateStrings(eventsList);
-        setLocalDateTimeInList(eventsList);
-        formatStartEndDate(eventsList);
-        trimDescription(eventsList);
-        eventsList.sort(new DateComparator());
-        return eventsList;
+
+    public List<Event> createListOfAllEvents() throws IOException {
+        try {
+            //TODO do podmiany getJsonEventData() na dzialajace loadDataFromJson()
+            Event[] gsonEvents = new JsonEventDataLoad().getJsonEventData();
+            List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
+            trimDateStrings(eventsList);
+            setLocalDateTimeInList(eventsList);
+            formatStartEndDate(eventsList);
+            trimDescription(eventsList);
+            eventsList.sort(new DateComparator());
+            return eventsList;
+        } catch (Exception e) {
+            return new ArrayList<Event>();
+        }
     }
 
     //method trims given StartDate and EndDate Strings form JSON file so they can be parsed to LocalDateTime

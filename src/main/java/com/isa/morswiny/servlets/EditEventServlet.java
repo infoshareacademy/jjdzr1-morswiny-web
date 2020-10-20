@@ -3,7 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.parsers.DateTimeParser;
-import com.isa.morswiny.toBeDeleted.*;
+import com.isa.morswiny.model.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;

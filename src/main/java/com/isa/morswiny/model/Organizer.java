@@ -1,11 +1,13 @@
 package com.isa.morswiny.model;
 
+
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table (name ="organizer")
-public class OrganizerEntity {
+public class Organizer {
     public Integer getOrganizerID() {
         return organizerID;
     }
@@ -16,14 +18,14 @@ public class OrganizerEntity {
     private String id;
     private String designation;
     @OneToMany (mappedBy = "organizer", cascade = CascadeType.ALL)
-    private Set<EventEntity> events;
+    private Set<Event> events;
 
-    public OrganizerEntity(String id, String designation) {
+    public Organizer(String id, String designation) {
         this.id = id;
         this.designation = designation;
     }
 
-    public OrganizerEntity() {
+    public Organizer() {
 
     }
 

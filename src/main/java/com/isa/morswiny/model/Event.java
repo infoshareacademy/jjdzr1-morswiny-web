@@ -1,20 +1,21 @@
 package com.isa.morswiny.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table (name = "event")
-
-public class EventEntity {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventId;
     private Integer id;
     private String endDate;
     private String name;
+
+    @Column(length = 16777215)
     private String descLong;
     private String categoryId;
     private String startDate;
@@ -24,24 +25,37 @@ public class EventEntity {
 
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="place_id", referencedColumnName = "placeId")
-    private PlaceEntity place;
+    private Place place;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
-    private EventURLEntity urls;
+    private EventURL urls;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="event_Id")
     @OrderColumn
-    private AttachmentEntity[] attachments;
+    private Attachment[] attachments;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="organizer_Id", referencedColumnName = "organizerId")
-    private OrganizerEntity organizer;
+    private Organizer organizer;
 
-    @OneToOne 
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
-    private TicketEntity tickets;
+    private Ticket tickets;
+
+
+    public String returnEventParams() {
+        return
+                ""  + '\n' //+place.getName() + place.getSubname() + '\n'
+                        + endDate + '\n'
+                        + name + '\n'
+                        + urls.getWww() + urls.getTickets() + '\n'
+                        + startDate + '\n'
+                        + descLong + '\n'
+                        + organizer.getDesignation() + '\n';
+    }
+
 
     public Integer getEventId() {
         return eventId;
@@ -123,43 +137,43 @@ public class EventEntity {
         this.endDateLDT = endDateLDT;
     }
 
-    public PlaceEntity getPlace() {
+    public Place getPlace() {
         return place;
     }
 
-    public void setPlace(PlaceEntity place) {
+    public void setPlace(Place place) {
         this.place = place;
     }
 
-    public EventURLEntity getUrls() {
+    public EventURL getUrls() {
         return urls;
     }
 
-    public void setUrls(EventURLEntity urls) {
+    public void setUrls(EventURL urls) {
         this.urls = urls;
     }
 
-    public AttachmentEntity[] getAttachments() {
+    public Attachment[] getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(AttachmentEntity[] attachments) {
+    public void setAttachments(Attachment[] attachments) {
         this.attachments = attachments;
     }
 
-    public OrganizerEntity getOrganizer() {
+    public Organizer getOrganizer() {
         return organizer;
     }
 
-    public void setOrganizer(OrganizerEntity organizer) {
+    public void setOrganizer(Organizer organizer) {
         this.organizer = organizer;
     }
 
-    public TicketEntity getTickets() {
+    public Ticket getTickets() {
         return tickets;
     }
 
-    public void setTickets(TicketEntity tickets) {
+    public void setTickets(Ticket tickets) {
         this.tickets = tickets;
     }
 }

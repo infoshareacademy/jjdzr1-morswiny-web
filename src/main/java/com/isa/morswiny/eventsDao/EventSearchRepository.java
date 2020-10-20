@@ -1,6 +1,6 @@
 package com.isa.morswiny.eventsDao;
 
-import com.isa.morswiny.toBeDeleted.Event;
+import com.isa.morswiny.model.Event;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -81,6 +81,8 @@ public class EventSearchRepository implements EventSearchRepositoryInterface, Se
         }
         return list;
     }
+
+
 
     // method to search for event dates
 //    public List<Event> searchByExactDate(String date) {
