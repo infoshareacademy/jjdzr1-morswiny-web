@@ -1,20 +1,14 @@
-package com.isa.morswiny.users;
+package com.isa.morswiny.dto;
 
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.users.User;
+import com.isa.morswiny.users.UserType;
 
-import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table (name = "user")
-public class User {
+public class UserDto {
 
-    @Id
-    @GeneratedValue
     private Integer id;
     private String name;
     private String surname;
@@ -22,11 +16,9 @@ public class User {
     private String email;
     private String password;
     private UserType userType;
-
-    @ManyToMany
     private List<Event> favourites;
 
-    public User () {
+    public UserDto () {
 
     }
 

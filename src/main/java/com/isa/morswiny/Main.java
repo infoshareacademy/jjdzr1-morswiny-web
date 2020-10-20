@@ -1,9 +1,6 @@
 package com.isa.morswiny;
 
-import com.isa.morswiny.eventsDao.EventCRUDRepository;
 import com.isa.morswiny.users.User;
-import com.isa.morswiny.usersDao.UserDataManagement;
-import com.isa.morswiny.usersDao.UserRepository;
 
 public class Main {
     public static void main(String[] args) {
