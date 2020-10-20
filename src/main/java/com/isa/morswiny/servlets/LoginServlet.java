@@ -1,6 +1,6 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.Event;
+
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -51,16 +51,35 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String login = req.getParameter("email");
-        String password = req.getParameter("password");
+        Map<String, Object> map = new HashMap<>();
+        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
-        if (login.equals("kuba") && password.equals("kuba")){
+        String login = req.getParameter("email");
+        int password = req.getParameter("password").hashCode();
+
+        if (login.equals("kuba")) {
             req.getSession().setAttribute("logged", "userLogin");
             resp.sendRedirect("/main-page");
         } else {
             resp.sendRedirect("HTML/login-failed.html");
         }
+
+        try {
+            template.process(map, resp.getWriter());
+        } catch (TemplateException e) {
+            STDOUT.error("Error while processing template: ", e);
+        }
+
     }
+
+    private boolean ifUserExists(String email){
+        return false;
+    }
+
+    private void logIn(String email, int Password){
+
+    }
+
 
 //    private Boolean findUser(String login, String passsword){
 //        userCRUDRepositoryInterface.getUser()
