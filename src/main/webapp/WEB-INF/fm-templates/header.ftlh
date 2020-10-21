@@ -81,7 +81,6 @@
         </li>
     </#if>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -102,6 +101,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
             </li>
+    </div>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search-events?">
             <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name = "search" aria-label="Search">

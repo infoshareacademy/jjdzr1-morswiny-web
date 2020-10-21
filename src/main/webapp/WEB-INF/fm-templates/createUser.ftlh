@@ -38,8 +38,6 @@
                     </div>
                     <#if success??>
                         <h3 style="text-align: center">Account was created successfully. Click <a href="/login">here</a> to log in.</h3>
-                        </form>
-                        </html>
                     <#elseif accountExist??>
                         <h5 style="color:red ">There is account associated with this email. Try to log in</h5>
                     <#elseif error??>
