@@ -48,7 +48,7 @@ public class EventServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
 
         if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", "username");
+            map.put("logged", req.getSession().getAttribute("logged"));
         }
 
         Integer id = Integer.parseInt(req.getParameter("id"));

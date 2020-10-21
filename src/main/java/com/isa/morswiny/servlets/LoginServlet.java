@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             UserDto user = logIn(email, passwordHashed);
             map.put("success", "success");
-            req.getSession().setAttribute("logged", user);
+            req.getSession().setAttribute("logged", user.getEmail());
             resp.sendRedirect("/main-page");
         }
 

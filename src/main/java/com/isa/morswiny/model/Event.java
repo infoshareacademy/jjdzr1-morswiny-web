@@ -1,9 +1,11 @@
 package com.isa.morswiny.model;
 
+import com.isa.morswiny.users.User;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table (name = "event")
@@ -43,6 +45,10 @@ public class Event {
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
     public String returnEventParams() {

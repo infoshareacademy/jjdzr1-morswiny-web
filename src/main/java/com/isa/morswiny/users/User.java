@@ -3,9 +3,6 @@ package com.isa.morswiny.users;
 import com.isa.morswiny.model.Event;
 
 import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +19,7 @@ public class User {
     private String password;
     private UserType userType;
 
-    @ManyToMany
+    @OneToMany (mappedBy = "user", fetch = FetchType.LAZY)
     private List<Event> favourites;
 
     public User () {

@@ -61,7 +61,12 @@ public class UserService {
     }
 
     public UserDto getByEmail(String email) {
-        return userToDto(userDao.getByEmail(email));
+        if (userDao.getByEmail(email) == null) {
+            return null;
+        } else {
+            return userToDto(userDao.getByEmail(email));
+        }
+
     }
 
     public UserDto save(UserDto userDto) {

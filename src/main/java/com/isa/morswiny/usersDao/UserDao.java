@@ -1,15 +1,15 @@
 package com.isa.morswiny.usersDao;
 
-import com.isa.morswiny.eventsDao.Dao;
-import com.isa.morswiny.model.Event;
 import com.isa.morswiny.users.User;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Stateless
 public class UserDao {
 
     @PersistenceContext
@@ -27,7 +27,12 @@ public class UserDao {
     public User getByEmail(String email) {
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT u FROM User u WHERE u.email = :email", User.class);
-        return query.setParameter("email", email).getSingleResult();
+        List<User> user = query.setParameter("email", email).getResultList();
+        if (user.isEmpty()){
+            return null;
+        } else {
+            return user.get(0);
+        }
     }
 
     public User save(User user) {
@@ -43,7 +48,7 @@ public class UserDao {
 
         User userFound = entityManager.find(User.class, id);
         userFound.setEmail(user.getEmail());
-        userFound.setLogin(user.getLogin());
+        userFound.setPassword(user.getPassword());
         if (user.getName() != null) {
             userFound.setName(user.getName());
         }
