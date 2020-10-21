@@ -37,43 +37,45 @@
                         <center><h2>Create an account</h2></center>
                     </div>
                     <#if success??>
-                        <h3>Account was created successfully. Click <a href="/login">here</a> to log in.</h3>
+                        <h3 style="text-align: center">Account was created successfully. Click <a href="/login">here</a> to log in.</h3>
+                        </form>
+                        </html>
                     <#elseif accountExist??>
-                        <h5 style="color:red">There is account associated with this email. Try to log in</h5>
+                        <h5 style="color:red ">There is account associated with this email. Try to log in</h5>
                     <#elseif error??>
                         <h5 style="color:red">There was an error during registration process!</h5>
                     </#if>
-                    <div class="form-group">
-                        <label class="control-label" for="signupName">First Name</label>
-                        <input id="signupName" name="name" type="text" maxlength="50" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="signupName">Last Name</label>
-                        <input id="signupSurname" name="surname" type="text" maxlength="50" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="signupEmail">Address E-mail</label>
-                        <input id="signupEmail" name="email" type="email" maxlength="50" class="form-control" required>
-                    </div>
-                    <div></div>
-                    <div class="form-group">
-                        <label class="control-label" for="signupPassword">Password</label>
-                        <input id="signupPassword" name="password" type="password" maxlength="25" class="form-control"
-                               placeholder="at least 6 characters" length="40" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="signupPasswordagain">Password verify</label>
-                        <input id="signupPasswordagain" type="password" maxlength="25" class="form-control"
-                               placeholder="at least 6 characters" length="40" required>
-                    </div>
-                    <div>
-                            <input type="submit" value="Submit" class="btn btn-lg btn-primary btn-block">
-                    </div>
-                    <br>
-                    <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our
-                        <a href="#">Privacy Policy</a>.</p>
-                    <hr>
-                    <p>Already have an account? <a href="/login">Sign in</a></p>
+                <div class="form-group">
+                    <label class="control-label" for="signupName">First Name</label>
+                    <input id="signupName" name="name" type="text" maxlength="50" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="signupName">Last Name</label>
+                    <input id="signupSurname" name="surname" type="text" maxlength="50" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="signupEmail">Address E-mail</label>
+                    <input id="signupEmail" name="email" type="email" maxlength="50" class="form-control" required>
+                </div>
+                <div></div>
+                <div class="form-group">
+                    <label class="control-label" for="signupPassword">Password</label>
+                    <input id="signupPassword" name="password" type="password" maxlength="25" class="form-control"
+                           placeholder="at least 6 characters" length="40" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="signupPasswordagain">Password verify</label>
+                    <input id="signupPasswordagain" type="password" maxlength="25" class="form-control"
+                           placeholder="at least 6 characters" length="40" required>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-lg btn-primary btn-block">
+                </div>
+                <br>
+                <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our
+                    <a href="#">Privacy Policy</a>.</p>
+                <hr>
+                <p>Already have an account? <a href="/login">Sign in</a></p>
                 </form>
             </div>
         </div>
