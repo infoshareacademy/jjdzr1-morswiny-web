@@ -70,6 +70,10 @@ public class AddUserServlet extends HttpServlet {
             map.put("error", "error");
         }
 
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         try {
             template.process(map, resp.getWriter());
         } catch (TemplateException e) {

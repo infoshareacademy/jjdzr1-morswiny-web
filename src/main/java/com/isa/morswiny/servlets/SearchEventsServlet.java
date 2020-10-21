@@ -59,6 +59,11 @@ public class SearchEventsServlet extends HttpServlet {
         Integer pageInt = Integer.parseInt(page);
 
         final Map model = new HashMap();
+
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            model.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         String userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);
