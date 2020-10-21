@@ -26,7 +26,7 @@
 <body>
 <#include "header.ftlh">
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <div class="account-wall">
                 <img class="profile-img"
