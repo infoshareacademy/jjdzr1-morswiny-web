@@ -44,6 +44,12 @@ public class AllEventsListServlet extends HttpServlet {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         setModel();
+
+        model.remove("logged");
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            model.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
         try {
@@ -55,6 +61,7 @@ public class AllEventsListServlet extends HttpServlet {
     }
 
     private void setModel() throws IOException {
+
         if (model == null || model.isEmpty()) {
             model.put("listOfMainEvents", setListOfMainEvents());
         }
