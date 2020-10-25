@@ -32,7 +32,7 @@ public class Event {
     private EventURL urls;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="event_Id")
+    @JoinColumn(name = "event_Id")
     @OrderColumn
     private Attachment[] attachments;
 

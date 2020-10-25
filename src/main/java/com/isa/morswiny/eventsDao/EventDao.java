@@ -16,7 +16,7 @@ public class EventDao implements Dao<Event> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+    @Transactional 
     public void save(Event event) {
         entityManager.persist(event);
     }
