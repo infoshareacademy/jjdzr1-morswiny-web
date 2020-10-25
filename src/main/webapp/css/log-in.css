@@ -73,3 +73,8 @@
     display: block;
     margin-top: 10px;
 }
+.p-log{
+    padding: 2px;
+    text-align: center;
+    color: red;
+}

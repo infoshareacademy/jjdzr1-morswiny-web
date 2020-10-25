@@ -46,6 +46,10 @@ public class AddEventServlet extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
 
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
         try {

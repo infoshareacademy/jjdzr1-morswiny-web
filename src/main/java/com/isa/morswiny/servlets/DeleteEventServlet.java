@@ -51,6 +51,10 @@ public class DeleteEventServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
 
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         System.out.println(eventCRUDRepositoryInterface.getAllEventsList());
 
         Template template = templateProvider.createTemplate(

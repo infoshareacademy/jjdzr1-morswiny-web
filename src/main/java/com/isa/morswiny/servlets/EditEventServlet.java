@@ -53,6 +53,11 @@ public class EditEventServlet extends HttpServlet {
         idString = req.getParameter("id");
 
         Map<String, Object> map = new HashMap<>();
+
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         Integer id = Integer.parseInt(idString);
         try {
             Event event = eventCRUDRepositoryInterface.getEventByID(id);
