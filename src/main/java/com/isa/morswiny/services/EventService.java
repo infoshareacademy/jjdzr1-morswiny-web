@@ -55,22 +55,21 @@ public class EventService {
         return eventToDto(event);
     }
 
-    //moze to wywalic i zrobic we free text warunek na pusty string
-    public List<EventDto> getAllEvents() {
-        return eventDao
-                .findAllEvents()
-                .stream()
-                .map(e -> eventToDto(e))
-                .collect(toList());
-    }
-
     public List<EventDto> findByFreeText (String query) {
         return eventDao
                 .findEventsByString(query)
                 .stream()
-                .map(e->eventToDto(e))
+                .map(this::eventToDto)
                 .collect(toList());
 
+    }
+
+    public List<EventDto> findLatestEvents (int numOfEventsToFind){
+        return eventDao
+                .findLatestEvents(numOfEventsToFind)
+                .stream()
+                .map(this::eventToDto)
+                .collect(toList());
     }
 
 

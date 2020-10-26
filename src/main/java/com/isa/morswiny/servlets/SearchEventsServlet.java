@@ -30,14 +30,14 @@ public class SearchEventsServlet extends HttpServlet {
     private Map<String, Object> model = new HashMap<>();
 
     @Inject
-    TemplateProvider templateProvider;
+    private TemplateProvider templateProvider;
 
     @Inject
     private EventService eventService;
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Integer limit = 20;
@@ -49,8 +49,6 @@ public class SearchEventsServlet extends HttpServlet {
         }
 
         Integer pageInt = Integer.parseInt(page);
-
-        //final Map model = new HashMap();
 
         if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
             model.put("logged", req.getSession().getAttribute("logged"));

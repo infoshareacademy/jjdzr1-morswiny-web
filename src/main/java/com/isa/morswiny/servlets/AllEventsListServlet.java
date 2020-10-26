@@ -1,11 +1,13 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
 
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.services.EventService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -30,12 +32,12 @@ public class AllEventsListServlet extends HttpServlet {
     private Map<String, Object> model = new HashMap<>();
 
     @Inject
-    TemplateProvider templateProvider;
+    private TemplateProvider templateProvider;
     @Inject
-    EventDao eventDao;
+    private EventService eventService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         setModel();
@@ -54,16 +56,16 @@ public class AllEventsListServlet extends HttpServlet {
         }
     }
 
-    private void setModel() throws IOException {
+    private void setModel() {
 
         if (model == null || model.isEmpty()) {
             model.put("listOfMainEvents", setListOfMainEvents(3));
         }
     }
 
-    private List<Event> setListOfMainEvents(int numOfEventsToSet) {
+    private List<EventDto> setListOfMainEvents(int numOfEventsToSet) {
 
-        return eventDao.findLatestEvents(numOfEventsToSet);
+        return eventService.findLatestEvents(numOfEventsToSet);
     }
 }
 
