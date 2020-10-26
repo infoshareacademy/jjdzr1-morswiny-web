@@ -37,6 +37,10 @@ public class EventDao implements Dao<Event> {
     }
 
     public List<Event> findEventsByString (String query) {
+
+        if (query.equals(null)){
+            return findAllEvents();
+        }
         String a ="SELECT e FROM Event e WHERE (e.descLong like :query or e.name like :query or e.place.name like :query or e.organizer.designation like :query)";
         TypedQuery<Event> search = entityManager.createQuery(a,Event.class);
         search.setParameter("query", "%" + query + "%");

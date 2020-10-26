@@ -10,8 +10,8 @@ public class EventDto {
     private String name;
     private String descLong;
     private String categoryId;
-    private LocalDateTime startDateLDT;
-    private LocalDateTime endDateLDT;
+    private String startDate;
+    private String endDate;
     private Place place;
     private EventURL urls;
     private Attachment[] attachments;
@@ -51,21 +51,20 @@ public class EventDto {
         this.categoryId = categoryId;
     }
 
-
-    public LocalDateTime getStartDateLDT() {
-        return startDateLDT;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStartDateLDT(LocalDateTime startDateLDT) {
-        this.startDateLDT = startDateLDT;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDateLDT() {
-        return endDateLDT;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setEndDateLDT(LocalDateTime endDateLDT) {
-        this.endDateLDT = endDateLDT;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public Place getPlace() {

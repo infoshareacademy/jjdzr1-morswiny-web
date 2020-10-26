@@ -65,9 +65,9 @@
             <#else>
                 <button class="button-singleevent" type="button" disabled>Tickets and more information</button>
             </#if>
-            <a href="/single-event?id=#{event.getId()}&addEvent=#{event.getId()}" class="button-singleevent" role="button">Add event to favourites</a>
-            <a href="/edit-event?id=${event.getId()}" class="button-singleevent" role="button"> Edit event </a>
-            <a href="/delete-event?id=${event.getId()}" class="button-singleevent" role="button"> Delete event </a>
+            <a href="/single-event?id=#{event.getEventId()}&addEvent=#{event.getEventId()}" class="button-singleevent" role="button">Add event to favourites</a>
+            <a href="/edit-event?id=${event.getEventId()}" class="button-singleevent" role="button"> Edit event </a>
+            <a href="/delete-event?id=${event.getEventId()}" class="button-singleevent" role="button"> Delete event </a>
         </div>
     </div>
 </div>

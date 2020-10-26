@@ -70,7 +70,7 @@ public class AllEventsListServlet extends HttpServlet {
     private List<Event> setListOfMainEvents() throws IOException {
         //List<Event> listOfAllEvents = eventCRUDRepositoryInterface.getAllEventsList();
         //@TODO 1 raz ladujmy wszystkie dane, a tutaj wyszukujmy 3 eventy po prostu
-        eventRepository.loadDataToDB();
+       // eventRepository.loadDataToDB();
 
 
         List<Event> listOfAllEvents = eventDao.findAllEvents();

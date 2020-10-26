@@ -128,9 +128,9 @@ public class EditEventServlet extends HttpServlet {
         event.setStartDate(req.getParameter("startDate"));
         event.setEndDate(req.getParameter("endDate"));
 
-        //event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
+        //event.setStartDate(dateTimeParser.setDateFormat(event.getStartDate()));
         String check = new String ("check");
-        //event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
+        //event.setEndDate(dateTimeParser.setDateFormat(event.getEndDate()));
 
         event.setDescLong(req.getParameter("description"));
 

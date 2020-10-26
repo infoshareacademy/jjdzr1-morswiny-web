@@ -1,11 +1,13 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.services.EventService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -41,7 +43,7 @@ public class SearchEventsServlet extends HttpServlet {
     EventRepository eventRepository;
 
     @Inject
-    EventDao eventDao;
+    private EventService eventService;
 
 
     @Override
@@ -84,10 +86,11 @@ public class SearchEventsServlet extends HttpServlet {
         model.put("count",count);
     }
 
-    private List<Event> setListOfQueriedEvents(String userQuery) {
+    private List<EventDto> setListOfQueriedEvents(String userQuery) {
         //return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
-        return  eventDao.findEventsByString(userQuery);
+//        return  eventDao.findEventsByString(userQuery);
 
+        return eventService.findByFreeText(userQuery);
     }
 
 
