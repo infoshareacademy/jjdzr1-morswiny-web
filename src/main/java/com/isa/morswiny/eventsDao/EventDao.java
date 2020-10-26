@@ -38,18 +38,24 @@ public class EventDao implements Dao<Event> {
 
     public List<Event> findEventsByString (String query) {
 
-        if (query.equals(null)){
+        if (query.isEmpty()){
             return findAllEvents();
         }
-        String a ="SELECT e FROM Event e WHERE (e.descLong like :query or e.name like :query or e.place.name like :query or e.organizer.designation like :query)";
-        TypedQuery<Event> search = entityManager.createQuery(a,Event.class);
+        String enquiry ="SELECT e FROM Event e WHERE (e.descLong like :query or e.name like :query or e.place.name like :query or e.organizer.designation like :query)";
+        TypedQuery<Event> search = entityManager.createQuery(enquiry,Event.class);
         search.setParameter("query", "%" + query + "%");
         return search.getResultList();
     }
 
     public List<Event> findAllEvents() {
-
         return entityManager.createQuery("select e from Event e",Event.class).getResultList();
+    }
+
+    public List<Event> findLatestEvents (int numOfEventsToFind) {
+        return entityManager
+                .createQuery("SELECT e FROM Event e ORDER BY startDateLDT DESC", Event.class)
+                .setMaxResults(numOfEventsToFind)
+                .getResultList();
 
     }
 

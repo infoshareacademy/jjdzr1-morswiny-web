@@ -31,13 +31,9 @@ public class AllEventsListServlet extends HttpServlet {
     private List<Event> listOfMainEvents = new ArrayList<>();
 
     @Inject
-    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
-    @Inject
     TemplateProvider templateProvider;
     @Inject
     EventDao eventDao;
-    @Inject
-    EventRepository eventRepository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,36 +53,18 @@ public class AllEventsListServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
-
     }
 
     private void setModel() throws IOException {
 
         if (model == null || model.isEmpty()) {
-            model.put("listOfMainEvents", setListOfMainEvents());
+            model.put("listOfMainEvents", setListOfMainEvents(3));
         }
     }
 
-    private List<Event> setListOfMainEvents() throws IOException {
-        //List<Event> listOfAllEvents = eventCRUDRepositoryInterface.getAllEventsList();
-        //@TODO 1 raz ladujmy wszystkie dane, a tutaj wyszukujmy 3 eventy po prostu
-       // eventRepository.loadDataToDB();
+    private List<Event> setListOfMainEvents(int numOfEventsToSet) {
 
-
-        List<Event> listOfAllEvents = eventDao.findAllEvents();
-
-        int numOfAllEvents = listOfAllEvents.size();
-        int numOfMainEvents = returnNumberOfMainEvents(listOfAllEvents);
-
-        listOfMainEvents = listOfAllEvents.stream()
-                .sorted(Comparator.comparing(Event::getStartDateLDT))
-                .skip(numOfAllEvents - numOfMainEvents)
-                .collect(toList());
-
-        return listOfMainEvents;
-    }
-    private int returnNumberOfMainEvents(List list){
-        return Math.min(list.size(), 3);
+        return eventDao.findLatestEvents(numOfEventsToSet);
     }
 }
 
