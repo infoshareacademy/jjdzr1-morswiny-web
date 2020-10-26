@@ -27,7 +27,6 @@ public class SearchEventsServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger(SearchEventsServlet.class);
     private static final String TEMPLATE_NAME = "searchEvents";
-    private String userQuery;
     private Map<String, Object> model = new HashMap<>();
 
     @Inject
@@ -57,7 +56,7 @@ public class SearchEventsServlet extends HttpServlet {
             model.put("logged", req.getSession().getAttribute("logged"));
         }
 
-        userQuery = req.getParameter("search");
+        String userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
