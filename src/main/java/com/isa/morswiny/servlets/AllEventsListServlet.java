@@ -28,7 +28,6 @@ public class AllEventsListServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);
     private static final String TEMPLATE_NAME = "allEvents";
     private Map<String, Object> model = new HashMap<>();
-    private List<Event> listOfMainEvents = new ArrayList<>();
 
     @Inject
     TemplateProvider templateProvider;

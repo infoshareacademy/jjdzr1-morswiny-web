@@ -25,22 +25,13 @@ import java.util.*;
 @WebServlet("/search-events")
 public class SearchEventsServlet extends HttpServlet {
 
-    private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);
+    private static final Logger STDOUT = LoggerFactory.getLogger(SearchEventsServlet.class);
     private static final String TEMPLATE_NAME = "searchEvents";
     private String userQuery;
     private Map<String, Object> model = new HashMap<>();
 
     @Inject
-    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
-
-    @Inject
     TemplateProvider templateProvider;
-
-    @Inject
-    EventSearchRepositoryInterface eventSearchRepositoryInterface;
-
-    @Inject
-    EventRepository eventRepository;
 
     @Inject
     private EventService eventService;
@@ -60,13 +51,13 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
-        final Map model = new HashMap();
+        //final Map model = new HashMap();
 
         if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
             model.put("logged", req.getSession().getAttribute("logged"));
         }
 
-        String userQuery = req.getParameter("search");
+        userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -87,9 +78,6 @@ public class SearchEventsServlet extends HttpServlet {
     }
 
     private List<EventDto> setListOfQueriedEvents(String userQuery) {
-        //return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
-//        return  eventDao.findEventsByString(userQuery);
-
         return eventService.findByFreeText(userQuery);
     }
 
