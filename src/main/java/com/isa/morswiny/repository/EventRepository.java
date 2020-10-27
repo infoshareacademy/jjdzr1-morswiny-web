@@ -2,6 +2,7 @@ package com.isa.morswiny.repository;
 
 import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.services.EventDbLoadService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -12,6 +13,8 @@ import java.util.List;
 public class EventRepository {
     @Inject
     private EventDao eventDao;
+    @Inject
+    private EventDbLoadService eventDbLoadService;
 
 
     private static List<Event> eventRepository = new ArrayList<>();
@@ -31,7 +34,8 @@ public class EventRepository {
     public void loadDataToDB() throws IOException {
         JsonEventDataManagement jsonEventDataManagement = new JsonEventDataManagement();
         List<Event> listOfEvents = jsonEventDataManagement.createListOfAllEvents();
-        listOfEvents.forEach(event -> eventDao.save(event));
+        eventDbLoadService.saveEventsFromJson(listOfEvents);
+//        listOfEvents.forEach(event -> eventDao.save(event));
     }
 
 

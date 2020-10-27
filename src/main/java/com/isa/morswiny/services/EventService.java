@@ -72,6 +72,11 @@ public class EventService {
                 .collect(toList());
     }
 
+    public boolean checkIfExistsByOldIdFromJson(Integer id){
+
+        return eventDao.find(id).isPresent();
+
+    }
 
 
 

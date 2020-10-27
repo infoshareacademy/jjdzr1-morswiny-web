@@ -1,5 +1,6 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.controller.EventRestController;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.eventsDao.EventDao;
 import com.isa.morswiny.model.Event;
@@ -7,6 +8,7 @@ import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.services.EventDbLoadService;
 import com.isa.morswiny.services.EventService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -36,9 +38,13 @@ public class AllEventsListServlet extends HttpServlet {
     @Inject
     private EventService eventService;
 
+    @Inject
+    private EventRepository eventRepository;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
+        //eventRepository.loadDataToDB();
 
         setModel();
 
