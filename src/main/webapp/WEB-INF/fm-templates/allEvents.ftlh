@@ -32,7 +32,6 @@
 
 </head>
 <body>
-<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="img-hover-zoom media">
         <a href="main.html"><img src="../Images/morswin.png"
@@ -101,8 +100,9 @@
 
     </div>
 </nav>
--->
-<#include "header.ftlh">
+
+<#--<#include "header.ftlh">-->
+
 <div>
     <ol class="breadcrumb primary-color">
         <li class="breadcrumb-item white-text">Home Page</li>
