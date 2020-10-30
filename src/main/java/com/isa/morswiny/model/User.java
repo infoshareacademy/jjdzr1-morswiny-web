@@ -1,8 +1,8 @@
 package com.isa.morswiny.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table (name = "user")
@@ -10,26 +10,26 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer user_id;
     private String name;
     private String surname;
     private String email;
     private String password;
     private UserType userType;
 
-    @OneToMany (mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Event> favourites;
+    @ManyToMany(mappedBy = "user")
+    private Set<Event> favourites;
 
     public User () {
 
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUser_id(Integer id) {
+        this.user_id = id;
     }
 
     public String getName() {
@@ -72,11 +72,11 @@ public class User {
         this.userType = userType;
     }
 
-    public List<Event> getFavourites() {
+    public Set<Event> getFavourites() {
         return favourites;
     }
 
-    public void setFavourites(List<Event> favourites) {
+    public void setFavourites(Set<Event> favourites) {
         this.favourites = favourites;
     }
 
@@ -85,7 +85,7 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) &&
+        return Objects.equals(getUser_id(), user.getUser_id()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
@@ -96,6 +96,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getSurname(), getEmail(), getPassword(), getUserType(), getFavourites());
+        return Objects.hash(getUser_id(), getName(), getSurname(), getEmail(), getPassword(), getUserType(), getFavourites());
     }
 }

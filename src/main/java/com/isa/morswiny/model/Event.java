@@ -2,6 +2,7 @@ package com.isa.morswiny.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table (name = "event")
@@ -42,10 +43,20 @@ public class Event {
     @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany
+    @JoinTable(
+            name = "favourites",
+            joinColumns = @JoinColumn(name = "eventId"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> user;
 
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
 
     public String returnEventParams() {
         return

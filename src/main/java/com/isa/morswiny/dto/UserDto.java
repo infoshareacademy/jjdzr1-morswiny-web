@@ -82,7 +82,7 @@ public class UserDto {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) &&
+        return Objects.equals(getId(), user.getUser_id()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&

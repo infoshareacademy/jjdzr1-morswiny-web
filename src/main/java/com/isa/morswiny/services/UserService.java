@@ -18,7 +18,7 @@ public class UserService {
     public static UserDto userToDto (User user){
         UserDto userDto = new UserDto();
         userDto.setEmail(user.getEmail());
-        userDto.setId(user.getId());
+        userDto.setId(user.getUser_id());
         userDto.setPassword(user.getPassword());
         userDto.setUserType(user.getUserType());
         if (user.getName() != null) {
@@ -37,7 +37,7 @@ public class UserService {
     public static User dtoToUser (UserDto userDto){
         User user = new User();
         user.setEmail(userDto.getEmail());
-        user.setId(userDto.getId());
+        user.setUser_id(userDto.getId());
         user.setPassword(userDto.getPassword());
         user.setUserType(userDto.getUserType());
         if (userDto.getName() != null) {
