@@ -32,7 +32,7 @@
 
 </head>
 <body>
-
+<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="img-hover-zoom media">
         <a href="main.html"><img src="../Images/morswin.png"
@@ -101,7 +101,8 @@
 
     </div>
 </nav>
-
+-->
+<#include "header.ftlh">
 <div>
     <ol class="breadcrumb primary-color">
         <li class="breadcrumb-item white-text">Home Page</li>
@@ -296,7 +297,7 @@
                                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
                     </button>
-                    <a href="/single-event?id=#{event.getId()}">
+                    <a href="/single-event?id=#{event.eventId}">
                         <button type="button" class="btn btn-info">Info</button>
                     </a>
                 </div>

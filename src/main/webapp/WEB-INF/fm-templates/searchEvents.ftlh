@@ -26,7 +26,7 @@
 
 </head>
 <body>
-
+<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="media">
         <a href="main-page"><img src="/Images/morswin.png" style="width: 80px; height: 80px" class="mr-3" alt="..."></a>
@@ -82,7 +82,8 @@
 
     </div>
 </nav>
-
+/-->
+<#include "header.ftlh">
 <div>
     <ol class="breadcrumb primary-color">
         <li class="breadcrumb-item"><a class="white-text" href="main-page">Home</a></li>
@@ -100,7 +101,7 @@
                 <li>Try to use different or more general words.</li>
                 <li>Try to use fewer words.</li>
             </ul>
-        <#elseif userQuery="">
+        <#elseif userQuery??>
             <p>Found <b>${listOfQueriedEvents?size}</b> results:</p>
         <#else>
             <p>Found <b>${listOfQueriedEvents?size}</b> results for the search term <b>"${userQuery}"</b>:</p>

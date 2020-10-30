@@ -1,28 +1,23 @@
-package com.isa.morswiny.users;
+package com.isa.morswiny.dto;
 
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.users.User;
+import com.isa.morswiny.users.UserType;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table (name = "user")
-public class User {
+public class UserDto {
 
-    @Id
-    @GeneratedValue
     private Integer id;
     private String name;
     private String surname;
     private String email;
     private String password;
     private UserType userType;
-
-    @OneToMany (mappedBy = "user", fetch = FetchType.LAZY)
     private List<Event> favourites;
 
-    public User () {
+    public UserDto () {
 
     }
 

@@ -1,6 +1,6 @@
 package com.isa.morswiny.comparators;
 
-import com.isa.morswiny.events.Event;
+import com.isa.morswiny.model.Event;
 import java.util.Comparator;
 
 public class DateComparator implements Comparator<Event> {

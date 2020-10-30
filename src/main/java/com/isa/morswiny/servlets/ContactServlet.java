@@ -32,7 +32,11 @@ public class ContactServlet extends HttpServlet {
         resp.setCharacterEncoding(ENCODING);
         req.setCharacterEncoding(ENCODING);
         HashMap<String, Object> map = new HashMap<>();
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
         getTemplate(resp, map, TEMPLATE_NAME);
+
 
     }
 

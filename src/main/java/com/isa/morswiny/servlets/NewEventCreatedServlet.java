@@ -1,6 +1,5 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +41,9 @@ public class NewEventCreatedServlet extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
 
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
 //        Integer id = Integer.parseInt(req.getParameter("id"));
 //        try {
 //            Event event = eventCRUDRepositoryInterface.getEventByID(id);

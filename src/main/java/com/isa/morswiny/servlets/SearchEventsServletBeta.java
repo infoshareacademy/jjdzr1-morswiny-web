@@ -1,6 +1,6 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.Event;
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
@@ -52,6 +52,11 @@ public class SearchEventsServletBeta extends HttpServlet {
 
 
         final Map model = new HashMap();
+
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            model.put("logged", req.getSession().getAttribute("logged"));
+        }
+
         final String userQuery = req.getParameter("search");
 
         initModel(model, userQuery,limit, pageInt, count);

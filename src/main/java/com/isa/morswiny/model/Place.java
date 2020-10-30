@@ -1,9 +1,29 @@
-package com.isa.morswiny.events;
+package com.isa.morswiny.model;
+
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Entity
+@Table(name = "place")
 
 public class Place {
+    public Integer getPlaceId() {
+        return placeId;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer placeId;
     private String id;
     private String subname;
+    @Column (nullable = false)
     private String name;
+
+    @OneToMany (mappedBy = "place")
+    private Set<Event> events = new HashSet<>();
 
 
     public Place(String id, String subname, String name) {

@@ -1,9 +1,9 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.events.*;
 import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.parsers.DateTimeParser;
+import com.isa.morswiny.model.*;
 import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +45,10 @@ public class AddEventServlet extends HttpServlet {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Map<String, Object> map = new HashMap<>();
+
+        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
+            map.put("logged", req.getSession().getAttribute("logged"));
+        }
 
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
