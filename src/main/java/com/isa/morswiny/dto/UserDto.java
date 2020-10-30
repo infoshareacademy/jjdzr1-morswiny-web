@@ -1,8 +1,8 @@
 package com.isa.morswiny.dto;
 
 import com.isa.morswiny.model.Event;
-import com.isa.morswiny.users.User;
-import com.isa.morswiny.users.UserType;
+import com.isa.morswiny.model.User;
+import com.isa.morswiny.model.UserType;
 
 import java.util.List;
 import java.util.Objects;

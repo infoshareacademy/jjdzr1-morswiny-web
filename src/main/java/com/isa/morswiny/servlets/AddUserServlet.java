@@ -2,9 +2,8 @@ package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
-import com.isa.morswiny.model.Event;
-import com.isa.morswiny.users.UserType;
-import com.isa.morswiny.usersDao.UserService;
+import com.isa.morswiny.model.UserType;
+import com.isa.morswiny.services.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;

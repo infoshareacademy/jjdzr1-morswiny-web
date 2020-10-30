@@ -1,7 +1,8 @@
-package com.isa.morswiny.usersDao;
+package com.isa.morswiny.services;
 
 import com.isa.morswiny.dto.UserDto;
-import com.isa.morswiny.users.User;
+import com.isa.morswiny.model.User;
+import com.isa.morswiny.Dao.UserDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

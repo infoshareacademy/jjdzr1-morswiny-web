@@ -1,6 +1,4 @@
-package com.isa.morswiny.users;
-
-import com.isa.morswiny.model.Event;
+package com.isa.morswiny.model;
 
 import javax.persistence.*;
 import java.util.List;

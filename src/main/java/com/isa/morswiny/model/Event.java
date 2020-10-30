@@ -1,11 +1,7 @@
 package com.isa.morswiny.model;
 
-import com.isa.morswiny.users.User;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table (name = "event")

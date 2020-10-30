@@ -1,6 +1,6 @@
-package com.isa.morswiny.usersDao;
+package com.isa.morswiny.Dao;
 
-import com.isa.morswiny.users.User;
+import com.isa.morswiny.model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

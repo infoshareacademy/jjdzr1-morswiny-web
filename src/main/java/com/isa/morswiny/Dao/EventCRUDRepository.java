@@ -1,4 +1,4 @@
-package com.isa.morswiny.eventsDao;
+package com.isa.morswiny.Dao;
 
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.repository.EventRepository;
@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 

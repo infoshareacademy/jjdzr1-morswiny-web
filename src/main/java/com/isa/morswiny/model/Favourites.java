@@ -2,6 +2,7 @@ package com.isa.morswiny.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "favourites")
@@ -20,6 +21,10 @@ public class Favourites {
     private Integer  active;
     private LocalDateTime startDateLDT;
     private LocalDateTime endDateLDT;
+
+
+    @ManyToMany
+    private Set<User> user;
 
 
 

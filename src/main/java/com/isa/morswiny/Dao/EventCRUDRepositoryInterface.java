@@ -1,9 +1,8 @@
-package com.isa.morswiny.eventsDao;
+package com.isa.morswiny.Dao;
 
 import com.isa.morswiny.model.Event;
 
 import javax.ejb.Local;
-import java.io.IOException;
 import java.util.List;
 
 @Local
