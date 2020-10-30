@@ -6,6 +6,7 @@ import com.isa.morswiny.model.UserType;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserDto {
 
@@ -15,7 +16,7 @@ public class UserDto {
     private String email;
     private String password;
     private UserType userType;
-    private List<Event> favourites;
+    private Set<Event> favourites;
 
     public UserDto () {
 
@@ -69,11 +70,11 @@ public class UserDto {
         this.userType = userType;
     }
 
-    public List<Event> getFavourites() {
+    public Set<Event> getFavourites() {
         return favourites;
     }
 
-    public void setFavourites(List<Event> favourites) {
+    public void setFavourites(Set<Event> favourites) {
         this.favourites = favourites;
     }
 

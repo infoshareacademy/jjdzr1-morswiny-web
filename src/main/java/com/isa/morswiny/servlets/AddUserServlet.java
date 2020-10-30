@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 @WebServlet("/createAccount")
@@ -105,7 +106,7 @@ public class AddUserServlet extends HttpServlet {
         else {
             userDto.setUserType(UserType.STANDARD_USER);
         }
-        userDto.setFavourites(new ArrayList<>());
+        userDto.setFavourites(new HashSet<>());
 
         return userDto;
     }
