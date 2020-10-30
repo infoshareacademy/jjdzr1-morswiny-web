@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/favourite")
+@WebServlet
 public class AddFavouriteServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -38,27 +38,8 @@ public class AddFavouriteServlet extends HttpServlet {
     @Inject
     private UserDao userDao;
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter writer = resp.getWriter();
-        resp.addHeader("Content-Type", "text/html; charset=utf-8");
-
-        String idEvent = req.getParameter("idEvent");
-        writer.println(idEvent);
-
-        Map<String, Object> map = new HashMap<>();
-
-
-        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        try {
-            template.process(map, resp.getWriter());
-        } catch (TemplateException e) {
-            STDOUT.error("Error while processing template: ", e);
-        }
-    }
-
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
@@ -69,6 +50,22 @@ public class AddFavouriteServlet extends HttpServlet {
         if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
             map.put("logged", req.getSession().getAttribute("logged"));
         }
+
+        Template template = templateProvider.createTemplate(
+                getServletContext(), TEMPLATE_NAME);
+        try {
+            template.process(map, writer);
+        } catch (TemplateException e) {
+            STDOUT.error("Error while processing template: ", e);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+
+
 
     }
 }
