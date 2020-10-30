@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 @RequestScoped
 public class EventDbLoadService {
+
     @Inject
     private EventDao eventDao;
 

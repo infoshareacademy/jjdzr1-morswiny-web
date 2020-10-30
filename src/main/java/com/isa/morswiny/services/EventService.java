@@ -12,10 +12,6 @@ public class EventService {
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
 
 
-
-
-
-
     private EventDto provideEventDto (Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());

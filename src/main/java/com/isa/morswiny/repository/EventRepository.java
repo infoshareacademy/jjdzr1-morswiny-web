@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 @RequestScoped
 public class EventRepository {
+
     @Inject
     private EventDao eventDao;
 
