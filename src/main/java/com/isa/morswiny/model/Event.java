@@ -47,7 +47,7 @@ public class Event {
     @JoinTable(
             name = "favourites",
             joinColumns = @JoinColumn(name = "eventId"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+            inverseJoinColumns = @JoinColumn(name = "userid"))
     private Set<User> user;
 
     public Set<User> getUser() {

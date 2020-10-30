@@ -4,7 +4,6 @@ import com.isa.morswiny.model.Event;
 import com.isa.morswiny.model.User;
 import com.isa.morswiny.model.UserType;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -83,7 +82,7 @@ public class UserDto {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getUser_id()) &&
+        return Objects.equals(getId(), user.getUserId()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&

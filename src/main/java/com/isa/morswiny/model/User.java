@@ -10,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Integer user_id;
+    private Integer userId;
     private String name;
     private String surname;
     private String email;
@@ -24,12 +24,12 @@ public class User {
 
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer id) {
-        this.user_id = id;
+    public void setUserId(Integer id) {
+        this.userId = id;
     }
 
     public String getName() {
@@ -85,7 +85,7 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getUser_id(), user.getUser_id()) &&
+        return Objects.equals(getUserId(), user.getUserId()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
@@ -96,6 +96,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser_id(), getName(), getSurname(), getEmail(), getPassword(), getUserType(), getFavourites());
+        return Objects.hash(getUserId(), getName(), getSurname(), getEmail(), getPassword(), getUserType(), getFavourites());
     }
 }
