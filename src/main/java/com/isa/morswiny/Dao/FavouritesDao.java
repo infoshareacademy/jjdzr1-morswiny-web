@@ -28,12 +28,12 @@ public class FavouritesDao {
 
     public List<Event> getFavouritesForUserId(String id) {
         TypedQuery<Event> query = entityManager.createQuery(
-                "SELECT u FROM favourites u WHERE u.userid = :id", Event.class);
-        List<Event> favrouties = query.setParameter("id", id).getResultList();
-        if (favrouties.isEmpty()){
+                "SELECT u FROM Event u WHERE u.userid = :id", Event.class);
+        List<Event> favourites = query.setParameter("id", id).getResultList();
+        if (favourites.isEmpty()){
             return null;
         } else {
-            return favrouties;
+            return favourites;
         }
     }
 }
