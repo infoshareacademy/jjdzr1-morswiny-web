@@ -58,7 +58,9 @@ public class UserService {
     }
 
     public List<UserDto> getAll() {
-        return userDao.getAll().stream().map(UserService::userToDto).collect(Collectors.toList());
+        return userDao.getAll().stream()
+                .map(UserService::userToDto)
+                .collect(Collectors.toList());
     }
 
     public UserDto getByEmail(String email) {

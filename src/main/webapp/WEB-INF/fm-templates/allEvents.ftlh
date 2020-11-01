@@ -22,111 +22,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://platform-api.sharethis.com/js/sharethis.js#property=5f9ed82f6de86200192a48e2&product=inline-share-buttons"
+            async="async">
+    </script>
 
     <style>
         .dark-mode {
             background-color: #222831;
             color: black;
         }
-    </style>
 
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="img-hover-zoom media">
-        <a href="main.html"><img src="../Images/morswin.png"
-                                 style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80"
-                                 class="mr-3" alt="..."></a>
-    </div>
-    <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        .zoom {
+            transition: transform .2s;
+        !important;
+            margin: 0 auto;
+        !important;
+        }
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="search-events?search=">Events</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/HTML/log-in.html">My Account</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/add-event">Add Event</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Filter
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="my-profile.html">Filter by Date</a>
-                    <a class="dropdown-item" href="my-profile.html">Filter by Place</a>
-                    <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
-                    <div class="col-xs-6">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" action="/search-events?">
-            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name="search"
-                   aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <div>
-            <button type="button" style="position:relative" class="btn btn-outline-primary" onclick="myFunction()">
-                Toggle dark mode
-            </button>
+        .zoom:hover {
+            transform: scale(1.1);
+        !important;
+        }
 
-            <a href="/HTML/log-in.html">
-                <button type="button" style="position:relative; right:-5px;" class="btn btn-outline-primary">Log in
-                </button>
-            </a>
-        </div>
-
-    </div>
-</nav>
-
-<#--<#include "header.ftlh">-->
-
-<div>
-    <ol class="breadcrumb primary-color">
-        <li class="breadcrumb-item white-text">Home Page</li>
-    </ol>
-</div>
-
-
-<div class="card text-center">
-    <div class="card-header">
-        Featured News
-    </div>
-    <div class="card-body">
-        <h4 class="card-title"> Welcome! </h4>
-        <p class="card-text">
-            We believe that culture is vital for every nation and person. <br>
-            You can find here many pieces of information concerning latest cultural events in Gdansk. <br>
-            Search for, add to favourites, register your own events! <br>
-            Have fun! :-) <br>
-        </p>
-    </div>
-</div>
-
-<div>
-    <style>
         .switch {
             position: relative;
             display: inline-block;
@@ -210,14 +128,123 @@
             border-radius: 50%;
         }
     </style>
-    <label class="switch"><input type="checkbox" id="togBtn">
-        <div  onclick="myFunction()" class="slider round"><!--ADDED HTML --><span class="on"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-moon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"/>
-</svg></span><span class="off"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-sun" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3.5 8a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/>
-  <path fill-rule="evenodd" d="M8.202.28a.25.25 0 0 0-.404 0l-.91 1.255a.25.25 0 0 1-.334.067L5.232.79a.25.25 0 0 0-.374.155l-.36 1.508a.25.25 0 0 1-.282.19l-1.532-.245a.25.25 0 0 0-.286.286l.244 1.532a.25.25 0 0 1-.189.282l-1.509.36a.25.25 0 0 0-.154.374l.812 1.322a.25.25 0 0 1-.067.333l-1.256.91a.25.25 0 0 0 0 .405l1.256.91a.25.25 0 0 1 .067.334L.79 10.768a.25.25 0 0 0 .154.374l1.51.36a.25.25 0 0 1 .188.282l-.244 1.532a.25.25 0 0 0 .286.286l1.532-.244a.25.25 0 0 1 .282.189l.36 1.508a.25.25 0 0 0 .374.155l1.322-.812a.25.25 0 0 1 .333.067l.91 1.256a.25.25 0 0 0 .405 0l.91-1.256a.25.25 0 0 1 .334-.067l1.322.812a.25.25 0 0 0 .374-.155l.36-1.508a.25.25 0 0 1 .282-.19l1.532.245a.25.25 0 0 0 .286-.286l-.244-1.532a.25.25 0 0 1 .189-.282l1.508-.36a.25.25 0 0 0 .155-.374l-.812-1.322a.25.25 0 0 1 .067-.333l1.256-.91a.25.25 0 0 0 0-.405l-1.256-.91a.25.25 0 0 1-.067-.334l.812-1.322a.25.25 0 0 0-.155-.374l-1.508-.36a.25.25 0 0 1-.19-.282l.245-1.532a.25.25 0 0 0-.286-.286l-1.532.244a.25.25 0 0 1-.282-.189l-.36-1.508a.25.25 0 0 0-.374-.155l-1.322.812a.25.25 0 0 1-.333-.067L8.203.28zM8 2.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z"/>
-</svg></span></div></label>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="zoom media">
+        <a href="main.html"><img src="../Images/morswin.png"
+                                 style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80"
+                                 class="mr-3" alt="..."></a>
+    </div>
+    <a class="navbar-brand" href="#"><b>Morświny Events</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active zoom">
+                <a class="nav-link" href="search-events?search=">Events</a>
+            </li>
+            <li class="nav-item active zoom">
+                <a class="nav-link" href="/HTML/log-in.html">My Account</a>
+            </li>
+            <li class="nav-item active zoom">
+                <a class="nav-link" href="/add-event">Add Event</a>
+            </li>
+            <li class="nav-item dropdown zoom">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter
+                </a>
+                <div class="dropdown-menu zoom" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="my-profile.html">Filter by Date</a>
+                    <a class="dropdown-item" href="my-profile.html">Filter by Place</a>
+                    <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
+                    <div class="col-xs-6">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item active zoom">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+            <li class="nav-item active zoom">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item active zoom">
+                <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
+            </li>
+            <li>
+                <label class="switch"><input type="checkbox" id="togBtn">
+                    <div onclick="myFunction()" class="slider round"><!--ADDED HTML --><span class="on"><svg width="2em"
+                                                                                                             height="2em"
+                                                                                                             viewBox="0 0 16 16"
+                                                                                                             class="bi bi-moon"
+                                                                                                             fill="currentColor"
+                                                                                                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"/>
+                        </svg></span><span class="off"><svg width="2em" height="2em" viewBox="0 0 16 16"
+                                                            class="bi bi-sun" fill="currentColor"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.5 8a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/>
+                        <path fill-rule="evenodd"
+                              d="M8.202.28a.25.25 0 0 0-.404 0l-.91 1.255a.25.25 0 0 1-.334.067L5.232.79a.25.25 0 0 0-.374.155l-.36 1.508a.25.25 0 0 1-.282.19l-1.532-.245a.25.25 0 0 0-.286.286l.244 1.532a.25.25 0 0 1-.189.282l-1.509.36a.25.25 0 0 0-.154.374l.812 1.322a.25.25 0 0 1-.067.333l-1.256.91a.25.25 0 0 0 0 .405l1.256.91a.25.25 0 0 1 .067.334L.79 10.768a.25.25 0 0 0 .154.374l1.51.36a.25.25 0 0 1 .188.282l-.244 1.532a.25.25 0 0 0 .286.286l1.532-.244a.25.25 0 0 1 .282.189l.36 1.508a.25.25 0 0 0 .374.155l1.322-.812a.25.25 0 0 1 .333.067l.91 1.256a.25.25 0 0 0 .405 0l.91-1.256a.25.25 0 0 1 .334-.067l1.322.812a.25.25 0 0 0 .374-.155l.36-1.508a.25.25 0 0 1 .282-.19l1.532.245a.25.25 0 0 0 .286-.286l-.244-1.532a.25.25 0 0 1 .189-.282l1.508-.36a.25.25 0 0 0 .155-.374l-.812-1.322a.25.25 0 0 1 .067-.333l1.256-.91a.25.25 0 0 0 0-.405l-1.256-.91a.25.25 0 0 1-.067-.334l.812-1.322a.25.25 0 0 0-.155-.374l-1.508-.36a.25.25 0 0 1-.19-.282l.245-1.532a.25.25 0 0 0-.286-.286l-1.532.244a.25.25 0 0 1-.282-.189l-.36-1.508a.25.25 0 0 0-.374-.155l-1.322.812a.25.25 0 0 1-.333-.067L8.203.28zM8 2.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z"/>
+                        </svg></span></div>
+                </label>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0" action="/search-events?">
+            <input class="form-control mr-sm-2" type="search" placeholder="Type here..." name="search"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div>
+
+            <button type="button" style="position:relative" class="btn btn-outline-primary" onclick="myFunction()">
+                Toggle dark mode
+            </button>
+
+            <a href="/HTML/log-in.html">
+                <button type="button" style="right:-5px;" class="btn btn-outline-primary">Log in
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+</nav>
+
+<div>
+    <ol class="breadcrumb primary-color">
+        <li class="breadcrumb-item white-text">Home Page</li>
+    </ol>
 </div>
+
+
+<div class="card text-center">
+    <div class="card-header">
+        Featured News
+    </div>
+    <div class="card-body">
+        <h4 class="card-title"> Welcome! </h4>
+        <p class="card-text">
+            We believe that culture is vital for every nation and person. <br>
+            You can find here many pieces of information concerning latest cultural events in Gdansk. <br>
+            Search for, add to favourites, register your own events! <br>
+            Have fun! :-) <br>
+        </p>
+    </div>
+</div>
+
 <div class="container">
     <br/>
     <div class="row justify-content-center">
@@ -300,6 +327,10 @@
                     <a href="/single-event?id=#{event.eventId}">
                         <button type="button" class="btn btn-info">Info</button>
                     </a>
+                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
+                         data-layout="button" data-size="large"><a target="_blank"
+                                                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                                                                   class="fb-xfbml-parse-ignore">Share</a></div>
                 </div>
             </div>
         </div>
@@ -313,6 +344,10 @@
         element.classList.toggle("dark-mode");
     }
 </script>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v8.0"
+        nonce="fyYGSOdG"></script>
 
 </body>
 </html>

@@ -5,17 +5,22 @@ import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.model.Event;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FavouritesService {
 
     @Inject
     private FavouritesDao favouritesDao;
 
-    public List<EventDto> getAllFavouritesForUser{
-
+    public List<EventDto> getAllFavouritesForUser(String id){
+        List<Event> favourites = favouritesDao.getFavouritesForUserId(id);
+        return favourites.stream()
+                .map(FavouritesService::provideEventDto)
+                .collect(Collectors.toList());
     }
 
-    private EventDto provideEventDto (Event event){
+    private static EventDto provideEventDto(Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());
         eventDto.setDescLong(event.getDescLong());
@@ -30,7 +35,7 @@ public class FavouritesService {
         return eventDto;
     }
 
-    private Event provideEvent(EventDto eventDto) {
+    private static Event provideEvent(EventDto eventDto) {
         Event event = new Event();
         event.setName(eventDto.getName());
         event.setDescLong(eventDto.getDescLong());

@@ -16,13 +16,11 @@ public class FavouritesDao {
     EntityManager entityManager;
 
 
-    @Override
-    public void save(Event event {
+    public void save(Event event) {
         entityManager.persist(event);
 
     }
 
-    @Override
     public void delete(Event event) {
         entityManager.remove(event);
 
