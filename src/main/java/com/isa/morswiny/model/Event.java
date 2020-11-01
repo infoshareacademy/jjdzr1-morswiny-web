@@ -2,6 +2,7 @@ package com.isa.morswiny.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -43,12 +44,12 @@ public class Event {
     @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "favourites",
             joinColumns = @JoinColumn(name = "eventId"),
             inverseJoinColumns = @JoinColumn(name = "userid"))
-    private Set<User> user;
+    private Set<User> user = new HashSet<>();
 
     public Set<User> getUser() {
         return user;

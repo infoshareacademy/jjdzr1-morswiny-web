@@ -1,6 +1,7 @@
 package com.isa.morswiny.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class User {
     private UserType userType;
 
     @ManyToMany(mappedBy = "user")
-    private Set<Event> favourites;
+    private Set<Event> favourites = new HashSet<>();
 
     public User () {
 

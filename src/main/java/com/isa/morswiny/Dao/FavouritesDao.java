@@ -17,19 +17,22 @@ public class FavouritesDao {
 
 
     @Override
-    public void save(Event event) {
+    public void save(Event event {
+        entityManager.persist(event);
 
     }
 
     @Override
     public void delete(Event event) {
+        entityManager.remove(event);
 
     }
 
     public List<Event> getFavouritesForUserId(String id) {
         TypedQuery<Event> query = entityManager.createQuery(
-                "SELECT u FROM Event u WHERE u.userid = :id", Event.class);
-        List<Event> favourites = query.setParameter("id", id).getResultList();
+                "SELECT u FROM favourites u WHERE u.userid = :id", Event.class);
+        query.setParameter("id", id);
+        List<Event> favourites = query.getResultList();
         if (favourites.isEmpty()){
             return null;
         } else {

@@ -11,6 +11,10 @@ public class FavouritesService {
     @Inject
     private FavouritesDao favouritesDao;
 
+    public List<EventDto> getAllFavouritesForUser{
+
+    }
+
     private EventDto provideEventDto (Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());
