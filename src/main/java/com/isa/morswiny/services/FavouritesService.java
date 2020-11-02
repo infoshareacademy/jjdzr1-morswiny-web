@@ -39,10 +39,9 @@ public class FavouritesService {
             favouritesDao.deleteFavouritesForUser(id);
             return true;
         }
-
-
     }
 
+    @Transactional
     public List<EventDto> getAllFavouritesForUser(String id){
         List<Event> favourites = favouritesDao.getFavouritesForUserId(id);
         return favourites.stream()
