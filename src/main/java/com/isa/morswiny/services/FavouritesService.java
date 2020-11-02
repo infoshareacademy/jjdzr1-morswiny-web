@@ -50,8 +50,8 @@ public class FavouritesService {
         eventDto.setName(event.getName());
         eventDto.setDescLong(event.getDescLong());
         eventDto.setCategoryId(event.getCategoryId());
-        eventDto.setStartDateLDT(event.getStartDateLDT());
-        eventDto.setEndDateLDT(event.getEndDateLDT());
+        eventDto.setStartDate(event.getStartDate());
+        eventDto.setEndDate(event.getEndDate());
         eventDto.setPlace(event.getPlace());
         eventDto.setUrls(event.getUrls());
         eventDto.setAttachments(event.getAttachments());
@@ -65,8 +65,8 @@ public class FavouritesService {
         event.setName(eventDto.getName());
         event.setDescLong(eventDto.getDescLong());
         event.setCategoryId(eventDto.getCategoryId());
-        event.setStartDateLDT(eventDto.getStartDateLDT());
-        event.setEndDateLDT(eventDto.getEndDateLDT());
+        event.setStartDate(eventDto.getStartDate());
+        event.setEndDate(eventDto.getEndDate());
         event.setPlace(eventDto.getPlace());
         event.setUrls(eventDto.getUrls());
         event.setAttachments(eventDto.getAttachments());

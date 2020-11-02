@@ -1,11 +1,13 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.Dao.EventDao;
+import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.model.Event;
 
 import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.services.EventService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;

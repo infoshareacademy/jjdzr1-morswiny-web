@@ -1,5 +1,6 @@
 package com.isa.morswiny.services;
 
+import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.Dao.EventSearchRepositoryInterface;
 import com.isa.morswiny.model.Event;
