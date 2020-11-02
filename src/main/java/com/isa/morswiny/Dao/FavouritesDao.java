@@ -6,18 +6,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 public class FavouritesDao {
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public void saveFavouritesForUser(String eventId) {
+    public Event saveFavouritesForUser(String eventId) {
         TypedQuery<Event> query = entityManager.createQuery(
                 "SELECT u FROM Event u WHERE u.eventId = :eventId", Event.class);
         query.setParameter("eventId",eventId);
         Event event = query.getSingleResult();
         entityManager.persist(event);
+        return event;
     }
 
     public void deleteFavouritesForUser(String eventId) {
@@ -26,9 +28,9 @@ public class FavouritesDao {
         query.setParameter("eventId",eventId);
         Event event = query.getSingleResult();
         if(event != null){
-            entityManager.remove(event);
+//            entityManager.remove(event);
+            entityManager.remove(entityManager.contains(event) ? event : entityManager.merge(event));
         }
-
     }
 
     public List<Event> getFavouritesForUserId(String id) {
@@ -41,5 +43,9 @@ public class FavouritesDao {
         } else {
             return favourites;
         }
+    }
+
+    public Optional<Event> find(Integer id) {
+        return Optional.ofNullable(entityManager.find(Event.class, id));
     }
 }

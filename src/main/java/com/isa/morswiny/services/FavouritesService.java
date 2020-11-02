@@ -1,17 +1,47 @@
 package com.isa.morswiny.services;
 
+import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.Dao.FavouritesDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.model.Event;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequestScoped
 public class FavouritesService {
 
     @Inject
     private FavouritesDao favouritesDao;
+//
+//    @Inject
+//    private EventDao eventDao;
+//
+
+    @Transactional
+    public EventDto saveFavouritesForUser(String id){
+        Event event = favouritesDao.saveFavouritesForUser(id);
+        return provideEventDto(event);
+
+    }
+
+    @Transactional
+    public boolean deleteFavouritesForUser(String id){
+        Integer intId = Integer.parseInt(id);
+        Optional<Event> event = favouritesDao.find(intId);
+        if(event.isEmpty()){
+            return false;
+        }else{
+            favouritesDao.deleteFavouritesForUser(id);
+            return true;
+        }
+
+
+    }
 
     public List<EventDto> getAllFavouritesForUser(String id){
         List<Event> favourites = favouritesDao.getFavouritesForUserId(id);
