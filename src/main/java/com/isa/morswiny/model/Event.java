@@ -18,6 +18,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventId;
+    @Column(unique = true)
     private Integer id;
     private String endDate;
     private String name;

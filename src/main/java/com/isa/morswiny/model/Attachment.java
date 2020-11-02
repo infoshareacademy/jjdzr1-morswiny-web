@@ -13,8 +13,9 @@ public class Attachment{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer attachmentId;
     private String fileName;
-    @ManyToOne
-    @JoinColumn(name = "event_Id", referencedColumnName = "eventId")
+
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="event_Id", referencedColumnName = "eventId")
     private Event event;
 
     public Attachment (String fileName) {

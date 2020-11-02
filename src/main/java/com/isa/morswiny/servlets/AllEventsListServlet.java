@@ -1,11 +1,13 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.Dao.EventDao;
+import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.model.Event;
 
 import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.services.EventService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -31,17 +33,17 @@ public class AllEventsListServlet extends HttpServlet {
     private List<Event> listOfMainEvents = new ArrayList<>();
 
     @Inject
-    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+    private TemplateProvider templateProvider;
     @Inject
-    TemplateProvider templateProvider;
+    private EventService eventService;
+
     @Inject
-    EventDao eventDao;
-    @Inject
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
+        eventRepository.loadDataToDB();
 
         setModel();
 
@@ -57,36 +59,18 @@ public class AllEventsListServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
-
     }
 
-    private void setModel() throws IOException {
+    private void setModel() {
 
         if (model == null || model.isEmpty()) {
-            model.put("listOfMainEvents", setListOfMainEvents());
+            model.put("listOfMainEvents", setListOfMainEvents(3));
         }
     }
 
-    private List<Event> setListOfMainEvents() throws IOException {
-        //List<Event> listOfAllEvents = eventCRUDRepositoryInterface.getAllEventsList();
-        //@TODO 1 raz ladujmy wszystkie dane, a tutaj wyszukujmy 3 eventy po prostu
-        eventRepository.loadDataToDB();
+    private List<EventDto> setListOfMainEvents(int numOfEventsToSet) {
 
-
-        List<Event> listOfAllEvents = eventDao.findAllEvents();
-
-        int numOfAllEvents = listOfAllEvents.size();
-        int numOfMainEvents = returnNumberOfMainEvents(listOfAllEvents);
-
-        listOfMainEvents = listOfAllEvents.stream()
-                .sorted(Comparator.comparing(Event::getStartDateLDT))
-                .skip(numOfAllEvents - numOfMainEvents)
-                .collect(toList());
-
-        return listOfMainEvents;
-    }
-    private int returnNumberOfMainEvents(List list){
-        return Math.min(list.size(), 3);
+        return eventService.findLatestEvents(numOfEventsToSet);
     }
 }
 

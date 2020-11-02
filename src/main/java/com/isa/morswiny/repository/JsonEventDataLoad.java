@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 
 import com.google.gson.stream.JsonReader;
 
@@ -34,14 +33,15 @@ public class JsonEventDataLoad {
     public Event[] loadDataFromJson ()  {
 
         EventRestController eventRestController = new EventRestController();
-        try {
-            String jsonData = eventRestController.connect();
-            Gson gson = new Gson();
-            return gson.fromJson(jsonData, Event[].class);
-        }catch (Exception e) {
-            System.out.println("loadDatafromJson() nie dziala");
-            return new Event[1];
-        }
+        return eventRestController.getJsonEvents();
+//        try {
+//            String jsonData = eventRestController.connect();
+//            Gson gson = new Gson();
+//            return gson.fromJson(jsonData, Event[].class);
+//        }catch (Exception e) {
+//            System.out.println("loadDatafromJson() nie dziala");
+//            return new Event[1];
+//        }
 
     }
 

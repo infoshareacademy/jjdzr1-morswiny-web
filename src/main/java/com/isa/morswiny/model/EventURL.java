@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="url")
 public class EventURL {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer eventUrlId;
