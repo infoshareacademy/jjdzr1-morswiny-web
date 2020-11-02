@@ -12,18 +12,28 @@ public class FavouritesDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public void save(String id) {
-        entityManager.persist(id);
+    public void saveFavouritesForUser(String eventId) {
+        TypedQuery<Event> query = entityManager.createQuery(
+                "SELECT u FROM Event u WHERE u.eventId = :eventId", Event.class);
+        query.setParameter("eventId",eventId);
+        Event event = query.getSingleResult();
+        entityManager.persist(event);
     }
 
-    public void delete(Event event) {
-        entityManager.remove(event);
+    public void deleteFavouritesForUser(String eventId) {
+        TypedQuery<Event> query = entityManager.createQuery(
+                "SELECT u FROM User.favourites u WHERE u.eventId = :eventId", Event.class);
+        query.setParameter("eventId",eventId);
+        Event event = query.getSingleResult();
+        if(event != null){
+            entityManager.remove(event);
+        }
 
     }
 
     public List<Event> getFavouritesForUserId(String id) {
         TypedQuery<Event> query = entityManager.createQuery(
-                "SELECT u FROM favourites u WHERE u.userid = :id", Event.class);
+                "SELECT u FROM User.favourites u WHERE u.id = :id", Event.class);
         query.setParameter("id", id);
         List<Event> favourites = query.getResultList();
         if (favourites.isEmpty()) {
