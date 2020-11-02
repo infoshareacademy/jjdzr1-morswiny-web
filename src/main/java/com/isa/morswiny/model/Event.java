@@ -1,14 +1,19 @@
 package com.isa.morswiny.model;
 
-import com.isa.morswiny.users.User;
-import org.hibernate.annotations.Type;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "event")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,39 +26,45 @@ public class Event {
     private String descLong;
     private String categoryId;
     private String startDate;
-    private Integer  active;
+    private Integer active;
     private LocalDateTime startDateLDT;
     private LocalDateTime endDateLDT;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name="place_id", referencedColumnName = "placeId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "place_id", referencedColumnName = "placeId")
     private Place place;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name="url_id", referencedColumnName = "eventUrlId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "url_id", referencedColumnName = "eventUrlId")
     private EventURL urls;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="event_Id")
+    @JoinColumn(name = "event_Id")
     @OrderColumn
     private Attachment[] attachments;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name="organizer_Id", referencedColumnName = "organizerId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizer_Id", referencedColumnName = "organizerId")
     private Organizer organizer;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name="ticket_id", referencedColumnName = "ticketId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_id", referencedColumnName = "ticketId")
     private Ticket tickets;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(mappedBy = "favourites")
+    private Set<User> user = new HashSet<>();
 
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
 
     public String returnEventParams() {
         return
-                ""  + '\n' //+place.getName() + place.getSubname() + '\n'
+                "" + '\n' //+place.getName() + place.getSubname() + '\n'
                         + endDate + '\n'
                         + name + '\n'
                         + urls.getWww() + urls.getTickets() + '\n'
@@ -61,7 +72,6 @@ public class Event {
                         + descLong + '\n'
                         + organizer.getDesignation() + '\n';
     }
-
 
     public Integer getEventId() {
         return eventId;

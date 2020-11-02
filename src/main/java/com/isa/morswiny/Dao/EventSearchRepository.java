@@ -1,4 +1,4 @@
-package com.isa.morswiny.eventsDao;
+package com.isa.morswiny.Dao;
 
 import com.isa.morswiny.model.Event;
 
@@ -11,6 +11,7 @@ import java.util.List;
 
 @SessionScoped
 public class EventSearchRepository implements EventSearchRepositoryInterface, Serializable {
+
     @Inject
     private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
 

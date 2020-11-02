@@ -1,4 +1,4 @@
-package com.isa.morswiny;
+package com.isa.morswiny.utils;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -1,11 +1,11 @@
 package com.isa.morswiny.dto;
 
 import com.isa.morswiny.model.Event;
-import com.isa.morswiny.users.User;
-import com.isa.morswiny.users.UserType;
+import com.isa.morswiny.model.User;
+import com.isa.morswiny.model.UserType;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserDto {
 
@@ -15,7 +15,7 @@ public class UserDto {
     private String email;
     private String password;
     private UserType userType;
-    private List<Event> favourites;
+    private Set<Event> favourites;
 
     public UserDto () {
 
@@ -69,11 +69,11 @@ public class UserDto {
         this.userType = userType;
     }
 
-    public List<Event> getFavourites() {
+    public Set<Event> getFavourites() {
         return favourites;
     }
 
-    public void setFavourites(List<Event> favourites) {
+    public void setFavourites(Set<Event> favourites) {
         this.favourites = favourites;
     }
 
@@ -82,7 +82,7 @@ public class UserDto {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) &&
+        return Objects.equals(getId(), user.getUserId()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&

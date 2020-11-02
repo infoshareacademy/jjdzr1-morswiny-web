@@ -1,13 +1,14 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
+import com.isa.morswiny.Dao.EventDao;
+import com.isa.morswiny.Dao.UserDao;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.repository.EventRepository;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,21 +20,26 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@ApplicationScoped
-@WebServlet("/new-event-created")
-public class NewEventCreatedServlet extends HttpServlet {
+@WebServlet
+public class AddFavouriteServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String TEMPLATE_NAME = "newEventCreated";
+    private static final String TEMPLATE_NAME = "favourites";
 
     @Inject
-    TemplateProvider templateProvider;
+    private TemplateProvider templateProvider;
 
     @Inject
-    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+    private EventDao eventDao;
+
+    @Inject
+    private EventRepository eventRepository;
+
+    @Inject
+    private UserDao userDao;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
@@ -44,13 +50,6 @@ public class NewEventCreatedServlet extends HttpServlet {
         if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
             map.put("logged", req.getSession().getAttribute("logged"));
         }
-//        Integer id = Integer.parseInt(req.getParameter("id"));
-//        try {
-//            Event event = eventCRUDRepositoryInterface.getEventByID(id);
-//            map.put("event", event);
-//        } catch (NullPointerException e) {
-//            writer.println("Event not found");
-//        }
 
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
@@ -61,6 +60,12 @@ public class NewEventCreatedServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+
+
+
+    }
 }
-
-

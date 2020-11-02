@@ -1,7 +1,7 @@
 package com.isa.morswiny.services;
 
 import com.isa.morswiny.dto.EventDto;
-import com.isa.morswiny.eventsDao.EventSearchRepositoryInterface;
+import com.isa.morswiny.Dao.EventSearchRepositoryInterface;
 import com.isa.morswiny.model.Event;
 
 import javax.inject.Inject;
@@ -10,10 +10,6 @@ public class EventService {
 
     @Inject
     EventSearchRepositoryInterface eventSearchRepositoryInterface;
-
-
-
-
 
 
     private EventDto provideEventDto (Event event){

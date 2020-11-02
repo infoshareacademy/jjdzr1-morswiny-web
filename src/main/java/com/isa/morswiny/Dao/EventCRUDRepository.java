@@ -1,34 +1,39 @@
-package com.isa.morswiny.eventsDao;
+package com.isa.morswiny.Dao;
 
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.repository.EventRepository;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
 @Stateless
+@Slf4j
 public class EventCRUDRepository implements EventCRUDRepositoryInterface , Serializable {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public List<Event> getAllEventsList()  {
 
+
+    public List<Event> getAllEventsList()  {
         try{
         return EventRepository.getEventRepository();}
         catch (Exception e){
             return new ArrayList<>();
         }
+
+
     }
 
     @Override
     public Event getEventByID(Integer id)  {
         List<Event> list = getAllEventsList();
         for (Event event : list){
-            if (id.equals(event.getId())){
+            if (id.equals(event.getId())){ //do poprawy - byl getter
                 return event;
             }
         }

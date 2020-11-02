@@ -333,3 +333,21 @@ body {
     margin-right: auto;
 }
 
+.zoom{
+    transition: transform .2s;!important;
+    margin: 0 auto;!important;
+}
+
+.zoom:hover {
+    transform: scale(1.5);!important; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.main-avatar{
+    margin-left: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 80px;
+    width: 80px;
+}
+
+
