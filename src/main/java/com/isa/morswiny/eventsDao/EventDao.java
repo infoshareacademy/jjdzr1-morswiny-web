@@ -16,7 +16,7 @@ public class EventDao implements Dao<Event> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional 
+    @Transactional
     public void save(Event event) {
         entityManager.persist(event);
     }
@@ -36,27 +36,40 @@ public class EventDao implements Dao<Event> {
         return Optional.ofNullable(entityManager.find(Event.class, id));
     }
 
-    public List<Event> findEventsByString (String query) {
+    public List<Event> findEventsByString(String query) {
 
-        if (query.isEmpty()){
+        if (query.isEmpty()) {
             return findAllEvents();
         }
-        String enquiry ="SELECT e FROM Event e WHERE (e.descLong like :query or e.name like :query or e.place.name like :query or e.organizer.designation like :query)";
-        TypedQuery<Event> search = entityManager.createQuery(enquiry,Event.class);
+        String enquiry = "SELECT e FROM Event e WHERE (e.descLong like :query or e.name like :query or e.place.name like :query or e.organizer.designation like :query)";
+        TypedQuery<Event> search = entityManager.createQuery(enquiry, Event.class);
         search.setParameter("query", "%" + query + "%");
         return search.getResultList();
     }
 
     public List<Event> findAllEvents() {
-        return entityManager.createQuery("select e from Event e",Event.class).getResultList();
+        return entityManager.createQuery("select e from Event e", Event.class).getResultList();
     }
 
-    public List<Event> findLatestEvents (int numOfEventsToFind) {
+    public List<Event> findLatestEvents(int numOfEventsToFind) {
         return entityManager
                 .createQuery("SELECT e FROM Event e ORDER BY startDateLDT DESC", Event.class)
                 .setMaxResults(numOfEventsToFind)
                 .getResultList();
 
+    }
+
+    public boolean findByJsonId(Integer jsonId) {
+        List<Event> listOfResults;
+        String enquiry = "select e from Event e where e.id = : query";
+
+        TypedQuery<Event> search = entityManager.createQuery(enquiry, Event.class);
+        search.setParameter("query", jsonId);
+
+        listOfResults = (search.getResultList());
+
+        System.out.println(listOfResults);
+        return !listOfResults.isEmpty();
     }
 
 }

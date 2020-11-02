@@ -44,7 +44,7 @@ public class AllEventsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
-        //eventRepository.loadDataToDB();
+        eventRepository.loadDataToDB();
 
         setModel();
 
