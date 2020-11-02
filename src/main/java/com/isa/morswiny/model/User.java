@@ -18,7 +18,8 @@ public class User {
     private String password;
     private UserType userType;
 
-    @ManyToMany    @JoinTable(
+    @ManyToMany
+    @JoinTable(
             name = "favourites",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "eventId"))
