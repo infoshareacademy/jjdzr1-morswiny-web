@@ -18,7 +18,10 @@ public class User {
     private String password;
     private UserType userType;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany    @JoinTable(
+            name = "favourites",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "eventId"))
     private Set<Event> favourites = new HashSet<>();
 
     public User () {
