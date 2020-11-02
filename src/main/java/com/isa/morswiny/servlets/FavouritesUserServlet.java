@@ -14,18 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@ApplicationScoped //?
+//@ApplicationScoped //?
 @WebServlet("/favourites-list")
 public class FavouritesUserServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "favouritesUserList";
-
-    @Inject
-    private TemplateProvider templateProvider;
-
-    @Inject
-    private FavouritesService favouritesService;
 
 
     @Override
@@ -33,7 +27,7 @@ public class FavouritesUserServlet extends HttpServlet {
 
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        
+
 
     }
 

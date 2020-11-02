@@ -17,33 +17,29 @@ public class FavouritesService {
 
     @Inject
     private FavouritesDao favouritesDao;
-//
-//    @Inject
-//    private EventDao eventDao;
-//
+
 
     @Transactional
-    public EventDto saveFavouritesForUser(String id){
-        Event event = favouritesDao.saveFavouritesForUser(id);
+    public EventDto saveFavouritesForUser(Integer eventId){
+        Event event = favouritesDao.saveFavouritesForUser(eventId);
         return provideEventDto(event);
 
     }
 
     @Transactional
-    public boolean deleteFavouritesForUser(String id){
-        Integer intId = Integer.parseInt(id);
-        Optional<Event> event = favouritesDao.find(intId);
+    public boolean deleteFavouritesForUser(Integer eventId){
+        Optional<Event> event = favouritesDao.find(eventId);
         if(event.isEmpty()){
             return false;
         }else{
-            favouritesDao.deleteFavouritesForUser(id);
+            favouritesDao.deleteFavouritesForUser(eventId);
             return true;
         }
     }
 
     @Transactional
-    public List<EventDto> getAllFavouritesForUser(String id){
-        List<Event> favourites = favouritesDao.getFavouritesForUserId(id);
+    public List<EventDto> getAllFavouritesForUser(Integer userId){
+        List<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
         return favourites.stream()
                 .map(FavouritesService::provideEventDto)
                 .collect(Collectors.toList());
