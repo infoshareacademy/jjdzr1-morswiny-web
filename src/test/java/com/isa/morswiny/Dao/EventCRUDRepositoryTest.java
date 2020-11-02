@@ -1,11 +1,4 @@
-package com.isa.morswiny.eventsDao;
-
-import com.isa.morswiny.model.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.isa.morswiny.Dao;
 
 
 public class EventCRUDRepositoryTest {

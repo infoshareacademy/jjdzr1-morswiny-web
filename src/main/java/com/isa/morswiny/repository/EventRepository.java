@@ -1,6 +1,6 @@
 package com.isa.morswiny.repository;
 
-import com.isa.morswiny.eventsDao.EventDao;
+import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.services.EventDbLoadService;
 
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 @RequestScoped
 public class EventRepository {
+
     @Inject
     private EventDao eventDao;
     @Inject

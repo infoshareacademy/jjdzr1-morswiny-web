@@ -1,7 +1,8 @@
-package com.isa.morswiny.usersDao;
+package com.isa.morswiny.services;
 
 import com.isa.morswiny.dto.UserDto;
-import com.isa.morswiny.users.User;
+import com.isa.morswiny.model.User;
+import com.isa.morswiny.Dao.UserDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -17,7 +18,7 @@ public class UserService {
     public static UserDto userToDto (User user){
         UserDto userDto = new UserDto();
         userDto.setEmail(user.getEmail());
-        userDto.setId(user.getId());
+        userDto.setId(user.getUserId());
         userDto.setPassword(user.getPassword());
         userDto.setUserType(user.getUserType());
         if (user.getName() != null) {
@@ -36,7 +37,7 @@ public class UserService {
     public static User dtoToUser (UserDto userDto){
         User user = new User();
         user.setEmail(userDto.getEmail());
-        user.setId(userDto.getId());
+        user.setUserId(userDto.getId());
         user.setPassword(userDto.getPassword());
         user.setUserType(userDto.getUserType());
         if (userDto.getName() != null) {
@@ -57,7 +58,9 @@ public class UserService {
     }
 
     public List<UserDto> getAll() {
-        return userDao.getAll().stream().map(UserService::userToDto).collect(Collectors.toList());
+        return userDao.getAll().stream()
+                .map(UserService::userToDto)
+                .collect(Collectors.toList());
     }
 
     public UserDto getByEmail(String email) {

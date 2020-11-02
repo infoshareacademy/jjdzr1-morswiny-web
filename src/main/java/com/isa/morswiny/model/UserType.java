@@ -1,4 +1,4 @@
-package com.isa.morswiny.users;
+package com.isa.morswiny.model;
 
 public enum UserType {
     ADMIN,

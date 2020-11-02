@@ -1,6 +1,6 @@
 package com.isa.morswiny.services;
 
-import com.isa.morswiny.eventsDao.EventDao;
+import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.model.Event;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RequestScoped
 public class EventDbLoadService {
+
     @Inject
     private EventDao eventDao;
 

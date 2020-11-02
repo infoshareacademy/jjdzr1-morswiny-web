@@ -1,4 +1,4 @@
-package com.isa.morswiny.eventsDao;
+package com.isa.morswiny.Dao;
 
 
 import com.isa.morswiny.model.EventURL;

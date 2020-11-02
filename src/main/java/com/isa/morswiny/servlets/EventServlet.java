@@ -1,8 +1,7 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.eventsDao.EventDao;
+import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.model.Event;
-import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

@@ -1,6 +1,6 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
+import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.parsers.DateTimeParser;
 import com.isa.morswiny.model.*;

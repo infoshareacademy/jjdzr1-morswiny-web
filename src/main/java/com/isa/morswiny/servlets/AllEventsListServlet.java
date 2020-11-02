@@ -1,15 +1,11 @@
 package com.isa.morswiny.servlets;
 
-import com.isa.morswiny.controller.EventRestController;
-import com.isa.morswiny.dto.EventDto;
-import com.isa.morswiny.eventsDao.EventDao;
+import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.model.Event;
 
-import com.isa.morswiny.eventsDao.EventCRUDRepositoryInterface;
+import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
-import com.isa.morswiny.services.EventDbLoadService;
-import com.isa.morswiny.services.EventService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -32,6 +28,7 @@ public class AllEventsListServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);
     private static final String TEMPLATE_NAME = "allEvents";
     private Map<String, Object> model = new HashMap<>();
+    private List<Event> listOfMainEvents = new ArrayList<>();
 
     @Inject
     private TemplateProvider templateProvider;

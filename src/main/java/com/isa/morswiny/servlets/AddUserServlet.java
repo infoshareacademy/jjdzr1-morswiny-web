@@ -2,9 +2,8 @@ package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
-import com.isa.morswiny.model.Event;
-import com.isa.morswiny.users.UserType;
-import com.isa.morswiny.usersDao.UserService;
+import com.isa.morswiny.model.UserType;
+import com.isa.morswiny.services.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -19,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 @WebServlet("/createAccount")
@@ -106,7 +106,7 @@ public class AddUserServlet extends HttpServlet {
         else {
             userDto.setUserType(UserType.STANDARD_USER);
         }
-        userDto.setFavourites(new ArrayList<>());
+        userDto.setFavourites(new HashSet<>());
 
         return userDto;
     }
