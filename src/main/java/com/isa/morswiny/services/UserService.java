@@ -3,6 +3,8 @@ package com.isa.morswiny.services;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.User;
 import com.isa.morswiny.Dao.UserDao;
+import com.isa.morswiny.model.UserType;
+import com.isa.morswiny.servlets.AddUserServlet;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -84,6 +86,13 @@ public class UserService {
     public UserDto update(Integer id, UserDto userDto) {
         User user = userDao.update(id, dtoToUser(userDto));
         return userToDto(user);
+    }
+
+    public void createAdmin() {
+        String adminPassword = String.valueOf("admin".hashCode());
+        UserDto adminUser = AddUserServlet.createUser("Admin", "Admin", "admin@morswiny.pl", adminPassword);
+        adminUser.setUserType(UserType.ADMIN);
+        save(adminUser);
     }
 
 }
