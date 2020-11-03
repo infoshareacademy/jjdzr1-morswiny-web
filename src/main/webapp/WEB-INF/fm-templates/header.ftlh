@@ -99,7 +99,7 @@
                 <a class="nav-link" href="/contact">Contact</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
+                <a class="nav-link" href="/about-us">About Us</a>
             </li>
     </div>
         </ul>
