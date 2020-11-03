@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,12 +60,13 @@ public class DataLoadServlet extends HttpServlet {
             String fileName = extractFileName(part);
             fileName = new File(fileName).getName();
             String filePath = savePath + File.separator + fileName;
+            Path pathToSource = Paths.get(filePath);
             if (!checkIfFileExists(filePath)) {
                 part.write(filePath);
-               // moveFileToArchive( ?????????,req);
+                moveFileToArchive(pathToSource, fileName,  req);
                 //TODO : wyswietlanie komunikatu po poprawnym zaladowaniu
 
-                req.setAttribute("message", "Upload successful" );
+                req.setAttribute("message", "Upload successful");
             } else {
                 //TODO: jakis tekst ze sie nie udalo
             }
@@ -73,20 +76,25 @@ public class DataLoadServlet extends HttpServlet {
 //        writer.append("Upload has been done successfully!\");
     }
 
-    private boolean checkIfFileExists (String filePath){
+    private boolean checkIfFileExists(String filePath) {
         Path path = Paths.get(filePath);
         return Files.exists(path);
     }
 
-    private void moveFileToArchive (File fileToArchive, HttpServletRequest req){
+    private boolean moveFileToArchive(Path pathToSource, String nameOfFile, HttpServletRequest req) {
         String appPath = req.getServletContext().getRealPath("");
         String savePath = appPath + File.separator + ARCHIVE_DIR;
+        Path pathToTarget = Paths.get(savePath + File.separator + nameOfFile + LocalDateTime.now());
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
         }
-        fileToArchive.renameTo(new File (savePath));
-
+        try {
+            Files.move(pathToSource, pathToTarget, StandardCopyOption.REPLACE_EXISTING);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
 
