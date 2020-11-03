@@ -30,7 +30,6 @@
             background-color: #222831;
             color: black;
         }
-
         .zoom {
             transition: transform .2s;
         !important;
@@ -46,8 +45,8 @@
         .switch {
             position: relative;
             display: inline-block;
-            width: 90px;
-            height: 34px;
+            width: 60px;
+            height: 20px;
         }
 
         .switch input {
@@ -69,8 +68,8 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
+            height: 13px;
+            width: 13px;
             left: 4px;
             bottom: 4px;
             background-color: white;
@@ -87,9 +86,9 @@
         }
 
         input:checked + .slider:before {
-            -webkit-transform: translateX(55px);
-            -ms-transform: translateX(55px);
-            transform: translateX(55px);
+            -webkit-transform: translateX(37px);
+            -ms-transform: translateX(37px);
+            transform: translateX(37px);
         }
 
         /*------ ADDED CSS ---------*/
@@ -103,7 +102,7 @@
             transform: translate(-50%, -50%);
             top: 50%;
             left: 50%;
-            font-size: 10px;
+            font-size: 8px;
             font-family: Verdana, sans-serif;
         }
 
@@ -119,7 +118,7 @@
 
         /* Rounded sliders */
         .slider.round {
-            border-radius: 34px;
+            border-radius: 15px;
         }
 
         .slider.round:before {
@@ -147,9 +146,11 @@
             <li class="nav-item active zoom">
                 <a class="nav-link" href="search-events?search=">Events</a>
             </li>
-            <li class="nav-item active zoom">
-                <a class="nav-link" href="/HTML/log-in.html">My Account</a>
-            </li>
+            <#if logged??>
+                <li class="nav-item active zoom">
+                    <a class="nav-link" href="/HTML/log-in.html">My Account</a>
+                </li>
+            </#if>
             <#if logged??>
                 <li class="nav-item active zoom">
                     <a class="nav-link" href="/add-event">Add Event</a>
@@ -177,7 +178,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item active zoom">
+            <li class="nav-item active">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
             <li class="nav-item active zoom">
@@ -188,7 +189,7 @@
             </li>
             </div>
             <li>
-                <label class="switch"><input type="checkbox" id="togBtn">
+                <label class="switch" style="margin-top: 5px"><input type="checkbox" id="togBtn">
                     <div onclick="myFunction()" class="slider round"><!--ADDED HTML --><span class="on"><svg width="2em"
                                                                                                              height="2em"
                                                                                                              viewBox="0 0 16 16"
