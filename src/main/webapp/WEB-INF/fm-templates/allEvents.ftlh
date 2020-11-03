@@ -150,9 +150,16 @@
             <li class="nav-item active zoom">
                 <a class="nav-link" href="/HTML/log-in.html">My Account</a>
             </li>
-            <li class="nav-item active zoom">
-                <a class="nav-link" href="/add-event">Add Event</a>
-            </li>
+            <#if logged??>
+                <li class="nav-item active zoom">
+                    <a class="nav-link" href="/add-event">Add Event</a>
+                </li>
+            <#else>
+                <li class="nav-item active zoom">
+                    <a class="nav-link" href="/login">Add Event</a>
+                </li>
+            </#if>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <li class="nav-item dropdown zoom">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,6 +186,7 @@
             <li class="nav-item active zoom">
                 <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
             </li>
+            </div>
             <li>
                 <label class="switch"><input type="checkbox" id="togBtn">
                     <div onclick="myFunction()" class="slider round"><!--ADDED HTML --><span class="on"><svg width="2em"
@@ -205,18 +213,26 @@
                    aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <div>
-
-            <button type="button" style="position:relative" class="btn btn-outline-primary" onclick="myFunction()">
-                Toggle dark mode
-            </button>
-
-            <a href="/HTML/log-in.html">
-                <button type="button" style="right:-5px;" class="btn btn-outline-primary">Log in
-                </button>
-            </a>
-
-        </div>
+        <#if logged??>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${logged}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="my-profile.html">My Profile</a>
+                    <a class="dropdown-item" href="/favourite">My favourites</a>
+                    <a class="dropdown-item" href="/logout">Log out</a>
+                </div>
+            </li>
+        <#else>
+            <div>
+                <a href="/login">
+                    <button type="button" style="position:relative; right:-5px;" class="btn btn-outline-primary">Log in
+                    </button>
+                </a>
+            </div>
+        </#if>
 
     </div>
 </nav>
