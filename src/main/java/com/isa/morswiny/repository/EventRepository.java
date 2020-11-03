@@ -22,21 +22,27 @@ public class EventRepository {
 
     //TODO - dodawanie nowych eventow
     public static List<Event> getEventRepository() throws IOException {
+       //TODO: usun te metode? albo parametryzacje pathToJson
+        String pathToJson="";
         if(eventRepository.size() == 0){
-            fillEventRepositoryWithJsonEvents();
+            fillEventRepositoryWithJsonEvents(pathToJson);
         }
         return eventRepository;
     }
 
-    public static void fillEventRepositoryWithJsonEvents() throws IOException {
-        eventRepository.addAll(new JsonEventDataManagement().createListOfAllEvents());
+    public static void fillEventRepositoryWithJsonEvents(String pathToJson) throws IOException {
+        eventRepository.addAll(new JsonEventDataManagement().createListOfAllEvents(pathToJson));
     }
 
-    public void loadDataToDB() throws IOException {
+    public List<Event> readJsonToList(String pathToJson){
         JsonEventDataManagement jsonEventDataManagement = new JsonEventDataManagement();
-        List<Event> listOfEvents = jsonEventDataManagement.createListOfAllEvents();
-        eventDbLoadService.saveEventsFromJson(listOfEvents);
-//        listOfEvents.forEach(event -> eventDao.save(event));
+        List<Event> events = new ArrayList<>();
+        try {
+            events = jsonEventDataManagement.createListOfAllEvents(pathToJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return events;
     }
 
 

@@ -1,6 +1,7 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.services.EventDbLoadService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -33,6 +34,8 @@ public class DataLoadServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
+    @Inject
+    private EventDbLoadService eventDbLoadService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,6 +66,7 @@ public class DataLoadServlet extends HttpServlet {
             Path pathToSource = Paths.get(filePath);
             if (!checkIfFileExists(filePath)) {
                 part.write(filePath);
+                eventDbLoadService.saveEventsFromJson(filePath);
                 moveFileToArchive(pathToSource, fileName,  req);
                 //TODO : wyswietlanie komunikatu po poprawnym zaladowaniu
 
