@@ -28,7 +28,7 @@
     <style>
         .dark-mode {
             background-color: #222831;
-            color: black;
+            color: gray;
         }
         .zoom {
             transition: transform .2s;
