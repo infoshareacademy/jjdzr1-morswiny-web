@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +26,7 @@ public class DataLoadServlet extends HttpServlet {
     private Map<String, Object> model = new HashMap<>();
     private static final String TEMPLATE_NAME = "loadData";
     private static final String SAVE_DIR = "uploadFiles";
+    private static final String ARCHIVE_DIR = "archivedFiles";
 
 
     @Inject
@@ -53,11 +57,36 @@ public class DataLoadServlet extends HttpServlet {
         for (Part part : req.getParts()) {
             String fileName = extractFileName(part);
             fileName = new File(fileName).getName();
-            part.write(savePath + File.separator + fileName);
+            String filePath = savePath + File.separator + fileName;
+            if (!checkIfFileExists(filePath)) {
+                part.write(filePath);
+               // moveFileToArchive( ?????????,req);
+                //TODO : wyswietlanie komunikatu po poprawnym zaladowaniu
+
+                req.setAttribute("message", "Upload successful" );
+            } else {
+                //TODO: jakis tekst ze sie nie udalo
+            }
         }
-        req.setAttribute("message", "Upload has been done successfully!");
-//        getServletContext().getRequestDispatcher("/loadData.ftlh").forward(
-//                req, resp);
+
+//        PrintWriter writer = resp.getWriter();
+//        writer.append("Upload has been done successfully!\");
+    }
+
+    private boolean checkIfFileExists (String filePath){
+        Path path = Paths.get(filePath);
+        return Files.exists(path);
+    }
+
+    private void moveFileToArchive (File fileToArchive, HttpServletRequest req){
+        String appPath = req.getServletContext().getRealPath("");
+        String savePath = appPath + File.separator + ARCHIVE_DIR;
+        File fileSaveDir = new File(savePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
+        fileToArchive.renameTo(new File (savePath));
+
     }
 
 
