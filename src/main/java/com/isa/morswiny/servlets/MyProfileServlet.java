@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,7 @@ public class MyProfileServlet extends HttpServlet {
     @Inject
     private UserService userService;
 
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setCharacterEncoding("UTF-8");
@@ -39,6 +41,11 @@ public class MyProfileServlet extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         ServletService.sessionValidation(req, map);
+
+        if (!map.containsKey("logged")){
+            resp.sendRedirect("/login");
+        }
+
         UserDto userLogged = getUserData((String) req.getSession().getAttribute("logged"));
         map.put("User", userLogged);
 
@@ -50,40 +57,33 @@ public class MyProfileServlet extends HttpServlet {
         }
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         Map<String, Object> map = new HashMap<>();
-        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
-        String email = req.getParameter("email");
+        ServletService.sessionValidation(req, map);
+
+        UserDto userLogged = getUserData((String) req.getSession().getAttribute("logged"));
+
+        String email = userLogged.getEmail();
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
-        int password = req.getParameter("password").hashCode();
-        String passwordHashed = Integer.toString(password);
+        String passwordForm = req.getParameter("password");
+        String password;
 
-        if (isUserAlreadyRegistered(email)){
-            map.put("accountExist", "AccountExist");
-        } else if (register(createUser(name, surname, email, passwordHashed))){
-            map.put("success", "success");
-        } else {
-            map.put("error", "error");
+
+        if (name.isEmpty()) {
+            name = userLogged.getName();
+        } else if (surname.isEmpty()) {
+            surname = userLogged.getSurname();
         }
+        password = (passwordForm.isEmpty()) ? userLogged.getPassword() : Integer.toString(passwordForm.hashCode());
 
-        try {
-            template.process(map, resp.getWriter());
-        } catch (TemplateException e) {
-            STDOUT.error("Error while processing template: ", e);
-        }
+        UserDto userChanged = createUser(name, surname, email, password);
+        userService.update(userLogged.getId(), userChanged);
 
-    }
-
-    private boolean register (UserDto userDto) {
-        if (isUserAlreadyRegistered(userDto.getEmail())){
-            return false;
-        } else {
-            userService.save(userDto);
-            return true;
-        }
+        resp.sendRedirect("/logout");
     }
 
     public static UserDto createUser(String name, String surname, String email, String password){

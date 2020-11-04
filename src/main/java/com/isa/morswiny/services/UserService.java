@@ -56,6 +56,21 @@ public class UserService {
         return user;
     }
 
+    public static User updateDtoToUser (UserDto userDto){
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setUserType(userDto.getUserType());
+        if (userDto.getName() != null) {
+            user.setName(userDto.getName());
+        }
+        if (userDto.getSurname() != null) {
+            user.setSurname(userDto.getSurname());
+        }
+
+        return user;
+    }
+
     public UserDto getUserDto(Integer id) {
         return userToDto(userDao.getUser(id));
     }
@@ -85,7 +100,7 @@ public class UserService {
     }
 
     public UserDto update(Integer id, UserDto userDto) {
-        User user = userDao.update(id, dtoToUser(userDto));
+        User user = userDao.update(id, updateDtoToUser(userDto));
         return userToDto(user);
     }
 

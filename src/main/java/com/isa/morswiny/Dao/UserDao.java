@@ -59,7 +59,7 @@ public class UserDao {
             userFound.setFavourites(user.getFavourites());
         }
         userFound.setSurname(user.getSurname());
-
+        entityManager.merge(userFound);
         return userFound;
     }
 }

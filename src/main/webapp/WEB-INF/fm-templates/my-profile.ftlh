@@ -20,6 +20,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
+
+
 </head>
 <body>
 
@@ -30,6 +32,7 @@
         <li class="breadcrumb-item white-text">Profile</li>
     </ol>
 </div>
+
 
 <hr>
 <div class="container bootstrap snippet">
@@ -52,21 +55,20 @@
             <ul class="list-group">
                 <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Events created:</strong></span>
-
+                    0
                 </li>
                 <li class="list-group-item text-right"><span
                             class="pull-left"><strong>Favourites:</strong></span> ${User.getFavourites()?size}
                 </li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>TBA</strong></span>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>TBA</strong></span> 0
                 </li>
-
             </ul>
             <br>
-<!--
+            <!--
             <ul class="list-group">
                 <li class="list-group-item text-muted">Admin Panel <i class="fa fa-dashboard fa-1x"></i></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Events deleted:</strong></span>
-                    125
+
                 </li>
                 <li class="list-group-item text-right"><span
                             class="pull-left"><strong>Accounts deleted:</strong></span> 13
@@ -78,12 +80,14 @@
                     78
                 </li>
             </ul>
+            -->
 
-
-        </div>/col-3
+        </div><!--/col-3-->
         <div class="col-sm-9" style="padding-top: 40px">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" checked> Settings
+                </label>
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option2"> Favourites
                 </label>
@@ -92,7 +96,6 @@
                 </label>
             </div>
 
-            -->
 
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
@@ -100,21 +103,21 @@
                     <#if dataChangeSuccess??>
                         <p style="color: green">Data changed successfully</p>
                     </#if>
-                    <form class="form" action="profile" method="put" id="registrationForm">
+                    <form class="form" action="profile" method="post" id="registrationForm">
                         <div class="form-group">
 
                             <div class="col-xs-6">
                                 <label for="first_name"><h4>First name</h4></label>
-                                <input type="text" class="form-control" name="first_name" id="first_name"
-                                       placeholder=${User.getName()} title="enter your first name if any.">
+                                <input type="text" class="form-control" name="name" id="first_name"
+                                       placeholder=${User.getName()} >
                             </div>
                         </div>
                         <div class="form-group">
 
                             <div class="col-xs-6">
                                 <label for="last_name"><h4>Last name</h4></label>
-                                <input type="text" class="form-control" name="last_name" id="last_name"
-                                       placeholder=${User.getSurname()} title="enter your last name if any.">
+                                <input type="text" class="form-control" name="surname" id="last_name"
+                                       placeholder=${User.getSurname()}>
                             </div>
                         </div>
 
@@ -123,7 +126,7 @@
                             <div class="col-xs-6">
                                 <label for="email"><h4>Address Email</h4></label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                       placeholder=${User.getEmail()} title="enter your email.">
+                                       placeholder=${User.getEmail()} disabled>
                             </div>
                         </div>
 
@@ -132,17 +135,10 @@
                             <div class="col-xs-6">
                                 <label for="password"><h4>Password</h4></label>
                                 <input type="password" class="form-control" name="password" id="password"
-                                       placeholder="password" title="enter your password.">
+                                       placeholder="***" >
                             </div>
                         </div>
-                        <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="password2"><h4>Password Verify</h4></label>
-                                <input type="password" class="form-control" name="password2" id="password2"
-                                       placeholder="password2" title="enter your password2.">
-                            </div>
-                        </div>
                         <div class="form-group">
 
                             <div class="col-xs-6">
@@ -164,15 +160,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-12" style="text-align: end">
+                            <div class="col-xs-12" >
                                 <br>
-
-                                <button type="submit" class="btn btn-success">Save</button>
-                                <button type="reset" class="btn btn-light">Reset</button>
+                                <button type="submit" class="btn btn-success">Edit and save</button>
                             </div>
                         </div>
                     </form>
-
+                    <form method="post" action="DeleteAccount">
+                        <button style="text-align: end" type="submit" class="btn btn-danger" style="margin-left: 10px">Delete my account</button>
+                    </form>
                     <hr>
 
                 </div><!--/tab-pane-->
