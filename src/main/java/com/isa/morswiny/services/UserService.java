@@ -61,12 +61,8 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setUserType(userDto.getUserType());
-        if (userDto.getName() != null) {
-            user.setName(userDto.getName());
-        }
-        if (userDto.getSurname() != null) {
-            user.setSurname(userDto.getSurname());
-        }
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
 
         return user;
     }

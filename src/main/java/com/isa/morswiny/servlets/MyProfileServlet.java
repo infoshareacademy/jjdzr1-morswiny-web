@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +58,7 @@ public class MyProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+        req.setCharacterEncoding("UTF-8");
         Map<String, Object> map = new HashMap<>();
 
         ServletService.sessionValidation(req, map);
@@ -75,7 +74,8 @@ public class MyProfileServlet extends HttpServlet {
 
         if (name.isEmpty()) {
             name = userLogged.getName();
-        } else if (surname.isEmpty()) {
+        }
+        if (surname.isEmpty()) {
             surname = userLogged.getSurname();
         }
         password = (passwordForm.isEmpty()) ? userLogged.getPassword() : Integer.toString(passwordForm.hashCode());
@@ -83,7 +83,7 @@ public class MyProfileServlet extends HttpServlet {
         UserDto userChanged = createUser(name, surname, email, password);
         userService.update(userLogged.getId(), userChanged);
 
-        resp.sendRedirect("/logout");
+        resp.sendRedirect("/profile");
     }
 
     public static UserDto createUser(String name, String surname, String email, String password){
@@ -100,10 +100,6 @@ public class MyProfileServlet extends HttpServlet {
         userDto.setFavourites(new HashSet<>());
 
         return userDto;
-    }
-
-    private boolean isUserAlreadyRegistered(String email){
-        return userService.getByEmail(email) != null;
     }
 
     private UserDto getUserData(String email){

@@ -48,6 +48,9 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        resp.setCharacterEncoding("UTF-8");
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
+
         Map<String, Object> map = new HashMap<>();
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 

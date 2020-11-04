@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>My profile</title>
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
@@ -115,7 +116,7 @@
                         <div class="form-group">
 
                             <div class="col-xs-6">
-                                <label for="last_name"><h4>Last name</h4></label>
+                                <label for="surname"><h4>Last name</h4></label>
                                 <input type="text" class="form-control" name="surname" id="last_name"
                                        placeholder=${User.getSurname()}>
                             </div>
