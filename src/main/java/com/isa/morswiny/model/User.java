@@ -18,7 +18,7 @@ public class User {
     private String password;
     private UserType userType;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
             name = "favourites",
             joinColumns = @JoinColumn(name = "userId"),

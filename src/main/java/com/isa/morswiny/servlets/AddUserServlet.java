@@ -3,6 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.model.UserType;
+import com.isa.morswiny.services.ServletService;
 import com.isa.morswiny.services.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -70,9 +71,7 @@ public class AddUserServlet extends HttpServlet {
             map.put("error", "error");
         }
 
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
+        ServletService.sessionValidation(req, map);
 
         try {
             template.process(map, resp.getWriter());
@@ -91,7 +90,7 @@ public class AddUserServlet extends HttpServlet {
         }
     }
 
-    private UserDto createUser(String name, String surname, String email, String password){
+    public static UserDto createUser(String name, String surname, String email, String password){
         UserDto userDto = new UserDto();
         if (name != null){
             userDto.setName(name);
@@ -101,11 +100,7 @@ public class AddUserServlet extends HttpServlet {
         }
         userDto.setEmail(email);
         userDto.setPassword(password);
-        if (isEligibleForAdminRole(email))
-            userDto.setUserType(UserType.ADMIN);
-        else {
-            userDto.setUserType(UserType.STANDARD_USER);
-        }
+        userDto.setUserType(UserType.STANDARD_USER);
         userDto.setFavourites(new HashSet<>());
 
         return userDto;
@@ -115,7 +110,4 @@ public class AddUserServlet extends HttpServlet {
         return userService.getByEmail(email) != null;
     }
 
-    public boolean isEligibleForAdminRole(String email) {
-        return email.contains("morswin");
-    }
 }

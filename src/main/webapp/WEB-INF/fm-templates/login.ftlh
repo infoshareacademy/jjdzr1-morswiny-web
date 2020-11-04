@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/./Images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/./Images/favicon/favicon-32x32.png">
@@ -34,9 +35,9 @@
                      src="../Images/morswin.png" height="130" width="130"
                      alt="">
                 <#if NoUser??>
-                    <p class="p-log">User not found!</p>
+                    <p class="text-center">User not found!</p>
                 <#elseif wrongPassword??>
-                    <p class="p-log">Wrong password! Try again!</p>
+                    <p class="text-center">Wrong password! Try again!</p>
                 </#if>
                 <form class="form-signin" name="loginForm" method="post" action="login" accept-charset="UTF-8">
                     <input type="text" name="email" class="form-control" placeholder="Email" required autofocus>

@@ -8,6 +8,8 @@ import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
 import com.isa.morswiny.services.EventService;
+import com.isa.morswiny.services.ServletService;
+import com.isa.morswiny.services.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -40,17 +42,18 @@ public class AllEventsListServlet extends HttpServlet {
     @Inject
     private EventRepository eventRepository;
 
+    @Inject
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
         eventRepository.loadDataToDB();
-
+        addAdmin();
         setModel();
 
         model.remove("logged");
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            model.put("logged", req.getSession().getAttribute("logged"));
-        }
+        ServletService.sessionValidation(req, model);
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
@@ -71,6 +74,12 @@ public class AllEventsListServlet extends HttpServlet {
     private List<EventDto> setListOfMainEvents(int numOfEventsToSet) {
 
         return eventService.findLatestEvents(numOfEventsToSet);
+    }
+
+    private void addAdmin(){
+        if (userService.getByEmail("admin@morswiny.pl") == null){
+            userService.createAdmin();
+        }
     }
 }
 
