@@ -34,7 +34,7 @@
 <hr>
 <div class="container bootstrap snippet">
     <div class="row">
-        <div class="col-sm-10"><h1>Hello Username.</h1></div>
+        <div class="col-sm-10"><h1>Hello ${User.getName()}</h1></div>
     </div>
     <div class="row">
         <div class="col-sm-3"><!--left col-->
@@ -52,19 +52,17 @@
             <ul class="list-group">
                 <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Events created:</strong></span>
-                    3
+
                 </li>
                 <li class="list-group-item text-right"><span
-                            class="pull-left"><strong>Favourites:</strong></span> 5
+                            class="pull-left"><strong>Favourites:</strong></span> ${User.getFavourites()?size}
                 </li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>TBA</strong></span> 65000
+                <li class="list-group-item text-right"><span class="pull-left"><strong>TBA</strong></span>
                 </li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Tickets:</strong></span>
-                    1
-                </li>
+
             </ul>
             <br>
-
+<!--
             <ul class="list-group">
                 <li class="list-group-item text-muted">Admin Panel <i class="fa fa-dashboard fa-1x"></i></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Events deleted:</strong></span>
@@ -82,12 +80,10 @@
             </ul>
 
 
-        </div><!--/col-3-->
+        </div>/col-3
         <div class="col-sm-9" style="padding-top: 40px">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="options" id="option1" checked> Settings
-                </label>
+
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option2"> Favourites
                 </label>
@@ -96,17 +92,21 @@
                 </label>
             </div>
 
+            -->
 
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
+                    <#if dataChangeSuccess??>
+                        <p style="color: green">Data changed successfully</p>
+                    </#if>
+                    <form class="form" action="profile" method="put" id="registrationForm">
                         <div class="form-group">
 
                             <div class="col-xs-6">
                                 <label for="first_name"><h4>First name</h4></label>
                                 <input type="text" class="form-control" name="first_name" id="first_name"
-                                       placeholder="first name" title="enter your first name if any.">
+                                       placeholder=${User.getName()} title="enter your first name if any.">
                             </div>
                         </div>
                         <div class="form-group">
@@ -114,7 +114,7 @@
                             <div class="col-xs-6">
                                 <label for="last_name"><h4>Last name</h4></label>
                                 <input type="text" class="form-control" name="last_name" id="last_name"
-                                       placeholder="last name" title="enter your last name if any.">
+                                       placeholder=${User.getSurname()} title="enter your last name if any.">
                             </div>
                         </div>
 
@@ -123,30 +123,7 @@
                             <div class="col-xs-6">
                                 <label for="email"><h4>Address Email</h4></label>
                                 <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="you@email.com" title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email"><h4>Country</h4></label>
-                                <select id="country" name="country" class="form-control">
-                                    <option value="Poland">Poland</option>
-                                    <option value="USA">USA</option>
-                                    <option value="UK">UK</option>
-                                    <option value="Germany">Germany</option>
-                                    <option value="France">France</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email"><h4>Gender</h4></label><br>
-                                <input type="radio" name="gender" id="gender-0" value="Male" checked="checked">
-                                Male
-                                <input type="radio" name="gender" id="gender-1" value="Female">
-                                Female
+                                       placeholder=${User.getEmail()} title="enter your email.">
                             </div>
                         </div>
 

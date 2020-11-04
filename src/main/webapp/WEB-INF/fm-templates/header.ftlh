@@ -161,7 +161,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="zoom media">
-        <a href="main.html"><img src="../Images/morswin.png"
+        <a href="/main-page"><img src="../Images/morswin.png"
                                  style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80"
                                  class="mr-3" alt="..."></a>
     </div>
@@ -179,11 +179,6 @@
             <#if logged??>
                 <li class="nav-item active zoom">
                     <a class="nav-link" href="/loadEvents">Add new Data</a>
-                </li>
-            </#if>
-            <#if logged??>
-                <li class="nav-item active zoom">
-                    <a class="nav-link" href="my-profile.html">My Account</a>
                 </li>
             </#if>
             <#if logged??>
@@ -207,11 +202,8 @@
                         <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
                     </div>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
                 <li class="nav-item active zoom">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
                 <li class="nav-item active zoom">
                     <a class="nav-link" href="/about-us">About Us</a>
@@ -250,7 +242,7 @@
                     ${logged}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="my-profile.html">My Profile</a>
+                    <a class="dropdown-item" href="/profile">My Profile</a>
                     <a class="dropdown-item" href="/favourite">My favourites</a>
                     <a class="dropdown-item" href="/logout">Log out</a>
                 </div>
