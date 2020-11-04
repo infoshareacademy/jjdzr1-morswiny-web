@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Stateless
 public class UserService {
 
+    private static final String ADMIN_PASSWORD = "admin";
     @Inject
     UserDao userDao;
 
@@ -89,7 +90,7 @@ public class UserService {
     }
 
     public void createAdmin() {
-        String adminPassword = String.valueOf("admin".hashCode());
+        String adminPassword = Integer.toString(ADMIN_PASSWORD.hashCode());
         UserDto adminUser = AddUserServlet.createUser("Admin", "Admin", "admin@morswiny.pl", adminPassword);
         adminUser.setUserType(UserType.ADMIN);
         save(adminUser);

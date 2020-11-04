@@ -214,7 +214,7 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item active zoom">
-                    <a class="nav-link" href="/HTML/abous-us.html">About Us</a>
+                    <a class="nav-link" href="/about-us">About Us</a>
                 </li>
             </div>
             <li>
