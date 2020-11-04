@@ -54,7 +54,12 @@ public class FavouritesUserServlet extends HttpServlet {
             model.put("logged", req.getSession().getAttribute("logged"));
         }
 
-        initModel(model, pageInt, count);
+        Integer count = 5;
+
+        String id = req.getParameter("userId");
+        Integer userId = Integer.parseInt(id);
+
+        initModel(model, userId, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
 
@@ -63,16 +68,15 @@ public class FavouritesUserServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
-
     }
 
-    private void initModel(Map model, Integer count) {
-        model.put("listOfQueriedEvents", setListOfQueriedEvents(query));
+    private void initModel(Map model, Integer userId, Integer count) {
+        model.put("listOfFavourites", setListOfFavouritesEventsForUser(userId));
         model.put("count",count);
     }
 
-    private List<EventDto> setListOfFavouritesEventsForUser(Integer id){
-        return favouritesService.getAllFavouritesForUser(id);
+    private List<EventDto> setListOfFavouritesEventsForUser(Integer userId){
+        return favouritesService.getAllFavouritesForUser(userId);
     }
 
 

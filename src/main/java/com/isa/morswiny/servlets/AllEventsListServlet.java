@@ -34,6 +34,7 @@ public class AllEventsListServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
+
     @Inject
     private EventService eventService;
 
