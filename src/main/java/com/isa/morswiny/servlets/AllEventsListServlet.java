@@ -29,15 +29,11 @@ public class AllEventsListServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);
     private static final String TEMPLATE_NAME = "allEvents";
     private Map<String, Object> model = new HashMap<>();
-    private List<Event> listOfMainEvents = new ArrayList<>();
 
     @Inject
     private TemplateProvider templateProvider;
     @Inject
     private EventService eventService;
-
-    @Inject
-    private EventRepository eventRepository;
 
     @Inject
     private UserService userService;
@@ -49,6 +45,7 @@ public class AllEventsListServlet extends HttpServlet {
         setModel();
 
         model.remove("logged");
+        model.remove("admin");
         ServletService.sessionValidation(req, model);
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);

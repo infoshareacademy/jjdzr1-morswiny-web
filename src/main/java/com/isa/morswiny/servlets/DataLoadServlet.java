@@ -50,7 +50,6 @@ public class DataLoadServlet extends HttpServlet {
             template.process(model, resp.getWriter());
         } catch (TemplateException e) {
         }
-
     }
 
     @Override
@@ -97,7 +96,6 @@ public class DataLoadServlet extends HttpServlet {
             return false;
         }
     }
-
 
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");

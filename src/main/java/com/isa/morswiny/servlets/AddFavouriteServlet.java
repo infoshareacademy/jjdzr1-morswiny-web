@@ -46,14 +46,15 @@ public class AddFavouriteServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Map<String, Object> map = new HashMap<>();
-
-        ServletService.sessionValidation(req, map);
+        Map<String, Object> model = new HashMap<>();
+        model.remove("logged");
+        model.remove("admin");
+        ServletService.sessionValidation(req, model);
 
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
         try {
-            template.process(map, writer);
+            template.process(model, writer);
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }

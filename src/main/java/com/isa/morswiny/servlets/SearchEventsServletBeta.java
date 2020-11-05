@@ -1,9 +1,11 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.Dao.EventSearchRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.services.EventService;
 import com.isa.morswiny.services.ServletService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -28,16 +30,14 @@ public class SearchEventsServletBeta extends HttpServlet {
     private static final String TEMPLATE_NAME = "searchEventsBeta";
 
     @Inject
-    EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
-    @Inject
     TemplateProvider templateProvider;
 
     @Inject
-    EventSearchRepositoryInterface eventSearchRepositoryInterface;
+    private EventService eventService;
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Integer limit = 20;
@@ -54,6 +54,8 @@ public class SearchEventsServletBeta extends HttpServlet {
 
         final Map model = new HashMap();
 
+        model.remove("logged");
+        model.remove("admin");
         ServletService.sessionValidation(req, model);
 
         final String userQuery = req.getParameter("search");
@@ -76,8 +78,8 @@ public class SearchEventsServletBeta extends HttpServlet {
         model.put("count",count);
     }
 
-    private List<Event> setListOfQueriedEvents(String userQuery) {
-        return eventSearchRepositoryInterface.searchByString(userQuery); //start i limit
+    private List<EventDto> setListOfQueriedEvents(String userQuery) {
+        return eventService.findByFreeText(userQuery); //start i limit
     }
 
 

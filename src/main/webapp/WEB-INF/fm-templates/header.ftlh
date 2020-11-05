@@ -176,7 +176,7 @@
             <li class="nav-item active zoom">
                 <a class="nav-link" href="search-events?search=">Events</a>
             </li>
-            <#if logged??>
+            <#if admin??>
                 <li class="nav-item active zoom">
                     <a class="nav-link" href="/loadEvents">Add new Data</a>
                 </li>
