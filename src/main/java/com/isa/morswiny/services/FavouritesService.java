@@ -52,7 +52,7 @@ public class FavouritesService {
             return UserService.userToDto(favouritesDao.getByEmail(email));
         }
     }
-    
+
     private static EventDto provideEventDto(Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());

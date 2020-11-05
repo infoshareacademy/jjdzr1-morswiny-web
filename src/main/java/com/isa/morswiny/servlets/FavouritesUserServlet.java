@@ -1,8 +1,10 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.dto.EventDto;
+import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.model.User;
 import com.isa.morswiny.services.EventService;
 import com.isa.morswiny.services.FavouritesService;
 import com.isa.morswiny.services.UserService;
@@ -54,18 +56,11 @@ public class FavouritesUserServlet extends HttpServlet {
             model.put("logged", req.getSession().getAttribute("logged"));
         }
 
-        //metoda w dao wyszkujaca po mailu usera
-        //pozniej z req.getsesstion atrybut przypisac do stringa
-        //dodac metode w servlecie wyszukuja po emailu i zwracajaca id
-
-
-
-
-
         Integer count = 5;
 
-        String id = req.getParameter("userId");
-        Integer userId = Integer.parseInt(id);
+        String email = (String) req.getSession().getAttribute("logged");
+
+        int userId = getUserId(email);
 
         initModel(model, userId, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -88,7 +83,8 @@ public class FavouritesUserServlet extends HttpServlet {
     }
 
     private int getUserId(String email){
-        favouritesService.
+        UserDto user = favouritesService.getUserByEmail(email);
+        return user.getId();
     }
 
 }
