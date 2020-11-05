@@ -4,6 +4,8 @@ import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.services.EventDbLoadService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +33,7 @@ public class DataLoadServlet extends HttpServlet {
     private static final String TEMPLATE_NAME = "loadData";
     private static final String SAVE_DIR = "uploadFiles";
     private static final String ARCHIVE_DIR = "archivedFiles";
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
 
     @Inject
@@ -45,7 +49,6 @@ public class DataLoadServlet extends HttpServlet {
         try {
             template.process(model, resp.getWriter());
         } catch (TemplateException e) {
-            //STDOUT.error("Error while processing template: " + template.getName(), e);
         }
 
     }
@@ -58,7 +61,7 @@ public class DataLoadServlet extends HttpServlet {
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
         }
-
+        PrintWriter writer = resp.getWriter();
         for (Part part : req.getParts()) {
             String fileName = extractFileName(part);
             fileName = new File(fileName).getName();
@@ -67,17 +70,11 @@ public class DataLoadServlet extends HttpServlet {
             if (!checkIfFileExists(filePath)) {
                 part.write(filePath);
                 eventDbLoadService.saveEventsFromJson(filePath);
-                moveFileToArchive(pathToSource, fileName,  req);
-                //TODO : wyswietlanie komunikatu po poprawnym zaladowaniu
-
-                req.setAttribute("message", "Upload successful");
-            } else {
-                //TODO: jakis tekst ze sie nie udalo
+                moveFileToArchive(pathToSource, fileName, req);
+                STDOUT.info("successful load of events data!");
+                resp.sendRedirect("/main-page");
             }
         }
-
-//        PrintWriter writer = resp.getWriter();
-//        writer.append("Upload has been done successfully!\");
     }
 
     private boolean checkIfFileExists(String filePath) {
