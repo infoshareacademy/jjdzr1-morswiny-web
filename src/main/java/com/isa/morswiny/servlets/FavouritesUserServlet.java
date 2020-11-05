@@ -54,6 +54,14 @@ public class FavouritesUserServlet extends HttpServlet {
             model.put("logged", req.getSession().getAttribute("logged"));
         }
 
+        //metoda w dao wyszkujaca po mailu usera
+        //pozniej z req.getsesstion atrybut przypisac do stringa
+        //dodac metode w servlecie wyszukuja po emailu i zwracajaca id
+
+
+
+
+
         Integer count = 5;
 
         String id = req.getParameter("userId");
@@ -79,5 +87,8 @@ public class FavouritesUserServlet extends HttpServlet {
         return favouritesService.getAllFavouritesForUser(userId);
     }
 
+    private int getUserId(String email){
+        favouritesService.
+    }
 
 }

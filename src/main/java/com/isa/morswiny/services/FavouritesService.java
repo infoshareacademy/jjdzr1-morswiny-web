@@ -3,6 +3,7 @@ package com.isa.morswiny.services;
 import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.Dao.FavouritesDao;
 import com.isa.morswiny.dto.EventDto;
+import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.Event;
 
 import javax.enterprise.context.RequestScoped;
@@ -17,7 +18,6 @@ public class FavouritesService {
 
     @Inject
     private FavouritesDao favouritesDao;
-
 
     @Transactional
     public EventDto saveFavouritesForUser(Integer eventId){
@@ -45,6 +45,14 @@ public class FavouritesService {
                 .collect(Collectors.toList());
     }
 
+    public UserDto getUserByEmail(String email){
+        if(favouritesDao.getByEmail(email) == null){
+            return null;
+        }else{
+            return UserService.userToDto(favouritesDao.getByEmail(email));
+        }
+    }
+    
     private static EventDto provideEventDto(Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());

@@ -1,6 +1,7 @@
 package com.isa.morswiny.Dao;
 
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.model.User;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
@@ -45,4 +46,12 @@ public class FavouritesDao {
     public Optional<Event> find(Integer id) {
         return Optional.ofNullable(entityManager.find(Event.class, id));
     }
+
+    public User getByEmail(String email) {
+        TypedQuery<User> query = entityManager.createQuery(
+                "SELECT u FROM User u WHERE u.email = :email", User.class);
+        query.setParameter("email", email).getResultList();
+        return query.getSingleResult();
+    }
+
 }
