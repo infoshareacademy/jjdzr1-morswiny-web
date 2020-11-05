@@ -3,6 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.freemarker.TemplateProvider;
+import com.isa.morswiny.services.ServletService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -46,9 +47,7 @@ public class EventServlet extends HttpServlet {
         }
         Map<String, Object> map = new HashMap<>();
 
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
+        ServletService.sessionValidation(req, map);
 
         Integer id = Integer.parseInt(req.getParameter("id"));
         try {

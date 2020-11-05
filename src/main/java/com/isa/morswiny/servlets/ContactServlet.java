@@ -2,13 +2,13 @@ package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.mailService.Service;
+import com.isa.morswiny.services.ServletService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +32,7 @@ public class ContactServlet extends HttpServlet {
         resp.setCharacterEncoding(ENCODING);
         req.setCharacterEncoding(ENCODING);
         HashMap<String, Object> map = new HashMap<>();
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
+        ServletService.sessionValidation(req, map);
         getTemplate(resp, map, TEMPLATE_NAME);
 
 
