@@ -19,14 +19,12 @@ public class FavouritesService {
     @Inject
     private FavouritesDao favouritesDao;
 
-    @Transactional
     public EventDto saveFavouritesForUser(Integer eventId){
         Event event = favouritesDao.saveFavouritesForUser(eventId);
         return provideEventDto(event);
 
     }
 
-    @Transactional
     public boolean deleteFavouritesForUser(Integer eventId){
         Optional<Event> event = favouritesDao.find(eventId);
         if(event.isEmpty()){
@@ -37,7 +35,6 @@ public class FavouritesService {
         }
     }
 
-    @Transactional
     public List<EventDto> getAllFavouritesForUser(Integer userId){
         List<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
         return favourites.stream()

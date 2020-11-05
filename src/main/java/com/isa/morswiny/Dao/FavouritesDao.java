@@ -38,7 +38,7 @@ public class FavouritesDao {
 
     public List<Event> getFavouritesForUserId(Integer id) {
         TypedQuery<Event> query = entityManager.createQuery(
-                "SELECT u FROM User.favourites u WHERE u.id = :id", Event.class);
+                "SELECT u FROM User.favourites u WHERE u. = :id", Event.class);
         query.setParameter("id", id);
         return query.getResultList();
     }
