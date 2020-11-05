@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -35,11 +36,11 @@ public class FavouritesService {
         }
     }
 
-    public List<EventDto> getAllFavouritesForUser(Integer userId){
-        List<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
+    public Set<EventDto> getAllFavouritesForUser(Integer userId){
+        Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
         return favourites.stream()
                 .map(FavouritesService::provideEventDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public UserDto getUserByEmail(String email){

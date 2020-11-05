@@ -48,18 +48,18 @@
             <p>Found <b>${listOfFavourites?size}</b> events</b>:</p>
         </#if>
     </div>
-    <div style="text-align: end; margin-right: 50px">
-        <div class="btn-group btn-group-sm" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                View
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <a class="dropdown-item" href="favourites-list?search=${userId}">Card View</a>
-                <a class="dropdown-item" href="favourites-list?search=${userId}">List View</a>
-            </div>
-        </div>
-    </div>
+<#--    <div style="text-align: end; margin-right: 50px">-->
+<#--        <div class="btn-group btn-group-sm" role="group">-->
+<#--            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"-->
+<#--                    aria-haspopup="true" aria-expanded="false">-->
+<#--                View-->
+<#--            </button>-->
+<#--            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">-->
+<#--                <a class="dropdown-item" href="favourites-list?search=${userId}">Card View</a>-->
+<#--                <a class="dropdown-item" href="favourites-list?search=${userId}">List View</a>-->
+<#--            </div>-->
+<#--        </div>-->
+<#--    </div>-->
 </div>
 
 <#list listOfFavourites as event>

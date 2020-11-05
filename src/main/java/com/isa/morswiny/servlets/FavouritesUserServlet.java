@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 //@ApplicationScoped //?
 @WebServlet("/favourites-list")
@@ -78,7 +79,7 @@ public class FavouritesUserServlet extends HttpServlet {
         model.put("count",count);
     }
 
-    private List<EventDto> setListOfFavouritesEventsForUser(Integer userId){
+    private Set<EventDto> setListOfFavouritesEventsForUser(Integer userId){
         return favouritesService.getAllFavouritesForUser(userId);
     }
 

@@ -1,9 +1,7 @@
 package com.isa.morswiny.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table (name = "user")
@@ -18,11 +16,11 @@ public class User {
     private String password;
     private UserType userType;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "favourites",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "eventId"))
+            joinColumns = @JoinColumn(name = "userId",referencedColumnName = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "eventId",referencedColumnName = "eventId"))
     private Set<Event> favourites = new HashSet<>();
 
     public User () {

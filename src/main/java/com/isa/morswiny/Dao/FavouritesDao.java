@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RequestScoped
 public class FavouritesDao {
@@ -36,11 +37,13 @@ public class FavouritesDao {
         }
     }
 
-    public List<Event> getFavouritesForUserId(Integer id) {
-        TypedQuery<Event> query = entityManager.createQuery(
-                "SELECT u FROM User.favourites u WHERE u. = :id", Event.class);
-        query.setParameter("id", id);
-        return query.getResultList();
+    public Set<Event> getFavouritesForUserId(Integer id) {
+        TypedQuery<User> userQuery = entityManager.createQuery(
+                "SELECT u FROM User u WHERE userId = :id", User.class);
+        userQuery.setParameter("id", id);
+        User user = userQuery.getSingleResult();
+        Set<Event> events = user.getFavourites();
+        return events;
     }
 
     public Optional<Event> find(Integer id) {
