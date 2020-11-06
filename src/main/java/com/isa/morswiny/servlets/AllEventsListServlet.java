@@ -4,24 +4,23 @@ import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.model.Event;
 
-import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
 import com.isa.morswiny.services.EventService;
+import com.isa.morswiny.services.ServletService;
+import com.isa.morswiny.services.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
-
-import static java.util.stream.Collectors.toList;
 
 
 @WebServlet("/main-page")
@@ -30,7 +29,6 @@ public class AllEventsListServlet extends HttpServlet {
     private static final Logger STDOUT = LoggerFactory.getLogger(AllEventsListServlet.class);
     private static final String TEMPLATE_NAME = "allEvents";
     private Map<String, Object> model = new HashMap<>();
-    private List<Event> listOfMainEvents = new ArrayList<>();
 
     @Inject
     private TemplateProvider templateProvider;
@@ -38,19 +36,17 @@ public class AllEventsListServlet extends HttpServlet {
     private EventService eventService;
 
     @Inject
-    private EventRepository eventRepository;
+    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
-        eventRepository.loadDataToDB();
-
+        addAdmin();
         setModel();
 
         model.remove("logged");
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            model.put("logged", req.getSession().getAttribute("logged"));
-        }
+        model.remove("admin");
+        ServletService.sessionValidation(req, model);
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
@@ -62,15 +58,19 @@ public class AllEventsListServlet extends HttpServlet {
     }
 
     private void setModel() {
+        model.put("listOfMainEvents", setListOfMainEvents(3));
 
-        if (model == null || model.isEmpty()) {
-            model.put("listOfMainEvents", setListOfMainEvents(3));
-        }
     }
 
     private List<EventDto> setListOfMainEvents(int numOfEventsToSet) {
 
         return eventService.findLatestEvents(numOfEventsToSet);
+    }
+
+    private void addAdmin() {
+        if (userService.getByEmail("admin@morswiny.pl") == null) {
+            userService.createAdmin();
+        }
     }
 }
 

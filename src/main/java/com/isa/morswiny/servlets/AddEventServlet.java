@@ -4,6 +4,7 @@ import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.parsers.DateTimeParser;
 import com.isa.morswiny.model.*;
+import com.isa.morswiny.services.ServletService;
 import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,9 +47,7 @@ public class AddEventServlet extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
+        ServletService.sessionValidation(req, map);
 
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);

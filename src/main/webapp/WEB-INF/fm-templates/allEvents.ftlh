@@ -131,7 +131,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="zoom media">
-        <a href="main.html"><img src="../Images/morswin.png"
+        <a href="/main-page"><img src="../Images/morswin.png"
                                  style="margin-left: 2px; margin-top: 2px; margin-bottom: 2px" height="80" width="80"
                                  class="mr-3" alt="..."></a>
     </div>
@@ -146,7 +146,7 @@
             <li class="nav-item active zoom">
                 <a class="nav-link" href="search-events?search=">Events</a>
             </li>
-            <#if logged??>
+            <#if admin??>
                 <li class="nav-item active zoom">
                     <a class="nav-link" href="/loadEvents">Add new Data</a>
                 </li>

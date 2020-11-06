@@ -4,6 +4,7 @@ import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.Dao.UserDao;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.repository.EventRepository;
+import com.isa.morswiny.services.ServletService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -45,16 +46,15 @@ public class AddFavouriteServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Map<String, Object> map = new HashMap<>();
-
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
+        Map<String, Object> model = new HashMap<>();
+        model.remove("logged");
+        model.remove("admin");
+        ServletService.sessionValidation(req, model);
 
         Template template = templateProvider.createTemplate(
                 getServletContext(), TEMPLATE_NAME);
         try {
-            template.process(map, writer);
+            template.process(model, writer);
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }

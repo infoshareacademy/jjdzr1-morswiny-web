@@ -3,6 +3,8 @@ package com.isa.morswiny.services;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.User;
 import com.isa.morswiny.Dao.UserDao;
+import com.isa.morswiny.model.UserType;
+import com.isa.morswiny.servlets.AddUserServlet;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 @Stateless
 public class UserService {
 
+    private static final String ADMIN_PASSWORD = "admin";
     @Inject
     UserDao userDao;
 
@@ -53,6 +56,17 @@ public class UserService {
         return user;
     }
 
+    public static User updateDtoToUser (UserDto userDto){
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setUserType(userDto.getUserType());
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+
+        return user;
+    }
+
     public UserDto getUserDto(Integer id) {
         return userToDto(userDao.getUser(id));
     }
@@ -73,8 +87,8 @@ public class UserService {
     }
 
     public UserDto save(UserDto userDto) {
-        User user = userDao.save(dtoToUser(userDto));
-        return userToDto(user);
+       User user = userDao.save(dtoToUser(userDto));
+       return userToDto(user);
     }
 
     public void delete(UserDto userDto) {
@@ -82,8 +96,15 @@ public class UserService {
     }
 
     public UserDto update(Integer id, UserDto userDto) {
-        User user = userDao.update(id, dtoToUser(userDto));
+        User user = userDao.update(id, updateDtoToUser(userDto));
         return userToDto(user);
+    }
+
+    public void createAdmin() {
+        String adminPassword = Integer.toString(ADMIN_PASSWORD.hashCode());
+        UserDto adminUser = AddUserServlet.createUser("Admin", "Admin", "admin@morswiny.pl", adminPassword);
+        adminUser.setUserType(UserType.ADMIN);
+        save(adminUser);
     }
 
 }
