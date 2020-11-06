@@ -38,14 +38,9 @@ public class FavouritesUserServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    @Inject
-    private EventService eventService;
 
     @Inject
     private FavouritesService favouritesService;
-
-    @Inject
-    UserService userService;
 
 
     @Override

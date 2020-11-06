@@ -3,6 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.services.EventService;
+import com.isa.morswiny.services.FavouritesService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -27,6 +28,9 @@ public class SearchEventsServlet extends HttpServlet {
 
     @Inject
     private EventService eventService;
+
+    @Inject
+    private FavouritesService favouritesService;
 
 
     @Override
@@ -70,6 +74,8 @@ public class SearchEventsServlet extends HttpServlet {
     private List<EventDto> setListOfQueriedEvents(String userQuery) {
         return eventService.findByFreeText(userQuery);
     }
+
+
 
 
 }

@@ -18,13 +18,35 @@ public class FavouritesDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Event saveFavouritesForUser(Integer eventId) {
-        TypedQuery<Event> query = entityManager.createQuery(
+    public Event saveFavouritesForUser(Integer eventId, Integer userId) {
+        TypedQuery<Event> eventQuery = entityManager.createQuery(
                 "SELECT u FROM Event u WHERE u.eventId = :eventId", Event.class);
-        query.setParameter("eventId",eventId);
-        Event event = query.getSingleResult();
-        entityManager.merge(event); //czy persist
+        TypedQuery<User> userQuery = entityManager.createQuery(
+                "SELECT u FROM User u WHERE userId = :userId", User.class);
+
+        userQuery.setParameter("userId",userId);
+        eventQuery.setParameter("eventId",eventId);
+
+        Event event = eventQuery.getSingleResult();
+        User user = userQuery.getSingleResult();
+        Set<Event> favourites = user.getFavourites();
+
+        if(!favourites.contains(event)){
+            entityManager.persist(event);
+            return event;
+        }else{
+            return null;
+        }
+
+    }
+
+    public Event addEventToFavourites(Event event){
+        entityManager.merge(event);
         return event;
+    }
+
+    public void removeEventFromFavourites(Event event) {
+        entityManager.remove(entityManager.contains(event) ? event : entityManager.merge(event));
     }
 
     public void deleteFavouritesForUser(Integer eventId) {
@@ -53,7 +75,7 @@ public class FavouritesDao {
     public User getByEmail(String email) {
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT u FROM User u WHERE u.email = :email", User.class);
-        query.setParameter("email", email).getResultList();
+        query.setParameter("email", email);
         return query.getSingleResult();
     }
 

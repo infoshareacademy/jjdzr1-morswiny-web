@@ -5,6 +5,7 @@ import com.isa.morswiny.Dao.FavouritesDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.model.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,10 +21,8 @@ public class FavouritesService {
     @Inject
     private FavouritesDao favouritesDao;
 
-    public EventDto saveFavouritesForUser(Integer eventId){
-        Event event = favouritesDao.saveFavouritesForUser(eventId);
-        return provideEventDto(event);
-
+    public EventDto saveFavouritesForUser(Integer eventId, Integer userId){
+        return provideEventDto(favouritesDao.saveFavouritesForUser(eventId,userId));
     }
 
     public boolean deleteFavouritesForUser(Integer eventId){
@@ -33,6 +32,15 @@ public class FavouritesService {
         }else{
             favouritesDao.deleteFavouritesForUser(eventId);
             return true;
+        }
+    }
+
+    public EventDto addEventToFavouritesForUser(Event event,Integer userId){
+        Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
+        if(!favourites.contains(event)){
+            return provideEventDto(favouritesDao.addEventToFavourites(event));
+        }else{
+            return null;
         }
     }
 
@@ -81,5 +89,14 @@ public class FavouritesService {
         event.setOrganizer(eventDto.getOrganizer());
 
         return event;
+    }
+
+    public EventDto save(EventDto eventDto) {
+        Event event = favouritesDao.addEventToFavourites(provideEvent(eventDto));
+        return provideEventDto(event);
+    }
+
+    public void delete(EventDto eventDto) {
+        favouritesDao.removeEventFromFavourites(provideEvent(eventDto));
     }
 }
