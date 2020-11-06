@@ -58,10 +58,8 @@ public class AllEventsListServlet extends HttpServlet {
     }
 
     private void setModel() {
+        model.put("listOfMainEvents", setListOfMainEvents(3));
 
-        if (model == null || model.isEmpty()) {
-            model.put("listOfMainEvents", setListOfMainEvents(3));
-        }
     }
 
     private List<EventDto> setListOfMainEvents(int numOfEventsToSet) {
@@ -69,8 +67,8 @@ public class AllEventsListServlet extends HttpServlet {
         return eventService.findLatestEvents(numOfEventsToSet);
     }
 
-    private void addAdmin(){
-        if (userService.getByEmail("admin@morswiny.pl") == null){
+    private void addAdmin() {
+        if (userService.getByEmail("admin@morswiny.pl") == null) {
             userService.createAdmin();
         }
     }
