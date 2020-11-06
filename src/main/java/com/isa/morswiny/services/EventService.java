@@ -78,8 +78,5 @@ public class EventService {
         return eventDao.find(id).isPresent();
 
     }
-
-
-
 }
 

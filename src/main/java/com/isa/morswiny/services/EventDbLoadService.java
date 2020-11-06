@@ -25,7 +25,7 @@ public class EventDbLoadService {
 //        Event event;
 //        for  (int i = 0; i<events.size(); i++){
 //            event=events.get(i);
-//            if (!eventDao.findByJsonId(event.getId())){
+//            if (!eventDao.findByJsonId(event.getId())){saveEventsFromJson
 //                eventDao.save(event);
 //                try{
 //                Thread.sleep(1000);}

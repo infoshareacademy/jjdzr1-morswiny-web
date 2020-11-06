@@ -73,8 +73,8 @@ public class UserService {
     }
 
     public UserDto save(UserDto userDto) {
-       User user = userDao.save(dtoToUser(userDto));
-       return userToDto(user);
+        User user = userDao.save(dtoToUser(userDto));
+        return userToDto(user);
     }
 
     public void delete(UserDto userDto) {

@@ -17,7 +17,7 @@ public class UserDto {
     private UserType userType;
     private Set<Event> favourites;
 
-    public UserDto () {
+    public UserDto() {
 
     }
 
@@ -80,8 +80,8 @@ public class UserDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
+        if (!(o instanceof com.isa.morswiny.model.User)) return false;
+        com.isa.morswiny.model.User user = (com.isa.morswiny.model.User) o;
         return Objects.equals(getId(), user.getUserId()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&
