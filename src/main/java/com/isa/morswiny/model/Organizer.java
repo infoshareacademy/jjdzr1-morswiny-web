@@ -8,13 +8,14 @@ import java.util.Set;
 @Entity
 @Table (name ="organizer")
 public class Organizer {
-    public Integer getOrganizerID() {
-        return organizerID;
+    public Integer getOrganizerId() {
+        return organizerId;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer organizerID;
+    private Integer organizerId;
+    @Column(unique = true)
     private String id;
     private String designation;
     @OneToMany (mappedBy = "organizer", cascade = CascadeType.ALL)
