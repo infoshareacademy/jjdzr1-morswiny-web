@@ -54,6 +54,7 @@ public class FavouritesService {
     private static EventDto provideEventDto(Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());
+        eventDto.setEventId(event.getEventId());
         eventDto.setDescLong(event.getDescLong());
         eventDto.setCategoryId(event.getCategoryId());
         eventDto.setStartDate(event.getStartDate());
@@ -69,6 +70,7 @@ public class FavouritesService {
     private static Event provideEvent(EventDto eventDto) {
         Event event = new Event();
         event.setName(eventDto.getName());
+        event.setEventId(eventDto.getEventId());
         event.setDescLong(eventDto.getDescLong());
         event.setCategoryId(eventDto.getCategoryId());
         event.setStartDate(eventDto.getStartDate());
