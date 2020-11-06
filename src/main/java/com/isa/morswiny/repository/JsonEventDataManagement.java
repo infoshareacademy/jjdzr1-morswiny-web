@@ -17,10 +17,10 @@ public class JsonEventDataManagement {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
 
-    public List<Event> createListOfAllEvents() throws IOException {
+    public List<Event> createListOfAllEvents(String pathToJson) throws IOException {
         try {
             //TODO do podmiany getJsonEventData() na dzialajace loadDataFromJson()
-            Event[] gsonEvents = new JsonEventDataLoad().getJsonEventData();
+            Event[] gsonEvents = new JsonEventDataLoad().getJsonEventData(pathToJson);
             List<Event> eventsList = new ArrayList<>(Arrays.asList(gsonEvents));
             trimDateStrings(eventsList);
             setLocalDateTimeInList(eventsList);

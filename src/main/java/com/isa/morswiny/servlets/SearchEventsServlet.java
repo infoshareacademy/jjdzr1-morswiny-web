@@ -44,6 +44,8 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
+        model.remove("logged");
+        model.remove("admin");
         ServletService.sessionValidation(req, model);
 
         String userQuery = req.getParameter("search");

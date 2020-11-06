@@ -54,7 +54,7 @@ public class AddUserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> model = new HashMap<>();
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
         String email = req.getParameter("email");
@@ -64,17 +64,18 @@ public class AddUserServlet extends HttpServlet {
         String passwordHashed = Integer.toString(password);
 
         if (isUserAlreadyRegistered(email)){
-            map.put("accountExist", "AccountExist");
+            model.put("accountExist", "AccountExist");
         } else if (register(createUser(name, surname, email, passwordHashed))){
-            map.put("success", "success");
+            model.put("success", "success");
         } else {
-            map.put("error", "error");
+            model.put("error", "error");
         }
-
-        ServletService.sessionValidation(req, map);
+        model.remove("logged");
+        model.remove("admin");
+        ServletService.sessionValidation(req, model);
 
         try {
-            template.process(map, resp.getWriter());
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }

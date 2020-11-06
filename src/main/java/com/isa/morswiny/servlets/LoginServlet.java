@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String TEMPLATE_NAME = "login";
+    private static final String ADMIN_EMAIL = "admin@morswiny.pl";
 
     @Inject
     UserService userService;
@@ -62,11 +63,15 @@ public class LoginServlet extends HttpServlet {
             map.put("NoUser", "NoUser");
         } else if (!verifyUser(email, passwordHashed)){
             map.put("wrongPassword", "WrongPassword");
-        } else {
+        }
+        else {
             UserDto user = logIn(email, passwordHashed);
             map.put("success", "success");
-            req.getSession().setAttribute("logged", user.getEmail());
-            resp.sendRedirect("/main-page");
+            if(user.getEmail().equals(ADMIN_EMAIL) ) {
+                req.getSession().setAttribute("admin", user.getEmail());
+            }
+                req.getSession().setAttribute("logged", user.getEmail());
+                resp.sendRedirect("/main-page");
         }
 
         try {
