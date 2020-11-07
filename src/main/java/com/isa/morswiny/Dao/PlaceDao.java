@@ -1,5 +1,6 @@
 package com.isa.morswiny.Dao;
 
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.model.Place;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,8 +15,9 @@ public class PlaceDao implements Dao<Place>{
     private EntityManager entityManager;
 
     @Override
-    public void save(Place place) {
+    public Place save(Place place) {
         entityManager.persist(place);
+        return null;
     }
 
     @Override

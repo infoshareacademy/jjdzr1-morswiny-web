@@ -17,8 +17,9 @@ public class EventDao implements Dao<Event> {
     private EntityManager entityManager;
 
     @Transactional
-    public void save(Event event) {
+    public Event save (Event event) {
         entityManager.persist(event);
+        return event;
     }
 
     @Override

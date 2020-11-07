@@ -2,16 +2,19 @@ package com.isa.morswiny.dto;
 
 import com.isa.morswiny.model.*;
 
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class EventDto {
     private Integer eventId;
     private Integer id;
+    private Integer active;
     private String name;
     private String descLong;
     private String categoryId;
     private String startDate;
+    private String startDateLDT;
     private String endDate;
+    private String endDateLDT;
     private Place place;
     private EventURL urls;
     private Attachment[] attachments;
@@ -25,6 +28,14 @@ public class EventDto {
 
     public void setEventId(Integer eventId) {
         this.eventId = eventId;
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -57,6 +68,22 @@ public class EventDto {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public String getStartDateLDT() {
+        return startDateLDT;
+    }
+
+    public void setStartDateLDT(String startDateLDT) {
+        this.startDateLDT = startDateLDT;
+    }
+
+    public String getEndDateLDT() {
+        return endDateLDT;
+    }
+
+    public void setEndDateLDT(String endDateLDT) {
+        this.endDateLDT = endDateLDT;
     }
 
     public String getEndDate() {
@@ -99,6 +126,7 @@ public class EventDto {
         this.organizer = organizer;
     }
 
+
     public Integer getId() {
         return id;
     }
@@ -106,4 +134,5 @@ public class EventDto {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }

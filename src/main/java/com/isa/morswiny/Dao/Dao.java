@@ -1,10 +1,12 @@
 package com.isa.morswiny.Dao;
 
+import com.isa.morswiny.model.Event;
+
 import java.util.Optional;
 
 public interface Dao<T> {
 
-    public void save(T t);
+    public T save(T t);
 
     public T update(T t);
 

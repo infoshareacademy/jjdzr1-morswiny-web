@@ -1,11 +1,13 @@
 package com.isa.morswiny.Dao;
 
 
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.model.Organizer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -13,9 +15,10 @@ public class OrganizerDao implements Dao<Organizer> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public void save(Organizer organizer) {
+    @Transactional
+    public Organizer save(Organizer organizer) {
         entityManager.persist(organizer);
+        return null;
     }
 
     @Override

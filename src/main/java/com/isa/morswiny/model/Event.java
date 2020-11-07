@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table (name = "event")
@@ -89,6 +90,7 @@ public class Event {
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public String getEndDate() {
         return endDate;

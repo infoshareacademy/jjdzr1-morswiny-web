@@ -7,8 +7,8 @@
     <data-source>
         <name>java:/morswinyEvents</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://0.0.0.0:32768/morswiny?serverTimezone=Europe/Warsaw</url>
-        <user>morswin</user>
-        <password>morswin</password>
+        <url>jdbc:mysql://0.0.0.0:3307/morswiny?serverTimezone=Europe/Warsaw</url>
+        <user>root</user>
+        <password>root</password>
     </data-source>
 </web-app>

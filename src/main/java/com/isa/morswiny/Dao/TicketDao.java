@@ -2,6 +2,7 @@ package com.isa.morswiny.Dao;
 
 
 
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.model.Ticket;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,8 +17,9 @@ public class TicketDao implements Dao<Ticket> {
     private EntityManager entityManager;
 
     @Override
-    public void save(Ticket ticket) {
+    public Ticket save(Ticket ticket) {
         entityManager.persist(ticket);
+        return null;
     }
 
     @Override

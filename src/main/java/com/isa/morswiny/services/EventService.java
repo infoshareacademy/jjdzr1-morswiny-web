@@ -3,7 +3,10 @@ package com.isa.morswiny.services;
 import com.isa.morswiny.Dao.EventDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.Dao.EventSearchRepositoryInterface;
+import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.Event;
+
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -19,12 +22,15 @@ public class EventService {
 
     private EventDto eventToDto (Event event){
         EventDto eventDto = new EventDto();
-        eventDto.setEventId(event.getEventId());
         eventDto.setName(event.getName());
+        eventDto.setId(event.getId());
+        eventDto.setActive(event.getActive());
         eventDto.setDescLong(event.getDescLong());
         eventDto.setCategoryId(event.getCategoryId());
         eventDto.setStartDate(event.getStartDate());
+        eventDto.setStartDateLDT(event.getStartDate());
         eventDto.setEndDate(event.getEndDate());
+        eventDto.setEndDateLDT(event.getEndDate());
         eventDto.setPlace(event.getPlace());
         eventDto.setUrls(event.getUrls());
         eventDto.setAttachments(event.getAttachments());
@@ -36,10 +42,14 @@ public class EventService {
     private Event dtoToEvent (EventDto eventDto) {
         Event event = new Event();
         event.setName(eventDto.getName());
+        event.setId(eventDto.getId());
+        event.setActive(eventDto.getActive());
         event.setDescLong(eventDto.getDescLong());
         event.setCategoryId(eventDto.getCategoryId());
         event.setStartDate(eventDto.getStartDate());
+        event.setStartDateLDT(LocalDateTime.parse(eventDto.getStartDateLDT()));
         event.setEndDate(eventDto.getEndDate());
+        event.setEndDateLDT(LocalDateTime.parse(eventDto.getEndDateLDT()));
         event.setPlace(eventDto.getPlace());
         event.setUrls(eventDto.getUrls());
         event.setAttachments(eventDto.getAttachments());
@@ -50,9 +60,7 @@ public class EventService {
 
 
     public EventDto saveEvent (EventDto eventDto) {
-        Event event = dtoToEvent(eventDto);
-        eventDao.save(event);
-
+        Event event = eventDao.save(dtoToEvent(eventDto));
         return eventToDto(event);
     }
 
@@ -72,6 +80,7 @@ public class EventService {
                 .map(this::eventToDto)
                 .collect(toList());
     }
+
 
     public boolean checkIfExistsByOldIdFromJson(Integer id){
 

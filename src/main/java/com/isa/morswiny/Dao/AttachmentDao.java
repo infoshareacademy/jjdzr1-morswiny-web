@@ -2,6 +2,7 @@ package com.isa.morswiny.Dao;
 
 
 import com.isa.morswiny.model.Attachment;
+import com.isa.morswiny.model.Event;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -17,8 +18,9 @@ public class AttachmentDao implements Dao<Attachment>, Serializable {
     private EntityManager entityManager;
 
     @Override
-    public void save(Attachment attachment) {
+    public Attachment save(Attachment attachment) {
         entityManager.persist(attachment);
+        return null;
     }
 
 

@@ -1,6 +1,7 @@
 package com.isa.morswiny.Dao;
 
 
+import com.isa.morswiny.model.Event;
 import com.isa.morswiny.model.EventURL;
 
 import javax.enterprise.context.SessionScoped;
@@ -16,9 +17,10 @@ public class EventURLDao implements Dao<EventURL>, Serializable {
     private EntityManager entityManager;
 
     @Override
-    public void save(EventURL eventURL) {
+    public EventURL save(EventURL eventURL) {
 
         entityManager.persist(eventURL);
+        return null;
     }
 
     @Override

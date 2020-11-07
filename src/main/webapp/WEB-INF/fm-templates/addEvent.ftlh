@@ -46,16 +46,32 @@
                         <input name="eventName" type="text" maxlength="100" class="form-control" value="" placeholder="" required/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="eventPlace">Place</label>
-                        <input name="eventPlace" type="text" maxlength="100" class="form-control" value="" required/>
+                        <label class="control-label" for="placeId">Place - Id</label>
+                        <input name="placeId" type="text" maxlength="100" class="form-control" value="" required/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="organizer">Organizer</label>
-                        <input name="organizer" type="text" maxlength="100" class="form-control" value="" required/>
+                        <label class="control-label" for="placeName">Place - name</label>
+                        <input name="placeName" type="text" maxlength="100" class="form-control" value="" required/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="eventURL">URL</label>
-                        <input name="eventURL" type="text" maxlength="100" class="form-control" value="" />
+                        <label class="control-label" for="placeSubname">Place - subname</label>
+                        <input name="placeSubname" type="text" maxlength="100" class="form-control" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="organizerDesignation">Organizer - designation</label>
+                        <input name="organizerDesignation" type="text" maxlength="100" class="form-control" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="organizerId">Organizer - Id</label>
+                        <input name="organizerId" type="text" maxlength="100" class="form-control" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="eventURLTickets">URL - Tickets</label>
+                        <input name="eventURLTickets" type="text" maxlength="100" class="form-control" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="eventURLWWW">URL - WWW</label>
+                        <input name="eventURLWWW" type="text" maxlength="100" class="form-control" value="" />
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="startDate">Start Date</label>
@@ -94,18 +110,14 @@
                         <textarea name="description" cols="20" rows="10" class="form-control" value=""></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="ticket">Ticket</label>
-                        <input name="ticket" type="text" maxlength="100" class="form-control" value="" />
-                    </div>
-                    <div class="form-group">
                         <label class="control-label" for="categoryId">Category Id</label>
                         <input name="categoryId" type="text" maxlength="100" class="form-control" value=""/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="active">Active</label><br>
-                        <input type="radio" name="active" id="active" value="1" checked="checked">
+                        <input type="radio" name="active" id="1" value="1" checked="checked">
                         Yes
-                        <input type="radio" name="active" id="active" value="0">
+                        <input type="radio" name="active" id="0" value="0">
                         No
                     </div>
                     <div class="form-group">
