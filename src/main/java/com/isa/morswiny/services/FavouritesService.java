@@ -59,7 +59,7 @@ public class FavouritesService {
         }
     }
 
-    private static EventDto provideEventDto(Event event){
+    public static EventDto provideEventDto(Event event){
         EventDto eventDto = new EventDto();
         eventDto.setName(event.getName());
         eventDto.setEventId(event.getEventId());
@@ -156,6 +156,8 @@ public class FavouritesService {
         favouritesDao.addFavouriteEvent(user);
         return userDto;
     }
+
+
 
 
 }

@@ -8,11 +8,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @RequestScoped
+@Transactional
 public class FavouritesDao {
 
     @PersistenceContext
@@ -83,8 +85,8 @@ public class FavouritesDao {
         return events;
     }
 
-    public Optional<Event> find(Integer id) {
-        return Optional.ofNullable(entityManager.find(Event.class, id));
+    public Event find(Integer id) {
+        return entityManager.find(Event.class, id);
     }
 
     public User getByEmail(String email) {

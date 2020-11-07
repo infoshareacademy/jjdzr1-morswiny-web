@@ -1,5 +1,6 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.Dao.FavouritesDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
@@ -35,6 +36,9 @@ public class SearchEventsServlet extends HttpServlet {
     @Inject
     private FavouritesService favouritesService;
 
+    @Inject
+    private FavouritesDao favouritesDao;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -59,6 +63,25 @@ public class SearchEventsServlet extends HttpServlet {
 
 
         String userQuery = req.getParameter("search");
+
+        List<EventDto> events = setListOfQueriedEvents(userQuery);
+
+        //oddzielna metoda
+        if(req.getParameter("addEvent")!=null){
+            Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
+            Event event = favouritesDao.find(eventId);
+            EventDto eventDto = favouritesService.provideEventDto(event);
+            addEventToFavourites(userId,eventDto);
+        }
+
+//         if(addEventToFavourites(userId,)){
+//                model.put("added","added");
+//            } else if (removeEventFromFavourites(userId,eventDto)){
+//                model.put("removed","added");
+//            }else{
+//                model.put("error","error");
+//            }
+
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -87,40 +110,6 @@ public class SearchEventsServlet extends HttpServlet {
         return user.getId();
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        Map<String, Object> map = new HashMap<>();
-        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-
-
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
-
-        String email = (String) req.getSession().getAttribute("logged");
-        int userId = getUserId(email);
-
-        String userQuery = req.getParameter("search");
-        List<EventDto> events = setListOfQueriedEvents(userQuery);
-
-        for(EventDto eventDto:events){
-            if(addEventToFavourites(userId,eventDto)){
-                map.put("added","added");
-            } else if (removeEventFromFavourites(userId,eventDto)){
-                map.put("removed","added");
-            }else{
-                map.put("error","error");
-            }
-        }
-
-        try {
-            template.process(map, resp.getWriter());
-        } catch (TemplateException e) {
-            STDOUT.error("Error while processing template: ", e);
-        }
-
-    }
 
     private boolean addEventToFavourites(Integer userId,EventDto eventDto){
         if(!isEventInFavouritesAlready(userId,eventDto)){
