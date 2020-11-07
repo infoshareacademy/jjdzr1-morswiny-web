@@ -40,9 +40,6 @@ public class AddEventServlet extends HttpServlet {
     private EventService eventService;
 
     @Inject
-    private OrganizerService organizerService;
-
-    @Inject
     private DateTimeParser dateTimeParser;
 
     @Inject
@@ -83,11 +80,12 @@ public class AddEventServlet extends HttpServlet {
         String eventName = req.getParameter("eventName");
         String active = req.getParameter("active");
         String placeId = req.getParameter("placeId");
+        String placeName = req.getParameter("placeName");
+        String placeSubname = req.getParameter("placeSubname");
+        String eventURLTickets = req.getParameter("eventURLTickets");
+        String eventURLWWW = req.getParameter("eventURLWWW");
         String organizerDesignation = req.getParameter("organizerDesignation");
         String organizerId = req.getParameter("organizerId");
-
-        //String organizer = req.getParameter("organizer");
-
         String url = req.getParameter("url");
         String startDate = req.getParameter("startDate");
         String startDateLDT = req.getParameter("startDateLDT");
@@ -98,9 +96,11 @@ public class AddEventServlet extends HttpServlet {
         String id = Integer.toString(idRandom);
                 String description = req.getParameter("description");
         String categoryId = req.getParameter("categoryId");
-        addOrganizer(createOrganizer(organizerDesignation,organizerId));
+        Organizer organizer = new Organizer(organizerDesignation, organizerId);
+        Place place = new Place(placeId, placeName, placeSubname);
+        EventURL eventURL = new EventURL(eventURLTickets, eventURLWWW);
         addEvent(createEvent(eventName, active, placeId, url, startDate, startDateLDT,
-                endDate, endDateLDT, id, description, categoryId));
+                endDate, endDateLDT, id, description, categoryId, organizer, place, eventURL));
         map.put("event", "OK");
         resp.sendRedirect("/new-event-created");
 
@@ -163,7 +163,7 @@ public class AddEventServlet extends HttpServlet {
          */
         private EventDto createEvent (String eventName, String active, String placeId, String url,
                 String startDate, String startDateLDT, String endDate, String endDateLDT, String id,
-                                      String description, String categoryId){
+                String description, String categoryId, Organizer organizer, Place place, EventURL eventURL){
 
             EventDto eventDto = new EventDto();
             eventDto.setName(eventName);
@@ -177,20 +177,22 @@ public class AddEventServlet extends HttpServlet {
             eventDto.setId(Integer.valueOf(id));
             eventDto.setDescLong(description);
             eventDto.setCategoryId(categoryId);
+            eventDto.setOrganizer(organizer);
+            eventDto.setPlace(place);
+            eventDto.setUrls(eventURL);
             return eventDto;
 
         }
 
-        private OrganizerDto createOrganizer (String organizerDesignation, String organizerId) {
+/*
+       private OrganizerDto createOrganizer (String organizerDesignation, String organizerId) {
+
             OrganizerDto organizerDto = new OrganizerDto();
             organizerDto.setDesignation(organizerDesignation);
             organizerDto.setId(organizerId);
 return organizerDto;
         }
 
-
-
-/*
     private boolean isEventAdded (Integer eventId) {
         return eventDao.findByJsonId(eventId) != null;
     }
@@ -202,10 +204,10 @@ return organizerDto;
         }
 
 
-        private boolean addOrganizer (OrganizerDto organizerDto) {
-organizerService.saveOrganizer(organizerDto);
-return true;
-   }
+//        private boolean addOrganizer (OrganizerDto organizerDto) {
+//organizerService.saveOrganizer(organizerDto);
+//return true;
+//   }
 
 
 

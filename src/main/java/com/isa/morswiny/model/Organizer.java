@@ -2,6 +2,8 @@ package com.isa.morswiny.model;
 
 
 
+import com.isa.morswiny.dto.EventDto;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -49,5 +51,8 @@ public class Organizer {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public void addEvent(EventDto event) {
     }
 }
