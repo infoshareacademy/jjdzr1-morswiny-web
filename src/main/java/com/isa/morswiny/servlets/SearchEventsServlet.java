@@ -105,10 +105,10 @@ public class SearchEventsServlet extends HttpServlet {
         List<EventDto> events = setListOfQueriedEvents(userQuery);
 
         for(EventDto eventDto:events){
-            if(isEventInFavouritesAlready(userId,eventDto)){
-                map.put("eventExist","eventExist");
-            } else if (addEventToFavourites(userId,eventDto)){
-                map.put("eventId",eventDto.getId());
+            if(addEventToFavourites(userId,eventDto)){
+                map.put("added",eventDto.getId());
+            } else if (removeEventFromFavourites(userId,eventDto)){
+                map.put("removed",eventDto.getId());
             }else{
                 map.put("error","error");
             }
@@ -138,6 +138,15 @@ public class SearchEventsServlet extends HttpServlet {
 
     private Set<EventDto> setListOfFavouritesEventsForUser(Integer userId){
         return favouritesService.getAllFavouritesForUser(userId);
+    }
+
+    private boolean removeEventFromFavourites(Integer userId, EventDto eventDto){
+        if(isEventInFavouritesAlready(userId,eventDto)){
+            favouritesService.removeFromFavourite(userId,eventDto);
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
