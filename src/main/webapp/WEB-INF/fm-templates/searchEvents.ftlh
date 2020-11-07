@@ -165,7 +165,7 @@
                             <button type="button" class="btn btn-primary">Buy ticket</button>
                         </a>
                     </#if>
-                    <a href="search-events?search=${userQuery}&addEvent=#{event.getEventId()}" class="button-singleevent" role="button">
+                    <a href="search-events?search=${userQuery}&addEvent=#{event.getEventId()}" role="button">
                     <button type="submit" class="btn btn-secondary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">

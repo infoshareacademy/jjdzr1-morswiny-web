@@ -59,20 +59,27 @@ public class SearchEventsServlet extends HttpServlet {
         model.remove("admin");
         ServletService.sessionValidation(req, model);
 
-        String email = (String) req.getSession().getAttribute("logged");
-        int userId = getUserId(email);
-
+        if(req.getSession().getAttribute("logged") != null){
+            String email = (String) req.getSession().getAttribute("logged");
+            int userId = getUserId(email);
+            if(req.getParameter("addEvent")!=null){
+                Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
+                Event event = favouritesDao.find(eventId);
+                EventDto eventDto = favouritesService.provideEventDto(event);
+                addEventToFavourites(userId,eventDto);
+            }
+        }
 
         String userQuery = req.getParameter("search");
 
 
         //oddzielna metoda
-        if(req.getParameter("addEvent")!=null){
-            Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
-            Event event = favouritesDao.find(eventId);
-            EventDto eventDto = favouritesService.provideEventDto(event);
-            addEventToFavourites(userId,eventDto);
-        }
+//        if(req.getParameter("addEvent")!=null){
+//            Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
+//            Event event = favouritesDao.find(eventId);
+//            EventDto eventDto = favouritesService.provideEventDto(event);
+//            addEventToFavourites(userId,eventDto);
+//        }
 
 
 
