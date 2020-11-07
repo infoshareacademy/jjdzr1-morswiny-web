@@ -108,7 +108,7 @@ public class SearchEventsServlet extends HttpServlet {
             if(isEventInFavouritesAlready(userId,eventDto)){
                 map.put("eventExist","eventExist");
             } else if (addEventToFavourites(userId,eventDto)){
-                map.put("success","success");
+                map.put("eventId",eventDto.getId());
             }else{
                 map.put("error","error");
             }
@@ -139,9 +139,5 @@ public class SearchEventsServlet extends HttpServlet {
     private Set<EventDto> setListOfFavouritesEventsForUser(Integer userId){
         return favouritesService.getAllFavouritesForUser(userId);
     }
-
-
-
-
 
 }

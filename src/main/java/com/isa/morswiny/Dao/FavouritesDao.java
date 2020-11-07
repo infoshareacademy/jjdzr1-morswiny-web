@@ -40,16 +40,23 @@ public class FavouritesDao {
 //
 //    }
 
-    public Event addEventToFavourites(Event event){
-        entityManager.merge(event);
-        return event;
-    }
+//    public Event addEventToFavourites(Event event){
+//        entityManager.merge(event);
+//        return event;
+//    }
 
     //official
     public User addFavouriteEvent(User user){
         entityManager.merge(user);
         return user;
     }
+
+    //official
+    public User removeFavouriteEvent(User user){
+        entityManager.merge(user);
+        return user;
+    }
+
 
 
 

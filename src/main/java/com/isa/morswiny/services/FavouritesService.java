@@ -138,9 +138,19 @@ public class FavouritesService {
         UserDto userDto = userToDto(favouritesDao.getUser(userId));
         Event eventFromDto = provideEvent(event);
         Set<Event> favourites = userDto.getFavourites();
-//        if(!favourites.contains(event)){
         favourites.add(eventFromDto);
-//        }
+        userDto.setFavourites(favourites);
+        User user = dtoToUser(userDto);
+        favouritesDao.addFavouriteEvent(user);
+        return userDto;
+    }
+
+    //official
+    public UserDto removeFromFavourite(Integer userId, EventDto event){
+        UserDto userDto = userToDto(favouritesDao.getUser(userId));
+        Event eventFromDto = provideEvent(event);
+        Set<Event> favourites = userDto.getFavourites();
+        favourites.remove(eventFromDto);
         userDto.setFavourites(favourites);
         User user = dtoToUser(userDto);
         favouritesDao.addFavouriteEvent(user);
