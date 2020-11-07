@@ -79,7 +79,6 @@ public class AddUserServlet extends HttpServlet {
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
-
     }
 
     private boolean register (UserDto userDto) {

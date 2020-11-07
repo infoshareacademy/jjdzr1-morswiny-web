@@ -51,7 +51,6 @@ public class AllEventsListServlet extends HttpServlet {
         model.remove("logged");
         if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
             model.put("logged", req.getSession().getAttribute("logged"));
-            System.out.println("dua");
         }
 
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);

@@ -21,28 +21,28 @@ public class FavouritesService {
     @Inject
     private FavouritesDao favouritesDao;
 
-    public EventDto saveFavouritesForUser(Integer eventId, Integer userId){
-        return provideEventDto(favouritesDao.saveFavouritesForUser(eventId,userId));
-    }
-
-    public boolean deleteFavouritesForUser(Integer eventId){
-        Optional<Event> event = favouritesDao.find(eventId);
-        if(event.isEmpty()){
-            return false;
-        }else{
-            favouritesDao.deleteFavouritesForUser(eventId);
-            return true;
-        }
-    }
-
-    public EventDto addEventToFavouritesForUser(Event event,Integer userId){
-        Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
-        if(!favourites.contains(event)){
-            return provideEventDto(favouritesDao.addEventToFavourites(event));
-        }else{
-            return null;
-        }
-    }
+//    public EventDto saveFavouritesForUser(Integer eventId, Integer userId){
+//        return provideEventDto(favouritesDao.saveFavouritesForUser(eventId,userId));
+//    }
+//
+//    public boolean deleteFavouritesForUser(Integer eventId){
+//        Optional<Event> event = favouritesDao.find(eventId);
+//        if(event.isEmpty()){
+//            return false;
+//        }else{
+//            favouritesDao.deleteFavouritesForUser(eventId);
+//            return true;
+//        }
+//    }
+//
+//    public EventDto addEventToFavouritesForUser(Event event,Integer userId){
+//        Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
+//        if(!favourites.contains(event)){
+//            return provideEventDto(favouritesDao.addEventToFavourites(event));
+//        }else{
+//            return null;
+//        }
+//    }
 
     public Set<EventDto> getAllFavouritesForUser(Integer userId){
         Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
@@ -91,12 +91,61 @@ public class FavouritesService {
         return event;
     }
 
-    public EventDto save(EventDto eventDto) {
-        Event event = favouritesDao.addEventToFavourites(provideEvent(eventDto));
-        return provideEventDto(event);
+    public static UserDto userToDto (User user){
+        UserDto userDto = new UserDto();
+        userDto.setEmail(user.getEmail());
+        userDto.setId(user.getUserId());
+        userDto.setPassword(user.getPassword());
+        userDto.setUserType(user.getUserType());
+        if (user.getName() != null) {
+            userDto.setName(user.getName());
+        }
+        if (user.getSurname() != null) {
+            userDto.setSurname(user.getSurname());
+        }
+        if (user.getFavourites() != null) {
+            userDto.setFavourites(user.getFavourites());
+        }
+
+        return userDto;
+    }
+
+    public static User dtoToUser (UserDto userDto){
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setUserId(userDto.getId());
+        user.setPassword(userDto.getPassword());
+        user.setUserType(userDto.getUserType());
+        if (userDto.getName() != null) {
+            user.setName(userDto.getName());
+        }
+        if (userDto.getSurname() != null) {
+            user.setSurname(userDto.getSurname());
+        }
+        if (userDto.getFavourites() != null) {
+            user.setFavourites(userDto.getFavourites());
+        }
+
+        return user;
     }
 
     public void delete(EventDto eventDto) {
         favouritesDao.removeEventFromFavourites(provideEvent(eventDto));
     }
+
+    //official
+    public UserDto addToFavourites(Integer userId, EventDto event){
+        UserDto userDto = userToDto(favouritesDao.getUser(userId));
+        Event eventFromDto = provideEvent(event);
+        Set<Event> favourites = userDto.getFavourites();
+//        if(!favourites.contains(event)){
+        favourites.add(eventFromDto);
+//        }
+        userDto.setFavourites(favourites);
+        User user = dtoToUser(userDto);
+        favouritesDao.addFavouriteEvent(user);
+        return userDto;
+    }
+
+
 }

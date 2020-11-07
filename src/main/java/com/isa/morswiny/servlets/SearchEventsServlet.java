@@ -101,9 +101,10 @@ public class SearchEventsServlet extends HttpServlet {
         String email = (String) req.getSession().getAttribute("logged");
         int userId = getUserId(email);
 
-        if(isEventInFavouritesAlready(userId,eventDto){
-            map.put("eventExist",eventDto);
-        }else if addEventToFavourites(eventDto, userId){
+
+        if(isEventInFavouritesAlready(eventDto,userId){
+            map.put("eventExist","eventExist");
+        } else if (addEventToFavourites(eventDto, userId){
             map.put("success","success");
         }else{
             map.put("error","error");
@@ -119,9 +120,9 @@ public class SearchEventsServlet extends HttpServlet {
 
     }
 
-    private boolean addEventToFavourites(EventDto eventDto,Integer userId){
-        if(isEventInFavouritesAlready(userId,eventDto)){
-            favouritesService.save(eventDto);
+    private boolean addEventToFavourites(Integer userId,EventDto eventDto){
+        if(!isEventInFavouritesAlready(userId,eventDto)){
+            favouritesService.addToFavourites(userId,eventDto);
             return true;
         }else{
             return false;
