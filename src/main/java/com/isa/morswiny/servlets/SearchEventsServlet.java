@@ -7,6 +7,7 @@ import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.services.EventService;
 import com.isa.morswiny.services.FavouritesService;
+import com.isa.morswiny.services.ServletService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -54,9 +55,9 @@ public class SearchEventsServlet extends HttpServlet {
 
         Integer pageInt = Integer.parseInt(page);
 
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            model.put("logged", req.getSession().getAttribute("logged"));
-        }
+        model.remove("logged");
+        model.remove("admin");
+        ServletService.sessionValidation(req, model);
 
         String email = (String) req.getSession().getAttribute("logged");
         int userId = getUserId(email);

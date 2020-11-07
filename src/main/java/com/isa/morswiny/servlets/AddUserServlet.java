@@ -3,6 +3,7 @@ package com.isa.morswiny.servlets;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.model.UserType;
+import com.isa.morswiny.services.ServletService;
 import com.isa.morswiny.services.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class AddUserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> model = new HashMap<>();
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
         String email = req.getParameter("email");
@@ -63,19 +64,18 @@ public class AddUserServlet extends HttpServlet {
         String passwordHashed = Integer.toString(password);
 
         if (isUserAlreadyRegistered(email)){
-            map.put("accountExist", "AccountExist");
+            model.put("accountExist", "AccountExist");
         } else if (register(createUser(name, surname, email, passwordHashed))){
-            map.put("success", "success");
+            model.put("success", "success");
         } else {
-            map.put("error", "error");
+            model.put("error", "error");
         }
-
-        if (req.getSession(false) != null && req.getSession(false).getAttribute("logged") != null){
-            map.put("logged", req.getSession().getAttribute("logged"));
-        }
+        model.remove("logged");
+        model.remove("admin");
+        ServletService.sessionValidation(req, model);
 
         try {
-            template.process(map, resp.getWriter());
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             STDOUT.error("Error while processing template: ", e);
         }
@@ -90,7 +90,7 @@ public class AddUserServlet extends HttpServlet {
         }
     }
 
-    private UserDto createUser(String name, String surname, String email, String password){
+    public static UserDto createUser(String name, String surname, String email, String password){
         UserDto userDto = new UserDto();
         if (name != null){
             userDto.setName(name);
@@ -100,11 +100,7 @@ public class AddUserServlet extends HttpServlet {
         }
         userDto.setEmail(email);
         userDto.setPassword(password);
-        if (isEligibleForAdminRole(email))
-            userDto.setUserType(UserType.ADMIN);
-        else {
-            userDto.setUserType(UserType.STANDARD_USER);
-        }
+        userDto.setUserType(UserType.STANDARD_USER);
         userDto.setFavourites(new HashSet<>());
 
         return userDto;
@@ -114,7 +110,4 @@ public class AddUserServlet extends HttpServlet {
         return userService.getByEmail(email) != null;
     }
 
-    public boolean isEligibleForAdminRole(String email) {
-        return email.contains("morswin");
-    }
 }

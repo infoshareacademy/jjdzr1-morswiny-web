@@ -16,11 +16,12 @@ import com.google.gson.stream.JsonReader;
 public class JsonEventDataLoad {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public Event[] getJsonEventData() {
+    public Event[] getJsonEventData(String pathToJson) {
         Gson gson = new Gson();
         JsonReader jsonReader = null;
         try {
-            File file = new File(getClass().getClassLoader().getResource("events.json").getFile());
+           // File file = new File(getClass().getClassLoader().getResource("events.json").getFile());
+            File file = new File(pathToJson);
             jsonReader = new JsonReader(new FileReader(file));
         } catch (Exception e) {
             STDOUT.error("Plik nie moze byc znaleziony lub nie jest w formacie JSON. Upewnij sie, ze podales wlasciwe dane.");
@@ -34,14 +35,6 @@ public class JsonEventDataLoad {
 
         EventRestController eventRestController = new EventRestController();
         return eventRestController.getJsonEvents();
-//        try {
-//            String jsonData = eventRestController.connect();
-//            Gson gson = new Gson();
-//            return gson.fromJson(jsonData, Event[].class);
-//        }catch (Exception e) {
-//            System.out.println("loadDatafromJson() nie dziala");
-//            return new Event[1];
-//        }
 
     }
 
