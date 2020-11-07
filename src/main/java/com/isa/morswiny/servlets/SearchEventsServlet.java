@@ -101,16 +101,18 @@ public class SearchEventsServlet extends HttpServlet {
         String email = (String) req.getSession().getAttribute("logged");
         int userId = getUserId(email);
 
+        String userQuery = req.getParameter("search");
+        List<EventDto> events = setListOfQueriedEvents(userQuery);
 
-        if(isEventInFavouritesAlready(eventDto,userId){
-            map.put("eventExist","eventExist");
-        } else if (addEventToFavourites(eventDto, userId){
-            map.put("success","success");
-        }else{
-            map.put("error","error");
+        for(EventDto eventDto:events){
+            if(isEventInFavouritesAlready(userId,eventDto)){
+                map.put("eventExist","eventExist");
+            } else if (addEventToFavourites(userId,eventDto)){
+                map.put("success","success");
+            }else{
+                map.put("error","error");
+            }
         }
-
-
 
         try {
             template.process(map, resp.getWriter());
