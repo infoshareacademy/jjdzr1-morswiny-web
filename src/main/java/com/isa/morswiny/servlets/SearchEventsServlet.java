@@ -106,9 +106,9 @@ public class SearchEventsServlet extends HttpServlet {
 
         for(EventDto eventDto:events){
             if(addEventToFavourites(userId,eventDto)){
-                map.put("added",eventDto.getId());
+                map.put("added","added");
             } else if (removeEventFromFavourites(userId,eventDto)){
-                map.put("removed",eventDto.getId());
+                map.put("removed","added");
             }else{
                 map.put("error","error");
             }
