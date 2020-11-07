@@ -64,7 +64,6 @@ public class SearchEventsServlet extends HttpServlet {
 
         String userQuery = req.getParameter("search");
 
-        List<EventDto> events = setListOfQueriedEvents(userQuery);
 
         //oddzielna metoda
         if(req.getParameter("addEvent")!=null){
@@ -74,13 +73,6 @@ public class SearchEventsServlet extends HttpServlet {
             addEventToFavourites(userId,eventDto);
         }
 
-//         if(addEventToFavourites(userId,)){
-//                model.put("added","added");
-//            } else if (removeEventFromFavourites(userId,eventDto)){
-//                model.put("removed","added");
-//            }else{
-//                model.put("error","error");
-//            }
 
 
         initModel(model, userQuery,limit, pageInt, count);

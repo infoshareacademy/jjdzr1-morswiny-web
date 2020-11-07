@@ -21,28 +21,6 @@ public class FavouritesService {
     @Inject
     private FavouritesDao favouritesDao;
 
-//    public EventDto saveFavouritesForUser(Integer eventId, Integer userId){
-//        return provideEventDto(favouritesDao.saveFavouritesForUser(eventId,userId));
-//    }
-//
-//    public boolean deleteFavouritesForUser(Integer eventId){
-//        Optional<Event> event = favouritesDao.find(eventId);
-//        if(event.isEmpty()){
-//            return false;
-//        }else{
-//            favouritesDao.deleteFavouritesForUser(eventId);
-//            return true;
-//        }
-//    }
-//
-//    public EventDto addEventToFavouritesForUser(Event event,Integer userId){
-//        Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
-//        if(!favourites.contains(event)){
-//            return provideEventDto(favouritesDao.addEventToFavourites(event));
-//        }else{
-//            return null;
-//        }
-//    }
 
     public Set<EventDto> getAllFavouritesForUser(Integer userId){
         Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
@@ -129,9 +107,7 @@ public class FavouritesService {
         return user;
     }
 
-    public void delete(EventDto eventDto) {
-        favouritesDao.removeEventFromFavourites(provideEvent(eventDto));
-    }
+
 
     //official
     public UserDto addToFavourites(Integer userId, EventDto event){
