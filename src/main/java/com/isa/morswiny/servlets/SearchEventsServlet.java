@@ -65,9 +65,7 @@ public class SearchEventsServlet extends HttpServlet {
             Integer userId = returnUserIdFromSession(req);
             if(req.getParameter("addEvent")!=null){
                 EventDto eventDto = getEventDtoFromUserRequest(req);
-                if(!addEventToFavourites(userId,eventDto)){
-                    removeEventFromFavourites(userId,eventDto);
-                }
+                addEventToFavourites(userId,eventDto);
             }
         }
 
@@ -121,30 +119,27 @@ public class SearchEventsServlet extends HttpServlet {
 
 
     private boolean addEventToFavourites(Integer userId,EventDto eventDto){
-        if(!isEventInFavouritesAlready(userId,eventDto)){
+        boolean isAlreadyInFavourites = isEventInFavouritesAlready(userId,eventDto);
+        if(!isAlreadyInFavourites){
             favouritesService.addToFavourites(userId,eventDto);
             return true;
         }else{
+            favouritesService.removeFromFavourite(userId,eventDto);
             return false;
         }
     }
 
-    private boolean isEventInFavouritesAlready(Integer userId, EventDto event){
-        Set<EventDto> favourites = setListOfFavouritesEventsForUser(userId);
+    private boolean isEventInFavouritesAlready(Integer userId, EventDto eventDto){
+        Event event = favouritesService.provideEvent(eventDto);
+        Set<Event> favourites = setListOfFavouritesEventsForUser(userId);
+        boolean check = favourites.contains(event);
         return favourites.contains(event);
     }
 
-    private Set<EventDto> setListOfFavouritesEventsForUser(Integer userId){
+    private Set<Event> setListOfFavouritesEventsForUser(Integer userId){
         return favouritesService.getAllFavouritesForUser(userId);
     }
 
-    private boolean removeEventFromFavourites(Integer userId, EventDto eventDto){
-        if(isEventInFavouritesAlready(userId,eventDto)){
-            favouritesService.removeFromFavourite(userId,eventDto);
-            return true;
-        }else{
-            return false;
-        }
-    }
+
 
 }

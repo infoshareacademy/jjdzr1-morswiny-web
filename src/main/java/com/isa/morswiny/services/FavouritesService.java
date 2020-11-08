@@ -22,11 +22,8 @@ public class FavouritesService {
     private FavouritesDao favouritesDao;
 
 
-    public Set<EventDto> getAllFavouritesForUser(Integer userId){
-        Set<Event> favourites = favouritesDao.getFavouritesForUserId(userId);
-        return favourites.stream()
-                .map(FavouritesService::provideEventDto)
-                .collect(Collectors.toSet());
+    public Set<Event> getAllFavouritesForUser(Integer userId){
+        return favouritesDao.getFavouritesForUserId(userId);
     }
 
     public UserDto getUserByEmail(String email){
@@ -53,7 +50,7 @@ public class FavouritesService {
         return eventDto;
     }
 
-    private static Event provideEvent(EventDto eventDto) {
+    public static Event provideEvent(EventDto eventDto) {
         Event event = new Event();
         event.setName(eventDto.getName());
         event.setEventId(eventDto.getEventId());

@@ -74,7 +74,7 @@ public class FavouritesUserServlet extends HttpServlet {
         model.put("count",count);
     }
 
-    private Set<EventDto> setListOfFavouritesEventsForUser(Integer userId){
+    private Set<Event> setListOfFavouritesEventsForUser(Integer userId){
         return favouritesService.getAllFavouritesForUser(userId);
     }
 
