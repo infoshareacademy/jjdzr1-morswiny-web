@@ -243,7 +243,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/profile">My Profile</a>
-                    <a class="dropdown-item" href="/favourite">My favourites</a>
+                    <a class="dropdown-item" href="/favourites-list">My favourites</a>
                     <a class="dropdown-item" href="/logout">Log out</a>
                 </div>
             </li>

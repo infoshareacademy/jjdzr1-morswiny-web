@@ -59,29 +59,19 @@ public class SearchEventsServlet extends HttpServlet {
         model.remove("admin");
         ServletService.sessionValidation(req, model);
 
-        if(req.getSession().getAttribute("logged") != null){
-            String email = (String) req.getSession().getAttribute("logged");
-            int userId = getUserId(email);
+        boolean ifAddedToFavourites;
+
+        if(checkIfUserLogged(req)){
+            Integer userId = returnUserIdFromSession(req);
             if(req.getParameter("addEvent")!=null){
-                Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
-                Event event = favouritesDao.find(eventId);
-                EventDto eventDto = favouritesService.provideEventDto(event);
-                addEventToFavourites(userId,eventDto);
+                EventDto eventDto = getEventDtoFromUserRequest(req);
+                if(!addEventToFavourites(userId,eventDto)){
+                    removeEventFromFavourites(userId,eventDto);
+                }
             }
         }
 
         String userQuery = req.getParameter("search");
-
-
-        //oddzielna metoda
-//        if(req.getParameter("addEvent")!=null){
-//            Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
-//            Event event = favouritesDao.find(eventId);
-//            EventDto eventDto = favouritesService.provideEventDto(event);
-//            addEventToFavourites(userId,eventDto);
-//        }
-
-
 
         initModel(model, userQuery,limit, pageInt, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -92,6 +82,25 @@ public class SearchEventsServlet extends HttpServlet {
             STDOUT.error("Error while processing template: " + template.getName(), e);
         }
     }
+
+    private Integer returnUserIdFromSession(HttpServletRequest req) {
+        String email = (String) req.getSession().getAttribute("logged");
+        Integer userId = getUserId(email);
+        return userId;
+    }
+
+    private EventDto getEventDtoFromUserRequest(HttpServletRequest req) {
+        Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
+        Event event = favouritesDao.find(eventId);
+        return favouritesService.provideEventDto(event);
+    }
+
+    private boolean checkIfUserLogged(HttpServletRequest req) {
+        return (req.getSession().getAttribute("logged") != null);
+    }
+
+
+
 
     private void initModel(Map model, String query,Integer limit, Integer page, Integer count) {
         model.put("userQuery", query);
