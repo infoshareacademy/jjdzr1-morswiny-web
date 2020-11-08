@@ -1,11 +1,13 @@
 package com.isa.morswiny.services;
 
+import com.isa.morswiny.Dao.UserDao;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.Event;
 import com.isa.morswiny.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -14,14 +16,21 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
+    @Mock
+    UserDao userDao;
 
     @Mock
     UserService userService;
+
+    @InjectMocks
+    UserService getUserService;
+
 
     @Test
     void userToDtoTest(){
@@ -99,6 +108,27 @@ public class UserServiceTest {
         when(userService.getByEmail(null)).thenThrow(NullPointerException.class);
 
         Assertions.assertThrows(NullPointerException.class, () -> userService.getByEmail(null));
+
+    }
+
+    @Test
+    void saveUserTest(){
+
+        User user = new User();
+        user.setName("TestName");
+
+        when(userDao.save(any(User.class))).thenReturn(new User());
+        User created = userDao.save(user);
+        UserDto createdDto = getUserService.save(UserService.userToDto(user));
+
+        Assertions.assertSame(createdDto.getName(), created.getName());
+    }
+
+    @Test
+    void deleteUserTest(){
+
+        doThrow(new NullPointerException("User not found")).when(userService).delete(null);
+        Assertions.assertThrows(NullPointerException.class,() -> userService.delete(null));
 
     }
 }

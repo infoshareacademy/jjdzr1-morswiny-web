@@ -31,10 +31,10 @@ public class EventDbLoadServiceTest {
         events.add(event2);
 
         EventDbLoadService eventDbLoadService = mock(EventDbLoadService.class);
-        doNothing().when(eventDbLoadService).saveEventsFromJson(isA(List.class));
-        eventDbLoadService.saveEventsFromJson(events);
+        doNothing().when(eventDbLoadService).saveEventsFromJson(isA(String.class));
+        eventDbLoadService.saveEventsFromJson(String.valueOf(events));
 
-        verify(eventDbLoadService, times(1)).saveEventsFromJson(events);
+        verify(eventDbLoadService, times(1)).saveEventsFromJson(String.valueOf(events));
 
     }
 }

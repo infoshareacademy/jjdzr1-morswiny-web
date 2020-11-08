@@ -16,7 +16,7 @@ public class FavouritesServiceTest {
     private FavouritesService favouritesService;
 
     @Test
-    void saveFavouritesForUserTest(){
+    void saveFavouriteForUserTest(){
 
         EventDto eventDto = new EventDto();
         eventDto.setEventId(1);
@@ -26,6 +26,24 @@ public class FavouritesServiceTest {
 
         Assertions.assertThrows(NullPointerException.class, ()-> favouritesService.saveFavouritesForUser(null));
         Assertions.assertEquals(favouritesService.saveFavouritesForUser(eventDto.getEventId()), eventDto);
+
+    }
+
+    @Test
+    void deleteFavouriteTest(){
+
+        EventDto eventDto = new EventDto();
+        eventDto.setEventId(1);
+
+        when(favouritesService.deleteFavouritesForUser(null)).thenThrow(NullPointerException.class);
+        when(favouritesService.deleteFavouritesForUser(eventDto.getEventId())).thenReturn(true);
+        boolean result = favouritesService.deleteFavouritesForUser(1);
+
+        Assertions.assertThrows(NullPointerException.class, ()-> favouritesService.deleteFavouritesForUser(null));
+        Assertions.assertTrue(result);
+
+
+
 
     }
 }

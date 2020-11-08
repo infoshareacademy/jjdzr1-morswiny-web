@@ -1,11 +1,20 @@
 package com.isa.morswiny.Dao;
 
+import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.model.Event;
+import com.isa.morswiny.model.User;
+import com.isa.morswiny.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +27,18 @@ public class EventDaoTest {
 
 
     @Mock
-    EventDao mockEventDao;
+    EntityManager mockEntityManager;
+
+    @InjectMocks
+    EventDao eventDao;
+
 
 
     @Test
     void saveEventToDatabaseTest(){
 
-        Event event = new Event();
 
+        Event event = new Event();
         EventDao eventDao = mock(EventDao.class);
         doNothing().when(eventDao).save(isA(Event.class));
         eventDao.save(event);
@@ -37,19 +50,16 @@ public class EventDaoTest {
     @Test
     void updateEventTest(){
 
+
         Event event = new Event();
         event.setEventId(1);
         event.setName("New Event");
-        mockEventDao.save(event);
+        Event updated = new Event();
+        when(eventDao.update(any(Event.class))).thenReturn(updated);
 
-        event.setName("Newest Event");
-        event.setEndDate("12.12.2020");
-
-        mockEventDao.update(event);
-
-
-        Assertions.assertEquals(event.getName(), "Newest Event");
-        Assertions.assertEquals(event.getEndDate(), "12.12.2020");
+        updated = eventDao.update(event);
+        updated.setName("Updated");
+        Assertions.assertNotSame(event.getName(), updated.getName());
 
 
     }
@@ -60,10 +70,10 @@ public class EventDaoTest {
         Event event = new Event();
         event.setEventId(1);
         event.setName("New Event");
-        mockEventDao.save(event);
-        mockEventDao.delete(event);
+        eventDao.save(event);
+        eventDao.delete(event);
 
-        Assertions.assertEquals(mockEventDao.find(event.getId()), Optional.empty());
+        Assertions.assertEquals(eventDao.find(event.getId()), Optional.empty());
 
 
     }
@@ -71,17 +81,17 @@ public class EventDaoTest {
     @Test
     void findTest(){
 
-
+        EventDao eventDao = mock(EventDao.class);
         //given
         Event event = new Event();
         event.setEventId(1);
         event.setName("New Event");
 
         //when
-        when(mockEventDao.find(any(Integer.class))).thenReturn(Optional.empty());
-        when(mockEventDao.find(event.getEventId())).thenReturn(Optional.of(event));
-        Optional<Event> resultRandom = mockEventDao.find(2);
-        Optional<Event> resultEvent = mockEventDao.find(event.getEventId());
+        when(eventDao.find(any(Integer.class))).thenReturn(Optional.empty());
+        when(eventDao.find(event.getEventId())).thenReturn(Optional.of(event));
+        Optional<Event> resultRandom = eventDao.find(2);
+        Optional<Event> resultEvent = eventDao.find(event.getEventId());
 
         //then
         Assertions.assertEquals(resultRandom,Optional.empty());
@@ -90,42 +100,43 @@ public class EventDaoTest {
 
     @Test
     void findAllEventsTest(){
-
+        EventDao eventDao = mock(EventDao.class);
         Event event1 = new Event();
         event1.setEventId(1);
-        event1.setName("First Event");
 
         Event event2 = new Event();
         event2.setEventId(2);
-        event2.setName("Second Event");
 
         List<Event> events = new ArrayList<>();
         events.add(event1);
         events.add(event2);
 
-        when(mockEventDao.findAllEvents()).thenReturn(events);
+        when(eventDao.findAllEvents()).thenReturn(events);
 
-        Assertions.assertEquals(events, mockEventDao.findAllEvents());
+        List<Event> created = eventDao.findAllEvents();
+        Assertions.assertEquals(events.size(), created.size());
     }
 
     @Test
     void findLatestEventsTest(){
+        EventDao eventDao = mock(EventDao.class);
+        Event event1 = new Event();
+        event1.setEventId(1);
+        event1.setStartDateLDT(LocalDateTime.of(2019, 12,12, 20, 20));
 
-//        Event event1 = new Event();
-//        event1.setEventId(1);
-//        event1.setStartDateLDT(LocalDateTime.of(2019, 12,12, 20, 20));
-//
-//        Event event2 = new Event();
-//        event2.setEventId(2);
-//        event2.setStartDateLDT(LocalDateTime.of(2020, 12,12, 20, 20));
-//
-//        List<Event> events = new ArrayList<>();
-//        events.add(event1);
-//        events.add(event2);
-//
-//        when(mockEventDao.findLatestEvents(1)).thenReturn(events);
-//
-//        Assertions.assertEquals(1, events.size());
+        Event event2 = new Event();
+        event2.setEventId(2);
+        event2.setStartDateLDT(LocalDateTime.of(2020, 12,12, 20, 20));
+
+        List<Event> events = new ArrayList<>();
+        events.add(event1);
+        events.add(event2);
+
+        when(eventDao.findLatestEvents(2)).thenReturn(events);
+
+        List<Event> created  = eventDao.findLatestEvents(2);
+
+        Assertions.assertSame(2, created.size());
 
     }
 }

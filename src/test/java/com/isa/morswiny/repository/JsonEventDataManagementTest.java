@@ -23,7 +23,7 @@ public class JsonEventDataManagementTest {
     @Test
     void createListOfAllEventsTest() throws IOException {
 
-        List<Event> list = jsonEventDataManagement.createListOfAllEvents();
+        List<Event> list = jsonEventDataManagement.createListOfAllEvents("");
         Assertions.assertNotNull(list);
 
     }
