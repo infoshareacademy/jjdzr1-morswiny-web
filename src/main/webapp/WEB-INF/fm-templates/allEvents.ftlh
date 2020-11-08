@@ -296,7 +296,7 @@
             <#if event.getAttachments()?size = 0>
                 <img src="/Images/morswin.png" class="card-img-top" style="height: auto; max-width: 620px;" alt="...">
             <#else>
-                <img src="${event.attachments[0].getFileName()}" style="max-height: 590px; max-width: 620px;">
+                <img src="${event.attachments[0].getFileName()}" style="height: 590px; width: 620px;">
             </#if>
             <div class="card-body">
                 <h5>${event.name}</h5>
