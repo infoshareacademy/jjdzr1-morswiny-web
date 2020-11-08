@@ -83,7 +83,6 @@ public class UserService {
         } else {
             return userToDto(userDao.getByEmail(email));
         }
-
     }
 
     public UserDto save(UserDto userDto) {

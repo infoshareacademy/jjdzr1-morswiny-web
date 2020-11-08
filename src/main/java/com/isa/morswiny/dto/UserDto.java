@@ -17,7 +17,15 @@ public class UserDto {
     private UserType userType;
     private Set<Event> favourites;
 
-    public UserDto() {
+    public Set<Event> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(Set<Event> favourites) {
+        this.favourites = favourites;
+    }
+
+    public UserDto () {
 
     }
 
@@ -69,19 +77,13 @@ public class UserDto {
         this.userType = userType;
     }
 
-    public Set<Event> getFavourites() {
-        return favourites;
-    }
 
-    public void setFavourites(Set<Event> favourites) {
-        this.favourites = favourites;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof com.isa.morswiny.model.User)) return false;
-        com.isa.morswiny.model.User user = (com.isa.morswiny.model.User) o;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
         return Objects.equals(getId(), user.getUserId()) &&
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getSurname(), user.getSurname()) &&

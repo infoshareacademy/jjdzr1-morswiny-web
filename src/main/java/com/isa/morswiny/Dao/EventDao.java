@@ -37,7 +37,6 @@ public class EventDao implements Dao<Event> {
     }
 
     public List<Event> findEventsByString(String query) {
-
         if (query.isEmpty()) {
             return findAllEvents();
         }

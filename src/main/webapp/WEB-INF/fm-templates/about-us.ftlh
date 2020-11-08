@@ -47,17 +47,13 @@
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="../Images/technolopgies.png" class="d-block w-100 center" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="../Images/morswin.png" class="d-block w-100 center" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="../Images/morswin.png" class="d-block w-100 center" alt="...">
+            <img src="../Images/sprint3.png" class="d-block w-100 center" alt="...">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

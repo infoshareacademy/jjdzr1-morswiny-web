@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -192,5 +193,19 @@ public class Event {
 
     public void setTickets(Ticket tickets) {
         this.tickets = tickets;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(eventId, event.eventId) &&
+                Objects.equals(name, event.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventId, name);
     }
 }
