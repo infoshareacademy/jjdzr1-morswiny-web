@@ -16,8 +16,33 @@ public class EventDto {
     private EventURL urls;
     private Attachment[] attachments;
     private Organizer organizer;
+    private Integer active;
+    private LocalDateTime startDateLDT;
+    private LocalDateTime endDateLDT;
 
+    public Integer getActive() {
+        return active;
+    }
 
+    public void setActive(Integer active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getStartDateLDT() {
+        return startDateLDT;
+    }
+
+    public void setStartDateLDT(LocalDateTime startDateLDT) {
+        this.startDateLDT = startDateLDT;
+    }
+
+    public LocalDateTime getEndDateLDT() {
+        return endDateLDT;
+    }
+
+    public void setEndDateLDT(LocalDateTime endDateLDT) {
+        this.endDateLDT = endDateLDT;
+    }
 
     public Integer getEventId() {
         return eventId;

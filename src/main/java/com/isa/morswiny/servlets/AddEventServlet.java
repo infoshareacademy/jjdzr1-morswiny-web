@@ -1,11 +1,15 @@
 package com.isa.morswiny.servlets;
 
 import com.isa.morswiny.Dao.EventCRUDRepositoryInterface;
+import com.isa.morswiny.Dao.EventDao;
+import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
 import com.isa.morswiny.parsers.DateTimeParser;
 import com.isa.morswiny.model.*;
 import com.isa.morswiny.services.ServletService;
+import com.isa.morswiny.services.EventService;
 import freemarker.template.*;
+import org.hibernate.id.UUIDGenerationStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
@@ -17,8 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 @ApplicationScoped
 @WebServlet("/add-event")
@@ -29,7 +36,7 @@ public class AddEventServlet extends HttpServlet {
 
 
     @Inject
-    private EventCRUDRepositoryInterface eventCRUDRepositoryInterface;
+    private EventService eventService;
 
     @Inject
     private DateTimeParser dateTimeParser;
@@ -58,7 +65,6 @@ public class AddEventServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -67,53 +73,69 @@ public class AddEventServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Event event = new Event();
-        event.setName(req.getParameter("eventName"));
-
-        Place place = new Place();
-        place.setName(req.getParameter("eventPlace"));
-        event.setPlace(place);
-
-        Organizer organizer = new Organizer();
-        organizer.setDesignation(req.getParameter("organizer"));
-        event.setOrganizer(organizer);
-
-        EventURL url = new EventURL();
-        url.setWww(req.getParameter("eventURL"));
-        event.setUrls(url);
-
-        event.setStartDate(req.getParameter("startDate"));
-        event.setEndDate(req.getParameter("endDate"));
-
-        event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
-        event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
-
-        event.setDescLong(req.getParameter("description"));
-
-
-        event.setAttachments(new Attachment[0]);
-       //event.getAttachments()[0].setFileName(req.getParameter("attachment"));
-
-        Ticket ticket = new Ticket();
-        ticket.setType(req.getParameter("ticket"));
-        event.setTickets(ticket);
-
-        event.setCategoryId(req.getParameter("categoryId"));
-        event.setActive(Integer.valueOf(req.getParameter("active")));
-
-
-        if (null == event.getId()) {
-            //TODO to be deleted
-            event.setId(eventCRUDRepositoryInterface.getNextID());
-            eventCRUDRepositoryInterface.createEvent(event);
-        }
-
         Map<String, Object> map = new HashMap<>();
-        map.put("event", event);
+        Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
 
-        System.out.println(map);
-
+        String eventName = req.getParameter("eventName");
+        String active = req.getParameter("active");
+        String organizerDesignation = req.getParameter("organizerDesignation");
+        String organizerId = req.getParameter("organizerId");
+        Organizer organizer = new Organizer(organizerId, organizerDesignation);
+        String placeId = req.getParameter("placeId");
+        String placeName = req.getParameter("placeName");
+        String placeSubname = req.getParameter("placeSubname");
+        Place place = new Place(placeId, placeName, placeSubname);
+        String eventURLTickets = req.getParameter("eventURLTickets");
+        String eventURLWWW = req.getParameter("eventURLWWW");
+        EventURL eventURL = new EventURL(eventURLWWW, eventURLTickets);
+        String url = req.getParameter("url");
+        String startDate = req.getParameter("startDate");
+        String startDateLDT = req.getParameter("startDateLDT");
+        String endDate = req.getParameter("endDate");
+        String endDateLDT = req.getParameter("endDateLDT");
+        Random r = new Random();
+        int idRandom = r.nextInt();
+        String id = Integer.toString(idRandom);
+        String description = req.getParameter("description");
+        String categoryId = req.getParameter("categoryId");
+        addEvent(createEvent(eventName, active, placeId, url, startDate, startDateLDT,
+                endDate, endDateLDT, id, description, categoryId, organizer, place, eventURL));
+        map.put("event", "OK");
         resp.sendRedirect("/new-event-created");
-    }
-}
 
+    }
+
+    private EventDto createEvent (String eventName, String active, String placeId, String url,
+                                  String startDate, String startDateLDT, String endDate, String endDateLDT, String id,
+                                  String description, String categoryId, Organizer organizer, Place place, EventURL eventURL){
+
+        EventDto eventDto = new EventDto();
+        eventDto.setName(eventName);
+        eventDto.setActive(Integer.valueOf(active));
+        eventDto.setPlace(eventDto.getPlace());
+        eventDto.setUrls(eventDto.getUrls());
+        eventDto.setStartDate(startDate);
+        eventDto.setStartDateLDT(LocalDateTime.parse(String.valueOf(dateTimeParser.setDateFormat(startDate))));
+        eventDto.setEndDate(endDate);
+        eventDto.setEndDateLDT(LocalDateTime.parse(String.valueOf(dateTimeParser.setDateFormat(endDate))));
+        eventDto.setId(Integer.valueOf(id));
+        eventDto.setDescLong(description);
+        eventDto.setCategoryId(categoryId);
+        eventDto.setOrganizer(organizer);
+        eventDto.setPlace(place);
+        eventDto.setUrls(eventURL);
+        return eventDto;
+
+    }
+
+    /*
+        private boolean isEventAdded (Integer eventId) {
+            return eventDao.findByJsonId(eventId) != null;
+        }
+    */
+    private boolean addEvent (EventDto eventDto){
+        eventService.saveEvent(eventDto);
+        return true;
+    }
+
+}
