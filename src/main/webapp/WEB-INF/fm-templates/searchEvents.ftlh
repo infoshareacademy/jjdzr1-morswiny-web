@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/./Images/favicon/favicon-16x16.png">
     <link rel="manifest" href="/./Images/favicon/site.webmanifest">
     <link rel="mask-icon" href="/./Images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="canonical" href="/web/tweet-button">
+    <link rel="me" href="https://twitter.com/twitterdev">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -158,6 +160,16 @@
                     </#if>
                 </div>
                 <br>
+                <div>
+                    <a class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
+                       data-layout="button" data-size="large" target="_blank"
+                       href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp" src="sdkpreparse"
+                       class="fb-xfbml-parse-ignore">Share</a></br>
+                    <#--                    dlaczego tutaj nie ma oddzielenia ?!-->
+                    </br><a class="twitter-share-button" data-layout="button" data-size="large"
+                            href="https://twitter.com/intent/tweet">
+                        Tweet</a>
+                </div>
 
                 <div style="text-align: end; margin-right: 20px; margin-bottom: 20px">
                     <#if event.getUrls().www ?has_content>
@@ -197,6 +209,12 @@
         </li>
     </ul>
 </nav>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v8.0"
+        nonce="26lxUPcI"></script>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
