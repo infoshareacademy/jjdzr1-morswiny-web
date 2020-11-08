@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/./Images/favicon/favicon-16x16.png">
     <link rel="manifest" href="/./Images/favicon/site.webmanifest">
     <link rel="mask-icon" href="/./Images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="canonical" href="/web/tweet-button">
+    <link rel="me" href="https://twitter.com/twitterdev">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -158,6 +160,16 @@
                     </#if>
                 </div>
                 <br>
+                <div>
+                    <a class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
+                       data-layout="button" data-size="large" target="_blank"
+                       href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp" src="sdkpreparse"
+                       class="fb-xfbml-parse-ignore">Share</a></br>
+                    <#--                    dlaczego tutaj nie ma oddzielenia ?!-->
+                    </br><a class="twitter-share-button" data-layout="button" data-size="large"
+                            href="https://twitter.com/intent/tweet">
+                        Tweet</a>
+                </div>
 
                 <div style="text-align: end; margin-right: 20px; margin-bottom: 20px">
                     <#if event.getUrls().www ?has_content>
@@ -165,13 +177,15 @@
                             <button type="button" class="btn btn-primary">Buy ticket</button>
                         </a>
                     </#if>
-                    <button type="button" class="btn btn-secondary">
+                    <a href="search-events?search=${userQuery}&addEvent=#{event.getEventId()}" role="button">
+                    <button type="submit" class="btn btn-secondary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
                     </button>
+                    </a>
                     <a href="/single-event?id=#{event.getEventId()}">
                         <button type="button" class="btn btn-info">Info</button>
                     </a>
@@ -195,6 +209,12 @@
         </li>
     </ul>
 </nav>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v8.0"
+        nonce="26lxUPcI"></script>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>

@@ -202,6 +202,11 @@
                         <a class="dropdown-item" href="my-profile.html">Filter by Ticket Price</a>
                     </div>
                 </li>
+                <#if admin??>
+                <li class="nav-item active">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                </#if>
                 <li class="nav-item active zoom">
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
@@ -243,7 +248,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/profile">My Profile</a>
-                    <a class="dropdown-item" href="/favourite">My favourites</a>
+                    <a class="dropdown-item" href="/favourites-list">My favourites</a>
                     <a class="dropdown-item" href="/logout">Log out</a>
                 </div>
             </li>

@@ -17,6 +17,14 @@ public class UserDto {
     private UserType userType;
     private Set<Event> favourites;
 
+    public Set<Event> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(Set<Event> favourites) {
+        this.favourites = favourites;
+    }
+
     public UserDto () {
 
     }
@@ -69,13 +77,7 @@ public class UserDto {
         this.userType = userType;
     }
 
-    public Set<Event> getFavourites() {
-        return favourites;
-    }
 
-    public void setFavourites(Set<Event> favourites) {
-        this.favourites = favourites;
-    }
 
     @Override
     public boolean equals(Object o) {
