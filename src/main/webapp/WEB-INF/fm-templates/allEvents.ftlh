@@ -221,7 +221,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="my-profile.html">My Profile</a>
-                    <a class="dropdown-item" href="/favourite">My favourites</a>
+                    <a class="dropdown-item" href="/favourites-list">My favourites</a>
                     <a class="dropdown-item" href="/logout">Log out</a>
                 </div>
             </li>
@@ -341,13 +341,15 @@
                             <button type="button" class="btn btn-primary">Buy tickets</button>
                         </a>
                     </#if>
-                    <button type="button" class="btn btn-secondary">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-                    </button>
+                    <a href="main-page?addEvent=#{event.getEventId()}" role="button">
+                        <button type="submit" class="btn btn-secondary">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </button>
+                    </a>
                     <a href="/single-event?id=#{event.getEventId()}">
                         <button type="button" class="btn btn-info">Info</button>
                     </a>

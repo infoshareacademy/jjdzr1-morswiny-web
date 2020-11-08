@@ -1,5 +1,6 @@
 package com.isa.morswiny.servlets;
 
+import com.isa.morswiny.Dao.FavouritesDao;
 import com.isa.morswiny.dto.EventDto;
 import com.isa.morswiny.dto.UserDto;
 import com.isa.morswiny.freemarker.TemplateProvider;
@@ -42,6 +43,9 @@ public class FavouritesUserServlet extends HttpServlet {
     @Inject
     private FavouritesService favouritesService;
 
+    @Inject
+    private FavouritesDao favouritesDao;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,7 +60,14 @@ public class FavouritesUserServlet extends HttpServlet {
 
         String email = (String) req.getSession().getAttribute("logged");
 
-        int userId = getUserId(email);
+        Integer userId = getUserId(email);
+
+        if(checkIfUserLogged(req)){
+            if(req.getParameter("addEvent")!=null){
+                EventDto eventDto = getEventDtoFromUserRequest(req);
+                addEventToFavourites(userId,eventDto);
+            }
+        }
 
         initModel(model, userId, count);
         Template template = templateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -78,9 +89,46 @@ public class FavouritesUserServlet extends HttpServlet {
         return favouritesService.getAllFavouritesForUser(userId);
     }
 
-    private int getUserId(String email){
+    private Integer getUserId(String email){
         UserDto user = favouritesService.getUserByEmail(email);
         return user.getId();
     }
+
+    private boolean addEventToFavourites(Integer userId,EventDto eventDto){
+        boolean isAlreadyInFavourites = isEventInFavouritesAlready(userId,eventDto);
+        if(!isAlreadyInFavourites){
+            favouritesService.addToFavourites(userId,eventDto);
+            return true;
+        }else{
+            favouritesService.removeFromFavourite(userId,eventDto);
+            return false;
+        }
+    }
+
+    private boolean isEventInFavouritesAlready(Integer userId, EventDto eventDto){
+        Event event = favouritesService.provideEvent(eventDto);
+        Set<Event> favourites = setListOfFavouritesEventsForUser(userId);
+        boolean check = favourites.contains(event);
+        return favourites.contains(event);
+    }
+
+    private Integer returnUserIdFromSession(HttpServletRequest req) {
+        String email = (String) req.getSession().getAttribute("logged");
+        Integer userId = getUserId(email);
+        return userId;
+    }
+
+    private EventDto getEventDtoFromUserRequest(HttpServletRequest req) {
+        Integer eventId = Integer.parseInt(req.getParameter("addEvent"));
+        Event event = favouritesDao.find(eventId);
+        return favouritesService.provideEventDto(event);
+    }
+
+    private boolean checkIfUserLogged(HttpServletRequest req) {
+        return (req.getSession().getAttribute("logged") != null);
+    }
+
+
+
 
 }

@@ -13,7 +13,6 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,8 +58,6 @@ public class SearchEventsServlet extends HttpServlet {
         model.remove("admin");
         ServletService.sessionValidation(req, model);
 
-        boolean ifAddedToFavourites;
-
         if(checkIfUserLogged(req)){
             Integer userId = returnUserIdFromSession(req);
             if(req.getParameter("addEvent")!=null){
@@ -98,8 +95,6 @@ public class SearchEventsServlet extends HttpServlet {
     }
 
 
-
-
     private void initModel(Map model, String query,Integer limit, Integer page, Integer count) {
         model.put("userQuery", query);
         model.put("listOfQueriedEvents", setListOfQueriedEvents(query));
@@ -116,6 +111,7 @@ public class SearchEventsServlet extends HttpServlet {
         UserDto user = favouritesService.getUserByEmail(email);
         return user.getId();
     }
+
 
 
     private boolean addEventToFavourites(Integer userId,EventDto eventDto){
