@@ -79,13 +79,16 @@ public class AddEventServlet extends HttpServlet {
 
         String eventName = req.getParameter("eventName");
         String active = req.getParameter("active");
+        String organizerDesignation = req.getParameter("organizerDesignation");
+        String organizerId = req.getParameter("organizerId");
+        Organizer organizer = new Organizer(organizerId, organizerDesignation);
         String placeId = req.getParameter("placeId");
         String placeName = req.getParameter("placeName");
         String placeSubname = req.getParameter("placeSubname");
+        Place place = new Place(placeId, placeName, placeSubname);
         String eventURLTickets = req.getParameter("eventURLTickets");
         String eventURLWWW = req.getParameter("eventURLWWW");
-        String organizerDesignation = req.getParameter("organizerDesignation");
-        String organizerId = req.getParameter("organizerId");
+        EventURL eventURL = new EventURL(eventURLWWW, eventURLTickets);
         String url = req.getParameter("url");
         String startDate = req.getParameter("startDate");
         String startDateLDT = req.getParameter("startDateLDT");
@@ -96,71 +99,13 @@ public class AddEventServlet extends HttpServlet {
         String id = Integer.toString(idRandom);
                 String description = req.getParameter("description");
         String categoryId = req.getParameter("categoryId");
-        Organizer organizer = new Organizer(organizerDesignation, organizerId);
-        Place place = new Place(placeId, placeName, placeSubname);
-        EventURL eventURL = new EventURL(eventURLTickets, eventURLWWW);
         addEvent(createEvent(eventName, active, placeId, url, startDate, startDateLDT,
-                endDate, endDateLDT, id, description, categoryId, organizer, place, eventURL));
+        endDate, endDateLDT, id, description, categoryId, organizer, place, eventURL));
         map.put("event", "OK");
         resp.sendRedirect("/new-event-created");
 
     }
-        /*
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter writer = resp.getWriter();
-        resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
-        Event event = new Event();
-        event.setName(req.getParameter("eventName"));
-
-        Place place = new Place();
-        place.setName(req.getParameter("eventPlace"));
-        event.setPlace(place);
-
-        Organizer organizer = new Organizer();
-        organizer.setDesignation(req.getParameter("organizer"));
-        event.setOrganizer(organizer);
-
-        EventURL url = new EventURL();
-        url.setWww(req.getParameter("eventURL"));
-        event.setUrls(url);
-
-        event.setStartDate(req.getParameter("startDate"));
-        event.setEndDate(req.getParameter("endDate"));
-
-        event.setStartDateLDT(dateTimeParser.setDateFormat(event.getStartDate()));
-        event.setEndDateLDT(dateTimeParser.setDateFormat(event.getEndDate()));
-
-        event.setDescLong(req.getParameter("description"));
-
-
-        event.setAttachments(new Attachment[0]);
-       //event.getAttachments()[0].setFileName(req.getParameter("attachment"));
-
-        Ticket ticket = new Ticket();
-        ticket.setType(req.getParameter("ticket"));
-        event.setTickets(ticket);
-
-        event.setCategoryId(req.getParameter("categoryId"));
-        event.setActive(Integer.valueOf(req.getParameter("active")));
-
-
-        if (null == event.getId()) {
-            //TODO to be deleted
-            event.setId(eventCRUDRepositoryInterface.getNextID());
-            eventCRUDRepositoryInterface.createEvent(event);
-        }
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("event", event);
-
-        System.out.println(map);
-
-        resp.sendRedirect("/new-event-created");
-    }
-
-
-         */
         private EventDto createEvent (String eventName, String active, String placeId, String url,
                 String startDate, String startDateLDT, String endDate, String endDateLDT, String id,
                 String description, String categoryId, Organizer organizer, Place place, EventURL eventURL){
@@ -185,14 +130,6 @@ public class AddEventServlet extends HttpServlet {
         }
 
 /*
-       private OrganizerDto createOrganizer (String organizerDesignation, String organizerId) {
-
-            OrganizerDto organizerDto = new OrganizerDto();
-            organizerDto.setDesignation(organizerDesignation);
-            organizerDto.setId(organizerId);
-return organizerDto;
-        }
-
     private boolean isEventAdded (Integer eventId) {
         return eventDao.findByJsonId(eventId) != null;
     }
@@ -202,13 +139,5 @@ return organizerDto;
             eventService.saveEvent(eventDto);
             return true;
         }
-
-
-//        private boolean addOrganizer (OrganizerDto organizerDto) {
-//organizerService.saveOrganizer(organizerDto);
-//return true;
-//   }
-
-
 
     }
